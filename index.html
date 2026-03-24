@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="css/just-stop.css" />
   <link rel="stylesheet" href="css/word-link.css" />
   <link rel="stylesheet" href="css/sequence-memory.css" />
+  <link rel="stylesheet" href="css/emoji-order.css" />
 </head>
 <body>
 
@@ -133,6 +134,14 @@
       <div class="game-info">
         <h2>シーケンスメモリー</h2>
         <p>点灯する色の順番を覚えて再現しよう</p>
+      </div>
+      <div class="badge">順序記憶</div>
+    </div>
+    <div class="game-card" onclick="showScreen('emoji-order')">
+      <div class="game-icon">🎴</div>
+      <div class="game-info">
+        <h2>絵文字記憶</h2>
+        <p>絵文字の順番を覚えて正確に再現しよう</p>
       </div>
       <div class="badge">順序記憶</div>
     </div>
@@ -718,6 +727,73 @@
   </div>
 </div>
 
+<!-- ========== EMOJI ORDER ========== -->
+<div id="emoji-order" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>絵文字記憶</h1>
+  </nav>
+  <div class="game-content" id="eo-content">
+
+    <!-- Length selector -->
+    <div class="diff-row" id="eo-len-row">
+      <button class="diff-btn selected" onclick="eoSetLen(this, 5)">5個</button>
+      <button class="diff-btn"          onclick="eoSetLen(this, 10)">10個</button>
+      <button class="diff-btn"          onclick="eoSetLen(this, 'custom')">カスタム</button>
+    </div>
+    <!-- Custom length control -->
+    <div class="eo-custom-ctrl" id="eo-custom-ctrl">
+      <button class="eo-custom-btn" onclick="eoCustomChange(-1)">−</button>
+      <span class="eo-custom-num" id="eo-custom-num">7</span>
+      <span>個</span>
+      <button class="eo-custom-btn" onclick="eoCustomChange(1)">＋</button>
+    </div>
+
+    <!-- Difficulty selector -->
+    <div class="diff-row" id="eo-diff-row">
+      <button class="diff-btn"          onclick="eoSetDiff(this,'easy')">かんたん</button>
+      <button class="diff-btn selected" onclick="eoSetDiff(this,'normal')">ふつう</button>
+      <button class="diff-btn"          onclick="eoSetDiff(this,'hard')">むずかしい</button>
+    </div>
+
+    <!-- Score bar -->
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">ラウンド</div>
+        <div class="value" id="eo-score">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="eo-best">0</div>
+      </div>
+    </div>
+
+    <!-- Flash stage -->
+    <div class="eo-flash-stage" id="eo-flash-stage">
+      <div class="eo-flash-emoji" id="eo-flash-emoji"></div>
+      <div class="eo-progress-text" id="eo-progress-text"></div>
+      <div class="eo-dots" id="eo-dots"></div>
+    </div>
+
+    <p class="eo-message" id="eo-message">スタートを押してください</p>
+
+    <!-- Answer stage -->
+    <div class="eo-answer-stage" id="eo-answer-stage">
+      <div class="eo-answer-hint" id="eo-answer-hint"></div>
+      <div class="eo-grid" id="eo-grid"></div>
+    </div>
+
+    <div class="answer-area">
+      <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+        <button class="btn-outline" id="eo-undo-btn" onclick="eoUndo()" style="display:none;">↩ 取り消し</button>
+        <button class="btn-primary" id="eo-confirm-btn" onclick="eoConfirm()" style="display:none;">✅ 確定</button>
+      </div>
+      <button class="btn-primary" id="eo-start-btn" onclick="eoStart()">スタート</button>
+    </div>
+
+  </div><!-- /.game-content -->
+</div><!-- /#emoji-order -->
+
 <!-- ========== RESULT OVERLAY ========== -->
 <div class="result-overlay" id="result-overlay">
   <div class="result-card">
@@ -745,5 +821,6 @@
 <script src="js/just-stop.js"></script>
 <script src="js/word-link.js"></script>
 <script src="js/sequence-memory.js"></script>
+<script src="js/emoji-order.js"></script>
 </body>
 </html>
