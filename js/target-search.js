@@ -142,11 +142,7 @@ function tsGameOver() {
   showResult('🔍', 'タイムアップ', `見つけた数: ${tsScore}`, () => tsStart());
 }
 
-// Ensure game stops when switching screens
-const originalNntStop = window.ntStop; // We don't have global router intercept for all, but we can hook if needed.
-// Actually main.js has `vcStop(); ntStop();` hardcoded in `showScreen()`. I need to update that or just let it run.
-// Wait, to stop timers properly, I will overwrite showScreen in main.js later or just define a global tsStop.
-window.tsStop = function() {
+function tsStop() {
   if (tsIsPlaying) {
     clearInterval(tsTimer);
     tsIsPlaying = false;
@@ -155,4 +151,4 @@ window.tsStop = function() {
     document.getElementById('ts-start-btn').style.display = 'inline-block';
     document.getElementById('ts-start-btn').textContent = 'スタート';
   }
-};
+}

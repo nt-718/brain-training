@@ -20,6 +20,20 @@ function cmLoadBest() {
   document.getElementById('cm-best').textContent = b ? b : '0';
 }
 
+function cmStop() {
+  cmRunning = false;
+  clearInterval(cmTimerInterval);
+  cmTimerInterval = null;
+  document.getElementById('cm-start-btn').style.display = '';
+  document.getElementById('cm-start-btn').textContent = 'スタート';
+  document.getElementById('cm-buttons').style.display = 'none';
+  document.getElementById('cm-message').style.display = 'block';
+  document.getElementById('cm-message').textContent = 'スタートを押してください';
+  document.getElementById('cm-word').textContent = '?';
+  document.getElementById('cm-word').style.color = '#fff';
+  document.getElementById('cm-timer-fill').style.width = '100%';
+}
+
 function cmStart() {
   cmScore = 0;
   cmTimerTotal = 2.0;

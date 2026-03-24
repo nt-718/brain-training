@@ -169,7 +169,7 @@ function slGameOver() {
   showResult('🍎', 'タイムアップ', `正解数: ${slScore}`, () => slStart());
 }
 
-window.slStop = function() {
+function slStop() {
   if (slIsPlaying) {
     clearInterval(slTimer);
     slIsPlaying = false;

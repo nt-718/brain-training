@@ -142,6 +142,25 @@ window.addEventListener('keydown', (e) => {
   }
 });
 
+// Touch swipe support
+let ssTouchStartX = 0;
+let ssTouchStartY = 0;
+document.addEventListener('touchstart', (e) => {
+  if (currentScreen !== 'swipe-sort' || !ssIsPlaying) return;
+  ssTouchStartX = e.touches[0].clientX;
+  ssTouchStartY = e.touches[0].clientY;
+}, { passive: true });
+
+document.addEventListener('touchend', (e) => {
+  if (currentScreen !== 'swipe-sort' || !ssIsPlaying) return;
+  const dx = e.changedTouches[0].clientX - ssTouchStartX;
+  const dy = e.changedTouches[0].clientY - ssTouchStartY;
+  // Only trigger if horizontal swipe is dominant and exceeds threshold
+  if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+    ssAnswer(dx < 0 ? 'left' : 'right');
+  }
+}, { passive: true });
+
 function ssGameOver() {
   clearInterval(ssTimer);
   ssIsPlaying = false;
@@ -165,7 +184,7 @@ function ssGameOver() {
   showResult('↔️', 'タイムアップ', `仕分けた数: ${ssScore}`, () => ssStart());
 }
 
-window.ssStop = function() {
+function ssStop() {
   if (ssIsPlaying) {
     clearInterval(ssTimer);
     ssIsPlaying = false;

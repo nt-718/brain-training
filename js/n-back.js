@@ -23,6 +23,19 @@ function nbLoadBest() {
   document.getElementById('nb-best').textContent = b ? b : '0';
 }
 
+function nbStop() {
+  nbRunning = false;
+  clearInterval(nbTimerInterval);
+  nbTimerInterval = null;
+  document.getElementById('nb-start-btn').style.display = '';
+  document.getElementById('nb-start-btn').textContent = 'スタート';
+  document.getElementById('nb-actions').style.display = 'none';
+  document.getElementById('nb-shape').textContent = '';
+  document.getElementById('nb-shape').style.fontSize = '';
+  document.getElementById('nb-message').textContent = 'スタートを押してください';
+  document.getElementById('nb-timer-fill').style.width = '100%';
+}
+
 function nbStart() {
   nbScore = 0;
   nbHistory = [];

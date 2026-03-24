@@ -35,6 +35,22 @@ function fmLoadBest() {
   document.getElementById('fm-best').textContent = b ? b : '1';
 }
 
+function fmStop() {
+  fmRunning = false;
+  clearInterval(fmTimerInterval);
+  fmTimerInterval = null;
+  document.getElementById('fm-start-btn').style.display = '';
+  document.getElementById('fm-start-btn').textContent = 'スタート';
+  document.getElementById('fm-numpad').style.display = 'none';
+  document.getElementById('fm-number').textContent = '?';
+  document.getElementById('fm-number').classList.remove('show');
+  document.getElementById('fm-visual').classList.remove('show');
+  document.getElementById('fm-visual').innerHTML = '';
+  document.getElementById('fm-message').textContent = '集中してください！';
+  document.getElementById('fm-timer-fill').style.width = '100%';
+  document.getElementById('fm-input').textContent = '?';
+}
+
 function fmStart() {
   fmScore = 1;
   fmRunning = true;

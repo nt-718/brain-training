@@ -10,6 +10,25 @@ let smPlayTimeout = null;
 
 const SM_COLORS = ['green', 'red', 'blue', 'yellow']; // matches button order
 
+// Web Audio API for sound feedback
+const smAudioCtx = typeof AudioContext !== 'undefined' ? new AudioContext() : (typeof webkitAudioContext !== 'undefined' ? new webkitAudioContext() : null);
+const SM_TONES = { green: 261.63, red: 329.63, blue: 392.00, yellow: 493.88 }; // C4, E4, G4, B4
+
+function smPlayTone(color, duration = 0.3) {
+  if (!smAudioCtx) return;
+  if (smAudioCtx.state === 'suspended') smAudioCtx.resume();
+  const osc = smAudioCtx.createOscillator();
+  const gain = smAudioCtx.createGain();
+  osc.type = 'sine';
+  osc.frequency.value = SM_TONES[color] || 440;
+  gain.gain.setValueAtTime(0.3, smAudioCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, smAudioCtx.currentTime + duration);
+  osc.connect(gain);
+  gain.connect(smAudioCtx.destination);
+  osc.start();
+  osc.stop(smAudioCtx.currentTime + duration);
+}
+
 function smStart() {
   smSeq   = [];
   smLevel = 0;
@@ -68,6 +87,7 @@ function smPlayNext() {
   const color = smSeq[smPlayIdx];
   const btn = document.getElementById(`sm-btn-${color}`);
   btn.classList.add('lit');
+  smPlayTone(color, smLevel <= 5 ? 0.5 : smLevel <= 10 ? 0.35 : 0.25);
 
   smPlayTimeout = setTimeout(() => {
     btn.classList.remove('lit');
@@ -81,6 +101,7 @@ function smTap(color) {
 
   const btn = document.getElementById(`sm-btn-${color}`);
   btn.classList.add('lit');
+  smPlayTone(color, 0.15);
   setTimeout(() => btn.classList.remove('lit'), 150);
 
   smUserSeq.push(color);

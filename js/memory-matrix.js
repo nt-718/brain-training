@@ -46,6 +46,11 @@ function mmStart() {
 function mmStop() {
   mmRunning = false;
   mmState = 'idle';
+  document.getElementById('mm-grid').innerHTML = '';
+  document.getElementById('mm-start-btn').style.display = '';
+  document.getElementById('mm-start-btn').textContent = 'スタート';
+  document.getElementById('mm-confirm-btn').style.display = 'none';
+  document.getElementById('mm-message').textContent = 'スタートを押してください';
 }
 
 function mmNextRound() {
