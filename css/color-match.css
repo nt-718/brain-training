@@ -1,0 +1,59 @@
+/* ===== COLOR MATCH ===== */
+.cm-stage {
+  width: 100%;
+  max-width: 400px;
+  height: 200px;
+  background: var(--card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.cm-word {
+  font-size: 3.5rem;
+  font-weight: 800;
+  text-shadow: 0 4px 12px rgba(0,0,0,0.6);
+  letter-spacing: 4px;
+}
+.cm-word.pop { animation: popText 0.2s cubic-bezier(0.175,0.885,0.32,1.275); }
+@keyframes popText {
+  0% { transform: scale(0.8); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+.cm-message {
+  position: absolute;
+  top: 16px;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+.cm-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+  max-width: 400px;
+}
+.cm-btn {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 16px;
+  padding: 18px;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: all 0.15s cubic-bezier(0.175,0.885,0.32,1.275);
+}
+.cm-btn:hover { background: rgba(255,255,255,0.2); transform: translateY(-4px); border-color: rgba(139, 92, 246, 0.5); box-shadow: 0 8px 16px rgba(139, 92, 246, 0.3);}
+.cm-btn:active { transform: scale(0.95); }

@@ -1,0 +1,52 @@
+/* ===== FLASH MATH ===== */
+.fm-stage {
+  width: 100%;
+  max-width: 400px;
+  height: 200px;
+  background: var(--card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.fm-number {
+  font-size: 6.5rem;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 4px 20px rgba(139, 92, 246, 0.9);
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.1s ease-out, transform 0.15s cubic-bezier(0.175,0.885,0.32,1.275);
+}
+.fm-number.show {
+  opacity: 1;
+  transform: scale(1);
+}
+.fm-visual {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.1s ease-out, transform 0.15s cubic-bezier(0.175,0.885,0.32,1.275);
+}
+.fm-visual.show {
+  opacity: 1;
+  transform: scale(1);
+}
+.fm-message {
+  position: absolute;
+  top: 16px;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+.fm-numpad {
+  max-width: 400px;
+}

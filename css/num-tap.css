@@ -1,0 +1,85 @@
+/* ===== NUM TAP GAME ===== */
+
+.next-hint {
+  font-size: 1.1rem;
+  color: var(--muted);
+  text-align: center;
+}
+.next-hint span {
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.4rem;
+  text-shadow: 0 0 10px var(--primary);
+}
+
+/* Stage */
+.tap-stage {
+  width: 100%;
+  max-width: 520px;
+  height: 380px;
+  background: var(--card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Tap buttons */
+.tap-btn {
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  transition: transform 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.15s, border-color 0.15s;
+  /* prevent text selection on rapid tapping */
+  user-select: none;
+  -webkit-user-select: none;
+}
+.tap-btn:hover { 
+  background: rgba(255,255,255,0.2); 
+  border-color: rgba(139, 92, 246, 0.8);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
+  transform: scale(1.12); 
+}
+
+.tap-btn.tapped {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+  pointer-events: none;
+  opacity: 0.2;
+  transform: scale(0.9);
+}
+
+.tap-btn.wrong-tap {
+  animation: shake 0.3s;
+  border-color: var(--secondary);
+  color: var(--secondary);
+  box-shadow: 0 0 15px var(--secondary);
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25%       { transform: translateX(-6px); }
+  75%       { transform: translateX( 6px); }
+}
+
+@media (max-width: 400px) {
+  .tap-stage { height: 320px; }
+  .tap-btn   { width: 48px; height: 48px; font-size: 1.1rem; }
+}

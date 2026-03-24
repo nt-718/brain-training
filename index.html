@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>脳トレ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/visual-calc.css" />
+  <link rel="stylesheet" href="css/num-tap.css" />
+  <link rel="stylesheet" href="css/memory-matrix.css" />
+  <link rel="stylesheet" href="css/color-match.css" />
+  <link rel="stylesheet" href="css/n-back.css" />
+  <link rel="stylesheet" href="css/flash-math.css" />
+  <link rel="stylesheet" href="css/target-search.css" />
+  <link rel="stylesheet" href="css/symbol-logic.css" />
+  <link rel="stylesheet" href="css/swipe-sort.css" />
+  <link rel="stylesheet" href="css/shell-game.css" />
+  <link rel="stylesheet" href="css/just-stop.css" />
+  <link rel="stylesheet" href="css/word-link.css" />
+  <link rel="stylesheet" href="css/sequence-memory.css" />
+</head>
+<body>
+
+<!-- ========== HOME ========== -->
+<div id="home" class="screen active">
+  <div class="home-header">
+    <div class="brain-icon">🧠</div>
+    <h1>脳トレ</h1>
+    <p>毎日少しずつ、脳を鍛えよう</p>
+  </div>
+  <div class="game-list">
+    <div class="game-card" onclick="showScreen('visual-calc')">
+      <div class="game-icon">🔵</div>
+      <div class="game-info">
+        <h2>ビジュアル計算</h2>
+        <p>丸の数を数えたり、計算したりしよう</p>
+      </div>
+      <div class="badge">計算</div>
+    </div>
+    <div class="game-card" onclick="showScreen('num-tap')">
+      <div class="game-icon">🔢</div>
+      <div class="game-info">
+        <h2>数字順番タップ</h2>
+        <p>数字を順番に素早くタップしよう</p>
+      </div>
+      <div class="badge">反射</div>
+    </div>
+    <div class="game-card" onclick="showScreen('memory-matrix')">
+      <div class="game-icon">🧩</div>
+      <div class="game-info">
+        <h2>メモリーマトリックス</h2>
+        <p>光ったマスの位置を記憶してタップ</p>
+      </div>
+      <div class="badge">記憶</div>
+    </div>
+    <div class="game-card" onclick="showScreen('color-match')">
+      <div class="game-icon">🎨</div>
+      <div class="game-info">
+        <h2>カラーマッチ</h2>
+        <p>「文字の色」を素早く判断しよう</p>
+      </div>
+      <div class="badge">抑制</div>
+    </div>
+    <div class="game-card" onclick="showScreen('n-back')">
+      <div class="game-icon">🔄</div>
+      <div class="game-info">
+        <h2>Nバック・チャレンジ</h2>
+        <p>N個前の図形と同じか答えよう</p>
+      </div>
+      <div class="badge">Wメモリ</div>
+    </div>
+    <div class="game-card" onclick="showScreen('flash-math')">
+      <div class="game-icon">⚡️</div>
+      <div class="game-info">
+        <h2>フラッシュサミング</h2>
+        <p>一瞬表示される数字を足そう</p>
+      </div>
+      <div class="badge">計算・瞬視</div>
+    </div>
+    <div class="game-card" onclick="showScreen('target-search')">
+      <div class="game-icon">🔍</div>
+      <div class="game-info">
+        <h2>ターゲットサーチ</h2>
+        <p>一つだけ違う文字を素早く見つけよう</p>
+      </div>
+      <div class="badge">探索</div>
+    </div>
+    <div class="game-card" onclick="showScreen('symbol-logic')">
+      <div class="game-icon">🍎</div>
+      <div class="game-info">
+        <h2>シンボル計算</h2>
+        <p>絵文字を使った計算式を解こう</p>
+      </div>
+      <div class="badge">推論</div>
+    </div>
+    <div class="game-card" onclick="showScreen('swipe-sort')">
+      <div class="game-icon">↔️</div>
+      <div class="game-info">
+        <h2>スワイプソート</h2>
+        <p>ルールに従って左右に素早く仕分けよう</p>
+      </div>
+      <div class="badge">判断</div>
+    </div>
+    <div class="game-card" onclick="showScreen('shell-game')">
+      <div class="game-icon">👁️‍🗨️</div>
+      <div class="game-info">
+        <h2>シェルゲーム</h2>
+        <p>星が入ったカップの動きを追おう</p>
+      </div>
+      <div class="badge">動体視力</div>
+    </div>
+    <div class="game-card" onclick="showScreen('just-stop')">
+      <div class="game-icon">⏱️</div>
+      <div class="game-info">
+        <h2>ジャストストップ</h2>
+        <p>目標の時間にピッタり止めよう</p>
+      </div>
+      <div class="badge">時間感覚</div>
+    </div>
+    <div class="game-card" onclick="showScreen('word-link')">
+      <div class="game-icon">🔤</div>
+      <div class="game-info">
+        <h2>ワードリンク</h2>
+        <p>バラバラの文字をタップして単語を完成</p>
+      </div>
+      <div class="badge">言語</div>
+    </div>
+    <div class="game-card" onclick="showScreen('sequence-memory')">
+      <div class="game-icon">🎵</div>
+      <div class="game-info">
+        <h2>シーケンスメモリー</h2>
+        <p>点灯する色の順番を覚えて再現しよう</p>
+      </div>
+      <div class="badge">順序記憶</div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== VISUAL CALC ========== -->
+<div id="visual-calc" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>ビジュアル計算</h1>
+  </nav>
+
+  <div class="game-content" id="vc-content">
+
+    <div class="diff-row" id="vc-diff-row">
+      <button class="diff-btn selected" onclick="vcSetDiff(this,'easy')">かんたん</button>
+      <button class="diff-btn"          onclick="vcSetDiff(this,'normal')">ふつう</button>
+      <button class="diff-btn"          onclick="vcSetDiff(this,'hard')">むずかしい</button>
+    </div>
+
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">スコア</div>
+        <div class="value" id="vc-score">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">問題</div>
+        <div class="value" id="vc-q-num">-/10</div>
+      </div>
+      <div class="score-item">
+        <div class="label">連続正解</div>
+        <div class="value" id="vc-streak">0</div>
+      </div>
+    </div>
+
+    <div class="timer-bar">
+      <div class="timer-fill" id="vc-timer-fill" style="width:100%"></div>
+    </div>
+
+    <p class="vc-question" id="vc-question">スタートを押してください</p>
+
+    <div class="vc-stage" id="vc-stage"></div>
+
+    <!-- 凡例: 丸のサイズの意味 -->
+    <div class="vc-legend">
+      <div class="leg-item">
+        <span class="leg-dot lg"></span><span>大 = 10</span>
+      </div>
+      <div class="leg-item">
+        <span class="leg-dot md"></span><span>中 = 5</span>
+      </div>
+      <div class="leg-item">
+        <span class="leg-dot sm"></span><span>小 = 1</span>
+      </div>
+    </div>
+
+    <div class="answer-area">
+      <div class="number-input" id="vc-input">?</div>
+
+      <div class="numpad">
+        <button class="numpad-btn" onclick="vcNumpad('7')">7</button>
+        <button class="numpad-btn" onclick="vcNumpad('8')">8</button>
+        <button class="numpad-btn" onclick="vcNumpad('9')">9</button>
+        <button class="numpad-btn del" onclick="vcNumpad('del')">⌫</button>
+
+        <button class="numpad-btn" onclick="vcNumpad('4')">4</button>
+        <button class="numpad-btn" onclick="vcNumpad('5')">5</button>
+        <button class="numpad-btn" onclick="vcNumpad('6')">6</button>
+        <button class="numpad-btn ok" onclick="vcNumpad('ok')">OK</button>
+
+        <button class="numpad-btn" onclick="vcNumpad('1')">1</button>
+        <button class="numpad-btn" onclick="vcNumpad('2')">2</button>
+        <button class="numpad-btn" onclick="vcNumpad('3')">3</button>
+
+        <button class="numpad-btn zero" onclick="vcNumpad('0')">0</button>
+      </div>
+
+      <button class="btn-primary" id="vc-start-btn" onclick="vcStart()">スタート</button>
+    </div>
+
+  </div><!-- /.game-content -->
+</div><!-- /#visual-calc -->
+
+<!-- ========== NUM TAP ========== -->
+<div id="num-tap" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>数字順番タップ</h1>
+  </nav>
+
+  <div class="game-content" id="nt-content">
+
+    <!-- <div class="diff-row" id="nt-diff-row"> removed as per logic change 10~20 random -->
+
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">ラウンド</div>
+        <div class="value" id="nt-round">1</div>
+      </div>
+      <div class="score-item">
+        <div class="label">タイム</div>
+        <div class="value" id="nt-time">0.0s</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="nt-best">--</div>
+      </div>
+    </div>
+
+    <div class="next-hint">次にタップ: <span id="nt-next">?</span></div>
+
+    <div class="tap-stage" id="nt-stage"></div>
+
+    <button class="btn-primary" id="nt-start-btn" onclick="ntStart()">スタート</button>
+
+  </div><!-- /.game-content -->
+</div><!-- /#num-tap -->
+
+<!-- ========== MEMORY MATRIX ========== -->
+<div id="memory-matrix" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>メモリーマトリックス</h1>
+  </nav>
+
+  <div class="game-content" id="mm-content">
+
+    <div class="diff-row" id="mm-diff-row">
+      <button class="diff-btn selected" onclick="mmSetDiff(this,'easy')">かんたん</button>
+      <button class="diff-btn"          onclick="mmSetDiff(this,'normal')">ふつう</button>
+      <button class="diff-btn"          onclick="mmSetDiff(this,'hard')">むずかしい</button>
+    </div>
+
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">ラウンド</div>
+        <div class="value" id="mm-round">1</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="mm-best">--</div>
+      </div>
+    </div>
+
+    <p class="mm-message" id="mm-message">スタートを押してください</p>
+
+    <div class="mm-stage" id="mm-stage">
+      <div class="mm-grid" id="mm-grid"></div>
+    </div>
+
+    <div class="answer-area" style="margin-top: 20px;">
+      <button class="btn-primary" id="mm-start-btn" onclick="mmStart()">スタート</button>
+      <button class="btn-primary" id="mm-confirm-btn" onclick="mmConfirm()" style="display:none;">確定する</button>
+    </div>
+
+  </div><!-- /.game-content -->
+</div><!-- /#memory-matrix -->
+
+<!-- ========== COLOR MATCH ========== -->
+<div id="color-match" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>カラーマッチ</h1>
+  </nav>
+  <div class="game-content" id="cm-content">
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">スコア</div>
+        <div class="value" id="cm-score">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="cm-best">0</div>
+      </div>
+    </div>
+    <div class="timer-bar">
+      <div class="timer-fill" id="cm-timer-fill" style="width:100%"></div>
+    </div>
+    
+    <div class="cm-stage">
+      <div class="cm-word" id="cm-word">?</div>
+      <p class="cm-message" id="cm-message">スタートを押してください</p>
+    </div>
+
+    <div class="answer-area">
+      <div class="cm-buttons" id="cm-buttons" style="display:none;">
+        <button class="cm-btn" onclick="cmTap('red')">あか</button>
+        <button class="cm-btn" onclick="cmTap('blue')">あお</button>
+        <button class="cm-btn" onclick="cmTap('green')">みどり</button>
+        <button class="cm-btn" onclick="cmTap('yellow')">きいろ</button>
+      </div>
+      <button class="btn-primary" id="cm-start-btn" onclick="cmStart()" style="margin-top:20px;">スタート</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== N-BACK ========== -->
+<div id="n-back" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>Nバック・チャレンジ</h1>
+  </nav>
+  <div class="game-content" id="nb-content">
+    <div class="diff-row" id="nb-diff-row">
+      <button class="diff-btn selected" onclick="nbSetDiff(this,'1')">1バック</button>
+      <button class="diff-btn"          onclick="nbSetDiff(this,'2')">2バック</button>
+      <button class="diff-btn"          onclick="nbSetDiff(this,'3')">3バック</button>
+    </div>
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">連続正解</div>
+        <div class="value" id="nb-score">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="nb-best">0</div>
+      </div>
+    </div>
+    <div class="timer-bar" style="margin-top:8px;">
+      <div class="timer-fill" id="nb-timer-fill" style="width:100%"></div>
+    </div>
+    
+    <div class="nb-stage">
+      <div class="nb-shape" id="nb-shape"></div>
+      <p class="nb-message" id="nb-message">スタートを押してください</p>
+    </div>
+
+    <div class="answer-area">
+      <div class="nb-actions" id="nb-actions" style="display:none;">
+        <button class="btn-outline" style="border-color:var(--secondary);color:var(--secondary);" onclick="nbAnswer(false)">❌ 違う</button>
+        <button class="btn-outline" style="border-color:var(--accent);color:var(--accent);" onclick="nbAnswer(true)">⭕️ 同じ</button>
+      </div>
+      <button class="btn-primary" id="nb-start-btn" onclick="nbStart()" style="margin-top:20px;">スタート</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== FLASH MATH ========== -->
+<div id="flash-math" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>フラッシュサミング</h1>
+  </nav>
+  <div class="game-content" id="fm-content">
+    <div class="diff-row" id="fm-type-row" style="margin-bottom: 4px;">
+      <button class="diff-btn"          onclick="fmSetType(this,'visual')">ビジュアル</button>
+      <button class="diff-btn selected" onclick="fmSetType(this,'number')">数字</button>
+      <button class="diff-btn"          onclick="fmSetType(this,'mixed')">混合</button>
+    </div>
+    <div class="diff-row" id="fm-diff-row">
+      <button class="diff-btn selected" onclick="fmSetDiff(this,'easy')">かんたん</button>
+      <button class="diff-btn"          onclick="fmSetDiff(this,'normal')">ふつう</button>
+      <button class="diff-btn"          onclick="fmSetDiff(this,'hard')">むずかしい</button>
+    </div>
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">ラウンド</div>
+        <div class="value" id="fm-round">1</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="fm-best">1</div>
+      </div>
+    </div>
+    <div class="timer-bar" style="margin-top:8px;">
+      <div class="timer-fill" id="fm-timer-fill" style="width:100%"></div>
+    </div>
+    
+    <div class="fm-stage" id="fm-stage">
+      <div class="fm-number" id="fm-number">?</div>
+      <div class="fm-visual" id="fm-visual"></div>
+      <p class="fm-message" id="fm-message">集中してください！</p>
+    </div>
+
+    <div class="answer-area">
+      <div class="number-input" id="fm-input">?</div>
+      <div class="numpad fm-numpad" id="fm-numpad" style="display:none; margin-top:10px;">
+        <button class="numpad-btn" onclick="fmNumpad('7')">7</button>
+        <button class="numpad-btn" onclick="fmNumpad('8')">8</button>
+        <button class="numpad-btn" onclick="fmNumpad('9')">9</button>
+        <button class="numpad-btn del" onclick="fmNumpad('del')">⌫</button>
+
+        <button class="numpad-btn" onclick="fmNumpad('4')">4</button>
+        <button class="numpad-btn" onclick="fmNumpad('5')">5</button>
+        <button class="numpad-btn" onclick="fmNumpad('6')">6</button>
+        <button class="numpad-btn ok" onclick="fmNumpad('ok')">OK</button>
+
+        <button class="numpad-btn" onclick="fmNumpad('1')">1</button>
+        <button class="numpad-btn" onclick="fmNumpad('2')">2</button>
+        <button class="numpad-btn" onclick="fmNumpad('3')">3</button>
+
+        <button class="numpad-btn zero" onclick="fmNumpad('0')">0</button>
+      </div>
+      <button class="btn-primary" id="fm-start-btn" onclick="fmStart()" style="margin-top:20px;">スタート</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== TARGET SEARCH ========== -->
+<div id="target-search" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>ターゲットサーチ</h1>
+  </nav>
+  <div class="game-content" id="ts-content">
+    <div class="diff-row" id="ts-diff-row">
+      <button class="diff-btn selected" onclick="tsSetDiff(this,'easy')">かんたん</button>
+      <button class="diff-btn"          onclick="tsSetDiff(this,'normal')">ふつう</button>
+      <button class="diff-btn"          onclick="tsSetDiff(this,'hard')">むずかしい</button>
+    </div>
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">スコア</div>
+        <div class="value" id="ts-score">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="ts-best">0</div>
+      </div>
+    </div>
+    <div class="timer-bar" style="margin-top:8px;">
+      <div class="timer-fill" id="ts-timer-fill" style="width:100%"></div>
+    </div>
+    
+    <div class="ts-stage" id="ts-stage">
+      <div class="ts-grid" id="ts-grid" style="display:none;"></div>
+      <p class="ts-message" id="ts-message">スタートを押してください</p>
+    </div>
+
+    <div class="answer-area">
+      <button class="btn-primary" id="ts-start-btn" onclick="tsStart()" style="margin-top:20px;">スタート</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== SYMBOL LOGIC ========== -->
+<div id="symbol-logic" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>シンボル計算</h1>
+  </nav>
+  <div class="game-content" id="sl-content">
+    <div class="diff-row" id="sl-diff-row">
+      <button class="diff-btn selected" onclick="slSetDiff(this,'easy')">かんたん</button>
+      <button class="diff-btn"          onclick="slSetDiff(this,'normal')">ふつう</button>
+      <button class="diff-btn"          onclick="slSetDiff(this,'hard')">むずかしい</button>
+    </div>
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">スコア</div>
+        <div class="value" id="sl-score">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="sl-best">0</div>
+      </div>
+    </div>
+    <div class="timer-bar" style="margin-top:8px;">
+      <div class="timer-fill" id="sl-timer-fill" style="width:100%"></div>
+    </div>
+    
+    <div class="sl-stage" id="sl-stage">
+      <div class="sl-equations" id="sl-equations" style="display:none;"></div>
+      <p class="sl-message" id="sl-message">スタートを押してください</p>
+    </div>
+
+    <div class="answer-area">
+      <div class="number-input" id="sl-input" style="display:none;">?</div>
+      <div class="numpad sl-numpad" id="sl-numpad" style="display:none; margin-top:10px;">
+        <button class="numpad-btn" onclick="slNumpad('7')">7</button>
+        <button class="numpad-btn" onclick="slNumpad('8')">8</button>
+        <button class="numpad-btn" onclick="slNumpad('9')">9</button>
+        <button class="numpad-btn del" onclick="slNumpad('del')">⌫</button>
+
+        <button class="numpad-btn" onclick="slNumpad('4')">4</button>
+        <button class="numpad-btn" onclick="slNumpad('5')">5</button>
+        <button class="numpad-btn" onclick="slNumpad('6')">6</button>
+        <button class="numpad-btn ok" onclick="slNumpad('ok')">OK</button>
+
+        <button class="numpad-btn" onclick="slNumpad('1')">1</button>
+        <button class="numpad-btn" onclick="slNumpad('2')">2</button>
+        <button class="numpad-btn" onclick="slNumpad('3')">3</button>
+
+        <button class="numpad-btn zero" onclick="slNumpad('0')">0</button>
+      </div>
+      <button class="btn-primary" id="sl-start-btn" onclick="slStart()" style="margin-top:20px;">スタート</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== SWIPE SORT ========== -->
+<div id="swipe-sort" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>スワイプソート</h1>
+  </nav>
+  <div class="game-content" id="ss-content">
+    <div class="diff-row" id="ss-diff-row">
+      <button class="diff-btn selected" onclick="ssSetDiff(this,'easy')">かんたん</button>
+      <button class="diff-btn"          onclick="ssSetDiff(this,'normal')">ふつう</button>
+      <button class="diff-btn"          onclick="ssSetDiff(this,'hard')">むずかしい</button>
+    </div>
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">スコア</div>
+        <div class="value" id="ss-score">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="ss-best">0</div>
+      </div>
+    </div>
+    <div class="timer-bar" style="margin-top:8px;">
+      <div class="timer-fill" id="ss-timer-fill" style="width:100%"></div>
+    </div>
+    
+    <div class="ss-rule" id="ss-rule" style="display:none;"></div>
+    <div class="ss-stage" id="ss-stage">
+      <div class="ss-card" id="ss-card" style="display:none;">?</div>
+      <p class="ss-message" id="ss-message">スタートを押してください</p>
+    </div>
+
+    <div class="answer-area">
+      <div class="ss-actions" id="ss-actions" style="display:none; gap:20px;">
+        <button class="btn-outline ss-btn" onclick="ssAnswer('left')">← 左</button>
+        <button class="btn-outline ss-btn" onclick="ssAnswer('right')">右 →</button>
+      </div>
+      <button class="btn-primary" id="ss-start-btn" onclick="ssStart()" style="margin-top:20px;">スタート</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== SHELL GAME ========== -->
+<div id="shell-game" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>シェルゲーム</h1>
+  </nav>
+  <div class="game-content" id="sg-content">
+    <div class="diff-row" id="sg-diff-row">
+      <button class="diff-btn selected" onclick="sgSetDiff(this,'easy')">かんたん</button>
+      <button class="diff-btn"          onclick="sgSetDiff(this,'normal')">ふつう</button>
+      <button class="diff-btn"          onclick="sgSetDiff(this,'hard')">むずかしい</button>
+    </div>
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">スコア</div>
+        <div class="value" id="sg-score">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="sg-best">0</div>
+      </div>
+    </div>
+    
+    <div class="sg-message" id="sg-message">スタートを押してください</div>
+    
+    <div class="sg-stage" id="sg-stage"></div>
+
+    <div class="answer-area">
+      <button class="btn-primary" id="sg-start-btn" onclick="sgStart()" style="margin-top:20px;">スタート</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== JUST STOP ========== -->
+<div id="just-stop" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>ジャストストップ</h1>
+  </nav>
+  <div class="game-content" id="js-content">
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">スコア</div>
+        <div class="value" id="js-score">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ラウンド</div>
+        <div class="value" id="js-round">- / 5</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="js-best">0</div>
+      </div>
+    </div>
+
+    <div class="js-target-display">
+      <div class="js-target-label">目標タイム</div>
+      <div class="js-target-time" id="js-target-time">--.-</div>
+      <div class="js-target-unit">秒</div>
+    </div>
+
+    <div class="js-clock-area">
+      <div class="js-ring" id="js-ring"></div>
+      <div class="js-clock-bg">
+        <div class="js-clock-number" id="js-clock-number">⏱️</div>
+      </div>
+    </div>
+
+    <div class="js-feedback" id="js-feedback"></div>
+
+    <div id="js-history" class="js-history"></div>
+
+    <div class="answer-area" style="gap:16px;">
+      <button class="js-stop-btn" id="js-stop-btn" onclick="jsAction()">ストップ！</button>
+      <button class="btn-primary" id="js-start-btn" onclick="jsStart()">スタート</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== WORD LINK ========== -->
+<div id="word-link" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>ワードリンク</h1>
+  </nav>
+  <div class="game-content" id="wl-content">
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">正解数</div>
+        <div class="value" id="wl-score">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="wl-best">0</div>
+      </div>
+    </div>
+    <div class="timer-bar">
+      <div class="timer-fill" id="wl-timer-fill" style="width:100%"></div>
+    </div>
+
+    <div class="wl-hint" id="wl-hint">スタートを押してください</div>
+
+    <div class="wl-answer-display" id="wl-answer"></div>
+
+    <div class="wl-grid" id="wl-grid"></div>
+
+    <div class="wl-message" id="wl-message"></div>
+
+    <div class="answer-area" style="gap:12px;">
+      <button class="btn-outline" id="wl-clear-btn" onclick="wlClear()" style="display:none;">まちがえ</button>
+      <button class="btn-primary" id="wl-start-btn" onclick="wlStart()">スタート</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== SEQUENCE MEMORY ========== -->
+<div id="sequence-memory" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>シーケンスメモリー</h1>
+  </nav>
+  <div class="game-content" id="sm-content">
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">スコア</div>
+        <div class="value" id="sm-score">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="sm-best">0</div>
+      </div>
+    </div>
+
+    <div class="sm-stage">
+      <div class="sm-level-badge" id="sm-level-display">レベル -</div>
+      
+      <div class="sm-grid">
+        <button class="sm-btn" id="sm-btn-green"  onclick="smTap('green')"  disabled></button>
+        <button class="sm-btn" id="sm-btn-red"    onclick="smTap('red')"    disabled></button>
+        <button class="sm-btn" id="sm-btn-blue"   onclick="smTap('blue')"   disabled></button>
+        <button class="sm-btn" id="sm-btn-yellow" onclick="smTap('yellow')" disabled></button>
+      </div>
+
+      <p class="sm-message" id="sm-message">スタートを押してください</p>
+    </div>
+
+    <div class="answer-area">
+      <button class="btn-primary" id="sm-start-btn" onclick="smStart()">スタート</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== RESULT OVERLAY ========== -->
+<div class="result-overlay" id="result-overlay">
+  <div class="result-card">
+    <div class="result-icon" id="res-icon">🎉</div>
+    <h2 id="res-title">ゲーム終了!</h2>
+    <div class="result-detail" id="res-detail"></div>
+    <div class="btn-row">
+      <button class="btn-outline" onclick="resultHome()">ホームへ</button>
+      <button class="btn-primary" onclick="resultRetry()">もう一度</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+<script src="js/visual-calc.js"></script>
+<script src="js/num-tap.js"></script>
+<script src="js/memory-matrix.js"></script>
+<script src="js/color-match.js"></script>
+<script src="js/n-back.js"></script>
+<script src="js/flash-math.js"></script>
+<script src="js/target-search.js"></script>
+<script src="js/symbol-logic.js"></script>
+<script src="js/swipe-sort.js"></script>
+<script src="js/shell-game.js"></script>
+<script src="js/just-stop.js"></script>
+<script src="js/word-link.js"></script>
+<script src="js/sequence-memory.js"></script>
+</body>
+</html>

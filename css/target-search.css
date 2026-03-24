@@ -1,0 +1,84 @@
+/* ===== TARGET SEARCH ===== */
+.ts-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+  min-height: 250px;
+}
+
+.ts-message {
+  font-size: 1.2rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+.ts-grid {
+  display: grid;
+  gap: 8px;
+  background: var(--card);
+  padding: 16px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--card-border);
+}
+
+.ts-grid.grid-easy {
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.ts-grid.grid-normal {
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+}
+
+.ts-grid.grid-hard {
+  grid-template-columns: repeat(8, 1fr);
+  gap: 6px;
+}
+
+.ts-cell {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: monospace;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.1s;
+  user-select: none;
+}
+
+.ts-grid.grid-easy .ts-cell { width: 50px; height: 50px; font-size: 1.8rem; }
+.ts-grid.grid-normal .ts-cell { width: 40px; height: 40px; font-size: 1.4rem; }
+.ts-grid.grid-hard .ts-cell { width: 32px; height: 32px; font-size: 1.1rem; }
+
+.ts-cell:active {
+  transform: scale(0.9);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.ts-cell.clicked-wrong {
+  animation: shake 0.3s cubic-bezier(.36,.07,.19,.97) both;
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
+.ts-cell.clicked-correct {
+  background: rgba(16, 185, 129, 0.3) !important;
+  border-color: rgba(16, 185, 129, 0.8) !important;
+  transform: scale(1.1);
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
+}

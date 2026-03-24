@@ -1,0 +1,58 @@
+/* ===== N-BACK CHALLENGE ===== */
+.nb-stage {
+  width: 100%;
+  max-width: 400px;
+  height: 220px;
+  background: var(--card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.nb-shape {
+  font-size: 6rem;
+  text-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+.nb-shape.pop {
+  animation: popShape 0.3s cubic-bezier(0.175,0.885,0.32,1.275);
+}
+@keyframes popShape {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.nb-message {
+  position: absolute;
+  top: 16px;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 800;
+  text-shadow: 0 2px 8px rgba(139, 92, 246, 0.8);
+  letter-spacing: 1px;
+}
+.nb-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  width: 100%;
+  max-width: 400px;
+  transition: opacity 0.3s;
+}
+.nb-actions .btn-outline {
+  padding: 16px;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+.nb-actions .btn-outline:active {
+  transform: scale(0.95);
+}
