@@ -1,4 +1,4 @@
-const CACHE_NAME = 'noutore-v1';
+const CACHE_NAME = 'noutore-v3';
 const ASSETS = [
   './',
   './index.html',
@@ -19,6 +19,11 @@ const ASSETS = [
   './css/word-link.css',
   './css/sequence-memory.css',
   './css/emoji-order.css',
+  './css/color-vision.css',
+  './css/color-code.css',
+  './css/mirror-path.css',
+  './css/pair-logic.css',
+  './css/chain-word.css',
   './js/main.js',
   './js/visual-calc.js',
   './js/num-tap.js',
@@ -34,16 +39,19 @@ const ASSETS = [
   './js/word-link.js',
   './js/sequence-memory.js',
   './js/emoji-order.js',
+  './js/color-vision.js',
+  './js/color-code.js',
+  './js/mirror-path.js',
+  './js/pair-logic.js',
+  './js/chain-word.js',
 ];
 
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(ASSETS)));
-});
-
-self.addEventListener('fetch', e => {
-  e.respondWith(
-    caches.match(e.request).then(r => r || fetch(e.request))
+  e.waitUntil(
+    caches.open(CACHE_NAME).then(c => c.addAll(ASSETS))
   );
+  // 新しいSWを即座にアクティブにする
+  self.skipWaiting();
 });
 
 self.addEventListener('activate', e => {
@@ -51,5 +59,21 @@ self.addEventListener('activate', e => {
     caches.keys().then(names =>
       Promise.all(names.filter(n => n !== CACHE_NAME).map(n => caches.delete(n)))
     )
+  );
+  // すべてのタブを即座に新しいSWの管理下に置く
+  self.clients.claim();
+});
+
+self.addEventListener('fetch', e => {
+  // ネットワーク優先：常に最新を取得し、オフライン時のみキャッシュを使う
+  e.respondWith(
+    fetch(e.request)
+      .then(response => {
+        // 成功したレスポンスをキャッシュに更新
+        const clone = response.clone();
+        caches.open(CACHE_NAME).then(c => c.put(e.request, clone));
+        return response;
+      })
+      .catch(() => caches.match(e.request))
   );
 });
