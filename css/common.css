@@ -86,7 +86,7 @@ body {
   margin-bottom: 32px;
 }
 .category-header {
-  padding: 0 16px;
+  padding: 0 64px;
   margin-bottom: 12px;
 }
 .category-header h2 {
@@ -104,10 +104,10 @@ body {
 }
 
 .game-list {
-  padding: 0 12px;
+  padding: 0 64px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  gap: 12px;
 }
 .game-card {
   background: var(--card);
@@ -115,7 +115,7 @@ body {
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--card-border);
   border-radius: 16px;
-  padding: 16px 8px;
+  padding: 12px 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -316,7 +316,9 @@ body {
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 600px) {
-  .game-list { grid-template-columns: repeat(2, 1fr); }
+  .game-list { grid-template-columns: repeat(2, 1fr); padding: 0 12px; }
+  .category-header { padding: 0 16px; }
+  .game-card { padding: 16px 8px; }
 }
 @media (max-width: 400px) {
   .game-content { padding: 16px 12px; gap: 12px; }
