@@ -77,6 +77,23 @@ body {
   z-index: -1;
   border-radius: 50%;
 }
+.sfx-toggle-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.sfx-toggle-btn:hover { background: rgba(255,255,255,0.2); }
 .home-header .brain-icon { font-size: 4.5rem; margin-bottom: 16px; filter: drop-shadow(0 4px 12px rgba(139, 92, 246, 0.5)); }
 .home-header h1 { font-size: 2.2rem; font-weight: 800; letter-spacing: 1px; }
 .home-header p  { opacity: 0.85; margin-top: 8px; font-size: 1.05rem; }

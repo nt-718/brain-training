@@ -2,6 +2,7 @@
 let currentScreen = 'home';
 
 function showScreen(id) {
+  sfx.nav();
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   currentScreen = id;
@@ -128,6 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
 let _retryFn = null;
 
 function showResult(icon, title, detail, onRetry) {
+  sfx.result();
   document.getElementById('res-icon').textContent   = icon;
   document.getElementById('res-title').textContent  = title;
   const detailEl = document.getElementById('res-detail');
