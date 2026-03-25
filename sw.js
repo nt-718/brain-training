@@ -1,4 +1,4 @@
-const CACHE_NAME = 'noutore-v6';
+const CACHE_NAME = 'noutore-v9';
 const ASSETS = [
   './',
   './index.html',
@@ -56,6 +56,28 @@ const ASSETS = [
   './js/go-nogo.js',
   './css/apple-catch.css',
   './js/apple-catch.js',
+  './css/speed-sum.css',
+  './js/speed-sum.js',
+  './css/eq-judge.css',
+  './js/eq-judge.js',
+  './css/num-order.css',
+  './js/num-order.js',
+  './css/obj-count.css',
+  './js/obj-count.js',
+  './css/hi-lo.css',
+  './js/hi-lo.js',
+  './css/color-seq.css',
+  './js/color-seq.js',
+  './css/prime-hunt.css',
+  './js/prime-hunt.js',
+  './css/frac-cmp.css',
+  './js/frac-cmp.js',
+  './css/card-flip.css',
+  './js/card-flip.js',
+  './css/budget-plan.css',
+  './js/budget-plan.js',
+  './css/cube-count.css',
+  './js/cube-count.js',
 ];
 
 self.addEventListener('install', e => {

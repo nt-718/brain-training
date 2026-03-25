@@ -1,0 +1,97 @@
+/* ===== カードフリップ ===== */
+
+.cflip-info {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.65);
+  text-align: center;
+  margin: 4px 0;
+}
+
+.cflip-stage {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  background: var(--card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  box-sizing: border-box;
+  margin: 6px 0;
+}
+
+.cflip-grid {
+  display: grid;
+  gap: 7px;
+}
+
+.cflip-grid-4 { grid-template-columns: repeat(4, 1fr); }
+.cflip-grid-5 { grid-template-columns: repeat(5, 1fr); }
+
+.cflip-card {
+  aspect-ratio: 1;
+  perspective: 500px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.cflip-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.35s ease;
+  border-radius: 10px;
+}
+
+.cflip-card.flipped .cflip-inner {
+  transform: rotateY(180deg);
+}
+
+.cflip-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cflip-back {
+  background: linear-gradient(135deg, var(--accent), var(--primary));
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.4);
+}
+
+.cflip-front {
+  transform: rotateY(180deg);
+  background: rgba(255,255,255,0.95);
+  font-size: 1.6rem;
+}
+
+/* Smaller emoji for 5-col grid */
+.cflip-grid-5 .cflip-front { font-size: 1.3rem; }
+
+.cflip-card.matched .cflip-inner {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.cflip-card.matched .cflip-face.cflip-front {
+  background: rgba(16, 185, 129, 0.25);
+}
+
+.cflip-card.shake .cflip-inner {
+  animation: cflipShake 0.38s ease both;
+}
+
+@keyframes cflipShake {
+  20% { transform: rotateY(180deg) translateX(-4px); }
+  60% { transform: rotateY(180deg) translateX(4px); }
+  100% { transform: rotateY(180deg) translateX(0); }
+}

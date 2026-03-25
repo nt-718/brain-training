@@ -31,6 +31,17 @@ function showScreen(id) {
   if (typeof mnStop === 'function') mnStop();
   if (typeof gnStop === 'function') gnStop();
   if (typeof acStop === 'function') acStop();
+  if (typeof spdStop === 'function') spdStop();
+  if (typeof eqtStop === 'function') eqtStop();
+  if (typeof norStop === 'function') norStop();
+  if (typeof ocStop === 'function') ocStop();
+  if (typeof hlStop === 'function') hlStop();
+  if (typeof cseqStop === 'function') cseqStop();
+  if (typeof phStop === 'function') phStop();
+  if (typeof fcmpStop === 'function') fcmpStop();
+  if (typeof cflipStop === 'function') cflipStop();
+  if (typeof bplanStop === 'function') bplanStop();
+  if (typeof ccntStop === 'function') ccntStop();
   if (id === 'home') refreshBestScores();
 }
 
@@ -62,7 +73,18 @@ const BS_MAPPING = [
   { target: 'pattern-next',  key: 'pnBest' },
   { target: 'mental-nav',    key: 'mnBest' },
   { target: 'go-nogo',       key: 'gnBest' },
-  { target: 'apple-catch',   key: 'acBest' }];
+  { target: 'apple-catch',   key: 'acBest' },
+  { target: 'speed-sum',    key: ['spd_best_easy','spd_best_normal','spd_best_hard'] },
+  { target: 'eq-judge',     key: ['eqt_best_easy','eqt_best_normal','eqt_best_hard'] },
+  { target: 'num-order',    key: ['nor_best_easy','nor_best_normal','nor_best_hard'] },
+  { target: 'obj-count',    key: ['oc_best_easy','oc_best_normal','oc_best_hard'] },
+  { target: 'hi-lo',        key: 'hlBest' },
+  { target: 'color-seq',   key: 'cseqBest' },
+  { target: 'prime-hunt',  key: ['ph_best_easy','ph_best_normal','ph_best_hard'] },
+  { target: 'frac-cmp',    key: ['fcmp_best_easy','fcmp_best_normal','fcmp_best_hard'] },
+  { target: 'card-flip',   key: ['cflip_best_easy','cflip_best_normal','cflip_best_hard'], reverse: true, suffix: '手' },
+  { target: 'budget-plan', key: ['bplan_best_easy','bplan_best_normal','bplan_best_hard'] },
+  { target: 'cube-count',  key: ['ccnt_best_easy','ccnt_best_normal','ccnt_best_hard'] }];
 
 function refreshBestScores() {
   BS_MAPPING.forEach(g => {

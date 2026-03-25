@@ -1,0 +1,83 @@
+/* ===== 素数ハント ===== */
+
+.ph-info {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.65);
+  text-align: center;
+  margin: 4px 0;
+}
+
+.ph-stage {
+  width: 100%;
+  max-width: 400px;
+  background: var(--card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 14px;
+  box-sizing: border-box;
+  margin: 6px 0;
+}
+
+.ph-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.ph-num-btn {
+  height: 56px;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #fff;
+  background: rgba(255,255,255,0.1);
+  border: 2px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.1s, background 0.1s, opacity 0.2s;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.ph-num-btn:active {
+  transform: scale(0.9);
+}
+
+.ph-num-btn.ph-tapped-correct {
+  background: rgba(16,185,129,0.35);
+  border-color: #10b981;
+  color: #10b981;
+  pointer-events: none;
+  animation: phCorrect 0.25s ease both;
+}
+
+@keyframes phCorrect {
+  50% { transform: scale(1.15); }
+}
+
+.ph-num-btn.ph-tapped-wrong {
+  background: rgba(244,63,94,0.35);
+  border-color: #f43f5e;
+  color: #f43f5e;
+  pointer-events: none;
+  animation: phWrong 0.35s ease both;
+}
+
+@keyframes phWrong {
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+  100% { transform: translateX(0); }
+}
+
+.ph-num-btn.ph-pop {
+  animation: phPop 0.2s cubic-bezier(0.175,0.885,0.32,1.275) both;
+}
+
+@keyframes phPop {
+  0%   { transform: scale(0); opacity: 0; }
+  70%  { transform: scale(1.08); }
+  100% { transform: scale(1); opacity: 1; }
+}

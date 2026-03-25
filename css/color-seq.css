@@ -1,0 +1,121 @@
+/* ===== カラーシーケンス ===== */
+
+.cseq-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  gap: 12px;
+  margin: 8px 0;
+}
+
+.cseq-message {
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  text-align: center;
+  min-height: 22px;
+}
+
+.cseq-tiles {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 18px 14px;
+  background: var(--card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 88px;
+  align-items: center;
+}
+
+.cseq-tile {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  border: 3px solid transparent;
+  transition: background 0.15s, border 0.15s, transform 0.1s;
+  flex-shrink: 0;
+}
+
+.cseq-tile.cseq-blank {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.15);
+}
+
+.cseq-tile.cseq-current {
+  border-color: #fff;
+  box-shadow: 0 0 14px rgba(255,255,255,0.5);
+  animation: cseqPulse 0.7s ease-in-out infinite alternate;
+}
+
+@keyframes cseqPulse {
+  from { box-shadow: 0 0 8px rgba(255,255,255,0.3); }
+  to   { box-shadow: 0 0 20px rgba(255,255,255,0.7); }
+}
+
+.cseq-tile.cseq-correct {
+  animation: cseqCorrect 0.3s ease both;
+}
+
+@keyframes cseqCorrect {
+  50%  { transform: scale(1.2); filter: brightness(1.4); }
+  100% { transform: scale(1); }
+}
+
+.cseq-tile.cseq-wrong {
+  animation: cseqWrong 0.4s ease both;
+}
+
+@keyframes cseqWrong {
+  25%  { transform: rotate(-6deg); filter: brightness(0.5); }
+  75%  { transform: rotate(6deg); }
+  100% { transform: rotate(0); }
+}
+
+.cseq-colors {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cseq-color-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.3);
+  cursor: pointer;
+  transition: transform 0.1s, filter 0.1s, border 0.15s;
+  user-select: none;
+  -webkit-user-select: none;
+  flex-shrink: 0;
+}
+
+.cseq-color-btn:active {
+  transform: scale(0.87);
+  filter: brightness(0.8);
+}
+
+.cseq-color-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
+}
+
+.cseq-pop {
+  animation: cseqTilePop 0.25s cubic-bezier(0.175,0.885,0.32,1.275) both;
+}
+
+@keyframes cseqTilePop {
+  0%   { transform: scale(0); opacity: 0; }
+  70%  { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}

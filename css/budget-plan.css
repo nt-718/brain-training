@@ -1,0 +1,153 @@
+/* ===== 予算プラン ===== */
+
+.bplan-budget-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 400px;
+  background: var(--card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 10px 16px;
+  box-sizing: border-box;
+  margin: 6px 0;
+}
+
+.bplan-budget-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.55);
+}
+
+.bplan-budget-val {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #facc15;
+}
+
+.bplan-total-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.55);
+  text-align: right;
+}
+
+.bplan-total-val {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #fff;
+  transition: color 0.2s;
+}
+
+.bplan-total-val.over { color: #f43f5e; }
+.bplan-total-val.good { color: #10b981; }
+
+.bplan-meter {
+  width: 100%;
+  max-width: 400px;
+  height: 8px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 2px 0 8px;
+}
+
+.bplan-meter-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.25s, background 0.25s;
+  background: linear-gradient(90deg, var(--accent), var(--primary));
+}
+
+.bplan-items {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.bplan-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.07);
+  border: 2px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.15s, border 0.15s, transform 0.1s;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.bplan-item:active { transform: scale(0.97); }
+
+.bplan-item.selected {
+  background: rgba(139,92,246,0.25);
+  border-color: var(--accent);
+}
+
+.bplan-item-icon { font-size: 1.4rem; flex-shrink: 0; }
+
+.bplan-item-name {
+  flex: 1;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.bplan-item-price {
+  font-size: 1rem;
+  font-weight: 800;
+  color: rgba(255,255,255,0.8);
+  white-space: nowrap;
+}
+
+.bplan-item.selected .bplan-item-price { color: #a78bfa; }
+
+.bplan-qty-val {
+  min-width: 24px;
+  text-align: center;
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: #fff;
+}
+
+.bplan-qty-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.1s;
+}
+
+.bplan-qty-btn:hover { background: rgba(255,255,255,0.2); }
+.bplan-qty-btn:active { transform: scale(0.9); }
+
+.bplan-confirm-btn {
+  width: 100%;
+  max-width: 400px;
+  height: 52px;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--accent), var(--primary));
+  color: #fff;
+  transition: transform 0.1s, filter 0.1s;
+  margin-top: 4px;
+}
+
+.bplan-confirm-btn:active { transform: scale(0.97); filter: brightness(0.9); }
+.bplan-confirm-btn:disabled { opacity: 0.4; pointer-events: none; }

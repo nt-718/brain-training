@@ -37,6 +37,17 @@
   <link rel="stylesheet" href="css/mental-nav.css" />
   <link rel="stylesheet" href="css/go-nogo.css" />
   <link rel="stylesheet" href="css/apple-catch.css" />
+  <link rel="stylesheet" href="css/speed-sum.css" />
+  <link rel="stylesheet" href="css/eq-judge.css" />
+  <link rel="stylesheet" href="css/num-order.css" />
+  <link rel="stylesheet" href="css/obj-count.css" />
+  <link rel="stylesheet" href="css/hi-lo.css" />
+  <link rel="stylesheet" href="css/color-seq.css" />
+  <link rel="stylesheet" href="css/prime-hunt.css" />
+  <link rel="stylesheet" href="css/frac-cmp.css" />
+  <link rel="stylesheet" href="css/card-flip.css" />
+  <link rel="stylesheet" href="css/budget-plan.css" />
+  <link rel="stylesheet" href="css/cube-count.css" />
 </head>
 <body>
 
@@ -48,11 +59,11 @@
     <h1>脳トレ</h1>
     <p>毎日少しずつ、脳を鍛えよう</p>
   </div>
-  <!-- Category: 計算・論理 -->
+  <!-- Category: 計算・数理 -->
   <div class="category-section">
     <div class="category-header">
-      <h2>🧮 計算・論理</h2>
-      <p>数や規則性を読み解く力を鍛える</p>
+      <h2>🧮 計算・数理</h2>
+      <p>数を素早く正確に扱う力を鍛える</p>
     </div>
     <div class="game-list">
       <div class="game-card" onclick="showScreen('visual-calc')">
@@ -71,11 +82,85 @@
         </div>
         <div class="badge">計算・瞬視</div>
       </div>
+      <div class="game-card" onclick="showScreen('speed-sum')">
+        <div class="game-icon">➕</div>
+        <div class="game-info">
+          <h2>スピードサム</h2>
+          <p>表示された数字の合計を素早く計算しよう</p>
+        </div>
+        <div class="badge">暗算</div>
+      </div>
+      <div class="game-card" onclick="showScreen('eq-judge')">
+        <div class="game-icon">✅</div>
+        <div class="game-info">
+          <h2>等式判定</h2>
+          <p>式が正しいか間違いか素早く判定しよう</p>
+        </div>
+        <div class="badge">計算</div>
+      </div>
+      <div class="game-card" onclick="showScreen('balance-scale')">
+        <div class="game-icon">⚖️</div>
+        <div class="game-info">
+          <h2>天秤パズル</h2>
+          <p>流れる数字の和を比べてどちらが重いか答えよう</p>
+        </div>
+        <div class="badge">暗算</div>
+      </div>
+      <div class="game-card" onclick="showScreen('prime-hunt')">
+        <div class="game-icon">🔬</div>
+        <div class="game-info">
+          <h2>素数ハント</h2>
+          <p>グリッドの中から素数だけを選び出そう</p>
+        </div>
+        <div class="badge">数論</div>
+      </div>
+      <div class="game-card" onclick="showScreen('frac-cmp')">
+        <div class="game-icon">➗</div>
+        <div class="game-info">
+          <h2>分数比較</h2>
+          <p>2つの分数の大小を素早く判定しよう</p>
+        </div>
+        <div class="badge">分数</div>
+      </div>
+      <div class="game-card" onclick="showScreen('budget-plan')">
+        <div class="game-icon">🛒</div>
+        <div class="game-info">
+          <h2>予算プラン</h2>
+          <p>予算内で商品をうまく組み合わせて購入しよう</p>
+        </div>
+        <div class="badge">計画</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category: 論理・推理 -->
+  <div class="category-section">
+    <div class="category-header">
+      <h2>💡 論理・推理</h2>
+      <p>規則の発見・空間認知・言語思考を鍛える</p>
+    </div>
+    <div class="game-list">
       <div class="game-card" onclick="showScreen('symbol-logic')">
         <div class="game-icon">🎯</div>
         <div class="game-info">
           <h2>シンボル計算</h2>
           <p>絵文字を使った計算式を解こう</p>
+        </div>
+        <div class="badge">推論</div>
+      </div>
+      <div class="game-card" onclick="showScreen('pair-logic')">
+        <div class="game-icon">🃏</div>
+        <div class="game-info">
+          <h2>ペアロジック</h2>
+          <p>ヒントから正しい並び順を推理しよう</p>
+        </div>
+        <div class="badge">推論</div>
+      </div>
+      <div class="game-card" onclick="showScreen('pattern-next')">
+        <div class="game-icon">🔮</div>
+        <div class="game-info">
+          <h2>パターン予測</h2>
+          <p>数列や色のパターンから次を予測しよう</p>
         </div>
         <div class="badge">推論</div>
       </div>
@@ -87,30 +172,6 @@
         </div>
         <div class="badge">空間認知</div>
       </div>
-      <div class="game-card" onclick="showScreen('pair-logic')">
-        <div class="game-icon">🃏</div>
-        <div class="game-info">
-          <h2>ペアロジック</h2>
-          <p>ヒントから正しい並び順を推理しよう</p>
-        </div>
-        <div class="badge">推論</div>
-      </div>
-      <div class="game-card" onclick="showScreen('balance-scale')">
-        <div class="game-icon">⚖️</div>
-        <div class="game-info">
-          <h2>天秤パズル</h2>
-          <p>流れる数字の和を比べてどちらが重いか答えよう</p>
-        </div>
-        <div class="badge">暗算</div>
-      </div>
-      <div class="game-card" onclick="showScreen('pattern-next')">
-        <div class="game-icon">🔮</div>
-        <div class="game-info">
-          <h2>パターン予測</h2>
-          <p>数列や色のパターンから次を予測しよう</p>
-        </div>
-        <div class="badge">推論</div>
-      </div>
       <div class="game-card" onclick="showScreen('mental-nav')">
         <div class="game-icon">🗺️</div>
         <div class="game-info">
@@ -119,6 +180,22 @@
         </div>
         <div class="badge">空間認知</div>
       </div>
+      <div class="game-card" onclick="showScreen('word-link')">
+        <div class="game-icon">🔤</div>
+        <div class="game-info">
+          <h2>ワードリンク</h2>
+          <p>バラバラの文字をタップして単語を完成</p>
+        </div>
+        <div class="badge">言語</div>
+      </div>
+      <div class="game-card" onclick="showScreen('chain-word')">
+        <div class="game-icon">🔗</div>
+        <div class="game-info">
+          <h2>チェーンワード</h2>
+          <p>単語から連想される言葉を選んでつなごう</p>
+        </div>
+        <div class="badge">連想</div>
+      </div>
     </div>
   </div>
 
@@ -126,7 +203,7 @@
   <div class="category-section">
     <div class="category-header">
       <h2>🧠 記憶</h2>
-      <p>短期記憶やワーキングメモリを鍛える</p>
+      <p>短期記憶・ワーキングメモリを鍛える</p>
     </div>
     <div class="game-list">
       <div class="game-card" onclick="showScreen('memory-matrix')">
@@ -161,6 +238,22 @@
         </div>
         <div class="badge">順序記憶</div>
       </div>
+      <div class="game-card" onclick="showScreen('color-seq')">
+        <div class="game-icon">🎨</div>
+        <div class="game-info">
+          <h2>カラーシーケンス</h2>
+          <p>一度に表示された色の並びを記憶して再現しよう</p>
+        </div>
+        <div class="badge">記憶スパン</div>
+      </div>
+      <div class="game-card" onclick="showScreen('card-flip')">
+        <div class="game-icon">🀄</div>
+        <div class="game-info">
+          <h2>カードフリップ</h2>
+          <p>同じ絵柄のペアを少ない手数で揃えよう</p>
+        </div>
+        <div class="badge">空間記憶</div>
+      </div>
     </div>
   </div>
 
@@ -168,7 +261,7 @@
   <div class="category-section">
     <div class="category-header">
       <h2>⚡ 反射・判断</h2>
-      <p>素早い判断力と無意識の抑制力を鍛える</p>
+      <p>素早い反応速度と判断力・抑制力を鍛える</p>
     </div>
     <div class="game-list">
       <div class="game-card" onclick="showScreen('num-tap')">
@@ -178,14 +271,6 @@
           <p>数字を順番に素早くタップしよう</p>
         </div>
         <div class="badge">反射</div>
-      </div>
-      <div class="game-card" onclick="showScreen('target-search')">
-        <div class="game-icon">🔍</div>
-        <div class="game-info">
-          <h2>ターゲットサーチ</h2>
-          <p>一つだけ違う文字を素早く見つけよう</p>
-        </div>
-        <div class="badge">探索</div>
       </div>
       <div class="game-card" onclick="showScreen('swipe-sort')">
         <div class="game-icon">↔️</div>
@@ -227,23 +312,13 @@
         </div>
         <div class="badge">反射</div>
       </div>
-    </div>
-  </div>
-
-  <!-- Category: 視覚・感覚 -->
-  <div class="category-section">
-    <div class="category-header">
-      <h2>👁️ 視覚・感覚</h2>
-      <p>動体視力や言語処理、時間感覚を鍛える</p>
-    </div>
-    <div class="game-list">
-      <div class="game-card" onclick="showScreen('shell-game')">
-        <div class="game-icon">🎩</div>
+      <div class="game-card" onclick="showScreen('hi-lo')">
+        <div class="game-icon">🃏</div>
         <div class="game-info">
-          <h2>シェルゲーム</h2>
-          <p>星が入ったカップの動きを追おう</p>
+          <h2>ハイ＆ロー</h2>
+          <p>次のカードは今より高い？低い？当て続けよう</p>
         </div>
-        <div class="badge">動体視力</div>
+        <div class="badge">判断</div>
       </div>
       <div class="game-card" onclick="showScreen('just-stop')">
         <div class="game-icon">⏱️</div>
@@ -253,24 +328,58 @@
         </div>
         <div class="badge">時間感覚</div>
       </div>
-      <div class="game-card" onclick="showScreen('word-link')">
-        <div class="game-icon">🔤</div>
+    </div>
+  </div>
+
+  <!-- Category: 知覚・注意 -->
+  <div class="category-section">
+    <div class="category-header">
+      <h2>👁️ 知覚・注意</h2>
+      <p>視覚的な認識力・注意力・空間把握力を鍛える</p>
+    </div>
+    <div class="game-list">
+      <div class="game-card" onclick="showScreen('target-search')">
+        <div class="game-icon">🔍</div>
         <div class="game-info">
-          <h2>ワードリンク</h2>
-          <p>バラバラの文字をタップして単語を完成</p>
+          <h2>ターゲットサーチ</h2>
+          <p>一つだけ違う文字を素早く見つけよう</p>
         </div>
-        <div class="badge">言語</div>
+        <div class="badge">探索</div>
       </div>
-      <div class="game-card" onclick="showScreen('chain-word')">
-        <div class="game-icon">🔗</div>
+      <div class="game-card" onclick="showScreen('num-order')">
+        <div class="game-icon">🔢</div>
         <div class="game-info">
-          <h2>チェーンワード</h2>
-          <p>単語から連想される言葉を選んでつなごう</p>
+          <h2>数字並べ</h2>
+          <p>バラバラな数字を小さい順にタップしよう</p>
         </div>
-        <div class="badge">連想</div>
+        <div class="badge">視覚探索</div>
+      </div>
+      <div class="game-card" onclick="showScreen('obj-count')">
+        <div class="game-icon">🔵</div>
+        <div class="game-info">
+          <h2>個数カウント</h2>
+          <p>一瞬表示されるアイコンの数を数えよう</p>
+        </div>
+        <div class="badge">瞬視</div>
+      </div>
+      <div class="game-card" onclick="showScreen('cube-count')">
+        <div class="game-icon">🧊</div>
+        <div class="game-info">
+          <h2>キューブカウント</h2>
+          <p>積み上げられた立体ブロックの数を数えよう</p>
+        </div>
+        <div class="badge">空間認識</div>
+      </div>
+      <div class="game-card" onclick="showScreen('shell-game')">
+        <div class="game-icon">🎩</div>
+        <div class="game-info">
+          <h2>シェルゲーム</h2>
+          <p>星が入ったカップの動きを追おう</p>
+        </div>
+        <div class="badge">動体視力</div>
       </div>
       <div class="game-card" onclick="showScreen('color-vision')">
-        <div class="game-icon">👁️</div>
+        <div class="game-icon">🌈</div>
         <div class="game-info">
           <h2>カラービジョン</h2>
           <p>1つだけ色が違うタイルを見つけよう</p>
@@ -1359,6 +1468,527 @@
   </div>
 </div>
 
+<!-- ========== SPEED SUM ========== -->
+<div id="speed-sum" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>スピードサム</h1>
+  </nav>
+  <div class="game-content">
+    <div class="diff-row" id="spd-diff-row">
+      <button class="diff-btn selected" onclick="spdSetDiff(this,'easy')">かんたん</button>
+      <button class="diff-btn"          onclick="spdSetDiff(this,'normal')">ふつう</button>
+      <button class="diff-btn"          onclick="spdSetDiff(this,'hard')">むずかしい</button>
+    </div>
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">スコア</div>
+        <div class="value" id="spd-score">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">残り</div>
+        <div class="value" id="spd-time">60</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="spd-best">0</div>
+      </div>
+    </div>
+    <div class="timer-bar">
+      <div class="timer-fill" id="spd-timer-fill" style="width:100%"></div>
+    </div>
+
+    <div class="spd-stage" id="spd-stage" style="visibility:hidden;">
+      <div class="spd-numbers" id="spd-numbers"></div>
+    </div>
+
+    <div class="answer-area">
+      <div class="number-input" id="spd-input">?</div>
+      <div class="numpad" id="spd-numpad" style="display:none; margin-top:10px;">
+        <button class="numpad-btn" onclick="spdNumpad('7')">7</button>
+        <button class="numpad-btn" onclick="spdNumpad('8')">8</button>
+        <button class="numpad-btn" onclick="spdNumpad('9')">9</button>
+        <button class="numpad-btn del" onclick="spdNumpad('del')">⌫</button>
+        <button class="numpad-btn" onclick="spdNumpad('4')">4</button>
+        <button class="numpad-btn" onclick="spdNumpad('5')">5</button>
+        <button class="numpad-btn" onclick="spdNumpad('6')">6</button>
+        <button class="numpad-btn ok" onclick="spdNumpad('ok')">OK</button>
+        <button class="numpad-btn" onclick="spdNumpad('1')">1</button>
+        <button class="numpad-btn" onclick="spdNumpad('2')">2</button>
+        <button class="numpad-btn" onclick="spdNumpad('3')">3</button>
+        <button class="numpad-btn zero" onclick="spdNumpad('0')">0</button>
+      </div>
+      <button class="btn-primary" id="spd-start-btn" onclick="spdStart()">スタート</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== EQ JUDGE ========== -->
+<div id="eq-judge" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>等式判定</h1>
+  </nav>
+  <div class="game-content">
+    <div class="diff-row" id="eqt-diff-row">
+      <button class="diff-btn selected" onclick="eqtSetDiff(this,'easy')">かんたん</button>
+      <button class="diff-btn"          onclick="eqtSetDiff(this,'normal')">ふつう</button>
+      <button class="diff-btn"          onclick="eqtSetDiff(this,'hard')">むずかしい</button>
+    </div>
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">スコア</div>
+        <div class="value" id="eqt-score">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">残り</div>
+        <div class="value" id="eqt-time">60</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="eqt-best">0</div>
+      </div>
+    </div>
+    <div class="timer-bar">
+      <div class="timer-fill" id="eqt-timer-fill" style="width:100%"></div>
+    </div>
+
+    <div class="eqt-stage" id="eqt-stage" style="visibility:hidden;">
+      <div class="eqt-expr" id="eqt-expr"></div>
+    </div>
+
+    <div class="answer-area">
+      <div class="eqt-btns" id="eqt-btns" style="display:none;">
+        <button class="eqt-btn eqt-btn-o" onclick="eqtTap(true)">⭕</button>
+        <button class="eqt-btn eqt-btn-x" onclick="eqtTap(false)">✖</button>
+      </div>
+      <button class="btn-primary" id="eqt-start-btn" onclick="eqtStart()" style="margin-top:16px;">スタート</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== NUM ORDER ========== -->
+<div id="num-order" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>数字並べ</h1>
+  </nav>
+  <div class="game-content">
+    <div class="diff-row" id="nor-diff-row">
+      <button class="diff-btn selected" onclick="norSetDiff(this,'easy')">かんたん</button>
+      <button class="diff-btn"          onclick="norSetDiff(this,'normal')">ふつう</button>
+      <button class="diff-btn"          onclick="norSetDiff(this,'hard')">むずかしい</button>
+    </div>
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">スコア</div>
+        <div class="value" id="nor-score">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">残り</div>
+        <div class="value" id="nor-time">60</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="nor-best">0</div>
+      </div>
+    </div>
+    <div class="timer-bar">
+      <div class="timer-fill" id="nor-timer-fill" style="width:100%"></div>
+    </div>
+
+    <p class="nor-hint" id="nor-hint">小さい順にタップ！</p>
+
+    <div class="nor-stage" id="nor-stage" style="visibility:hidden;">
+      <div class="nor-grid" id="nor-grid"></div>
+    </div>
+
+    <div class="answer-area">
+      <button class="btn-primary" id="nor-start-btn" onclick="norStart()">スタート</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== OBJ COUNT ========== -->
+<div id="obj-count" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>個数カウント</h1>
+  </nav>
+  <div class="game-content">
+    <div class="diff-row" id="oc-diff-row">
+      <button class="diff-btn selected" onclick="ocSetDiff(this,'easy')">かんたん</button>
+      <button class="diff-btn"          onclick="ocSetDiff(this,'normal')">ふつう</button>
+      <button class="diff-btn"          onclick="ocSetDiff(this,'hard')">むずかしい</button>
+    </div>
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">問題</div>
+        <div class="value" id="oc-q-num">0/10</div>
+      </div>
+      <div class="score-item">
+        <div class="label">正解</div>
+        <div class="value" id="oc-score">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="oc-best">0</div>
+      </div>
+    </div>
+
+    <p class="oc-message" id="oc-message">スタートを押してください</p>
+
+    <div class="oc-stage" id="oc-stage">
+      <div class="oc-grid" id="oc-grid"></div>
+    </div>
+
+    <div class="answer-area">
+      <div class="number-input" id="oc-input" style="display:none;">?</div>
+      <div class="numpad" id="oc-numpad" style="display:none; margin-top:10px;">
+        <button class="numpad-btn" onclick="ocNumpad('7')">7</button>
+        <button class="numpad-btn" onclick="ocNumpad('8')">8</button>
+        <button class="numpad-btn" onclick="ocNumpad('9')">9</button>
+        <button class="numpad-btn del" onclick="ocNumpad('del')">⌫</button>
+        <button class="numpad-btn" onclick="ocNumpad('4')">4</button>
+        <button class="numpad-btn" onclick="ocNumpad('5')">5</button>
+        <button class="numpad-btn" onclick="ocNumpad('6')">6</button>
+        <button class="numpad-btn ok" onclick="ocNumpad('ok')">OK</button>
+        <button class="numpad-btn" onclick="ocNumpad('1')">1</button>
+        <button class="numpad-btn" onclick="ocNumpad('2')">2</button>
+        <button class="numpad-btn" onclick="ocNumpad('3')">3</button>
+        <button class="numpad-btn zero" onclick="ocNumpad('0')">0</button>
+      </div>
+      <button class="btn-primary" id="oc-start-btn" onclick="ocStart()">スタート</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== HI-LO ========== -->
+<div id="hi-lo" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>ハイ＆ロー</h1>
+  </nav>
+  <div class="game-content">
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">連続正解</div>
+        <div class="value" id="hl-score">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">残り枚数</div>
+        <div class="value" id="hl-remain">52</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="hl-best">0</div>
+      </div>
+    </div>
+
+    <div class="hl-stage" id="hl-stage" style="visibility:hidden;">
+      <div class="hl-card-area">
+        <div class="hl-card hl-black" id="hl-current-card">
+          <div class="hl-card-value" id="hl-card-value">A</div>
+          <div class="hl-card-suit" id="hl-card-suit">♠</div>
+        </div>
+      </div>
+      <p class="hl-message" id="hl-message">次のカードは？</p>
+    </div>
+
+    <div class="answer-area">
+      <div class="hl-btns" id="hl-btns" style="display:none;">
+        <button class="hl-btn hl-btn-hi" onclick="hlTap('high')">↑ ハイ</button>
+        <button class="hl-btn hl-btn-lo" onclick="hlTap('low')">↓ ロー</button>
+      </div>
+      <button class="btn-primary" id="hl-start-btn" onclick="hlStart()" style="margin-top:16px;">スタート</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== COLOR SEQ ========== -->
+<div id="color-seq" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>カラーシーケンス</h1>
+  </nav>
+  <div class="game-content">
+    <div class="diff-row" id="cseq-diff-row">
+      <button class="diff-btn selected" onclick="cseqSetDiff(this,'easy')">かんたん</button>
+      <button class="diff-btn"          onclick="cseqSetDiff(this,'normal')">ふつう</button>
+      <button class="diff-btn"          onclick="cseqSetDiff(this,'hard')">むずかしい</button>
+    </div>
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">スコア</div>
+        <div class="value" id="cseq-score">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="cseq-best">0</div>
+      </div>
+    </div>
+
+    <div class="cseq-stage" id="cseq-stage" style="visibility:hidden;">
+      <p class="cseq-message" id="cseq-message"></p>
+      <div class="cseq-tiles" id="cseq-tiles"></div>
+      <div class="cseq-colors" id="cseq-colors">
+        <button class="cseq-color-btn" style="background:#f43f5e;" onclick="cseqTap(0)" disabled></button>
+        <button class="cseq-color-btn" style="background:#3b82f6;" onclick="cseqTap(1)" disabled></button>
+        <button class="cseq-color-btn" style="background:#facc15;" onclick="cseqTap(2)" disabled></button>
+        <button class="cseq-color-btn" style="background:#10b981;" onclick="cseqTap(3)" disabled></button>
+        <button class="cseq-color-btn" style="background:#8b5cf6;" onclick="cseqTap(4)" disabled></button>
+      </div>
+    </div>
+
+    <div class="answer-area">
+      <button class="btn-primary" id="cseq-start-btn" onclick="cseqStart()">スタート</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== PRIME HUNT ========== -->
+<div id="prime-hunt" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>素数ハント</h1>
+  </nav>
+  <div class="game-content">
+    <div class="diff-row" id="ph-diff-row">
+      <button class="diff-btn selected" onclick="phSetDiff(this,'easy')">かんたん</button>
+      <button class="diff-btn"          onclick="phSetDiff(this,'normal')">ふつう</button>
+      <button class="diff-btn"          onclick="phSetDiff(this,'hard')">むずかしい</button>
+    </div>
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">スコア</div>
+        <div class="value" id="ph-score">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">残り</div>
+        <div class="value" id="ph-time">60</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="ph-best">0</div>
+      </div>
+    </div>
+    <div class="timer-bar">
+      <div class="timer-fill" id="ph-timer-fill" style="width:100%"></div>
+    </div>
+
+    <p class="ph-info" id="ph-info">素数をタップしよう！</p>
+
+    <div class="ph-stage" id="ph-stage" style="visibility:hidden;">
+      <div class="ph-grid" id="ph-grid"></div>
+    </div>
+
+    <div class="answer-area">
+      <button class="btn-primary" id="ph-start-btn" onclick="phStart()">スタート</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== FRAC CMP ========== -->
+<div id="frac-cmp" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>分数比較</h1>
+  </nav>
+  <div class="game-content">
+    <div class="diff-row" id="fcmp-diff-row">
+      <button class="diff-btn selected" onclick="fcmpSetDiff(this,'easy')">かんたん</button>
+      <button class="diff-btn"          onclick="fcmpSetDiff(this,'normal')">ふつう</button>
+      <button class="diff-btn"          onclick="fcmpSetDiff(this,'hard')">むずかしい</button>
+    </div>
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">スコア</div>
+        <div class="value" id="fcmp-score">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">残り</div>
+        <div class="value" id="fcmp-time">60</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="fcmp-best">0</div>
+      </div>
+    </div>
+    <div class="timer-bar">
+      <div class="timer-fill" id="fcmp-timer-fill" style="width:100%"></div>
+    </div>
+
+    <div class="fcmp-stage" id="fcmp-stage" style="visibility:hidden;">
+      <div class="fcmp-frac">
+        <div class="fcmp-num" id="fcmp-a">3</div>
+        <div class="fcmp-line"></div>
+        <div class="fcmp-den" id="fcmp-b">4</div>
+      </div>
+      <div class="fcmp-vs">?</div>
+      <div class="fcmp-frac">
+        <div class="fcmp-num" id="fcmp-c">5</div>
+        <div class="fcmp-line"></div>
+        <div class="fcmp-den" id="fcmp-d">7</div>
+      </div>
+    </div>
+
+    <div class="answer-area">
+      <div class="fcmp-btns" id="fcmp-btns" style="display:none;">
+        <button class="fcmp-btn" onclick="fcmpTap('>')">＞</button>
+        <button class="fcmp-btn" onclick="fcmpTap('=')">＝</button>
+        <button class="fcmp-btn" onclick="fcmpTap('<')">＜</button>
+      </div>
+      <button class="btn-primary" id="fcmp-start-btn" onclick="fcmpStart()" style="margin-top:14px;">スタート</button>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- ========== CARD FLIP ========== -->
+<div id="card-flip" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>カードフリップ</h1>
+  </nav>
+  <div class="game-content">
+    <div class="diff-row" id="cflip-diff-row">
+      <button class="diff-btn selected" onclick="cflipSetDiff(this,'easy')">かんたん</button>
+      <button class="diff-btn"          onclick="cflipSetDiff(this,'normal')">ふつう</button>
+      <button class="diff-btn"          onclick="cflipSetDiff(this,'hard')">むずかしい</button>
+    </div>
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">手数</div>
+        <div class="value" id="cflip-moves">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="cflip-best">-</div>
+      </div>
+    </div>
+
+    <p class="cflip-info" id="cflip-info">カードをめくってペアを揃えよう</p>
+
+    <div class="cflip-stage" id="cflip-stage" style="visibility:hidden;">
+      <div class="cflip-grid cflip-grid-4" id="cflip-grid"></div>
+    </div>
+
+    <div class="answer-area">
+      <button class="btn-primary" id="cflip-start-btn" onclick="cflipStart()">スタート</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ========== BUDGET PLAN ========== -->
+<div id="budget-plan" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>予算プラン</h1>
+  </nav>
+  <div class="game-content">
+    <div class="diff-row" id="bplan-diff-row">
+      <button class="diff-btn selected" onclick="bplanSetDiff(this,'easy')">かんたん</button>
+      <button class="diff-btn"          onclick="bplanSetDiff(this,'normal')">ふつう</button>
+      <button class="diff-btn"          onclick="bplanSetDiff(this,'hard')">むずかしい</button>
+    </div>
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">スコア</div>
+        <div class="value" id="bplan-score">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">残り</div>
+        <div class="value" id="bplan-time">60</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="bplan-best">0</div>
+      </div>
+    </div>
+    <div class="timer-bar">
+      <div class="timer-fill" id="bplan-timer-fill" style="width:100%"></div>
+    </div>
+
+    <div id="bplan-stage" style="visibility:hidden; display:flex; flex-direction:column; align-items:center; width:100%; gap:6px;">
+      <div class="bplan-budget-bar">
+        <div>
+          <div class="bplan-budget-label">予算</div>
+          <div class="bplan-budget-val" id="bplan-budget-val">¥0</div>
+        </div>
+        <div style="text-align:right;">
+          <div class="bplan-total-label">合計</div>
+          <div class="bplan-total-val" id="bplan-total-val">¥0</div>
+        </div>
+      </div>
+      <div class="bplan-meter">
+        <div class="bplan-meter-fill" id="bplan-meter-fill" style="width:0%"></div>
+      </div>
+      <div class="bplan-items" id="bplan-items"></div>
+      <button class="bplan-confirm-btn" id="bplan-confirm-btn" onclick="bplanConfirm()" disabled>購入する</button>
+    </div>
+
+    <div class="answer-area">
+      <button class="btn-primary" id="bplan-start-btn" onclick="bplanStart()">スタート</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== CUBE COUNT ========== -->
+<div id="cube-count" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>キューブカウント</h1>
+  </nav>
+  <div class="game-content">
+    <div class="diff-row" id="ccnt-diff-row">
+      <button class="diff-btn selected" onclick="ccntSetDiff(this,'easy')">かんたん</button>
+      <button class="diff-btn"          onclick="ccntSetDiff(this,'normal')">ふつう</button>
+      <button class="diff-btn"          onclick="ccntSetDiff(this,'hard')">むずかしい</button>
+    </div>
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">問題</div>
+        <div class="value" id="ccnt-q-num">0/10</div>
+      </div>
+      <div class="score-item">
+        <div class="label">正解</div>
+        <div class="value" id="ccnt-score">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="ccnt-best">0</div>
+      </div>
+    </div>
+
+    <p class="ccnt-message" id="ccnt-message">スタートを押してください</p>
+
+    <div class="ccnt-canvas-wrap">
+      <canvas id="ccnt-canvas" width="320" height="200"></canvas>
+    </div>
+
+    <div class="answer-area">
+      <div class="number-input" id="ccnt-input" style="display:none;">?</div>
+      <div class="numpad" id="ccnt-numpad" style="display:none; margin-top:10px;">
+        <button class="numpad-btn" onclick="ccntNumpad('7')">7</button>
+        <button class="numpad-btn" onclick="ccntNumpad('8')">8</button>
+        <button class="numpad-btn" onclick="ccntNumpad('9')">9</button>
+        <button class="numpad-btn del" onclick="ccntNumpad('del')">⌫</button>
+        <button class="numpad-btn" onclick="ccntNumpad('4')">4</button>
+        <button class="numpad-btn" onclick="ccntNumpad('5')">5</button>
+        <button class="numpad-btn" onclick="ccntNumpad('6')">6</button>
+        <button class="numpad-btn ok" onclick="ccntNumpad('ok')">OK</button>
+        <button class="numpad-btn" onclick="ccntNumpad('1')">1</button>
+        <button class="numpad-btn" onclick="ccntNumpad('2')">2</button>
+        <button class="numpad-btn" onclick="ccntNumpad('3')">3</button>
+        <button class="numpad-btn zero" onclick="ccntNumpad('0')">0</button>
+      </div>
+      <button class="btn-primary" id="ccnt-start-btn" onclick="ccntStart()">スタート</button>
+    </div>
+  </div>
+</div>
+
 <!-- ========== RESULT OVERLAY ========== -->
 <div class="result-overlay" id="result-overlay">
   <div class="result-card">
@@ -1399,6 +2029,17 @@
 <script src="js/mental-nav.js"></script>
 <script src="js/go-nogo.js"></script>
 <script src="js/apple-catch.js"></script>
+<script src="js/speed-sum.js"></script>
+<script src="js/eq-judge.js"></script>
+<script src="js/num-order.js"></script>
+<script src="js/obj-count.js"></script>
+<script src="js/hi-lo.js"></script>
+<script src="js/color-seq.js"></script>
+<script src="js/prime-hunt.js"></script>
+<script src="js/frac-cmp.js"></script>
+<script src="js/card-flip.js"></script>
+<script src="js/budget-plan.js"></script>
+<script src="js/cube-count.js"></script>
 <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').catch(() => {});

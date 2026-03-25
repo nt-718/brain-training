@@ -1,0 +1,59 @@
+/* ===== 個数カウント ===== */
+
+.oc-message {
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.8);
+  text-align: center;
+  margin: 6px 0;
+  min-height: 24px;
+}
+
+.oc-stage {
+  width: 100%;
+  max-width: 400px;
+  min-height: 160px;
+  background: var(--card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  box-sizing: border-box;
+  margin: 6px 0;
+}
+
+.oc-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  align-items: center;
+}
+
+.oc-item {
+  font-size: 1.8rem;
+  line-height: 1;
+  user-select: none;
+  -webkit-user-select: none;
+  animation: ocItemPop 0.2s ease both;
+}
+
+@keyframes ocItemPop {
+  0%   { transform: scale(0); opacity: 0; }
+  80%  { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.oc-hide {
+  animation: ocHide 0.25s ease forwards;
+}
+
+@keyframes ocHide {
+  0%   { opacity: 1; }
+  100% { opacity: 0; transform: scale(0.8); }
+}
