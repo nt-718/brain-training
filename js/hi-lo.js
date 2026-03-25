@@ -115,7 +115,11 @@ function hlTap(guess) {
     document.getElementById('hl-message').textContent = '✗ ハズレ！';
     cardEl.classList.add('hl-result-wrong');
     setTimeout(() => {
-      if (!hlRunning) hlGameOver();
+      if (!hlRunning) return;
+      cardEl.classList.remove('hl-result-wrong');
+      document.getElementById('hl-message').textContent = '次のカードは？';
+      hlWaiting = false;
+      if (hlDeck.length === 0) hlGameClear();
     }, 600);
   }
 }
@@ -136,7 +140,7 @@ function hlSaveAndShow(icon, title, detail) {
   showResult(
     record ? '🏆' : icon,
     title,
-    `連続正解: ${hlScore}\n${record ? '🏆 新記録!' : 'ベスト: ' + prev}`,
+    `累計正解: ${hlScore}\n${record ? '🏆 新記録!' : 'ベスト: ' + prev}`,
     hlStart
   );
 }
