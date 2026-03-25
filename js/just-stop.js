@@ -4,7 +4,7 @@ let jsState = 'idle'; // idle, countdown, running, done
 let jsStartTime = 0;
 let jsTargetMs  = 0;
 let jsScore     = 0;
-let jsBest      = 0;
+let jsBest      = parseInt(localStorage.getItem('jsBest')) || 0;
 let jsRound     = 0;
 const JS_ROUNDS = 5;
 let jsInterval  = null;
@@ -19,6 +19,7 @@ function jsStart() {
   document.getElementById('js-score').textContent = 0;
   document.getElementById('js-history').innerHTML = '';
   document.getElementById('js-start-btn').style.display = 'none';
+  document.getElementById('js-best').textContent = jsBest;
   jsNextRound();
 }
 
@@ -41,6 +42,7 @@ function jsNextRound() {
     if (jsScore > jsBest) {
       jsBest = jsScore;
       document.getElementById('js-best').textContent = jsBest;
+      localStorage.setItem('jsBest', jsBest);
     }
     document.getElementById('js-start-btn').style.display = 'inline-flex';
     document.getElementById('js-start-btn').textContent = 'もう一度';

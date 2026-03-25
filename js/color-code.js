@@ -1,6 +1,6 @@
 /* ========== COLOR CODE ========== */
 let ccTimer = null;
-let ccTimeLimit = 30;
+let ccTimeLimit = 45;
 let ccTimeLeft = 0;
 let ccScore = 0;
 let ccMode = 'color2hex'; // 'color2hex' or 'hex2color'

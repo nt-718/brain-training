@@ -27,7 +27,7 @@ function ssStart() {
   if (ssIsPlaying) return;
   
   ssScore = 0;
-  ssTotalTime = ssDiff === 'easy' ? 30 : (ssDiff === 'normal' ? 40 : 50);
+  ssTotalTime = ssDiff === 'easy' ? 45 : (ssDiff === 'normal' ? 60 : 75);
   ssTimeLeft = ssTotalTime;
   
   document.getElementById('ss-score').textContent = ssScore;

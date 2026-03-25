@@ -1,0 +1,122 @@
+/* ===== PAIR LOGIC ===== */
+.pl-hints {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.pl-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-size: 1rem;
+}
+
+.pl-hint-item {
+  font-size: 1.5rem;
+}
+
+.pl-hint-op {
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.pl-instruction {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-bottom: 12px;
+}
+
+.pl-slots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.pl-slot {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.04);
+  border: 2px dashed rgba(255,255,255,0.2);
+  border-radius: 12px;
+  font-size: 0.9rem;
+  color: var(--muted);
+  transition: all 0.2s;
+}
+
+.pl-slot.pl-filled {
+  border-style: solid;
+  border-color: var(--primary);
+  background: rgba(139, 92, 246, 0.15);
+  font-size: 1.6rem;
+  color: #fff;
+  animation: plPop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.pl-slot.pl-slot-correct {
+  border-color: var(--accent);
+  background: rgba(16, 185, 129, 0.25);
+}
+
+.pl-slot.pl-slot-wrong {
+  border-color: #f43f5e;
+  background: rgba(244, 63, 94, 0.25);
+  animation: plShake 0.3s;
+}
+
+@keyframes plPop {
+  0%   { transform: scale(0.7); }
+  60%  { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+@keyframes plShake {
+  0%, 100% { transform: translateX(0); }
+  25%      { transform: translateX(-5px); }
+  75%      { transform: translateX(5px); }
+}
+
+.pl-items {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pl-item-btn {
+  width: 56px;
+  height: 56px;
+  font-size: 1.8rem;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pl-item-btn:hover {
+  background: rgba(255,255,255,0.15);
+  transform: scale(1.1);
+  border-color: var(--primary);
+}
+
+.pl-item-btn.pl-used {
+  opacity: 0.25;
+  pointer-events: none;
+  transform: scale(0.85);
+}

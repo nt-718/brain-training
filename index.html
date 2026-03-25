@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="14種類の認知トレーニングゲームで毎日脳を鍛えよう。計算・記憶・反射・判断力を楽しく向上。" />
+  <meta name="description" content="18種類の認知トレーニングゲームで毎日脳を鍛えよう。計算・記憶・反射・判断力を楽しく向上。" />
   <meta name="theme-color" content="#8b5cf6" />
   <title>脳トレ</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -28,6 +28,9 @@
   <link rel="stylesheet" href="css/emoji-order.css" />
   <link rel="stylesheet" href="css/color-vision.css" />
   <link rel="stylesheet" href="css/color-code.css" />
+  <link rel="stylesheet" href="css/mirror-path.css" />
+  <link rel="stylesheet" href="css/pair-logic.css" />
+  <link rel="stylesheet" href="css/chain-word.css" />
 </head>
 <body>
 
@@ -46,7 +49,7 @@
     </div>
     <div class="game-list">
       <div class="game-card" onclick="showScreen('visual-calc')">
-        <div class="game-icon">🔵</div>
+        <div class="game-icon">🧮</div>
         <div class="game-info">
           <h2>ビジュアル計算</h2>
           <p>丸の数を数えたり、計算したりしよう</p>
@@ -66,6 +69,22 @@
         <div class="game-info">
           <h2>シンボル計算</h2>
           <p>絵文字を使った計算式を解こう</p>
+        </div>
+        <div class="badge">推論</div>
+      </div>
+      <div class="game-card" onclick="showScreen('mirror-path')">
+        <div class="game-icon">🪞</div>
+        <div class="game-info">
+          <h2>ミラーパス</h2>
+          <p>反転した矢印を読み解きゴールを探せ</p>
+        </div>
+        <div class="badge">空間認知</div>
+      </div>
+      <div class="game-card" onclick="showScreen('pair-logic')">
+        <div class="game-icon">🃏</div>
+        <div class="game-info">
+          <h2>ペアロジック</h2>
+          <p>ヒントから正しい並び順を推理しよう</p>
         </div>
         <div class="badge">推論</div>
       </div>
@@ -96,7 +115,7 @@
         <div class="badge">Wメモリ</div>
       </div>
       <div class="game-card" onclick="showScreen('sequence-memory')">
-        <div class="game-icon">🎵</div>
+        <div class="game-icon">🚥</div>
         <div class="game-info">
           <h2>シーケンスメモリー</h2>
           <p>点灯する色の順番を覚えて再現しよう</p>
@@ -164,7 +183,7 @@
     </div>
     <div class="game-list">
       <div class="game-card" onclick="showScreen('shell-game')">
-        <div class="game-icon">👁️‍🗨️</div>
+        <div class="game-icon">🎩</div>
         <div class="game-info">
           <h2>シェルゲーム</h2>
           <p>星が入ったカップの動きを追おう</p>
@@ -187,8 +206,16 @@
         </div>
         <div class="badge">言語</div>
       </div>
+      <div class="game-card" onclick="showScreen('chain-word')">
+        <div class="game-icon">🔗</div>
+        <div class="game-info">
+          <h2>チェーンワード</h2>
+          <p>単語から連想される言葉を選んでつなごう</p>
+        </div>
+        <div class="badge">連想</div>
+      </div>
       <div class="game-card" onclick="showScreen('color-vision')">
-        <div class="game-icon">👀</div>
+        <div class="game-icon">👁️</div>
         <div class="game-info">
           <h2>カラービジョン</h2>
           <p>1つだけ色が違うタイルを見つけよう</p>
@@ -234,6 +261,10 @@
       <div class="score-item">
         <div class="label">連続正解</div>
         <div class="value" id="vc-streak">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="vc-best">0</div>
       </div>
     </div>
 
@@ -927,6 +958,109 @@
   </div>
 </div>
 
+<!-- ========== MIRROR PATH ========== -->
+<div id="mirror-path" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>ミラーパス</h1>
+  </nav>
+  <div class="game-content" id="mp-content">
+    <div class="diff-row" id="mp-diff-row">
+      <button class="diff-btn selected" onclick="mpSetDiff(this,'easy')">かんたん</button>
+      <button class="diff-btn"          onclick="mpSetDiff(this,'normal')">ふつう</button>
+      <button class="diff-btn"          onclick="mpSetDiff(this,'hard')">むずかしい</button>
+    </div>
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">スコア</div>
+        <div class="value" id="mp-score">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="mp-best">0</div>
+      </div>
+    </div>
+    <div class="timer-bar" style="margin-top:8px;">
+      <div class="timer-fill" id="mp-timer-fill" style="width:100%"></div>
+    </div>
+
+    <div id="mp-stage" style="margin:12px 0;"></div>
+
+    <div class="answer-area">
+      <button class="btn-primary" id="mp-start-btn" onclick="mpStart()" style="margin-top:12px;">スタート</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== PAIR LOGIC ========== -->
+<div id="pair-logic" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>ペアロジック</h1>
+  </nav>
+  <div class="game-content" id="pl-content">
+    <div class="diff-row" id="pl-diff-row">
+      <button class="diff-btn selected" onclick="plSetDiff(this,'easy')">かんたん</button>
+      <button class="diff-btn"          onclick="plSetDiff(this,'normal')">ふつう</button>
+      <button class="diff-btn"          onclick="plSetDiff(this,'hard')">むずかしい</button>
+    </div>
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">スコア</div>
+        <div class="value" id="pl-score">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="pl-best">0</div>
+      </div>
+    </div>
+    <div class="timer-bar" style="margin-top:8px;">
+      <div class="timer-fill" id="pl-timer-fill" style="width:100%"></div>
+    </div>
+
+    <div id="pl-stage" style="margin:12px 0;"></div>
+
+    <div class="answer-area">
+      <button class="btn-primary" id="pl-start-btn" onclick="plStart()" style="margin-top:12px;">スタート</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== CHAIN WORD ========== -->
+<div id="chain-word" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>チェーンワード</h1>
+  </nav>
+  <div class="game-content">
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">チェーン</div>
+        <div class="value" id="cw-chain-count">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="cw-best">0</div>
+      </div>
+    </div>
+
+    <div class="cw-timer-bar">
+      <div class="cw-timer-fill" id="cw-timer-fill"></div>
+    </div>
+
+    <div class="cw-prompt-area" id="cw-prompt-area">
+      <div class="cw-prompt-label">この言葉と関係するのは？</div>
+      <div class="cw-prompt-word" id="cw-prompt-word">？</div>
+    </div>
+
+    <div class="cw-choices" id="cw-choices"></div>
+
+    <div class="answer-area">
+      <button class="btn-primary" id="cw-start-btn" onclick="cwStart()">スタート</button>
+    </div>
+  </div>
+</div>
+
 <!-- ========== RESULT OVERLAY ========== -->
 <div class="result-overlay" id="result-overlay">
   <div class="result-card">
@@ -957,7 +1091,9 @@
 <script src="js/emoji-order.js"></script>
 <script src="js/color-vision.js"></script>
 <script src="js/color-code.js"></script>
-<script>
+<script src="js/mirror-path.js"></script>
+<script src="js/pair-logic.js"></script>
+<script src="js/chain-word.js"></script><script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').catch(() => {});
   }

@@ -8,9 +8,9 @@ let cvIsPlaying = false;
 let cvDiff = 'normal';
 
 const cvDiffSettings = {
-  'easy': { time: 45, maxGrid: 5 },
-  'normal': { time: 30, maxGrid: 6 },
-  'hard': { time: 20, maxGrid: 8 }
+  'easy': { time: 60, maxGrid: 5 },
+  'normal': { time: 45, maxGrid: 6 },
+  'hard': { time: 30, maxGrid: 8 }
 };
 
 function cvSetDiff(btn, diff) {
@@ -132,7 +132,7 @@ function cvGameOver() {
   
   const diffLabel = cvDiff === 'easy' ? 'かんたん' : cvDiff === 'hard' ? 'むずかしい' : 'ふつう';
   showResult(
-    '👀',
+    '👁️',
     'タイムアップ！',
     `スコア: ${cvScore}\n難易度: ${diffLabel}${isNewBest ? '\n🌟自己ベスト更新！' : ''}`,
     cvStart

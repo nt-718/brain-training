@@ -22,7 +22,7 @@ let eoCustomLen  = 7;
 let eoSeq        = [];       // the shown emoji sequence
 let eoUserSeq    = [];       // user's built-up answer list
 let eoScore      = 0;
-let eoBest       = 0;
+let eoBest       = parseInt(localStorage.getItem('eoBest')) || 0;
 let eoRound      = 0;
 let eoState      = 'idle';   // idle | showing | answering
 let eoFlashTimer = null;
@@ -62,6 +62,7 @@ function eoStart() {
   eoState = 'showing';
 
   document.getElementById('eo-score').textContent = 0;
+  document.getElementById('eo-best').textContent = eoBest;
   document.getElementById('eo-start-btn').style.display = 'none';
   document.getElementById('eo-len-row').style.pointerEvents = 'none';
   document.getElementById('eo-diff-row').style.pointerEvents = 'none';
@@ -273,6 +274,7 @@ function eoConfirm() {
     if (eoScore > eoBest) {
       eoBest = eoScore;
       document.getElementById('eo-best').textContent = eoBest;
+      localStorage.setItem('eoBest', eoBest);
     }
     document.getElementById('eo-message').textContent = 'ラウンドクリア！✨';
     eoFlashTimer = setTimeout(() => eoNextRound(), 1000);
@@ -281,6 +283,7 @@ function eoConfirm() {
     if (eoScore > eoBest) {
       eoBest = eoScore;
       document.getElementById('eo-best').textContent = eoBest;
+      localStorage.setItem('eoBest', eoBest);
     }
     eoFlashTimer = setTimeout(() => {
       eoStop();

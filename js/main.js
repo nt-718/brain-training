@@ -21,12 +21,15 @@ function showScreen(id) {
   if (typeof eoStop === 'function') eoStop();
   if (typeof cvStop === 'function') cvStop();
   if (typeof ccStop === 'function') ccStop();
+  if (typeof mpStop === 'function') mpStop();
+  if (typeof plStop === 'function') plStop();
+  if (typeof cwStop === 'function') cwStop();
   if (id === 'home') refreshBestScores();
 }
 
 /* ===== BEST SCORES ON GAME CARDS ===== */
 const BS_MAPPING = [
-  { target: 'visual-calc',   key: null },
+  { target: 'visual-calc',   key: 'vcBest' },
   { target: 'num-tap',       key: 'nt_best_random', suffix: 's', reverse: true },
   { target: 'memory-matrix', key: ['mm_best_easy','mm_best_normal','mm_best_hard'] },
   { target: 'color-match',   key: 'cm_best' },
@@ -37,9 +40,16 @@ const BS_MAPPING = [
   { target: 'target-search', key: 'tsBest' },
   { target: 'symbol-logic',  key: 'slBest' },
   { target: 'swipe-sort',    key: 'ssBest' },
+  { target: 'shell-game',    key: 'sgBest' },
+  { target: 'just-stop',     key: 'jsBest' },
+  { target: 'word-link',     key: 'wlBest' },
+  { target: 'sequence-memory',key: 'smBest' },
+  { target: 'emoji-order',   key: 'eoBest' },
   { target: 'color-vision',  key: ['cv_best_easy','cv_best_normal','cv_best_hard'] },
-  { target: 'color-code',    key: ['cc_best_color2hex','cc_best_hex2color'] }
-];
+  { target: 'color-code',    key: ['cc_best_color2hex','cc_best_hex2color'] },
+  { target: 'mirror-path',   key: 'mpBest' },
+  { target: 'pair-logic',    key: 'plBest' },
+  { target: 'chain-word',   key: 'cwBest' }];
 
 function refreshBestScores() {
   BS_MAPPING.forEach(g => {
@@ -47,22 +57,29 @@ function refreshBestScores() {
     const card = document.querySelector(`[onclick="showScreen('${g.target}')"]`);
     if (!card) return;
 
-    let best = g.reverse ? Infinity : 0;
+    let best = g.reverse ? Infinity : -Infinity;
+    let hasScore = false;
     
     if (Array.isArray(g.key)) {
       g.key.forEach(k => {
-        const v = parseFloat(localStorage.getItem(k));
-        if (!isNaN(v)) {
-          if (g.reverse && v < best) best = v;
-          else if (!g.reverse && v > best) best = v;
+        const raw = localStorage.getItem(k);
+        if (raw !== null) {
+          hasScore = true;
+          const v = parseFloat(raw);
+          if (!isNaN(v)) {
+            if (g.reverse && v < best) best = v;
+            else if (!g.reverse && v > best) best = v;
+          }
         }
       });
     } else {
-      const v = parseFloat(localStorage.getItem(g.key));
-      if (!isNaN(v)) best = v;
+      const raw = localStorage.getItem(g.key);
+      if (raw !== null) {
+        hasScore = true;
+        const v = parseFloat(raw);
+        if (!isNaN(v)) best = v;
+      }
     }
-
-    const hasScore = g.reverse ? (best !== Infinity) : (best > 0);
     
     let badge = card.querySelector('.card-best-score');
     if (hasScore) {

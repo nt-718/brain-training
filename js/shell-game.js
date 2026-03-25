@@ -1,7 +1,7 @@
 let sgDiff = 'easy'; // easy, normal, hard
 let sgState = 'idle'; // idle, showing, shuffling, waiting
 let sgScore = 0;
-let sgBest = 0;
+let sgBest = parseInt(localStorage.getItem('sgBest')) || 0;
 let sgRound = 1;
 
 let sgCupsData = [];
@@ -31,6 +31,7 @@ function sgStart() {
   sgScore = 0;
   sgRound = 1;
   document.getElementById('sg-score').textContent = sgScore;
+  document.getElementById('sg-best').textContent = sgBest;
   sgInitRound();
 }
 
@@ -222,6 +223,7 @@ function sgTapCup(idx) {
     if (sgScore > sgBest) {
       sgBest = sgScore;
       document.getElementById('sg-best').textContent = sgBest;
+      localStorage.setItem('sgBest', sgBest);
     }
     
     // Reveal all remaining stars
@@ -236,7 +238,7 @@ function sgTapCup(idx) {
     document.getElementById('sg-start-btn').textContent = 'もう一度';
     
     setTimeout(() => {
-      showResult('👁️‍🗨️', '終了!', `スコア: ${sgScore} (ベスト: ${sgBest})`, sgStart);
+      showResult('🎩', '終了!', `スコア: ${sgScore} (ベスト: ${sgBest})`, sgStart);
     }, 1500);
   }
 }

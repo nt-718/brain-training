@@ -5,7 +5,7 @@ let slScore = 0;
 let slBest = 0;
 let slTimer = null;
 let slTimeLeft = 60;
-let slTotalTime = 60;
+let slTotalTime = 80;
 let slIsPlaying = false;
 let slCurrentAnswer = 0;
 let slCurrentInput = '';
@@ -29,7 +29,7 @@ function slStart() {
   if (slIsPlaying) return;
   
   slScore = 0;
-  slTotalTime = slDiff === 'easy' ? 40 : (slDiff === 'normal' ? 60 : 80);
+  slTotalTime = slDiff === 'easy' ? 60 : (slDiff === 'normal' ? 80 : 100);
   slTimeLeft = slTotalTime;
   
   document.getElementById('sl-score').textContent = slScore;

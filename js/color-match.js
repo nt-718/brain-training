@@ -12,7 +12,7 @@ let cmRunning = false;
 let cmScore = 0;
 let cmTargetColorId = '';
 let cmTimerLeft = 0;
-let cmTimerTotal = 2; 
+let cmTimerTotal = 3;
 let cmTimerInterval = null;
 
 function cmLoadBest() {
@@ -36,7 +36,7 @@ function cmStop() {
 
 function cmStart() {
   cmScore = 0;
-  cmTimerTotal = 2.0;
+  cmTimerTotal = 3.0;
   cmRunning = true;
   document.getElementById('cm-start-btn').style.display = 'none';
   document.getElementById('cm-buttons').style.display = 'grid';
@@ -67,7 +67,7 @@ function cmNextQuestion() {
   void el.offsetWidth;
   el.classList.add('pop');
 
-  cmTimerTotal = Math.max(0.6, 2.0 - (cmScore * 0.04));
+  cmTimerTotal = Math.max(0.8, 3.0 - (cmScore * 0.04));
   cmTimerLeft = cmTimerTotal;
   
   clearInterval(cmTimerInterval);

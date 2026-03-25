@@ -40,7 +40,7 @@ function tsStart() {
   if (tsIsPlaying) return;
   
   tsScore = 0;
-  tsTotalTime = tsDiff === 'easy' ? 20 : (tsDiff === 'normal' ? 30 : 40);
+  tsTotalTime = tsDiff === 'easy' ? 30 : (tsDiff === 'normal' ? 45 : 60);
   tsTimeLeft = tsTotalTime;
   
   document.getElementById('ts-score').textContent = tsScore;

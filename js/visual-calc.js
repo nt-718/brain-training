@@ -2,7 +2,7 @@
 
 // --- Constants ---
 const VC_TOTAL = 10;
-const VC_TIMER_SEC = { easy: 12, normal: 9, hard: 6 };
+const VC_TIMER_SEC = { easy: 16, normal: 12, hard: 9 };
 
 // Dot sizes (px) per unit type
 const DOT_SIZE = { ten: 56, five: 32, one: 16 };
@@ -27,6 +27,7 @@ const COLOR_PINK  = '#ff6584';
 // --- State ---
 let vcDiff         = 'easy';
 let vcScore        = 0;
+let vcBest         = parseInt(localStorage.getItem('vcBest')) || 0;
 let vcStreak       = 0;
 let vcQNum         = 0;
 let vcAnswer       = 0;
@@ -49,6 +50,7 @@ function vcStart() {
   document.getElementById('vc-start-btn').style.display = 'none';
   document.getElementById('vc-score').textContent  = 0;
   document.getElementById('vc-streak').textContent = 0;
+  document.getElementById('vc-best').textContent = vcBest;
   vcRunning = true;
   vcNextQuestion();
 }
@@ -190,9 +192,14 @@ function vcWrong() {
 function vcEnd() {
   vcRunning = false;
   clearInterval(vcTimerInterval);
+  if (vcScore > vcBest) {
+    vcBest = vcScore;
+    document.getElementById('vc-best').textContent = vcBest;
+    localStorage.setItem('vcBest', vcBest);
+  }
   document.getElementById('vc-start-btn').style.display = '';
   const icon = vcScore >= 150 ? '🏆' : vcScore >= 80 ? '🥈' : '🎉';
-  showResult(icon, 'ゲーム終了!', 'スコア: ' + vcScore + '点', vcStart);
+  showResult('🧮', 'ゲーム終了!', `スコア: ${vcScore}点 (ベスト: ${vcBest})`, vcStart);
 }
 
 function flashGameContent(correct) {

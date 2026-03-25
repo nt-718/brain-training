@@ -2,14 +2,14 @@
 
 let wlState = 'idle';
 let wlScore = 0;
-let wlBest  = 0;
+let wlBest  = parseInt(localStorage.getItem('wlBest')) || 0;
 let wlRound = 0;
 let wlCurrentWord = null;
 let wlSelectedIndices = []; // indices into wlShuffled
 let wlShuffled = [];        // shuffled char array
 let wlTimerFill = null;
 let wlTimeLeft = 0;
-let wlTotalTime = 30;       // seconds per round set
+let wlTotalTime = 45;       // seconds per round set
 
 // Word bank: { word, hint }
 const WL_WORDS = [
@@ -156,6 +156,7 @@ function wlStart() {
   document.getElementById('wl-score').textContent = 0;
   document.getElementById('wl-start-btn').style.display = 'none';
   document.getElementById('wl-clear-btn').style.display = 'inline-flex';
+  document.getElementById('wl-best').textContent = wlBest;
   wlStartTimer();
   wlNextWord();
 }
@@ -197,6 +198,7 @@ function wlGameOver() {
   if (wlScore > wlBest) {
     wlBest = wlScore;
     document.getElementById('wl-best').textContent = wlBest;
+    localStorage.setItem('wlBest', wlBest);
   }
   document.getElementById('wl-start-btn').style.display = 'inline-flex';
   document.getElementById('wl-start-btn').textContent = 'もう一度';

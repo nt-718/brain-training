@@ -9,7 +9,7 @@ let nbDiff = 1; // 1, 2, 3 back
 let nbHistory = [];
 let nbTimerInterval = null;
 let nbTimerLeft = 0;
-let nbTimeTotal = 3.0;
+let nbTimeTotal = 4.0;
 
 function nbSetDiff(btn, diff) {
   document.querySelectorAll('#nb-diff-row .diff-btn').forEach(b => b.classList.remove('selected'));
@@ -82,7 +82,7 @@ function nbNextShape() {
     document.getElementById('nb-actions').style.opacity = '1';
     document.getElementById('nb-actions').style.pointerEvents = 'all';
     
-    nbTimeTotal = Math.max(1.2, 3.0 - (nbScore * 0.05));
+    nbTimeTotal = Math.max(1.6, 4.0 - (nbScore * 0.05));
     nbTimerLeft = nbTimeTotal;
     
     nbUpdateTimerBar();

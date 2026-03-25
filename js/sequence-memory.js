@@ -4,7 +4,7 @@ let smState   = 'idle'; // idle, playing, input
 let smSeq     = [];
 let smUserSeq = [];
 let smLevel   = 0;
-let smBest    = 0;
+let smBest    = parseInt(localStorage.getItem('smBest')) || 0;
 let smPlayIdx = 0;
 let smPlayTimeout = null;
 
@@ -34,6 +34,7 @@ function smStart() {
   smLevel = 0;
   smBest  = Math.max(smBest, 0);
   document.getElementById('sm-score').textContent = 0;
+  document.getElementById('sm-best').textContent = smBest;
   document.getElementById('sm-start-btn').style.display = 'none';
   smNextLevel();
 }
@@ -119,12 +120,13 @@ function smTap(color) {
     if (smLevel - 1 > smBest) {
       smBest = smLevel - 1;
       document.getElementById('sm-best').textContent = smBest;
+      localStorage.setItem('smBest', smBest);
     }
     document.getElementById('sm-message').textContent = '残念...';
     setTimeout(() => {
       document.getElementById('sm-start-btn').style.display = 'inline-flex';
       document.getElementById('sm-start-btn').textContent = 'もう一度';
-      showResult('🎵', 'ゲームオーバー！', `レベル ${smLevel - 1} まで到達！ (ベスト: ${smBest})`, smStart);
+      showResult('🚥', 'ゲームオーバー！', `レベル ${smLevel - 1} まで到達！ (ベスト: ${smBest})`, smStart);
     }, 800);
     return;
   }

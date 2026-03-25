@@ -117,7 +117,7 @@ function fmDoFlash(speed) {
     document.getElementById('fm-message').textContent = '合計は？';
     document.getElementById('fm-numpad').style.display = 'grid';
     
-    fmTimeTotal = 8 + (fmSequence.length * 0.5);
+    fmTimeTotal = 12 + (fmSequence.length * 0.8);
     fmTimerLeft = fmTimeTotal;
     clearInterval(fmTimerInterval);
     fmUpdateTimerBar();
