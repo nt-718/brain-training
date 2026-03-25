@@ -1,0 +1,98 @@
+/* ===== GO / NO-GO ===== */
+
+.gn-rule-label {
+  font-size: 1rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.9);
+  text-align: center;
+  margin: 6px 0;
+  min-height: 24px;
+  padding: 10px 16px;
+  background: var(--card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+}
+
+.gn-item-timer-bar {
+  width: 100%;
+  max-width: 400px;
+  height: 6px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 6px 0;
+}
+
+.gn-item-timer-fill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--primary));
+  border-radius: 3px;
+  transition: width 0.05s linear, background 0.3s;
+}
+
+.gn-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 400px;
+  height: 160px;
+  background: var(--card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin: 8px 0;
+  cursor: pointer;
+  transition: background 0.12s;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.gn-stage:active {
+  background: rgba(139, 92, 246, 0.2);
+}
+
+.gn-item-display {
+  font-size: 4rem;
+  font-weight: 800;
+  color: #fff;
+  text-align: center;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.gn-item-pop {
+  animation: gnItemPop 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+@keyframes gnItemPop {
+  0%   { transform: scale(0.4); opacity: 0; }
+  70%  { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.gn-item-correct {
+  animation: gnCorrect 0.25s ease both;
+}
+
+@keyframes gnCorrect {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.2); filter: brightness(1.4); }
+  100% { transform: scale(0.8); opacity: 0; }
+}
+
+.gn-tap-hint {
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 4px;
+}

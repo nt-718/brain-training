@@ -24,6 +24,12 @@ function showScreen(id) {
   if (typeof mpStop === 'function') mpStop();
   if (typeof plStop === 'function') plStop();
   if (typeof cwStop === 'function') cwStop();
+  if (typeof bnStop === 'function') bnStop();
+  if (typeof blStop === 'function') blStop();
+  if (typeof pnStop === 'function') pnStop();
+  if (typeof mnStop === 'function') mnStop();
+  if (typeof gnStop === 'function') gnStop();
+  if (typeof acStop === 'function') acStop();
   if (id === 'home') refreshBestScores();
 }
 
@@ -49,7 +55,13 @@ const BS_MAPPING = [
   { target: 'color-code',    key: ['cc_best_color2hex','cc_best_hex2color'] },
   { target: 'mirror-path',   key: 'mpBest' },
   { target: 'pair-logic',    key: 'plBest' },
-  { target: 'chain-word',   key: 'cwBest' }];
+  { target: 'chain-word',   key: 'cwBest' },
+  { target: 'big-number',    key: 'bnBest' },
+  { target: 'balance-scale', key: 'blBest' },
+  { target: 'pattern-next',  key: 'pnBest' },
+  { target: 'mental-nav',    key: 'mnBest' },
+  { target: 'go-nogo',       key: 'gnBest' },
+  { target: 'apple-catch',   key: 'acBest' }];
 
 function refreshBestScores() {
   BS_MAPPING.forEach(g => {

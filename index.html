@@ -31,6 +31,12 @@
   <link rel="stylesheet" href="css/mirror-path.css" />
   <link rel="stylesheet" href="css/pair-logic.css" />
   <link rel="stylesheet" href="css/chain-word.css" />
+  <link rel="stylesheet" href="css/big-number.css" />
+  <link rel="stylesheet" href="css/balance-scale.css" />
+  <link rel="stylesheet" href="css/pattern-next.css" />
+  <link rel="stylesheet" href="css/mental-nav.css" />
+  <link rel="stylesheet" href="css/go-nogo.css" />
+  <link rel="stylesheet" href="css/apple-catch.css" />
 </head>
 <body>
 
@@ -65,7 +71,7 @@
         <div class="badge">計算・瞬視</div>
       </div>
       <div class="game-card" onclick="showScreen('symbol-logic')">
-        <div class="game-icon">🍎</div>
+        <div class="game-icon">🎯</div>
         <div class="game-info">
           <h2>シンボル計算</h2>
           <p>絵文字を使った計算式を解こう</p>
@@ -87,6 +93,30 @@
           <p>ヒントから正しい並び順を推理しよう</p>
         </div>
         <div class="badge">推論</div>
+      </div>
+      <div class="game-card" onclick="showScreen('balance-scale')">
+        <div class="game-icon">⚖️</div>
+        <div class="game-info">
+          <h2>天秤パズル</h2>
+          <p>流れる数字の和を比べてどちらが重いか答えよう</p>
+        </div>
+        <div class="badge">暗算</div>
+      </div>
+      <div class="game-card" onclick="showScreen('pattern-next')">
+        <div class="game-icon">🔮</div>
+        <div class="game-info">
+          <h2>パターン予測</h2>
+          <p>数列や色のパターンから次を予測しよう</p>
+        </div>
+        <div class="badge">推論</div>
+      </div>
+      <div class="game-card" onclick="showScreen('mental-nav')">
+        <div class="game-icon">🗺️</div>
+        <div class="game-info">
+          <h2>メンタルナビ</h2>
+          <p>矢印の指示を頭の中でたどりゴールを探せ</p>
+        </div>
+        <div class="badge">空間認知</div>
       </div>
     </div>
   </div>
@@ -115,7 +145,7 @@
         <div class="badge">Wメモリ</div>
       </div>
       <div class="game-card" onclick="showScreen('sequence-memory')">
-        <div class="game-icon">🚥</div>
+        <div class="game-icon">🌈</div>
         <div class="game-info">
           <h2>シーケンスメモリー</h2>
           <p>点灯する色の順番を覚えて再現しよう</p>
@@ -171,6 +201,30 @@
           <p>「文字の色」を素早く判断しよう</p>
         </div>
         <div class="badge">抑制</div>
+      </div>
+      <div class="game-card" onclick="showScreen('big-number')">
+        <div class="game-icon">🆚</div>
+        <div class="game-info">
+          <h2>ビッグナンバー</h2>
+          <p>大きい数を30秒間タップしまくれ！</p>
+        </div>
+        <div class="badge">判断</div>
+      </div>
+      <div class="game-card" onclick="showScreen('go-nogo')">
+        <div class="game-icon">🚦</div>
+        <div class="game-info">
+          <h2>Go/No-Go</h2>
+          <p>ルールに合うものだけ素早くタップしよう</p>
+        </div>
+        <div class="badge">抑制</div>
+      </div>
+      <div class="game-card" onclick="showScreen('apple-catch')">
+        <div class="game-icon">🍎</div>
+        <div class="game-info">
+          <h2>アップルキャッチ</h2>
+          <p>落ちてくる🍎だけをタップ！🍏は触るな！</p>
+        </div>
+        <div class="badge">反射</div>
       </div>
     </div>
   </div>
@@ -1061,6 +1115,249 @@
   </div>
 </div>
 
+<!-- ========== BIG NUMBER ========== -->
+<div id="big-number" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>ビッグナンバー</h1>
+  </nav>
+  <div class="game-content">
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">スコア</div>
+        <div class="value" id="bn-score">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">残り時間</div>
+        <div class="value" id="bn-time">30</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="bn-best">0</div>
+      </div>
+    </div>
+    <div class="timer-bar" style="margin-top:8px;">
+      <div class="timer-fill" id="bn-timer-fill" style="width:100%"></div>
+    </div>
+
+    <p class="bn-message" id="bn-message">大きい数をタップ！</p>
+
+    <div class="bn-stage" id="bn-stage" style="visibility:hidden;">
+      <button class="bn-btn" id="bn-left"  onclick="bnTap(0)">?</button>
+      <button class="bn-btn" id="bn-right" onclick="bnTap(1)">?</button>
+    </div>
+
+    <div class="answer-area">
+      <button class="btn-primary" id="bn-start-btn" onclick="bnStart()" style="margin-top:20px;">スタート</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== BALANCE SCALE ========== -->
+<div id="balance-scale" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>天秤パズル</h1>
+  </nav>
+  <div class="game-content">
+    <div class="diff-row" id="bl-diff-row">
+      <button class="diff-btn selected" onclick="blSetDiff(this,'easy')">かんたん</button>
+      <button class="diff-btn"          onclick="blSetDiff(this,'normal')">ふつう</button>
+      <button class="diff-btn"          onclick="blSetDiff(this,'hard')">むずかしい</button>
+    </div>
+
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">スコア</div>
+        <div class="value" id="bl-score">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="bl-best">0</div>
+      </div>
+    </div>
+
+    <div class="timer-bar" style="margin-top:8px;">
+      <div class="timer-fill" id="bl-timer-fill" style="width:100%"></div>
+    </div>
+
+    <p class="bl-question-label" id="bl-question-label">スタートを押してください</p>
+
+    <div class="bl-scale-area">
+      <div class="bl-pan-wrap">
+        <div class="bl-pan-label">左</div>
+        <div class="bl-pan" id="bl-left-chips"></div>
+        <div class="bl-pan-sum" id="bl-left-sum"></div>
+      </div>
+      <div class="bl-divider"><div class="bl-divider-line"></div></div>
+      <div class="bl-pan-wrap">
+        <div class="bl-pan-label">右</div>
+        <div class="bl-pan" id="bl-right-chips"></div>
+        <div class="bl-pan-sum" id="bl-right-sum"></div>
+      </div>
+    </div>
+
+    <div class="bl-answer-btns" id="bl-answer-btns">
+      <button class="bl-answer-btn bl-left-btn" onclick="blAnswer('L')">⬅ 左が重い</button>
+      <button class="bl-answer-btn bl-right-btn" onclick="blAnswer('R')">右が重い ➡</button>
+    </div>
+
+    <div class="answer-area">
+      <button class="btn-primary" id="bl-start-btn" onclick="blStart()">スタート</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ========== PATTERN NEXT ========== -->
+<div id="pattern-next" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>パターン予測</h1>
+  </nav>
+  <div class="game-content">
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">スコア</div>
+        <div class="value" id="pn-score">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="pn-best">0</div>
+      </div>
+    </div>
+
+    <div class="timer-bar" style="margin-top:8px;">
+      <div class="timer-fill" id="pn-timer-fill" style="width:100%"></div>
+    </div>
+
+    <div class="pn-sequence" id="pn-sequence"></div>
+
+    <div class="pn-choices" id="pn-choices"></div>
+
+    <div class="answer-area">
+      <button class="btn-primary" id="pn-start-btn" onclick="pnStart()">スタート</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== MENTAL NAV ========== -->
+<div id="mental-nav" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>メンタルナビ</h1>
+  </nav>
+  <div class="game-content">
+    <div class="diff-row" id="mn-diff-row">
+      <button class="diff-btn selected" onclick="mnSetDiff(this,'easy')">かんたん</button>
+      <button class="diff-btn"          onclick="mnSetDiff(this,'normal')">ふつう</button>
+      <button class="diff-btn"          onclick="mnSetDiff(this,'hard')">むずかしい</button>
+    </div>
+
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">スコア</div>
+        <div class="value" id="mn-score">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="mn-best">0</div>
+      </div>
+    </div>
+
+    <div class="timer-bar" style="margin-top:8px;">
+      <div class="timer-fill" id="mn-timer-fill" style="width:100%"></div>
+    </div>
+
+    <div class="mn-instructions-wrap">
+      <div class="mn-instructions-label">指示</div>
+      <div class="mn-instructions" id="mn-instructions">スタートを押してください</div>
+    </div>
+
+    <div class="mn-grid-wrap">
+      <div class="mn-grid" id="mn-grid"></div>
+    </div>
+
+    <div class="answer-area">
+      <button class="btn-primary" id="mn-start-btn" onclick="mnStart()">スタート</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== GO / NO-GO ========== -->
+<div id="go-nogo" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>Go/No-Go</h1>
+  </nav>
+  <div class="game-content">
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">スコア</div>
+        <div class="value" id="gn-score">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">残り時間</div>
+        <div class="value" id="gn-main-time">30</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="gn-best">0</div>
+      </div>
+    </div>
+
+    <div class="timer-bar" style="margin-top:8px;">
+      <div class="timer-fill" id="gn-main-timer-fill" style="width:100%"></div>
+    </div>
+
+    <div class="gn-rule-label" id="gn-rule-label">ルールに従ってタップしよう！</div>
+
+    <div class="gn-item-timer-bar">
+      <div class="gn-item-timer-fill" id="gn-item-timer-fill" style="width:100%"></div>
+    </div>
+
+    <div class="gn-stage" id="gn-stage" style="visibility:hidden;" onclick="gnTap()">
+      <div class="gn-item-display" id="gn-item-display"></div>
+    </div>
+
+    <p class="gn-tap-hint">ステージ全体をタップ</p>
+
+    <div class="answer-area">
+      <button class="btn-primary" id="gn-start-btn" onclick="gnStart()">スタート</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== APPLE CATCH ========== -->
+<div id="apple-catch" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>アップルキャッチ</h1>
+  </nav>
+  <div class="ac-hud">
+    <div class="ac-stat">
+      <div class="ac-label">スコア</div>
+      <div class="ac-value" id="ac-score">0</div>
+    </div>
+    <div class="ac-lives" id="ac-lives">❤️❤️❤️</div>
+    <div class="ac-stat">
+      <div class="ac-label">残り</div>
+      <div class="ac-value" id="ac-time">30</div>
+    </div>
+  </div>
+  <div class="timer-bar">
+    <div class="timer-fill" id="ac-timer-fill" style="width:100%"></div>
+  </div>
+  <div class="ac-field" id="ac-field">
+    <div class="ac-overlay" id="ac-overlay">
+      <div class="ac-overlay-emoji">🍎</div>
+      <div class="ac-overlay-text">🍎 だけをタップ！<br>🍏 はタッチしないで！</div>
+      <button class="btn-primary" onclick="acStart()">スタート</button>
+      <div class="ac-best-wrap">ベスト: <span id="ac-best">0</span></div>
+    </div>
+  </div>
+</div>
+
 <!-- ========== RESULT OVERLAY ========== -->
 <div class="result-overlay" id="result-overlay">
   <div class="result-card">
@@ -1093,7 +1390,14 @@
 <script src="js/color-code.js"></script>
 <script src="js/mirror-path.js"></script>
 <script src="js/pair-logic.js"></script>
-<script src="js/chain-word.js"></script><script>
+<script src="js/chain-word.js"></script>
+<script src="js/big-number.js"></script>
+<script src="js/balance-scale.js"></script>
+<script src="js/pattern-next.js"></script>
+<script src="js/mental-nav.js"></script>
+<script src="js/go-nogo.js"></script>
+<script src="js/apple-catch.js"></script>
+<script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').catch(() => {});
   }

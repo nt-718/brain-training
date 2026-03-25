@@ -1,4 +1,4 @@
-const CACHE_NAME = 'noutore-v3';
+const CACHE_NAME = 'noutore-v6';
 const ASSETS = [
   './',
   './index.html',
@@ -44,6 +44,18 @@ const ASSETS = [
   './js/mirror-path.js',
   './js/pair-logic.js',
   './js/chain-word.js',
+  './css/big-number.css',
+  './js/big-number.js',
+  './css/balance-scale.css',
+  './js/balance-scale.js',
+  './css/pattern-next.css',
+  './js/pattern-next.js',
+  './css/mental-nav.css',
+  './js/mental-nav.js',
+  './css/go-nogo.css',
+  './js/go-nogo.js',
+  './css/apple-catch.css',
+  './js/apple-catch.js',
 ];
 
 self.addEventListener('install', e => {

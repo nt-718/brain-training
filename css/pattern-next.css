@@ -1,0 +1,91 @@
+/* ===== PATTERN NEXT (パターン予測) ===== */
+
+.pn-sequence {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 400px;
+  margin: 12px 0;
+}
+
+.pn-seq-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  background: var(--card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.pn-seq-question {
+  border-color: var(--primary);
+  color: var(--primary);
+  font-size: 1.4rem;
+  box-shadow: 0 0 12px rgba(139,92,246,0.4);
+}
+
+.pn-seq-pop {
+  animation: pnPop 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+@keyframes pnPop {
+  0%   { transform: scale(0.5); opacity: 0; }
+  70%  { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.pn-choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+  max-width: 400px;
+  margin: 8px 0;
+}
+
+.pn-choice-btn {
+  padding: 16px 8px;
+  background: var(--card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.12s, transform 0.12s, border-color 0.15s;
+}
+
+.pn-choice-btn:hover {
+  background: rgba(255,255,255,0.12);
+}
+
+.pn-choice-btn:active {
+  transform: scale(0.95);
+  background: rgba(139, 92, 246, 0.35);
+}
+
+.pn-choice-btn.pn-correct {
+  border-color: var(--accent);
+  background: rgba(16, 185, 129, 0.25);
+  color: var(--accent);
+}
+
+.pn-choice-btn.pn-wrong {
+  border-color: var(--secondary);
+  background: rgba(236, 72, 153, 0.25);
+  color: var(--secondary);
+}
