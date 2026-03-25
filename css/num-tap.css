@@ -16,7 +16,7 @@
 .tap-stage {
   width: 100%;
   max-width: 520px;
-  height: 380px;
+  height: 460px;
   background: var(--card);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -80,6 +80,6 @@
 }
 
 @media (max-width: 400px) {
-  .tap-stage { height: 320px; }
+  .tap-stage { height: 400px; }
   .tap-btn   { width: 48px; height: 48px; font-size: 1.1rem; }
 }
