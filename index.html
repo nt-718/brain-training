@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="18種類の認知トレーニングゲームで毎日脳を鍛えよう。計算・記憶・反射・判断力を楽しく向上。" />
+  <meta name="description" content="41種類の認知トレーニングゲームで毎日脳を鍛えよう。計算・記憶・反射・判断力を楽しく向上。" />
   <meta name="theme-color" content="#8b5cf6" />
   <title>脳トレ</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -48,6 +48,9 @@
   <link rel="stylesheet" href="css/card-flip.css" />
   <link rel="stylesheet" href="css/budget-plan.css" />
   <link rel="stylesheet" href="css/cube-count.css" />
+  <link rel="stylesheet" href="css/comp-color.css" />
+  <link rel="stylesheet" href="css/make-ten.css" />
+  <link rel="stylesheet" href="css/flash-sudoku.css" />
 </head>
 <body>
 
@@ -130,6 +133,14 @@
         </div>
         <div class="badge">計画</div>
       </div>
+      <div class="game-card" onclick="showScreen('make-ten')">
+        <div class="game-icon">🔟</div>
+        <div class="game-info">
+          <h2>メイク10</h2>
+          <p>4つの数字を四則演算で10にしよう</p>
+        </div>
+        <div class="badge">暗算</div>
+      </div>
     </div>
   </div>
 
@@ -195,6 +206,14 @@
           <p>単語から連想される言葉を選んでつなごう</p>
         </div>
         <div class="badge">連想</div>
+      </div>
+      <div class="game-card" onclick="showScreen('flash-sudoku')">
+        <div class="game-icon">🔦</div>
+        <div class="game-info">
+          <h2>フラッシュ数独</h2>
+          <p>暗闇の数独！タップしたマスだけ光る</p>
+        </div>
+        <div class="badge">論理</div>
       </div>
     </div>
   </div>
@@ -391,6 +410,14 @@
         <div class="game-info">
           <h2>カラーコード</h2>
           <p>色とそのカラーコードを的中させよう</p>
+        </div>
+        <div class="badge">色彩感覚</div>
+      </div>
+      <div class="game-card" onclick="showScreen('comp-color')">
+        <div class="game-icon">🎨</div>
+        <div class="game-info">
+          <h2>補色を探せ</h2>
+          <p>表示された色の補色を4択から選ぼう</p>
         </div>
         <div class="badge">色彩感覚</div>
       </div>
@@ -1989,11 +2016,166 @@
   </div>
 </div>
 
+<!-- ========== COMP COLOR ========== -->
+<div id="comp-color" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>補色を探せ</h1>
+  </nav>
+  <div class="game-content">
+    <div class="diff-row" id="ccol-diff-row">
+      <button class="diff-btn selected" onclick="ccolSetDiff(this,'easy')">かんたん</button>
+      <button class="diff-btn"          onclick="ccolSetDiff(this,'normal')">ふつう</button>
+      <button class="diff-btn"          onclick="ccolSetDiff(this,'hard')">むずかしい</button>
+    </div>
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">スコア</div>
+        <div class="value" id="ccol-score">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="ccol-best">0</div>
+      </div>
+    </div>
+    <div class="timer-bar" style="margin-top:8px;">
+      <div class="timer-fill" id="ccol-timer-fill" style="width:100%"></div>
+    </div>
+
+    <div class="ccol-stage" id="ccol-stage" style="display:none;">
+      <div class="ccol-question">
+        <div class="ccol-q-label">この色の補色は？</div>
+        <div class="ccol-swatch" id="ccol-swatch"></div>
+      </div>
+      <div class="ccol-choices">
+        <div class="ccol-choice" id="ccol-c0"></div>
+        <div class="ccol-choice" id="ccol-c1"></div>
+        <div class="ccol-choice" id="ccol-c2"></div>
+        <div class="ccol-choice" id="ccol-c3"></div>
+      </div>
+      <div class="ccol-message" id="ccol-message"></div>
+    </div>
+
+    <div class="answer-area">
+      <button class="btn-primary" id="ccol-start-btn" onclick="ccolStart()" style="margin-top:20px;">スタート</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== MAKE TEN ========== -->
+<div id="make-ten" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>メイク10</h1>
+  </nav>
+  <div class="game-content">
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">正解数</div>
+        <div class="value" id="mten-score">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">残り時間</div>
+        <div class="value" id="mten-timer">60</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="mten-best">0</div>
+      </div>
+    </div>
+
+    <div id="mten-stage" style="display:none; width:100%; flex-direction:column; align-items:center; gap:16px;">
+      <div class="mten-hint">4つの数字を四則演算で <strong>10</strong> にしよう！</div>
+      <div class="mten-num-tiles" id="mten-num-tiles"></div>
+      <div class="mten-expr-row" id="mten-expr-row"></div>
+      <div class="mten-actions">
+        <button class="btn-outline" onclick="mtenClearExpr()" style="padding:10px 18px;">クリア</button>
+        <button class="btn-outline" onclick="mtenUndoLast()" style="padding:10px 18px;">⌫ 戻す</button>
+        <button class="btn-outline" onclick="mtenNewPuzzle()" style="padding:10px 18px;">スキップ</button>
+        <button class="btn-outline" onclick="mtenShowAnswer()" style="padding:10px 18px;">答えを見る</button>
+      </div>
+      <button class="btn-primary" id="mten-confirm-btn" onclick="mtenConfirm()" style="display:none; margin-top:0;">確定</button>
+      <div class="mten-message" id="mten-message"></div>
+      <div class="mten-hint" style="margin-top:4px;">※ 演算子をタップして切り替え・数字を順にタップして式を作ろう</div>
+    </div>
+
+    <div class="answer-area">
+      <button class="btn-primary" id="mten-start-btn" onclick="mtenStart()" style="margin-top:20px;">スタート</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== FLASH SUDOKU ========== -->
+<div id="flash-sudoku" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>フラッシュ数独</h1>
+  </nav>
+  <div class="game-content">
+    <div class="diff-row" id="fsd-diff-row">
+      <button class="diff-btn selected" onclick="fsdSetDiff(this,'easy')">かんたん</button>
+      <button class="diff-btn"          onclick="fsdSetDiff(this,'normal')">ふつう</button>
+      <button class="diff-btn"          onclick="fsdSetDiff(this,'hard')">むずかしい</button>
+    </div>
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">クリア数</div>
+        <div class="value" id="fsd-best">0</div>
+      </div>
+    </div>
+
+    <div id="fsd-stage" style="display:none; width:100%; flex-direction:column; align-items:center; gap:12px; flex-direction:column;">
+      <div class="fsd-message" id="fsd-message">スタートを押してください</div>
+      <div class="fsd-grid-wrap">
+        <div class="fsd-grid" id="fsd-grid"></div>
+      </div>
+      <div class="fsd-status" id="fsd-status"></div>
+      <div class="fsd-numpad" id="fsd-numpad" style="display:none;">
+        <button class="fsd-npbtn" onclick="fsdInputNum(1)">1</button>
+        <button class="fsd-npbtn" onclick="fsdInputNum(2)">2</button>
+        <button class="fsd-npbtn" onclick="fsdInputNum(3)">3</button>
+        <button class="fsd-npbtn" onclick="fsdInputNum(4)">4</button>
+        <button class="fsd-npbtn" onclick="fsdInputNum(5)">5</button>
+        <button class="fsd-npbtn" onclick="fsdInputNum(6)">6</button>
+        <button class="fsd-npbtn" onclick="fsdInputNum(7)">7</button>
+        <button class="fsd-npbtn" onclick="fsdInputNum(8)">8</button>
+        <button class="fsd-npbtn" onclick="fsdInputNum(9)">9</button>
+        <button class="fsd-npbtn clr" onclick="fsdClearCell()">消す</button>
+      </div>
+    </div>
+
+    <div class="answer-area">
+      <button class="btn-primary" id="fsd-start-btn" onclick="fsdStart()" style="margin-top:20px;">スタート</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== UPDATE POPUP ========== -->
+<div class="update-popup-overlay" id="update-popup-overlay">
+  <div class="update-popup-card">
+    <div class="update-popup-icon" id="popup-icon"></div>
+    <h2 class="update-popup-title" id="popup-title"></h2>
+    <ul class="update-popup-list" id="popup-list"></ul>
+    <button class="btn-primary" onclick="closeUpdatePopup()">さっそくやってみる！</button>
+    <button class="update-popup-dismiss" onclick="dismissUpdatePopup()">以降表示しない</button>
+  </div>
+</div>
+
+<!-- ========== RANK GUIDE POPUP ========== -->
+<div class="rank-guide-overlay" id="rank-guide-overlay" onclick="closeRankGuide()">
+  <div class="rank-guide-modal" onclick="event.stopPropagation()">
+    <h3>ランク基準</h3>
+    <div id="rank-guide-content"></div>
+    <button class="btn-outline" onclick="closeRankGuide()">閉じる</button>
+  </div>
+</div>
+
 <!-- ========== RESULT OVERLAY ========== -->
 <div class="result-overlay" id="result-overlay">
   <div class="result-card">
     <div class="result-icon" id="res-icon">🎉</div>
     <h2 id="res-title">ゲーム終了!</h2>
+    <div class="result-rank" id="res-rank" style="display:none"></div>
     <div class="result-detail" id="res-detail"></div>
     <div class="btn-row">
       <button class="btn-outline" onclick="resultHome()">ホームへ</button>
@@ -2040,6 +2222,9 @@
 <script src="js/card-flip.js"></script>
 <script src="js/budget-plan.js"></script>
 <script src="js/cube-count.js"></script>
+<script src="js/comp-color.js"></script>
+<script src="js/make-ten.js"></script>
+<script src="js/flash-sudoku.js"></script>
 <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').catch(() => {});

@@ -1,5 +1,15 @@
 /* ===== キューブカウント (cube-count) ===== */
 
+var CCNT_RANKS = [
+  { min: 10, label: '伝説',        emoji: '👑', color: '#f59e0b' },
+  { min: 9,  label: '達人',        emoji: '🏆', color: '#8b5cf6' },
+  { min: 8,  label: 'エキスパート', emoji: '💫', color: '#3b82f6' },
+  { min: 7,  label: '上級者',      emoji: '⭐', color: '#10b981' },
+  { min: 5,  label: '中級者',      emoji: '🌟', color: '#6ee7b7' },
+  { min: 3,  label: '見習い',      emoji: '🔰', color: '#94a3b8' },
+  { min: 0,  label: 'まだまだ',    emoji: '🌱', color: '#64748b' },
+];
+
 const CCNT_BEST_KEYS = { easy: 'ccnt_best_easy', normal: 'ccnt_best_normal', hard: 'ccnt_best_hard' };
 const CCNT_TOTAL_Q = 10;
 const CCNT_CONFIGS = {
@@ -196,10 +206,12 @@ function ccntFinish() {
     localStorage.setItem(key, ccntScore);
     document.getElementById('ccnt-best').textContent = ccntScore;
   }
+  const rank = getScoreRank(ccntScore, CCNT_RANKS);
   showResult(
     record ? '🏆' : '🧊',
     '結果発表！',
     `正解数: ${ccntScore} / ${CCNT_TOTAL_Q}\n${record ? '🏆 新記録!' : 'ベスト: ' + prev}`,
-    ccntStart
+    ccntStart,
+    rank
   );
 }

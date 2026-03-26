@@ -1,5 +1,15 @@
 /* ===== 等式判定 (eq-judge) ===== */
 
+var EQT_RANKS = [
+  { min: 48, label: '伝説',        emoji: '👑', color: '#f59e0b' },
+  { min: 38, label: '達人',        emoji: '🏆', color: '#8b5cf6' },
+  { min: 28, label: 'エキスパート', emoji: '💫', color: '#3b82f6' },
+  { min: 20, label: '上級者',      emoji: '⭐', color: '#10b981' },
+  { min: 13, label: '中級者',      emoji: '🌟', color: '#6ee7b7' },
+  { min: 6,  label: '見習い',      emoji: '🔰', color: '#94a3b8' },
+  { min: 0,  label: 'まだまだ',    emoji: '🌱', color: '#64748b' },
+];
+
 const EQT_BEST_KEYS = { easy: 'eqt_best_easy', normal: 'eqt_best_normal', hard: 'eqt_best_hard' };
 const EQT_TOTAL_TIME = 60;
 
@@ -168,10 +178,12 @@ function eqtTimeUp() {
     localStorage.setItem(key, eqtScore);
     document.getElementById('eqt-best').textContent = eqtScore;
   }
+  const rank = getScoreRank(eqtScore, EQT_RANKS);
   showResult(
     record ? '🏆' : '⏰',
     '時間切れ！',
     `スコア: ${eqtScore}\n${record ? '🏆 新記録!' : 'ベスト: ' + prev}`,
-    eqtStart
+    eqtStart,
+    rank
   );
 }

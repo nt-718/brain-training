@@ -1,5 +1,16 @@
 /* ===== NUM TAP GAME ===== */
 
+var NT_RANKS = [
+  { max: 15,       label: '伝説',        emoji: '👑', color: '#f59e0b' },
+  { max: 20,       label: '達人',        emoji: '🏆', color: '#8b5cf6' },
+  { max: 26,       label: 'エキスパート', emoji: '💫', color: '#3b82f6' },
+  { max: 33,       label: '上級者',      emoji: '⭐', color: '#10b981' },
+  { max: 44,       label: '中級者',      emoji: '🌟', color: '#6ee7b7' },
+  { max: 60,       label: '見習い',      emoji: '🔰', color: '#94a3b8' },
+  { max: Infinity, label: 'まだまだ',    emoji: '🌱', color: '#64748b' },
+];
+NT_RANKS.unit = '秒';
+
 const NT_BEST_KEY  = 'nt_best_';
 const NT_BTN_SIZE  = 52; // px, must match CSS
 const NT_MIN_DIST  = 56; // minimum center-to-center distance between buttons
@@ -116,5 +127,6 @@ function ntComplete() {
 
   const bestMsg = isRecord ? '🏆 新記録!' : 'ベスト: ' + prev + 's';
   const icon    = isRecord ? '🏆' : parseFloat(elapsed) < 20 ? '🥇' : '🎉';
-  showResult(icon, 'クリア!', elapsed + '秒　' + bestMsg, ntStart);
+  const rank = getScoreRank(parseFloat(elapsed), NT_RANKS);
+  showResult(icon, 'クリア!', elapsed + '秒　' + bestMsg, ntStart, rank);
 }

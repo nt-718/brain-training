@@ -1,5 +1,15 @@
 /* ===== 数字並べ (num-order) ===== */
 
+var NOR_RANKS = [
+  { min: 40, label: '伝説',        emoji: '👑', color: '#f59e0b' },
+  { min: 30, label: '達人',        emoji: '🏆', color: '#8b5cf6' },
+  { min: 22, label: 'エキスパート', emoji: '💫', color: '#3b82f6' },
+  { min: 16, label: '上級者',      emoji: '⭐', color: '#10b981' },
+  { min: 10, label: '中級者',      emoji: '🌟', color: '#6ee7b7' },
+  { min: 5,  label: '見習い',      emoji: '🔰', color: '#94a3b8' },
+  { min: 0,  label: 'まだまだ',    emoji: '🌱', color: '#64748b' },
+];
+
 const NOR_BEST_KEYS = { easy: 'nor_best_easy', normal: 'nor_best_normal', hard: 'nor_best_hard' };
 const NOR_TOTAL_TIME = 60;
 const NOR_CONFIGS = {
@@ -135,10 +145,12 @@ function norTimeUp() {
     localStorage.setItem(key, norScore);
     document.getElementById('nor-best').textContent = norScore;
   }
+  const rank = getScoreRank(norScore, NOR_RANKS);
   showResult(
     record ? '🏆' : '⏰',
     '時間切れ！',
     `スコア: ${norScore}\n${record ? '🏆 新記録!' : 'ベスト: ' + prev}`,
-    norStart
+    norStart,
+    rank
   );
 }

@@ -24,6 +24,18 @@ const COLOR_BLUE  = '#6c63ff';
 const COLOR_GREEN = '#43b89c';
 const COLOR_PINK  = '#ff6584';
 
+// --- Rank thresholds (highest first) ---
+// Max score: easy≈420 / normal≈340 / hard≈280 (10問 × 最大42/34/28点)
+var VC_RANKS = [
+  { min: 320, label: '伝説',        emoji: '👑', color: '#f59e0b' },
+  { min: 250, label: '達人',        emoji: '🏆', color: '#8b5cf6' },
+  { min: 190, label: 'エキスパート', emoji: '💫', color: '#3b82f6' },
+  { min: 140, label: '上級者',      emoji: '⭐', color: '#10b981' },
+  { min: 90,  label: '中級者',      emoji: '🌟', color: '#6ee7b7' },
+  { min: 40,  label: '見習い',      emoji: '🔰', color: '#94a3b8' },
+  { min: 0,   label: 'まだまだ',    emoji: '🌱', color: '#64748b' },
+];
+
 // --- State ---
 let vcDiff         = 'easy';
 let vcScore        = 0;
@@ -198,8 +210,8 @@ function vcEnd() {
     localStorage.setItem('vcBest', vcBest);
   }
   document.getElementById('vc-start-btn').style.display = '';
-  const icon = vcScore >= 150 ? '🏆' : vcScore >= 80 ? '🥈' : '🎉';
-  showResult('🧮', 'ゲーム終了!', `スコア: ${vcScore}点 (ベスト: ${vcBest})`, vcStart);
+  const rank = getScoreRank(vcScore, VC_RANKS);
+  showResult('🧮', 'ゲーム終了!', `スコア: ${vcScore}点 (ベスト: ${vcBest})`, vcStart, rank);
 }
 
 function flashGameContent(correct) {

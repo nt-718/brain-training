@@ -1,5 +1,15 @@
 /* ===== 素数ハント (prime-hunt) ===== */
 
+var PH_RANKS = [
+  { min: 40, label: '伝説',        emoji: '👑', color: '#f59e0b' },
+  { min: 30, label: '達人',        emoji: '🏆', color: '#8b5cf6' },
+  { min: 22, label: 'エキスパート', emoji: '💫', color: '#3b82f6' },
+  { min: 15, label: '上級者',      emoji: '⭐', color: '#10b981' },
+  { min: 9,  label: '中級者',      emoji: '🌟', color: '#6ee7b7' },
+  { min: 4,  label: '見習い',      emoji: '🔰', color: '#94a3b8' },
+  { min: 0,  label: 'まだまだ',    emoji: '🌱', color: '#64748b' },
+];
+
 const PH_BEST_KEYS = { easy: 'ph_best_easy', normal: 'ph_best_normal', hard: 'ph_best_hard' };
 const PH_TOTAL_TIME = 60;
 const PH_GRID_SIZE = 12;
@@ -149,10 +159,12 @@ function phTimeUp() {
     localStorage.setItem(key, phScore);
     document.getElementById('ph-best').textContent = phScore;
   }
+  const rank = getScoreRank(phScore, PH_RANKS);
   showResult(
     record ? '🏆' : '⏰',
     '時間切れ！',
     `スコア: ${phScore}\n${record ? '🏆 新記録!' : 'ベスト: ' + prev}`,
-    phStart
+    phStart,
+    rank
   );
 }

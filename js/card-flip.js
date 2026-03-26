@@ -1,5 +1,16 @@
 /* ===== カードフリップ (card-flip) ===== */
 
+var CFLIP_RANKS = [
+  { max: 10,       label: '伝説',        emoji: '👑', color: '#f59e0b' },
+  { max: 13,       label: '達人',        emoji: '🏆', color: '#8b5cf6' },
+  { max: 16,       label: 'エキスパート', emoji: '💫', color: '#3b82f6' },
+  { max: 20,       label: '上級者',      emoji: '⭐', color: '#10b981' },
+  { max: 25,       label: '中級者',      emoji: '🌟', color: '#6ee7b7' },
+  { max: 30,       label: '見習い',      emoji: '🔰', color: '#94a3b8' },
+  { max: Infinity, label: 'まだまだ',    emoji: '🌱', color: '#64748b' },
+];
+CFLIP_RANKS.unit = '手';
+
 const CFLIP_BEST_KEYS = { easy: 'cflip_best_easy', normal: 'cflip_best_normal', hard: 'cflip_best_hard' };
 const CFLIP_EMOJIS = ['🍎','🍊','🍋','🍇','🍓','🍒','🍑','🍌','🥝','🍍','🥥','🍈','🥭','🍐','🫐','🍅'];
 const CFLIP_CONFIGS = {
@@ -142,10 +153,12 @@ function cflipComplete() {
   }
 
   const prevDisplay = prev === Infinity ? '-' : prev + '手';
+  const rank = getScoreRank(cflipMoves, CFLIP_RANKS);
   showResult(
     record ? '🏆' : '🃏',
     'クリア！',
     `手数: ${cflipMoves} 手\n${record ? '🏆 新記録!' : 'ベスト: ' + prevDisplay}`,
-    cflipStart
+    cflipStart,
+    rank
   );
 }

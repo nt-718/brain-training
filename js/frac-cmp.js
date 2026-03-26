@@ -1,5 +1,15 @@
 /* ===== 分数比較 (frac-cmp) ===== */
 
+var FCMP_RANKS = [
+  { min: 45, label: '伝説',        emoji: '👑', color: '#f59e0b' },
+  { min: 35, label: '達人',        emoji: '🏆', color: '#8b5cf6' },
+  { min: 26, label: 'エキスパート', emoji: '💫', color: '#3b82f6' },
+  { min: 18, label: '上級者',      emoji: '⭐', color: '#10b981' },
+  { min: 12, label: '中級者',      emoji: '🌟', color: '#6ee7b7' },
+  { min: 6,  label: '見習い',      emoji: '🔰', color: '#94a3b8' },
+  { min: 0,  label: 'まだまだ',    emoji: '🌱', color: '#64748b' },
+];
+
 const FCMP_BEST_KEYS = { easy: 'fcmp_best_easy', normal: 'fcmp_best_normal', hard: 'fcmp_best_hard' };
 const FCMP_TOTAL_TIME = 60;
 
@@ -185,10 +195,12 @@ function fcmpTimeUp() {
     localStorage.setItem(key, fcmpScore);
     document.getElementById('fcmp-best').textContent = fcmpScore;
   }
+  const rank = getScoreRank(fcmpScore, FCMP_RANKS);
   showResult(
     record ? '🏆' : '⏰',
     '時間切れ！',
     `スコア: ${fcmpScore}\n${record ? '🏆 新記録!' : 'ベスト: ' + prev}`,
-    fcmpStart
+    fcmpStart,
+    rank
   );
 }

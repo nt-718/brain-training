@@ -1,5 +1,15 @@
 /* ===== MEMORY MATRIX GAME ===== */
 
+var MM_RANKS = [
+  { min: 20, label: '伝説',        emoji: '👑', color: '#f59e0b' },
+  { min: 16, label: '達人',        emoji: '🏆', color: '#8b5cf6' },
+  { min: 12, label: 'エキスパート', emoji: '💫', color: '#3b82f6' },
+  { min: 9,  label: '上級者',      emoji: '⭐', color: '#10b981' },
+  { min: 6,  label: '中級者',      emoji: '🌟', color: '#6ee7b7' },
+  { min: 3,  label: '見習い',      emoji: '🔰', color: '#94a3b8' },
+  { min: 0,  label: 'まだまだ',    emoji: '🌱', color: '#64748b' },
+];
+
 const MM_BEST_KEY = 'mm_best_';
 
 let mmDiff = 'easy';
@@ -223,5 +233,6 @@ function mmGameOver() {
   });
 
   const bestMsg = isRecord ? '🏆 新記録!' : 'ベスト: ' + prevBest;
-  showResult(isRecord ? '🏆' : '😢', 'ゲームオーバー', `スコア: ${score} ラウンド\n${bestMsg}`, mmStart);
+  const rank = getScoreRank(score, MM_RANKS);
+  showResult(isRecord ? '🏆' : '😢', 'ゲームオーバー', `スコア: ${score} ラウンド\n${bestMsg}`, mmStart, rank);
 }

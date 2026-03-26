@@ -1,5 +1,15 @@
 // Mirror Path (ミラーパス)
 
+var MP_RANKS = [
+  { min: 70, label: '伝説',        emoji: '👑', color: '#f59e0b' },
+  { min: 55, label: '達人',        emoji: '🏆', color: '#8b5cf6' },
+  { min: 40, label: 'エキスパート', emoji: '💫', color: '#3b82f6' },
+  { min: 28, label: '上級者',      emoji: '⭐', color: '#10b981' },
+  { min: 18, label: '中級者',      emoji: '🌟', color: '#6ee7b7' },
+  { min: 8,  label: '見習い',      emoji: '🔰', color: '#94a3b8' },
+  { min: 0,  label: 'まだまだ',    emoji: '🌱', color: '#64748b' },
+];
+
 let mpDiff = 'easy';
 let mpScore = 0;
 let mpBest = 0;
@@ -208,7 +218,8 @@ function mpGameOver() {
   document.getElementById('mp-start-btn').style.display = 'inline-block';
   document.getElementById('mp-start-btn').textContent = 'もう一度';
 
-  showResult('🪞', 'タイムアップ', `正解数: ${mpScore}\nベスト: ${mpBest}`, mpStart);
+  const rank = getScoreRank(mpScore, MP_RANKS);
+  showResult('🪞', 'タイムアップ', `正解数: ${mpScore}\nベスト: ${mpBest}`, mpStart, rank);
 }
 
 function mpStop() {

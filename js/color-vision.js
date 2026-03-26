@@ -1,4 +1,15 @@
 /* ========== COLOR VISION ========== */
+
+var CV_RANKS = [
+  { min: 40, label: '伝説',        emoji: '👑', color: '#f59e0b' },
+  { min: 30, label: '達人',        emoji: '🏆', color: '#8b5cf6' },
+  { min: 22, label: 'エキスパート', emoji: '💫', color: '#3b82f6' },
+  { min: 16, label: '上級者',      emoji: '⭐', color: '#10b981' },
+  { min: 10, label: '中級者',      emoji: '🌟', color: '#6ee7b7' },
+  { min: 5,  label: '見習い',      emoji: '🔰', color: '#94a3b8' },
+  { min: 0,  label: 'まだまだ',    emoji: '🌱', color: '#64748b' },
+];
+
 let cvTimer = null;
 let cvTimeLeft = 0;
 let cvScore = 0;
@@ -131,11 +142,13 @@ function cvGameOver() {
   }
   
   const diffLabel = cvDiff === 'easy' ? 'かんたん' : cvDiff === 'hard' ? 'むずかしい' : 'ふつう';
+  const rank = getScoreRank(cvScore, CV_RANKS);
   showResult(
     '👁️',
     'タイムアップ！',
     `スコア: ${cvScore}\n難易度: ${diffLabel}${isNewBest ? '\n🌟自己ベスト更新！' : ''}`,
-    cvStart
+    cvStart,
+    rank
   );
 }
 

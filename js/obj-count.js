@@ -1,5 +1,15 @@
 /* ===== 個数カウント (obj-count) ===== */
 
+var OC_RANKS = [
+  { min: 10, label: '伝説',        emoji: '👑', color: '#f59e0b' },
+  { min: 9,  label: '達人',        emoji: '🏆', color: '#8b5cf6' },
+  { min: 8,  label: 'エキスパート', emoji: '💫', color: '#3b82f6' },
+  { min: 7,  label: '上級者',      emoji: '⭐', color: '#10b981' },
+  { min: 5,  label: '中級者',      emoji: '🌟', color: '#6ee7b7' },
+  { min: 3,  label: '見習い',      emoji: '🔰', color: '#94a3b8' },
+  { min: 0,  label: 'まだまだ',    emoji: '🌱', color: '#64748b' },
+];
+
 const OC_BEST_KEYS = { easy: 'oc_best_easy', normal: 'oc_best_normal', hard: 'oc_best_hard' };
 const OC_TOTAL_Q = 10;
 const OC_CONFIGS = {
@@ -145,10 +155,12 @@ function ocFinish() {
     localStorage.setItem(key, ocScore);
     document.getElementById('oc-best').textContent = ocScore;
   }
+  const rank = getScoreRank(ocScore, OC_RANKS);
   showResult(
     record ? '🏆' : '🎯',
     '結果発表！',
     `正解数: ${ocScore} / ${OC_TOTAL_Q}\n${record ? '🏆 新記録!' : 'ベスト: ' + prev}`,
-    ocStart
+    ocStart,
+    rank
   );
 }

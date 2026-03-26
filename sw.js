@@ -1,4 +1,4 @@
-const CACHE_NAME = 'noutore-v9';
+const CACHE_NAME = 'noutore-v10';
 const ASSETS = [
   './',
   './index.html',
@@ -78,6 +78,12 @@ const ASSETS = [
   './js/budget-plan.js',
   './css/cube-count.css',
   './js/cube-count.js',
+  './css/comp-color.css',
+  './js/comp-color.js',
+  './css/make-ten.css',
+  './js/make-ten.js',
+  './css/flash-sudoku.css',
+  './js/flash-sudoku.js',
 ];
 
 self.addEventListener('install', e => {

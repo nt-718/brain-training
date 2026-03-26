@@ -1,5 +1,15 @@
 /* ===== N-BACK CHALLENGE ===== */
 
+var NB_RANKS = [
+  { min: 30, label: '伝説',        emoji: '👑', color: '#f59e0b' },
+  { min: 24, label: '達人',        emoji: '🏆', color: '#8b5cf6' },
+  { min: 18, label: 'エキスパート', emoji: '💫', color: '#3b82f6' },
+  { min: 12, label: '上級者',      emoji: '⭐', color: '#10b981' },
+  { min: 8,  label: '中級者',      emoji: '🌟', color: '#6ee7b7' },
+  { min: 4,  label: '見習い',      emoji: '🔰', color: '#94a3b8' },
+  { min: 0,  label: 'まだまだ',    emoji: '🌱', color: '#64748b' },
+];
+
 const NB_BEST_KEY = 'nb_best_';
 const NB_SHAPES = ['🍎','🐶','🚘','⚽️','⭐️','🎵','🎈', '🍉', '🚀', '💎'];
 
@@ -142,5 +152,6 @@ function nbGameOver() {
   }
   
   const msg = record ? '🏆 新記録!' : `ベスト: ${best}`;
-  showResult(record ? '🏆' : '😢', 'ゲームオーバー', `スコア: ${nbScore}\n${msg}`, nbStart);
+  const rank = getScoreRank(nbScore, NB_RANKS);
+  showResult(record ? '🏆' : '😢', 'ゲームオーバー', `スコア: ${nbScore}\n${msg}`, nbStart, rank);
 }

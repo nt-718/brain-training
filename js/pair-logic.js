@@ -1,5 +1,15 @@
 // Pair Logic (ペアロジック)
 
+var PL_RANKS = [
+  { min: 38, label: '伝説',        emoji: '👑', color: '#f59e0b' },
+  { min: 28, label: '達人',        emoji: '🏆', color: '#8b5cf6' },
+  { min: 20, label: 'エキスパート', emoji: '💫', color: '#3b82f6' },
+  { min: 14, label: '上級者',      emoji: '⭐', color: '#10b981' },
+  { min: 9,  label: '中級者',      emoji: '🌟', color: '#6ee7b7' },
+  { min: 4,  label: '見習い',      emoji: '🔰', color: '#94a3b8' },
+  { min: 0,  label: 'まだまだ',    emoji: '🌱', color: '#64748b' },
+];
+
 let plDiff = 'easy';
 let plScore = 0;
 let plBest = 0;
@@ -197,7 +207,8 @@ function plGameOver() {
   document.getElementById('pl-start-btn').style.display = 'inline-block';
   document.getElementById('pl-start-btn').textContent = 'もう一度';
 
-  showResult('🃏', 'タイムアップ', `正解数: ${plScore}\nベスト: ${plBest}`, plStart);
+  const rank = getScoreRank(plScore, PL_RANKS);
+  showResult('🃏', 'タイムアップ', `正解数: ${plScore}\nベスト: ${plBest}`, plStart, rank);
 }
 
 function plStop() {

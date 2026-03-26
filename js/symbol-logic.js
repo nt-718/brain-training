@@ -1,5 +1,15 @@
 // Symbol Logic
 
+var SL_RANKS = [
+  { min: 45, label: '伝説',        emoji: '👑', color: '#f59e0b' },
+  { min: 35, label: '達人',        emoji: '🏆', color: '#8b5cf6' },
+  { min: 26, label: 'エキスパート', emoji: '💫', color: '#3b82f6' },
+  { min: 18, label: '上級者',      emoji: '⭐', color: '#10b981' },
+  { min: 12, label: '中級者',      emoji: '🌟', color: '#6ee7b7' },
+  { min: 6,  label: '見習い',      emoji: '🔰', color: '#94a3b8' },
+  { min: 0,  label: 'まだまだ',    emoji: '🌱', color: '#64748b' },
+];
+
 let slDiff = 'easy';
 let slScore = 0;
 let slBest = 0;
@@ -166,7 +176,8 @@ function slGameOver() {
   document.getElementById('sl-start-btn').style.display = 'inline-block';
   document.getElementById('sl-start-btn').textContent = 'もう一度';
   
-  showResult('🍎', 'タイムアップ', `正解数: ${slScore}`, () => slStart());
+  const rank = getScoreRank(slScore, SL_RANKS);
+  showResult('🍎', 'タイムアップ', `正解数: ${slScore}`, () => slStart(), rank);
 }
 
 function slStop() {

@@ -42,49 +42,55 @@ function showScreen(id) {
   if (typeof cflipStop === 'function') cflipStop();
   if (typeof bplanStop === 'function') bplanStop();
   if (typeof ccntStop === 'function') ccntStop();
+  if (typeof ccolStop === 'function') ccolStop();
+  if (typeof mtenStop === 'function') mtenStop();
+  if (typeof fsdStop === 'function') fsdStop();
   if (id === 'home') refreshBestScores();
 }
 
 /* ===== BEST SCORES ON GAME CARDS ===== */
 const BS_MAPPING = [
-  { target: 'visual-calc',   key: 'vcBest' },
-  { target: 'num-tap',       key: 'nt_best_random', suffix: 's', reverse: true },
-  { target: 'memory-matrix', key: ['mm_best_easy','mm_best_normal','mm_best_hard'] },
-  { target: 'color-match',   key: 'cm_best' },
-  { target: 'n-back',        key: ['nb_best_1','nb_best_2','nb_best_3'] },
-  { target: 'flash-math',    key: ['fm_best_number_easy','fm_best_number_normal','fm_best_number_hard',
-                                   'fm_best_visual_easy','fm_best_visual_normal','fm_best_visual_hard',
-                                   'fm_best_mixed_easy','fm_best_mixed_normal','fm_best_mixed_hard'] },
-  { target: 'target-search', key: 'tsBest' },
-  { target: 'symbol-logic',  key: 'slBest' },
-  { target: 'swipe-sort',    key: 'ssBest' },
-  { target: 'shell-game',    key: 'sgBest' },
-  { target: 'just-stop',     key: 'jsBest' },
-  { target: 'word-link',     key: 'wlBest' },
-  { target: 'sequence-memory',key: 'smBest' },
-  { target: 'emoji-order',   key: 'eoBest' },
-  { target: 'color-vision',  key: ['cv_best_easy','cv_best_normal','cv_best_hard'] },
-  { target: 'color-code',    key: ['cc_best_color2hex','cc_best_hex2color'] },
-  { target: 'mirror-path',   key: 'mpBest' },
-  { target: 'pair-logic',    key: 'plBest' },
-  { target: 'chain-word',   key: 'cwBest' },
-  { target: 'big-number',    key: 'bnBest' },
-  { target: 'balance-scale', key: 'blBest' },
-  { target: 'pattern-next',  key: 'pnBest' },
-  { target: 'mental-nav',    key: 'mnBest' },
-  { target: 'go-nogo',       key: 'gnBest' },
-  { target: 'apple-catch',   key: 'acBest' },
-  { target: 'speed-sum',    key: ['spd_best_easy','spd_best_normal','spd_best_hard'] },
-  { target: 'eq-judge',     key: ['eqt_best_easy','eqt_best_normal','eqt_best_hard'] },
-  { target: 'num-order',    key: ['nor_best_easy','nor_best_normal','nor_best_hard'] },
-  { target: 'obj-count',    key: ['oc_best_easy','oc_best_normal','oc_best_hard'] },
-  { target: 'hi-lo',        key: 'hlBest' },
-  { target: 'color-seq',   key: 'cseqBest' },
-  { target: 'prime-hunt',  key: ['ph_best_easy','ph_best_normal','ph_best_hard'] },
-  { target: 'frac-cmp',    key: ['fcmp_best_easy','fcmp_best_normal','fcmp_best_hard'] },
-  { target: 'card-flip',   key: ['cflip_best_easy','cflip_best_normal','cflip_best_hard'], reverse: true, suffix: '手' },
-  { target: 'budget-plan', key: ['bplan_best_easy','bplan_best_normal','bplan_best_hard'] },
-  { target: 'cube-count',  key: ['ccnt_best_easy','ccnt_best_normal','ccnt_best_hard'] }];
+  { target: 'visual-calc',    key: 'vcBest',                                                                     ranksVar: 'VC_RANKS' },
+  { target: 'num-tap',        key: 'nt_best_random',        suffix: 's', reverse: true,                          ranksVar: 'NT_RANKS' },
+  { target: 'memory-matrix',  key: ['mm_best_easy','mm_best_normal','mm_best_hard'],                              ranksVar: 'MM_RANKS' },
+  { target: 'color-match',    key: 'cm_best',                                                                     ranksVar: 'CM_RANKS' },
+  { target: 'n-back',         key: ['nb_best_1','nb_best_2','nb_best_3'],                                         ranksVar: 'NB_RANKS' },
+  { target: 'flash-math',     key: ['fm_best_number_easy','fm_best_number_normal','fm_best_number_hard',
+                                    'fm_best_visual_easy','fm_best_visual_normal','fm_best_visual_hard',
+                                    'fm_best_mixed_easy','fm_best_mixed_normal','fm_best_mixed_hard'],             ranksVar: 'FM_RANKS' },
+  { target: 'target-search',  key: 'tsBest',                                                                      ranksVar: 'TS_RANKS' },
+  { target: 'symbol-logic',   key: 'slBest',                                                                      ranksVar: 'SL_RANKS' },
+  { target: 'swipe-sort',     key: 'ssBest',                                                                      ranksVar: 'SS_RANKS' },
+  { target: 'shell-game',     key: 'sgBest',                                                                      ranksVar: 'SG_RANKS' },
+  { target: 'just-stop',      key: 'jsBest',                                                                      ranksVar: 'JS_RANKS' },
+  { target: 'word-link',      key: 'wlBest',                                                                      ranksVar: 'WL_RANKS' },
+  { target: 'sequence-memory',key: 'smBest',                                                                      ranksVar: 'SM_RANKS' },
+  { target: 'emoji-order',    key: 'eoBest',                                                                      ranksVar: 'EO_RANKS' },
+  { target: 'color-vision',   key: ['cv_best_easy','cv_best_normal','cv_best_hard'],                              ranksVar: 'CV_RANKS' },
+  { target: 'color-code',     key: ['cc_best_color2hex','cc_best_hex2color'],                                     ranksVar: 'CC_RANKS' },
+  { target: 'mirror-path',    key: 'mpBest',                                                                      ranksVar: 'MP_RANKS' },
+  { target: 'pair-logic',     key: 'plBest',                                                                      ranksVar: 'PL_RANKS' },
+  { target: 'chain-word',     key: 'cwBest',                                                                      ranksVar: 'CW_RANKS' },
+  { target: 'big-number',     key: 'bnBest',                                                                      ranksVar: 'BN_RANKS' },
+  { target: 'balance-scale',  key: 'blBest',                                                                      ranksVar: 'BL_RANKS' },
+  { target: 'pattern-next',   key: 'pnBest',                                                                      ranksVar: 'PN_RANKS' },
+  { target: 'mental-nav',     key: 'mnBest',                                                                      ranksVar: 'MN_RANKS' },
+  { target: 'go-nogo',        key: 'gnBest',                                                                      ranksVar: 'GN_RANKS' },
+  { target: 'apple-catch',    key: 'acBest',                                                                      ranksVar: 'AC_RANKS' },
+  { target: 'speed-sum',      key: ['spd_best_easy','spd_best_normal','spd_best_hard'],                           ranksVar: 'SPD_RANKS' },
+  { target: 'eq-judge',       key: ['eqt_best_easy','eqt_best_normal','eqt_best_hard'],                           ranksVar: 'EQT_RANKS' },
+  { target: 'num-order',      key: ['nor_best_easy','nor_best_normal','nor_best_hard'],                           ranksVar: 'NOR_RANKS' },
+  { target: 'obj-count',      key: ['oc_best_easy','oc_best_normal','oc_best_hard'],                              ranksVar: 'OC_RANKS' },
+  { target: 'hi-lo',          key: 'hlBest',                                                                      ranksVar: 'HL_RANKS' },
+  { target: 'color-seq',      key: 'cseqBest',                                                                    ranksVar: 'CSEQ_RANKS' },
+  { target: 'prime-hunt',     key: ['ph_best_easy','ph_best_normal','ph_best_hard'],                              ranksVar: 'PH_RANKS' },
+  { target: 'frac-cmp',       key: ['fcmp_best_easy','fcmp_best_normal','fcmp_best_hard'],                        ranksVar: 'FCMP_RANKS' },
+  { target: 'card-flip',      key: ['cflip_best_easy','cflip_best_normal','cflip_best_hard'], reverse: true, suffix: '手', ranksVar: 'CFLIP_RANKS' },
+  { target: 'budget-plan',    key: ['bplan_best_easy','bplan_best_normal','bplan_best_hard'],                     ranksVar: 'BPLAN_RANKS' },
+  { target: 'cube-count',     key: ['ccnt_best_easy','ccnt_best_normal','ccnt_best_hard'],                        ranksVar: 'CCNT_RANKS' },
+  { target: 'comp-color',     key: ['ccol_best_easy','ccol_best_normal','ccol_best_hard'],                        ranksVar: 'CCOL_RANKS' },
+  { target: 'make-ten',       key: 'mten_best',                                                                   ranksVar: 'MTEN_RANKS' },
+  { target: 'flash-sudoku',   key: ['fsd_best_easy','fsd_best_normal','fsd_best_hard'],                           ranksVar: 'FSD_RANKS' }];
 
 function refreshBestScores() {
   BS_MAPPING.forEach(g => {
@@ -124,16 +130,76 @@ function refreshBestScores() {
         card.appendChild(badge);
       }
       const display = g.suffix ? best + g.suffix : best;
-      badge.textContent = `🏆 ${display}`;
+      if (g.ranksVar && window[g.ranksVar]) {
+        const rank = getScoreRank(best, window[g.ranksVar]);
+        badge.innerHTML = `<span style="color:${rank.color}">${rank.emoji}</span> ${display}`;
+        badge.style.cursor = 'pointer';
+        badge.dataset.ranksVar = g.ranksVar;
+        badge.onclick = (e) => { e.stopPropagation(); showRankGuide(badge.dataset.ranksVar); };
+      } else {
+        badge.textContent = `🏆 ${display}`;
+        badge.style.cursor = '';
+        badge.onclick = null;
+      }
     } else if (badge) {
       badge.remove();
     }
   });
 }
 
+/* ===== UPDATE POPUP ===== */
+// 新しいお知らせを追加するときはここに追加するだけでOK
+const ANNOUNCEMENTS = [
+  {
+    id: 'ann_20260326',
+    icon: '🎮',
+    title: '新しいゲームを追加しました！',
+    items: [
+      '🔢 <strong>メイク10</strong> — 数字を組み合わせて10を作ろう',
+      '⚡ <strong>フラッシュ数独</strong> — 一瞬表示される数独の問題を解こう',
+      '🎨 <strong>補色を探せ</strong> — 色の補色を素早く見つけよう',
+    ]
+  }
+];
+
+let _currentAnnouncementId = null;
+
+function _getSeenAnnouncements() {
+  try { return JSON.parse(localStorage.getItem('seenAnnouncements') || '[]'); }
+  catch { return []; }
+}
+
+function checkUpdatePopup() {
+  const seen = _getSeenAnnouncements();
+  const unseen = ANNOUNCEMENTS.filter(a => !seen.includes(a.id));
+  if (unseen.length === 0) return;
+  const ann = unseen[unseen.length - 1];
+  _currentAnnouncementId = ann.id;
+  document.getElementById('popup-icon').textContent = ann.icon;
+  document.getElementById('popup-title').textContent = ann.title;
+  document.getElementById('popup-list').innerHTML = ann.items.map(item => `<li>${item}</li>`).join('');
+  document.getElementById('update-popup-overlay').classList.add('show');
+}
+
+function closeUpdatePopup() {
+  document.getElementById('update-popup-overlay').classList.remove('show');
+}
+
+function dismissUpdatePopup() {
+  if (_currentAnnouncementId) {
+    const seen = _getSeenAnnouncements();
+    if (!seen.includes(_currentAnnouncementId)) {
+      seen.push(_currentAnnouncementId);
+      localStorage.setItem('seenAnnouncements', JSON.stringify(seen));
+    }
+  }
+  document.getElementById('update-popup-overlay').classList.remove('show');
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   refreshBestScores();
-  
+  checkUpdatePopup();
+
   // Accessibility: Make game cards keyboard navigable
   document.querySelectorAll('.game-card').forEach(card => {
     card.setAttribute('tabindex', '0');
@@ -150,14 +216,58 @@ document.addEventListener('DOMContentLoaded', () => {
 /* ===== RESULT OVERLAY ===== */
 let _retryFn = null;
 
-function showResult(icon, title, detail, onRetry) {
+function showResult(icon, title, detail, onRetry, rank = null) {
   sfx.result();
   document.getElementById('res-icon').textContent   = icon;
   document.getElementById('res-title').textContent  = title;
   const detailEl = document.getElementById('res-detail');
   detailEl.innerHTML = detail.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+  const rankEl = document.getElementById('res-rank');
+  if (rank) {
+    rankEl.style.display = '';
+    rankEl.innerHTML = `<span class="rank-badge" style="--rank-color:${rank.color}">${rank.emoji} ${rank.label}</span>`;
+  } else {
+    rankEl.style.display = 'none';
+  }
   _retryFn = onRetry;
   document.getElementById('result-overlay').classList.add('show');
+}
+
+/* ===== SCORE RANK UTILITY ===== */
+// ranks: [{ min, label, emoji, color }, ...] sorted highest first
+function getScoreRank(score, ranks) {
+  for (const rank of ranks) {
+    if ('max' in rank ? score <= rank.max : score >= rank.min) return rank;
+  }
+  return ranks[ranks.length - 1];
+}
+
+function showRankGuide(ranksVar) {
+  const ranks = window[ranksVar];
+  if (!ranks) return;
+  const isReverse = 'max' in ranks[0];
+  const unit = ranks.unit || '点';
+  document.getElementById('rank-guide-content').innerHTML = ranks.map((r, i) => {
+    let range;
+    if (isReverse) {
+      const prev = ranks[i - 1];
+      const from = prev ? prev.max + 1 : null;
+      const to   = r.max === Infinity ? null : r.max;
+      range = from === null ? `〜${to}${unit}` : to === null ? `${from}${unit}〜` : `${from}〜${to}${unit}`;
+    } else {
+      const next = ranks[i - 1];
+      range = next ? `${r.min}〜${next.min - 1}点` : `${r.min}点〜`;
+    }
+    return `<div class="rank-guide-row">
+      <span class="rank-guide-badge" style="--rank-color:${r.color}">${r.emoji} ${r.label}</span>
+      <span class="rank-guide-score">${range}</span>
+    </div>`;
+  }).join('');
+  document.getElementById('rank-guide-overlay').classList.add('show');
+}
+
+function closeRankGuide() {
+  document.getElementById('rank-guide-overlay').classList.remove('show');
 }
 
 function resultHome() {

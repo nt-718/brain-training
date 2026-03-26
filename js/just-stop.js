@@ -1,5 +1,15 @@
 /* ===== JUST STOP GAME ===== */
 
+var JS_RANKS = [
+  { min: 46, label: '伝説',        emoji: '👑', color: '#f59e0b' },
+  { min: 40, label: '達人',        emoji: '🏆', color: '#8b5cf6' },
+  { min: 34, label: 'エキスパート', emoji: '💫', color: '#3b82f6' },
+  { min: 26, label: '上級者',      emoji: '⭐', color: '#10b981' },
+  { min: 18, label: '中級者',      emoji: '🌟', color: '#6ee7b7' },
+  { min: 10, label: '見習い',      emoji: '🔰', color: '#94a3b8' },
+  { min: 0,  label: 'まだまだ',    emoji: '🌱', color: '#64748b' },
+];
+
 let jsState = 'idle'; // idle, countdown, running, done
 let jsStartTime = 0;
 let jsTargetMs  = 0;
@@ -46,7 +56,8 @@ function jsNextRound() {
     }
     document.getElementById('js-start-btn').style.display = 'inline-flex';
     document.getElementById('js-start-btn').textContent = 'もう一度';
-    showResult('⏱️', 'ゲーム終了！', `スコア: ${jsScore} / ${JS_ROUNDS * 10} (ベスト: ${jsBest})`, jsStart);
+    const rank = getScoreRank(jsScore, JS_RANKS);
+    showResult('⏱️', 'ゲーム終了！', `スコア: ${jsScore} / ${JS_ROUNDS * 10} (ベスト: ${jsBest})`, jsStart, rank);
     return;
   }
 

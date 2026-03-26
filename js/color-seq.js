@@ -1,5 +1,15 @@
 /* ===== カラーシーケンス (color-seq) ===== */
 
+var CSEQ_RANKS = [
+  { min: 20, label: '伝説',        emoji: '👑', color: '#f59e0b' },
+  { min: 16, label: '達人',        emoji: '🏆', color: '#8b5cf6' },
+  { min: 12, label: 'エキスパート', emoji: '💫', color: '#3b82f6' },
+  { min: 9,  label: '上級者',      emoji: '⭐', color: '#10b981' },
+  { min: 6,  label: '中級者',      emoji: '🌟', color: '#6ee7b7' },
+  { min: 3,  label: '見習い',      emoji: '🔰', color: '#94a3b8' },
+  { min: 0,  label: 'まだまだ',    emoji: '🌱', color: '#64748b' },
+];
+
 const CSEQ_BEST_KEY = 'cseqBest';
 const CSEQ_COLORS = [
   { id: 'red',    bg: '#f43f5e' },
@@ -157,10 +167,12 @@ function cseqGameOver() {
     localStorage.setItem(CSEQ_BEST_KEY, score);
     document.getElementById('cseq-best').textContent = score;
   }
+  const rank = getScoreRank(score, CSEQ_RANKS);
   showResult(
     record ? '🏆' : '🎨',
     'ゲームオーバー！',
     `${score + 2}色でミス\nスコア: ${score}\n${record ? '🏆 新記録!' : 'ベスト: ' + prev}`,
-    cseqStart
+    cseqStart,
+    rank
   );
 }

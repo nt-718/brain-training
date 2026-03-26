@@ -1,5 +1,15 @@
 /* ===== APPLE CATCH ===== */
 
+var AC_RANKS = [
+  { min: 28, label: '伝説',        emoji: '👑', color: '#f59e0b' },
+  { min: 22, label: '達人',        emoji: '🏆', color: '#8b5cf6' },
+  { min: 16, label: 'エキスパート', emoji: '💫', color: '#3b82f6' },
+  { min: 12, label: '上級者',      emoji: '⭐', color: '#10b981' },
+  { min: 7,  label: '中級者',      emoji: '🌟', color: '#6ee7b7' },
+  { min: 3,  label: '見習い',      emoji: '🔰', color: '#94a3b8' },
+  { min: 0,  label: 'まだまだ',    emoji: '🌱', color: '#64748b' },
+];
+
 const AC_BEST_KEY   = 'acBest';
 const AC_TIME_TOTAL = 30;
 const AC_MAX_LIVES  = 3;
@@ -189,5 +199,6 @@ function acFinish(reason) {
               : reason === 'wrong' ? '🍏 をタップした！'
               :                      '🍎 を逃した！';
 
-  showResult(icon, title, `スコア: ${acScore}\n${badge}`, acStart);
+  const rank = getScoreRank(acScore, AC_RANKS);
+  showResult(icon, title, `スコア: ${acScore}\n${badge}`, acStart, rank);
 }

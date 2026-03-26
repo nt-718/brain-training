@@ -1,5 +1,15 @@
 /* ===== CHAIN WORD GAME ===== */
 
+var CW_RANKS = [
+  { min: 22, label: '伝説',        emoji: '👑', color: '#f59e0b' },
+  { min: 17, label: '達人',        emoji: '🏆', color: '#8b5cf6' },
+  { min: 13, label: 'エキスパート', emoji: '💫', color: '#3b82f6' },
+  { min: 9,  label: '上級者',      emoji: '⭐', color: '#10b981' },
+  { min: 6,  label: '中級者',      emoji: '🌟', color: '#6ee7b7' },
+  { min: 3,  label: '見習い',      emoji: '🔰', color: '#94a3b8' },
+  { min: 0,  label: 'まだまだ',    emoji: '🌱', color: '#64748b' },
+];
+
 let cwState = 'idle';
 let cwChain = 0;
 let cwBest  = parseInt(localStorage.getItem('cwBest')) || 0;
@@ -256,5 +266,6 @@ function cwGameOver(isTimeout) {
   const icon   = isTimeout ? '⏱️' : '❌';
   const reason = isTimeout ? 'タイムアップ！' : '不正解！';
   const bestStr = isBest ? '🎉 新記録！' : `ベスト: ${cwBest}`;
-  showResult(icon, reason, `チェーン数: ${cwChain}\n${bestStr}`, cwStart);
+  const rank = getScoreRank(cwChain, CW_RANKS);
+  showResult(icon, reason, `チェーン数: ${cwChain}\n${bestStr}`, cwStart, rank);
 }

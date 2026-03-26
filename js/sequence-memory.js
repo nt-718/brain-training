@@ -1,5 +1,15 @@
 /* ===== SEQUENCE MEMORY GAME ===== */
 
+var SM_RANKS = [
+  { min: 20, label: '伝説',        emoji: '👑', color: '#f59e0b' },
+  { min: 16, label: '達人',        emoji: '🏆', color: '#8b5cf6' },
+  { min: 12, label: 'エキスパート', emoji: '💫', color: '#3b82f6' },
+  { min: 9,  label: '上級者',      emoji: '⭐', color: '#10b981' },
+  { min: 6,  label: '中級者',      emoji: '🌟', color: '#6ee7b7' },
+  { min: 3,  label: '見習い',      emoji: '🔰', color: '#94a3b8' },
+  { min: 0,  label: 'まだまだ',    emoji: '🌱', color: '#64748b' },
+];
+
 let smState   = 'idle'; // idle, playing, input
 let smSeq     = [];
 let smUserSeq = [];
@@ -126,7 +136,8 @@ function smTap(color) {
     setTimeout(() => {
       document.getElementById('sm-start-btn').style.display = 'inline-flex';
       document.getElementById('sm-start-btn').textContent = 'もう一度';
-      showResult('🚥', 'ゲームオーバー！', `レベル ${smLevel - 1} まで到達！ (ベスト: ${smBest})`, smStart);
+      const rank = getScoreRank(smLevel - 1, SM_RANKS);
+      showResult('🚥', 'ゲームオーバー！', `レベル ${smLevel - 1} まで到達！ (ベスト: ${smBest})`, smStart, rank);
     }, 800);
     return;
   }

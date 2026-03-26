@@ -1,5 +1,15 @@
 // Target Search Logic
 
+var TS_RANKS = [
+  { min: 40, label: '伝説',        emoji: '👑', color: '#f59e0b' },
+  { min: 30, label: '達人',        emoji: '🏆', color: '#8b5cf6' },
+  { min: 22, label: 'エキスパート', emoji: '💫', color: '#3b82f6' },
+  { min: 16, label: '上級者',      emoji: '⭐', color: '#10b981' },
+  { min: 10, label: '中級者',      emoji: '🌟', color: '#6ee7b7' },
+  { min: 5,  label: '見習い',      emoji: '🔰', color: '#94a3b8' },
+  { min: 0,  label: 'まだまだ',    emoji: '🌱', color: '#64748b' },
+];
+
 let tsDiff = 'easy'; // easy, normal, hard
 let tsScore = 0;
 let tsBest = 0;
@@ -139,7 +149,8 @@ function tsGameOver() {
   document.getElementById('ts-start-btn').style.display = 'inline-block';
   document.getElementById('ts-start-btn').textContent = 'もう一度';
   
-  showResult('🔍', 'タイムアップ', `見つけた数: ${tsScore}`, () => tsStart());
+  const rank = getScoreRank(tsScore, TS_RANKS);
+  showResult('🔍', 'タイムアップ', `見つけた数: ${tsScore}`, () => tsStart(), rank);
 }
 
 function tsStop() {

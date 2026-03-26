@@ -1,5 +1,15 @@
 /* ===== 予算プラン (budget-plan) ===== */
 
+var BPLAN_RANKS = [
+  { min: 45, label: '伝説',        emoji: '👑', color: '#f59e0b' },
+  { min: 35, label: '達人',        emoji: '🏆', color: '#8b5cf6' },
+  { min: 26, label: 'エキスパート', emoji: '💫', color: '#3b82f6' },
+  { min: 18, label: '上級者',      emoji: '⭐', color: '#10b981' },
+  { min: 12, label: '中級者',      emoji: '🌟', color: '#6ee7b7' },
+  { min: 6,  label: '見習い',      emoji: '🔰', color: '#94a3b8' },
+  { min: 0,  label: 'まだまだ',    emoji: '🌱', color: '#64748b' },
+];
+
 const BPLAN_BEST_KEYS = { easy: 'bplan_best_easy', normal: 'bplan_best_normal', hard: 'bplan_best_hard' };
 const BPLAN_TOTAL_TIME = 60;
 
@@ -193,10 +203,12 @@ function bplanTimeUp() {
     localStorage.setItem(key, bplanScore);
     document.getElementById('bplan-best').textContent = bplanScore;
   }
+  const rank = getScoreRank(bplanScore, BPLAN_RANKS);
   showResult(
     record ? '🏆' : '💰',
     '時間切れ！',
     `スコア: ${bplanScore}\n${record ? '🏆 新記録!' : 'ベスト: ' + prev}`,
-    bplanStart
+    bplanStart,
+    rank
   );
 }

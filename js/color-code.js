@@ -1,4 +1,15 @@
 /* ========== COLOR CODE ========== */
+
+var CC_RANKS = [
+  { min: 35, label: '伝説',        emoji: '👑', color: '#f59e0b' },
+  { min: 28, label: '達人',        emoji: '🏆', color: '#8b5cf6' },
+  { min: 22, label: 'エキスパート', emoji: '💫', color: '#3b82f6' },
+  { min: 16, label: '上級者',      emoji: '⭐', color: '#10b981' },
+  { min: 10, label: '中級者',      emoji: '🌟', color: '#6ee7b7' },
+  { min: 5,  label: '見習い',      emoji: '🔰', color: '#94a3b8' },
+  { min: 0,  label: 'まだまだ',    emoji: '🌱', color: '#64748b' },
+];
+
 let ccTimer = null;
 let ccTimeLimit = 45;
 let ccTimeLeft = 0;
@@ -154,11 +165,13 @@ function ccGameOver() {
     if(typeof refreshBestScores === 'function') refreshBestScores();
   }
   
+  const rank = getScoreRank(ccScore, CC_RANKS);
   showResult(
     '#️⃣',
     'タイムアップ！',
     `スコア: ${ccScore}\nモード: ${ccMode === 'color2hex' ? '色→コード' : 'コード→色'}${isNewBest ? '\n🌟自己ベスト更新！' : ''}`,
-    ccStart
+    ccStart,
+    rank
   );
 }
 

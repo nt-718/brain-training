@@ -1,5 +1,15 @@
 /* ===== WORD LINK GAME ===== */
 
+var WL_RANKS = [
+  { min: 22, label: '伝説',        emoji: '👑', color: '#f59e0b' },
+  { min: 17, label: '達人',        emoji: '🏆', color: '#8b5cf6' },
+  { min: 13, label: 'エキスパート', emoji: '💫', color: '#3b82f6' },
+  { min: 9,  label: '上級者',      emoji: '⭐', color: '#10b981' },
+  { min: 6,  label: '中級者',      emoji: '🌟', color: '#6ee7b7' },
+  { min: 3,  label: '見習い',      emoji: '🔰', color: '#94a3b8' },
+  { min: 0,  label: 'まだまだ',    emoji: '🌱', color: '#64748b' },
+];
+
 let wlState = 'idle';
 let wlScore = 0;
 let wlBest  = parseInt(localStorage.getItem('wlBest')) || 0;
@@ -203,7 +213,8 @@ function wlGameOver() {
   document.getElementById('wl-start-btn').style.display = 'inline-flex';
   document.getElementById('wl-start-btn').textContent = 'もう一度';
   document.getElementById('wl-clear-btn').style.display = 'none';
-  showResult('🔤', 'タイムアップ！', `${wlTotalTime}秒で ${wlScore} 問正解！ (ベスト: ${wlBest})`, wlStart);
+  const rank = getScoreRank(wlScore, WL_RANKS);
+  showResult('🔤', 'タイムアップ！', `${wlTotalTime}秒で ${wlScore} 問正解！ (ベスト: ${wlBest})`, wlStart, rank);
 }
 
 function wlNextWord() {

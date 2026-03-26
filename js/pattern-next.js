@@ -1,5 +1,15 @@
 /* ===== PATTERN NEXT (パターン予測) ===== */
 
+var PN_RANKS = [
+  { min: 13, label: '伝説',        emoji: '👑', color: '#f59e0b' },
+  { min: 11, label: '達人',        emoji: '🏆', color: '#8b5cf6' },
+  { min: 9,  label: 'エキスパート', emoji: '💫', color: '#3b82f6' },
+  { min: 7,  label: '上級者',      emoji: '⭐', color: '#10b981' },
+  { min: 5,  label: '中級者',      emoji: '🌟', color: '#6ee7b7' },
+  { min: 3,  label: '見習い',      emoji: '🔰', color: '#94a3b8' },
+  { min: 0,  label: 'まだまだ',    emoji: '🌱', color: '#64748b' },
+];
+
 const PN_BEST_KEY = 'pnBest';
 
 let pnRunning = false;
@@ -236,5 +246,6 @@ function pnGameOver(reason) {
   const icon = record ? '🏆' : (reason === 'timeout' ? '⏰' : '🔮');
   const title = reason === 'timeout' ? '時間切れ！' : 'ミス！';
   const detail = `スコア: ${pnScore}\n${record ? '🏆 新記録!' : 'ベスト: ' + prev}`;
-  showResult(icon, title, detail, pnStart);
+  const rank = getScoreRank(pnScore, PN_RANKS);
+  showResult(icon, title, detail, pnStart, rank);
 }

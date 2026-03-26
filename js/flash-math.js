@@ -1,5 +1,15 @@
 /* ===== FLASH MATH ===== */
 
+var FM_RANKS = [
+  { min: 15, label: '伝説',        emoji: '👑', color: '#f59e0b' },
+  { min: 12, label: '達人',        emoji: '🏆', color: '#8b5cf6' },
+  { min: 9,  label: 'エキスパート', emoji: '💫', color: '#3b82f6' },
+  { min: 7,  label: '上級者',      emoji: '⭐', color: '#10b981' },
+  { min: 5,  label: '中級者',      emoji: '🌟', color: '#6ee7b7' },
+  { min: 3,  label: '見習い',      emoji: '🔰', color: '#94a3b8' },
+  { min: 0,  label: 'まだまだ',    emoji: '🌱', color: '#64748b' },
+];
+
 const FM_BEST_KEY = 'fm_best_';
 let fmRunning = false;
 let fmScore = 1; // round
@@ -217,5 +227,6 @@ function fmGameOver() {
   }
   
   const msg = record ? '🏆 新記録!' : `ベスト: ${best} ラウンド`;
-  showResult(record ? '🏆' : '😢', 'ゲームオーバー', `到達: ${fmScore} ラウンド\n${msg}`, fmStart);
+  const rank = getScoreRank(fmScore, FM_RANKS);
+  showResult(record ? '🏆' : '😢', 'ゲームオーバー', `到達: ${fmScore} ラウンド\n${msg}`, fmStart, rank);
 }

@@ -1,5 +1,15 @@
 /* ===== COLOR MATCH ===== */
 
+var CM_RANKS = [
+  { min: 60, label: '伝説',        emoji: '👑', color: '#f59e0b' },
+  { min: 50, label: '達人',        emoji: '🏆', color: '#8b5cf6' },
+  { min: 40, label: 'エキスパート', emoji: '💫', color: '#3b82f6' },
+  { min: 30, label: '上級者',      emoji: '⭐', color: '#10b981' },
+  { min: 20, label: '中級者',      emoji: '🌟', color: '#6ee7b7' },
+  { min: 12, label: '見習い',      emoji: '🔰', color: '#94a3b8' },
+  { min: 0,  label: 'まだまだ',    emoji: '🌱', color: '#64748b' },
+];
+
 const CM_BEST_KEY = 'cm_best';
 const CM_COLORS = [
   { id: 'red', name: 'あか', hex: '#f43f5e' },
@@ -118,5 +128,6 @@ function cmGameOver() {
     document.getElementById('cm-best').textContent = cmScore;
   }
   const msg = record ? '🏆 新記録!' : `ベスト: ${best}`;
-  showResult(record ? '🏆' : '😢', 'ゲームオーバー', `スコア: ${cmScore}\n${msg}`, cmStart);
+  const rank = getScoreRank(cmScore, CM_RANKS);
+  showResult(record ? '🏆' : '😢', 'ゲームオーバー', `スコア: ${cmScore}\n${msg}`, cmStart, rank);
 }

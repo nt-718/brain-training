@@ -1,3 +1,13 @@
+var SG_RANKS = [
+  { min: 70, label: '伝説',        emoji: '👑', color: '#f59e0b' },
+  { min: 50, label: '達人',        emoji: '🏆', color: '#8b5cf6' },
+  { min: 40, label: 'エキスパート', emoji: '💫', color: '#3b82f6' },
+  { min: 30, label: '上級者',      emoji: '⭐', color: '#10b981' },
+  { min: 20, label: '中級者',      emoji: '🌟', color: '#6ee7b7' },
+  { min: 10, label: '見習い',      emoji: '🔰', color: '#94a3b8' },
+  { min: 0,  label: 'まだまだ',    emoji: '🌱', color: '#64748b' },
+];
+
 let sgDiff = 'easy'; // easy, normal, hard
 let sgState = 'idle'; // idle, showing, shuffling, waiting
 let sgScore = 0;
@@ -238,7 +248,8 @@ function sgTapCup(idx) {
     document.getElementById('sg-start-btn').textContent = 'もう一度';
     
     setTimeout(() => {
-      showResult('🎩', '終了!', `スコア: ${sgScore} (ベスト: ${sgBest})`, sgStart);
+      const rank = getScoreRank(sgScore, SG_RANKS);
+      showResult('🎩', '終了!', `スコア: ${sgScore} (ベスト: ${sgBest})`, sgStart, rank);
     }, 1500);
   }
 }

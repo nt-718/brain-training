@@ -1,5 +1,15 @@
 /* ===== ハイ＆ロー (hi-lo) ===== */
 
+var HL_RANKS = [
+  { min: 40, label: '伝説',        emoji: '👑', color: '#f59e0b' },
+  { min: 30, label: '達人',        emoji: '🏆', color: '#8b5cf6' },
+  { min: 22, label: 'エキスパート', emoji: '💫', color: '#3b82f6' },
+  { min: 16, label: '上級者',      emoji: '⭐', color: '#10b981' },
+  { min: 10, label: '中級者',      emoji: '🌟', color: '#6ee7b7' },
+  { min: 5,  label: '見習い',      emoji: '🔰', color: '#94a3b8' },
+  { min: 0,  label: 'まだまだ',    emoji: '🌱', color: '#64748b' },
+];
+
 const HL_BEST_KEY = 'hlBest';
 const HL_LABELS = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
 const HL_SUITS = ['♠', '♣', '♥', '♦'];
@@ -137,11 +147,13 @@ function hlSaveAndShow(icon, title, detail) {
     localStorage.setItem(HL_BEST_KEY, hlScore);
     document.getElementById('hl-best').textContent = hlScore;
   }
+  const rank = getScoreRank(hlScore, HL_RANKS);
   showResult(
     record ? '🏆' : icon,
     title,
     `累計正解: ${hlScore}\n${record ? '🏆 新記録!' : 'ベスト: ' + prev}`,
-    hlStart
+    hlStart,
+    rank
   );
 }
 
