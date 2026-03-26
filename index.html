@@ -51,6 +51,7 @@
   <link rel="stylesheet" href="css/comp-color.css" />
   <link rel="stylesheet" href="css/make-ten.css" />
   <link rel="stylesheet" href="css/flash-sudoku.css" />
+  <link rel="stylesheet" href="css/race-pos.css" />
 </head>
 <body>
 
@@ -138,6 +139,14 @@
         <div class="game-info">
           <h2>メイク10</h2>
           <p>4つの数字を四則演算で10にしよう</p>
+        </div>
+        <div class="badge">暗算</div>
+      </div>
+      <div class="game-card" onclick="showScreen('race-pos')">
+        <div class="game-icon">🏃</div>
+        <div class="game-info">
+          <h2>レース順位</h2>
+          <p>抜いたり抜かれたりして、最終何位か当てよう</p>
         </div>
         <div class="badge">暗算</div>
       </div>
@@ -2150,6 +2159,60 @@
   </div>
 </div>
 
+<!-- ========== RACE POS ========== -->
+<div id="race-pos" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>レース順位</h1>
+  </nav>
+  <div class="game-content">
+    <div class="diff-row" id="rp-diff-row">
+      <button class="diff-btn" onclick="rpSetDiff(this,'easy')">かんたん</button>
+      <button class="diff-btn selected" onclick="rpSetDiff(this,'normal')">ふつう</button>
+      <button class="diff-btn" onclick="rpSetDiff(this,'hard')">むずかしい</button>
+    </div>
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">正解</div>
+        <div class="value" id="rp-score">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ラウンド</div>
+        <div class="value" id="rp-round">0/10</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="rp-best">0</div>
+      </div>
+    </div>
+
+    <div class="rp-stage" id="rp-stage" style="display:none;">
+      <div class="rp-event-display" id="rp-event-display"></div>
+      <div class="rp-numpad-wrap" id="rp-numpad-wrap" style="display:none;">
+        <div class="rp-answer-display" id="rp-answer-display">?</div>
+        <div class="numpad">
+          <button class="numpad-btn" onclick="rpNumpad('7')">7</button>
+          <button class="numpad-btn" onclick="rpNumpad('8')">8</button>
+          <button class="numpad-btn" onclick="rpNumpad('9')">9</button>
+          <button class="numpad-btn del" onclick="rpNumpad('del')">⌫</button>
+          <button class="numpad-btn" onclick="rpNumpad('4')">4</button>
+          <button class="numpad-btn" onclick="rpNumpad('5')">5</button>
+          <button class="numpad-btn" onclick="rpNumpad('6')">6</button>
+          <button class="numpad-btn ok" onclick="rpNumpad('ok')">OK</button>
+          <button class="numpad-btn" onclick="rpNumpad('1')">1</button>
+          <button class="numpad-btn" onclick="rpNumpad('2')">2</button>
+          <button class="numpad-btn" onclick="rpNumpad('3')">3</button>
+          <button class="numpad-btn zero" onclick="rpNumpad('0')">0</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="answer-area">
+      <button class="btn-primary" id="rp-start-btn" onclick="rpStart()">スタート</button>
+    </div>
+  </div>
+</div>
+
 <!-- ========== UPDATE POPUP ========== -->
 <div class="update-popup-overlay" id="update-popup-overlay">
   <div class="update-popup-card">
@@ -2225,6 +2288,7 @@
 <script src="js/comp-color.js"></script>
 <script src="js/make-ten.js"></script>
 <script src="js/flash-sudoku.js"></script>
+<script src="js/race-pos.js"></script>
 <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').catch(() => {});

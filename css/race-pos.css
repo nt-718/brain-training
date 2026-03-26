@@ -1,0 +1,113 @@
+/* ===== レース順位 ===== */
+
+.rp-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  gap: 12px;
+  margin: 8px 0;
+}
+
+/* ---- event display card ---- */
+.rp-event-display {
+  width: 100%;
+  max-width: 320px;
+  min-height: 160px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 20px 16px;
+  box-sizing: border-box;
+  background: rgba(255,255,255,0.07);
+  border: 2px solid rgba(255,255,255,0.12);
+  transition: background 0.2s, border-color 0.2s;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.rp-event-display.rp-start {
+  background: rgba(139, 92, 246, 0.25);
+  border-color: rgba(139, 92, 246, 0.5);
+}
+
+.rp-event-display.rp-overtake {
+  background: rgba(16, 185, 129, 0.25);
+  border-color: rgba(16, 185, 129, 0.5);
+}
+
+.rp-event-display.rp-overtaken {
+  background: rgba(239, 68, 68, 0.20);
+  border-color: rgba(239, 68, 68, 0.45);
+}
+
+.rp-event-display.rp-question {
+  background: rgba(245, 158, 11, 0.20);
+  border-color: rgba(245, 158, 11, 0.45);
+}
+
+.rp-event-display.rp-result-ok {
+  background: rgba(16, 185, 129, 0.30);
+  border-color: rgba(16, 185, 129, 0.6);
+}
+
+.rp-event-display.rp-result-ng {
+  background: rgba(239, 68, 68, 0.25);
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
+.rp-anim {
+  animation: rpPop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+@keyframes rpPop {
+  0%   { opacity: 0; transform: scale(0.75); }
+  60%  { transform: scale(1.06); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.rp-event-icon {
+  font-size: 2.6rem;
+  line-height: 1;
+}
+
+.rp-event-text {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: #fff;
+  text-align: center;
+  line-height: 1.25;
+}
+
+.rp-event-sub {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.55);
+  margin-top: 2px;
+}
+
+/* ---- answer area ---- */
+.rp-numpad-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 320px;
+}
+
+.rp-answer-display {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #fff;
+  background: rgba(255,255,255,0.1);
+  border: 2px solid rgba(255,255,255,0.25);
+  border-radius: 12px;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  letter-spacing: 0.05em;
+}

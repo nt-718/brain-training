@@ -45,6 +45,7 @@ function showScreen(id) {
   if (typeof ccolStop === 'function') ccolStop();
   if (typeof mtenStop === 'function') mtenStop();
   if (typeof fsdStop === 'function') fsdStop();
+  if (typeof rpStop === 'function') rpStop();
   if (id === 'home') refreshBestScores();
 }
 
@@ -90,7 +91,8 @@ const BS_MAPPING = [
   { target: 'cube-count',     key: ['ccnt_best_easy','ccnt_best_normal','ccnt_best_hard'],                        ranksVar: 'CCNT_RANKS' },
   { target: 'comp-color',     key: ['ccol_best_easy','ccol_best_normal','ccol_best_hard'],                        ranksVar: 'CCOL_RANKS' },
   { target: 'make-ten',       key: 'mten_best',                                                                   ranksVar: 'MTEN_RANKS' },
-  { target: 'flash-sudoku',   key: ['fsd_best_easy','fsd_best_normal','fsd_best_hard'],                           ranksVar: 'FSD_RANKS' }];
+  { target: 'flash-sudoku',   key: ['fsd_best_easy','fsd_best_normal','fsd_best_hard'],                           ranksVar: 'FSD_RANKS' },
+  { target: 'race-pos',       key: ['rp_best_easy','rp_best_normal','rp_best_hard'],                               ranksVar: 'RP_RANKS' }];
 
 function refreshBestScores() {
   BS_MAPPING.forEach(g => {
@@ -158,6 +160,14 @@ const ANNOUNCEMENTS = [
       '🔢 <strong>メイク10</strong> — 数字を組み合わせて10を作ろう',
       '⚡ <strong>フラッシュ数独</strong> — 一瞬表示される数独の問題を解こう',
       '🎨 <strong>補色を探せ</strong> — 色の補色を素早く見つけよう',
+    ]
+  },
+  {
+    id: 'ann_20260327',
+    icon: '🏃',
+    title: '新しいゲームを追加しました！',
+    items: [
+      '🏃 <strong>レース順位</strong> — 抜いたり抜かれたりして最終何位か当てよう',
     ]
   }
 ];
