@@ -18,12 +18,13 @@ const OM_CONFIG = {
 };
 
 var OM_RANKS = [
-  { min: 25, label: 'S', emoji: '👑', color: '#ff4b4b' },
-  { min: 20, label: 'A', emoji: '💎', color: '#ff7eb3' },
-  { min: 15, label: 'B', emoji: '🥇', color: '#ffd700' },
-  { min: 10, label: 'C', emoji: '🥈', color: '#c0c0c0' },
-  { min: 5,  label: 'D', emoji: '🥉', color: '#cd7f32' },
-  { min: 0,  label: 'E', emoji: '🌱', color: '#a0a0a0' }
+  { min: 25, label: '伝説',        emoji: '👑', color: '#f59e0b' },
+  { min: 20, label: '達人',        emoji: '🏆', color: '#8b5cf6' },
+  { min: 15, label: 'エキスパート', emoji: '💫', color: '#3b82f6' },
+  { min: 10, label: '上級者',      emoji: '⭐', color: '#10b981' },
+  { min: 5,  label: '中級者',      emoji: '🌟', color: '#6ee7b7' },
+  { min: 1,  label: '見習い',      emoji: '🔰', color: '#94a3b8' },
+  { min: 0,  label: 'まだまだ',    emoji: '🌱', color: '#64748b' },
 ];
 
 function omSetDiff(btn, diff) {
@@ -205,12 +206,7 @@ function omEndGame() {
   const diffLabel = omState.difficulty === 'easy' ? 'かんたん' : omState.difficulty === 'normal' ? 'ふつう' : 'むずかしい';
   const detail = `難易度: ${diffLabel}\nスコア: ${omState.score}問\n${isNewBest ? '🎉 ベストスコア更新！' : `(ベスト: ${Math.max(best, omState.score)}問)`}`;
   
-  // Note: OM_RANKS needs to be defined in main.js, we will just pass rank if OM_RANKS exists.
-  let rank = null;
-  if (window.OM_RANKS) {
-    rank = getScoreRank(omState.score, window.OM_RANKS);
-  }
-  
+  const rank = getScoreRank(omState.score, OM_RANKS);
   showResult('🔐', 'タイムアップ！', detail, omStart, rank);
   refreshBestScores(); // From main.js
 }
