@@ -46,6 +46,7 @@ function showScreen(id) {
   if (typeof mtenStop === 'function') mtenStop();
   if (typeof fsdStop === 'function') fsdStop();
   if (typeof rpStop === 'function') rpStop();
+  if (typeof omStop === 'function') omStop();
   if (id === 'home') refreshBestScores();
 }
 
@@ -92,7 +93,8 @@ const BS_MAPPING = [
   { target: 'comp-color',     key: ['ccol_best_easy','ccol_best_normal','ccol_best_hard'],                        ranksVar: 'CCOL_RANKS' },
   { target: 'make-ten',       key: 'mten_best',                                                                   ranksVar: 'MTEN_RANKS' },
   { target: 'flash-sudoku',   key: ['fsd_best_easy','fsd_best_normal','fsd_best_hard'],                           ranksVar: 'FSD_RANKS' },
-  { target: 'race-pos',       key: ['rp_best_easy','rp_best_normal','rp_best_hard'],                               ranksVar: 'RP_RANKS' }];
+  { target: 'race-pos',       key: ['rp_best_easy','rp_best_normal','rp_best_hard'],                               ranksVar: 'RP_RANKS' },
+  { target: 'otp-memory',     key: ['om_best_easy','om_best_normal','om_best_hard'],                               ranksVar: 'OM_RANKS' }];
 
 function refreshBestScores() {
   BS_MAPPING.forEach(g => {
@@ -168,6 +170,14 @@ const ANNOUNCEMENTS = [
     title: '新しいゲームを追加しました！',
     items: [
       '🏃 <strong>レース順位</strong> — 抜いたり抜かれたりして最終何位か当てよう',
+    ]
+  },
+  {
+    id: 'ann_20260329',
+    icon: '🔐',
+    title: '新しいゲームを追加しました！',
+    items: [
+      '🔐 <strong>OTPメモリー</strong> — ワンタイムパスワードを记忆して入力しよう',
     ]
   }
 ];

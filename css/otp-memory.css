@@ -1,0 +1,75 @@
+.om-stage {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.om-otp-display {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  font-family: monospace;
+  background: var(--bg-card);
+  padding: 20px 40px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  color: var(--text-color);
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.om-message {
+  font-size: 1.2rem;
+  color: var(--text-color);
+  text-align: center;
+  margin-top: 10px;
+  min-height: 1.5em;
+}
+
+.om-keyboard {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 5px;
+  margin-top: 10px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.om-key {
+  background: var(--bg-card);
+  border: none;
+  border-radius: 5px;
+  padding: 10px 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-color);
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: all 0.2s;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.om-key:active {
+  transform: scale(0.95);
+  background: var(--border);
+}
+
+.om-key.del { grid-column: span 2; background: #e74c3c; color: #fff; }
+.om-key.ok { grid-column: span 3; background: var(--accent); color: #fff; }
+.om-key.wide { grid-column: span 2; }
+.om-key.space { grid-column: span 3; }
+
+.om-keyboard.alphanumeric {
+  grid-template-columns: repeat(10, 1fr);
+  gap: 4px;
+}
+.om-keyboard.alphanumeric .om-key {
+  font-size: 1.1rem;
+  padding: 12px 0;
+}

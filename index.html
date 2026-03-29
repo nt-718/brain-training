@@ -52,6 +52,7 @@
   <link rel="stylesheet" href="css/make-ten.css" />
   <link rel="stylesheet" href="css/flash-sudoku.css" />
   <link rel="stylesheet" href="css/race-pos.css" />
+  <link rel="stylesheet" href="css/otp-memory.css" />
 </head>
 <body>
 
@@ -281,6 +282,14 @@
           <p>同じ絵柄のペアを少ない手数で揃えよう</p>
         </div>
         <div class="badge">空間記憶</div>
+      </div>
+      <div class="game-card" onclick="showScreen('otp-memory')">
+        <div class="game-icon">🔐</div>
+        <div class="game-info">
+          <h2>OTPメモリー</h2>
+          <p>ワンタイムパスワードを記憶して入力しよう</p>
+        </div>
+        <div class="badge">記憶</div>
       </div>
     </div>
   </div>
@@ -2233,6 +2242,80 @@
   </div>
 </div>
 
+<!-- ========== OTP MEMORY ========== -->
+<div id="otp-memory" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>OTPメモリー</h1>
+  </nav>
+
+  <div class="game-content" id="om-content">
+
+    <div class="diff-row" id="om-diff-row">
+      <button class="diff-btn selected" onclick="omSetDiff(this,'easy')">かんたん</button>
+      <button class="diff-btn"          onclick="omSetDiff(this,'normal')">ふつう</button>
+      <button class="diff-btn"          onclick="omSetDiff(this,'hard')">むずかしい</button>
+    </div>
+
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">スコア</div>
+        <div class="value" id="om-score">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="om-best">0</div>
+      </div>
+    </div>
+
+    <div class="timer-bar">
+      <div class="timer-fill" id="om-timer-fill" style="width:100%"></div>
+    </div>
+
+    <div class="om-stage" id="om-stage">
+      <div class="om-otp-display" id="om-otp-display">******</div>
+      <p class="om-message" id="om-message">スタートを押してください</p>
+    </div>
+
+    <div class="answer-area">
+      <!-- Numpad for Easy & Normal -->
+      <div class="numpad" id="om-numpad" style="display:none; max-width: 300px; margin: 0 auto 10px;">
+        <button class="numpad-btn" onclick="omInput('7')">7</button>
+        <button class="numpad-btn" onclick="omInput('8')">8</button>
+        <button class="numpad-btn" onclick="omInput('9')">9</button>
+        <button class="numpad-btn del" onclick="omInput('del')">⌫</button>
+
+        <button class="numpad-btn" onclick="omInput('4')">4</button>
+        <button class="numpad-btn" onclick="omInput('5')">5</button>
+        <button class="numpad-btn" onclick="omInput('6')">6</button>
+        <button class="numpad-btn ok" onclick="omSubmit()" style="grid-row: span 2;">OK</button>
+
+        <button class="numpad-btn" onclick="omInput('1')">1</button>
+        <button class="numpad-btn" onclick="omInput('2')">2</button>
+        <button class="numpad-btn" onclick="omInput('3')">3</button>
+
+        <button class="numpad-btn zero" onclick="omInput('0')" style="grid-column: span 3;">0</button>
+      </div>
+
+      <!-- Alphanumeric Keyboard for Hard -->
+      <div class="om-keyboard alphanumeric" id="om-keyboard" style="display:none; margin: 0 auto 10px;">
+        <!-- QWERTY Row 1 -->
+        <button class="om-key" onclick="omInput('Q')">Q</button><button class="om-key" onclick="omInput('W')">W</button><button class="om-key" onclick="omInput('E')">E</button><button class="om-key" onclick="omInput('R')">R</button><button class="om-key" onclick="omInput('T')">T</button><button class="om-key" onclick="omInput('Y')">Y</button><button class="om-key" onclick="omInput('U')">U</button><button class="om-key" onclick="omInput('I')">I</button><button class="om-key" onclick="omInput('O')">O</button><button class="om-key" onclick="omInput('P')">P</button>
+        <!-- Row 2 -->
+        <button class="om-key" onclick="omInput('A')">A</button><button class="om-key" onclick="omInput('S')">S</button><button class="om-key" onclick="omInput('D')">D</button><button class="om-key" onclick="omInput('F')">F</button><button class="om-key" onclick="omInput('G')">G</button><button class="om-key" onclick="omInput('H')">H</button><button class="om-key" onclick="omInput('J')">J</button><button class="om-key" onclick="omInput('K')">K</button><button class="om-key" onclick="omInput('L')">L</button><button class="om-key del" onclick="omInput('del')" style="grid-column: span 1;">⌫</button>
+        <!-- Row 3 -->
+        <button class="om-key" onclick="omInput('Z')">Z</button><button class="om-key" onclick="omInput('X')">X</button><button class="om-key" onclick="omInput('C')">C</button><button class="om-key" onclick="omInput('V')">V</button><button class="om-key" onclick="omInput('B')">B</button><button class="om-key" onclick="omInput('N')">N</button><button class="om-key" onclick="omInput('M')">M</button>
+        <button class="om-key ok" onclick="omSubmit()" style="grid-column: span 3;">OK</button>
+        <!-- Numbers Row 4 -->
+        <button class="om-key" onclick="omInput('1')">1</button><button class="om-key" onclick="omInput('2')">2</button><button class="om-key" onclick="omInput('3')">3</button><button class="om-key" onclick="omInput('4')">4</button><button class="om-key" onclick="omInput('5')">5</button><button class="om-key" onclick="omInput('6')">6</button><button class="om-key" onclick="omInput('7')">7</button><button class="om-key" onclick="omInput('8')">8</button><button class="om-key" onclick="omInput('9')">9</button><button class="om-key" onclick="omInput('0')">0</button>
+      </div>
+
+      <button class="btn-primary" id="om-act-btn" onclick="omBtnAction()" style="margin-top:10px;">スタート</button>
+    </div>
+
+  </div><!-- /.game-content -->
+</div><!-- /#otp-memory -->
+
 <!-- ========== RESULT OVERLAY ========== -->
 <div class="result-overlay" id="result-overlay">
   <div class="result-card">
@@ -2289,6 +2372,7 @@
 <script src="js/make-ten.js"></script>
 <script src="js/flash-sudoku.js"></script>
 <script src="js/race-pos.js"></script>
+<script src="js/otp-memory.js"></script>
 <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').catch(() => {});
