@@ -189,6 +189,14 @@ const ANNOUNCEMENTS = [
     items: [
       '📅 <strong>曜日計算</strong> — 日付から曜日を素早く当てよう',
     ]
+  },
+  {
+    id: 'ann_20260329c',
+    icon: '👹',
+    title: 'シェルゲームに難易度「鬼」を追加しました！',
+    items: [
+      '👹 <strong>シェルゲーム［鬼］</strong> — カップ8個・星3つ・超高速シャッフルに挑戦！',
+    ]
   }
 ];
 

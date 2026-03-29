@@ -23,9 +23,10 @@ let sgTotalStars = 0;
 
 // Config
 const sgConfig = {
-  easy:   { cups: 3, stars: 1, shuffles: 5, speed: 600 },
-  normal: { cups: 5, stars: 1, shuffles: 8, speed: 450 },
-  hard:   { cups: 6, stars: 2, shuffles: 12, speed: 350 }
+  easy:   { cups: 3, stars: 1, shuffles: 5,  speed: 600 },
+  normal: { cups: 5, stars: 1, shuffles: 8,  speed: 450 },
+  hard:   { cups: 6, stars: 2, shuffles: 12, speed: 350 },
+  oni:    { cups: 8, stars: 3, shuffles: 20, speed: 250 }
 };
 
 function sgSetDiff(btn, diff) {

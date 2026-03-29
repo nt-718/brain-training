@@ -80,3 +80,17 @@
 .sg-cup.revealed .sg-empty {
   display: block;
 }
+
+/* 鬼ボタン */
+.diff-btn.oni-btn {
+  background: linear-gradient(135deg, #7f1d1d, #dc2626);
+  color: #fff;
+  border-color: #ef4444;
+  font-weight: 900;
+}
+.diff-btn.oni-btn.selected,
+.diff-btn.oni-btn:hover {
+  background: linear-gradient(135deg, #dc2626, #f97316);
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.7);
+  border-color: #f97316;
+}
