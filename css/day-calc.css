@@ -1,0 +1,204 @@
+/* ===== 曜日計算 (day-calc) ===== */
+
+.dc-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  gap: 16px;
+  margin: 8px 0;
+}
+
+.dc-date-display {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--text-color);
+  text-align: center;
+  animation: dcPop 0.25s ease;
+}
+
+.dc-feedback {
+  font-size: 1.1rem;
+  font-weight: 600;
+  min-height: 1.6em;
+  text-align: center;
+  color: var(--text-muted, #94a3b8);
+  transition: color 0.15s;
+}
+
+.dc-feedback.dc-ok { color: var(--success, #10b981); }
+.dc-feedback.dc-ng { color: var(--danger,  #ef4444); }
+
+.dc-day-row {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.dc-day-btn {
+  flex: 1;
+  min-width: 40px;
+  max-width: 52px;
+  aspect-ratio: 1;
+  border: none;
+  border-radius: 12px;
+  background: var(--card, #1e293b);
+  color: var(--text-color);
+  font-size: 1.15rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.1s, background 0.15s;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dc-day-btn:active:not(:disabled) {
+  transform: scale(0.92);
+}
+
+.dc-day-btn:disabled {
+  cursor: default;
+}
+
+.dc-day-btn.dc-correct {
+  background: var(--success, #10b981);
+  color: #fff;
+  animation: dcPop 0.2s ease;
+}
+
+.dc-day-btn.dc-wrong {
+  background: var(--danger, #ef4444);
+  color: #fff;
+}
+
+/* 土曜・日曜に色付け（平常時のみ） */
+.dc-day-btn[data-day="5"]:not(:disabled):not(.dc-correct):not(.dc-wrong) {
+  color: #60a5fa;
+}
+.dc-day-btn[data-day="6"]:not(:disabled):not(.dc-correct):not(.dc-wrong) {
+  color: #f87171;
+}
+
+@keyframes dcPop {
+  0%   { opacity: 0; transform: scale(0.75); }
+  60%  { transform: scale(1.08); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* ===== ツェラーの公式 ===== */
+
+.dc-formula-box {
+  width: 100%;
+  max-width: 400px;
+  background: var(--card, #1e293b);
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-top: 8px;
+}
+
+.dc-formula-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted, #94a3b8);
+  margin-bottom: 12px;
+}
+
+/* 数式行 */
+.dc-formula {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 3px;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 1.05rem;
+  color: var(--text-color);
+  margin-bottom: 14px;
+  line-height: 1;
+}
+
+/* 変数（イタリック＋色分け） */
+.dc-var        { font-style: italic; font-weight: 600; }
+.dc-var-h      { color: #a78bfa; }
+.dc-var-q      { color: #60a5fa; }
+.dc-var-m      { color: #34d399; }
+.dc-var-k      { color: #fbbf24; }
+.dc-var-j      { color: #f87171; }
+
+.dc-sym        { font-style: normal; color: var(--text-muted, #94a3b8); padding: 0 1px; }
+.dc-mod        { font-size: 0.85em; padding-left: 4px; }
+.dc-paren      { font-size: 1.4em; line-height: 1; color: var(--text-muted, #94a3b8); }
+.dc-num-plain  { font-style: normal; }
+
+/* ガウス記号（床関数）: ⌊ x ⌋ 風に縦線で囲む */
+.dc-floor {
+  display: inline-flex;
+  align-items: center;
+  border-left:  2.5px solid var(--text-muted, #94a3b8);
+  border-right: 2.5px solid var(--text-muted, #94a3b8);
+  border-bottom: 2.5px solid var(--text-muted, #94a3b8);
+  border-radius: 0 0 2px 2px;
+  padding: 1px 3px 2px;
+  margin: 0 1px;
+}
+
+.dc-floor-inner {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* 分数 */
+.dc-frac {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  vertical-align: middle;
+  font-size: 0.78em;
+  line-height: 1.15;
+  gap: 1px;
+}
+
+.dc-frac .dc-num {
+  border-bottom: 1.5px solid currentColor;
+  padding-bottom: 1px;
+  white-space: nowrap;
+}
+
+.dc-frac .dc-den {
+  white-space: nowrap;
+}
+
+/* 変数説明 */
+.dc-legend {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px 12px;
+  margin: 0;
+  padding: 0;
+  font-size: 0.8rem;
+}
+
+.dc-legend > div {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.dc-legend dt {
+  font-style: italic;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-weight: 600;
+  min-width: 14px;
+}
+
+.dc-legend dd {
+  margin: 0;
+  color: var(--text-muted, #94a3b8);
+  font-size: 0.78rem;
+  line-height: 1.3;
+}

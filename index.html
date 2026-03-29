@@ -53,6 +53,7 @@
   <link rel="stylesheet" href="css/flash-sudoku.css" />
   <link rel="stylesheet" href="css/race-pos.css" />
   <link rel="stylesheet" href="css/otp-memory.css" />
+  <link rel="stylesheet" href="css/day-calc.css" />
 </head>
 <body>
 
@@ -148,6 +149,14 @@
         <div class="game-info">
           <h2>レース順位</h2>
           <p>抜いたり抜かれたりして、最終何位か当てよう</p>
+        </div>
+        <div class="badge">暗算</div>
+      </div>
+      <div class="game-card" onclick="showScreen('day-calc')">
+        <div class="game-icon">📅</div>
+        <div class="game-info">
+          <h2>曜日計算</h2>
+          <p>日付から曜日を当てよう</p>
         </div>
         <div class="badge">暗算</div>
       </div>
@@ -2316,6 +2325,85 @@
   </div><!-- /.game-content -->
 </div><!-- /#otp-memory -->
 
+<!-- ========== 曜日計算 ========== -->
+<div id="day-calc" class="screen">
+  <nav class="nav">
+    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <h1>📅 曜日計算</h1>
+  </nav>
+  <div class="game-content">
+
+    <div class="diff-row" id="dc-diff-row">
+      <button class="diff-btn selected" onclick="dcSetDiff(this,'easy')">かんたん</button>
+      <button class="diff-btn" onclick="dcSetDiff(this,'normal')">ふつう</button>
+      <button class="diff-btn" onclick="dcSetDiff(this,'hard')">むずかしい</button>
+    </div>
+
+    <div class="score-bar">
+      <div class="score-item">
+        <div class="label">スコア</div>
+        <div class="value" id="dc-score">0</div>
+      </div>
+      <div class="score-item">
+        <div class="label">ベスト</div>
+        <div class="value" id="dc-best">0</div>
+      </div>
+    </div>
+
+    <div class="timer-bar">
+      <div class="timer-fill" id="dc-timer-fill" style="width:100%"></div>
+    </div>
+
+    <div id="dc-stage" class="dc-stage" style="display:none;">
+      <div class="dc-date-display" id="dc-date-display"></div>
+      <div class="dc-feedback" id="dc-feedback"></div>
+      <div class="dc-day-row">
+        <button class="dc-day-btn" data-day="0" onclick="dcAnswer(0,this)">月</button>
+        <button class="dc-day-btn" data-day="1" onclick="dcAnswer(1,this)">火</button>
+        <button class="dc-day-btn" data-day="2" onclick="dcAnswer(2,this)">水</button>
+        <button class="dc-day-btn" data-day="3" onclick="dcAnswer(3,this)">木</button>
+        <button class="dc-day-btn" data-day="4" onclick="dcAnswer(4,this)">金</button>
+        <button class="dc-day-btn" data-day="5" onclick="dcAnswer(5,this)">土</button>
+        <button class="dc-day-btn" data-day="6" onclick="dcAnswer(6,this)">日</button>
+      </div>
+    </div>
+
+    <div class="answer-area">
+      <button class="btn-primary" id="dc-start-btn" onclick="dcStart()">スタート</button>
+    </div>
+
+    <div class="dc-formula-box">
+      <div class="dc-formula-title">ツェラーの公式</div>
+      <div class="dc-formula">
+        <span class="dc-var dc-var-h">h</span>
+        <span class="dc-sym">=</span>
+        <span class="dc-paren">(</span>
+        <span class="dc-var dc-var-q">q</span>
+        <span class="dc-sym">+</span>
+        <span class="dc-floor"><span class="dc-floor-inner"><span class="dc-frac"><span class="dc-num">13(<span class="dc-var dc-var-m">m</span>+1)</span><span class="dc-den">5</span></span></span></span>
+        <span class="dc-sym">+</span>
+        <span class="dc-var dc-var-k">K</span>
+        <span class="dc-sym">+</span>
+        <span class="dc-floor"><span class="dc-floor-inner"><span class="dc-frac"><span class="dc-num"><span class="dc-var dc-var-k">K</span></span><span class="dc-den">4</span></span></span></span>
+        <span class="dc-sym">+</span>
+        <span class="dc-floor"><span class="dc-floor-inner"><span class="dc-frac"><span class="dc-num"><span class="dc-var dc-var-j">J</span></span><span class="dc-den">4</span></span></span></span>
+        <span class="dc-sym">&#8722;</span>
+        <span class="dc-num-plain">2</span><span class="dc-var dc-var-j">J</span>
+        <span class="dc-paren">)</span>
+        <span class="dc-sym dc-mod">mod 7</span>
+      </div>
+      <dl class="dc-legend">
+        <div><dt><span class="dc-var dc-var-q">q</span></dt><dd>日</dd></div>
+        <div><dt><span class="dc-var dc-var-m">m</span></dt><dd>月（1月→13, 2月→14 で前年扱い）</dd></div>
+        <div><dt><span class="dc-var dc-var-k">K</span></dt><dd>年の下2桁</dd></div>
+        <div><dt><span class="dc-var dc-var-j">J</span></dt><dd>世紀（年の上2桁）</dd></div>
+        <div><dt><span class="dc-var dc-var-h">h</span></dt><dd>0=土 1=日 2=月 3=火 4=水 5=木 6=金</dd></div>
+      </dl>
+    </div>
+
+  </div>
+</div><!-- /#day-calc -->
+
 <!-- ========== RESULT OVERLAY ========== -->
 <div class="result-overlay" id="result-overlay">
   <div class="result-card">
@@ -2373,6 +2461,7 @@
 <script src="js/flash-sudoku.js"></script>
 <script src="js/race-pos.js"></script>
 <script src="js/otp-memory.js"></script>
+<script src="js/day-calc.js"></script>
 <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').catch(() => {});

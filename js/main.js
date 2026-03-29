@@ -47,6 +47,7 @@ function showScreen(id) {
   if (typeof fsdStop === 'function') fsdStop();
   if (typeof rpStop === 'function') rpStop();
   if (typeof omStop === 'function') omStop();
+  if (typeof dcStop === 'function') dcStop();
   if (id === 'home') refreshBestScores();
 }
 
@@ -94,7 +95,8 @@ const BS_MAPPING = [
   { target: 'make-ten',       key: 'mten_best',                                                                   ranksVar: 'MTEN_RANKS' },
   { target: 'flash-sudoku',   key: ['fsd_best_easy','fsd_best_normal','fsd_best_hard'],                           ranksVar: 'FSD_RANKS' },
   { target: 'race-pos',       key: ['rp_best_easy','rp_best_normal','rp_best_hard'],                               ranksVar: 'RP_RANKS' },
-  { target: 'otp-memory',     key: ['om_best_easy','om_best_normal','om_best_hard'],                               ranksVar: 'OM_RANKS' }];
+  { target: 'otp-memory',     key: ['om_best_easy','om_best_normal','om_best_hard'],                               ranksVar: 'OM_RANKS' },
+  { target: 'day-calc',       key: ['dc_best_easy','dc_best_normal','dc_best_hard'],                               ranksVar: 'DC_RANKS' }];
 
 function refreshBestScores() {
   BS_MAPPING.forEach(g => {
@@ -178,6 +180,14 @@ const ANNOUNCEMENTS = [
     title: '新しいゲームを追加しました！',
     items: [
       '🔐 <strong>OTPメモリー</strong> — ワンタイムパスワードを记忆して入力しよう',
+    ]
+  },
+  {
+    id: 'ann_20260329b',
+    icon: '📅',
+    title: '新しいゲームを追加しました！',
+    items: [
+      '📅 <strong>曜日計算</strong> — 日付から曜日を素早く当てよう',
     ]
   }
 ];
