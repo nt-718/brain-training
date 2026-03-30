@@ -1,21 +1,21 @@
 /* ===== 曜日計算 (day-calc) ===== */
 
 var DC_RANKS = [
-  { min: 30, label: '伝説',        emoji: '👑', color: '#f59e0b' },
-  { min: 22, label: '達人',        emoji: '🏆', color: '#8b5cf6' },
-  { min: 15, label: 'エキスパート', emoji: '💫', color: '#3b82f6' },
-  { min: 10, label: '上級者',      emoji: '⭐', color: '#10b981' },
-  { min: 6,  label: '中級者',      emoji: '🌟', color: '#6ee7b7' },
-  { min: 1,  label: '見習い',      emoji: '🔰', color: '#94a3b8' },
-  { min: 0,  label: 'まだまだ',    emoji: '🌱', color: '#64748b' },
+  { min: 50, label: '伝説', emoji: '👑', color: '#f59e0b' },
+  { min: 35, label: '達人', emoji: '🏆', color: '#8b5cf6' },
+  { min: 22, label: 'エキスパート', emoji: '💫', color: '#3b82f6' },
+  { min: 12, label: '上級者', emoji: '⭐', color: '#10b981' },
+  { min: 6, label: '中級者', emoji: '🌟', color: '#6ee7b7' },
+  { min: 1, label: '見習い', emoji: '🔰', color: '#94a3b8' },
+  { min: 0, label: 'まだまだ', emoji: '🌱', color: '#64748b' },
 ];
 
 const DC_DAYS = ['月', '火', '水', '木', '金', '土', '日'];
 
 const DC_CONFIG = {
-  easy:   { yearMin: 2020, yearMax: 2025 },
+  easy: { yearMin: 2020, yearMax: 2025 },
   normal: { yearMin: 2000, yearMax: 2030 },
-  hard:   { yearMin: 1950, yearMax: 2050 },
+  hard: { yearMin: 1950, yearMax: 2050 },
 };
 
 let dcState = {
@@ -64,7 +64,7 @@ function dcStart() {
   dcState.playing = true;
   dcState.answering = true;
   dcState.score = 0;
-  dcState.timeLeft = 60000;
+  dcState.timeLeft = 180000;
   document.getElementById('dc-score').textContent = '0';
   document.getElementById('dc-diff-row').style.pointerEvents = 'none';
   document.getElementById('dc-diff-row').style.opacity = '0.5';
@@ -79,23 +79,14 @@ function dcStart() {
       dcState.timeLeft = 0;
       dcEnd();
     }
-    document.getElementById('dc-timer-fill').style.width = (dcState.timeLeft / 60000 * 100) + '%';
+    document.getElementById('dc-timer-fill').style.width = (dcState.timeLeft / 180000 * 100) + '%';
   }, 100);
 }
 
-// ツェラーの公式で曜日を計算 → DC_DAYS のインデックス（月=0…日=6）を返す
+// Date オブジェクトで曜日を取得 → DC_DAYS のインデックス（月=0…日=6）を返す
 function dcGetDayOfWeek(year, month, day) {
-  let m = month;
-  let y = year;
-  if (m <= 2) { m += 12; y -= 1; }
-  const q = day;
-  const K = y % 100;
-  const J = Math.floor(y / 100);
-  let h = (q + Math.floor(13 * (m + 1) / 5) + K + Math.floor(K / 4) + Math.floor(J / 4) - 2 * J) % 7;
-  if (h < 0) h += 7;
-  // h: 0=土, 1=日, 2=月, 3=火, 4=水, 5=木, 6=金
-  // DC_DAYS: 月=0, 火=1, 水=2, 木=3, 金=4, 土=5, 日=6
-  return [5, 6, 0, 1, 2, 3, 4][h];
+  const d = new Date(year, month - 1, day).getDay(); // 0=日, 1=月, ..., 6=土
+  return (d + 6) % 7; // 月=0, 火=1, ..., 日=6
 }
 
 function dcGenerateDate() {
