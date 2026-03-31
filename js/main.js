@@ -1,55 +1,209 @@
+/* ===== DAILY PICK ===== */
+(function initDailyPick() {
+  const ALL_GAMES = [
+    { id:'visual-calc',    name:'ドットカウンター',     icon:'🧮', cat:'計算', color:'rgba(251,191,36,0.6)' },
+    { id:'flash-math',     name:'フラッシュサム',        icon:'⚡️', cat:'計算', color:'rgba(251,146,60,0.6)' },
+    { id:'speed-sum',      name:'ラピッドサム',          icon:'➕', cat:'計算', color:'rgba(74,222,128,0.6)' },
+    { id:'eq-judge',       name:'イコールジャッジ',      icon:'✅', cat:'計算', color:'rgba(52,211,153,0.6)' },
+    { id:'balance-scale',  name:'バランスバトル',        icon:'⚖️', cat:'計算', color:'rgba(250,204,21,0.6)' },
+    { id:'prime-hunt',     name:'プライムハンター',      icon:'🔬', cat:'計算', color:'rgba(45,212,191,0.6)' },
+    { id:'frac-cmp',       name:'フラクションバトル',    icon:'➗', cat:'計算', color:'rgba(96,165,250,0.6)' },
+    { id:'budget-plan',    name:'バジェットマスター',    icon:'🛒', cat:'計算', color:'rgba(34,197,94,0.6)' },
+    { id:'make-ten',       name:'メイク10',              icon:'🔟', cat:'計算', color:'rgba(251,113,133,0.6)' },
+    { id:'race-pos',       name:'レースビジョン',        icon:'🏃', cat:'計算', color:'rgba(249,115,22,0.6)' },
+    { id:'day-calc',       name:'カレンダーマスター',    icon:'📅', cat:'計算', color:'rgba(167,139,250,0.6)' },
+    { id:'clock-calc',     name:'クロックマスター',      icon:'⏳', cat:'計算', color:'rgba(96,165,250,0.6)' },
+    { id:'symbol-logic',   name:'シンボルブレイカー',    icon:'🎯', cat:'論理', color:'rgba(232,121,249,0.6)' },
+    { id:'pair-logic',     name:'ペアロジック',          icon:'🃏', cat:'論理', color:'rgba(129,140,248,0.6)' },
+    { id:'pattern-next',   name:'パターンブレイカー',    icon:'🔮', cat:'論理', color:'rgba(192,132,252,0.6)' },
+    { id:'mirror-path',    name:'リバースナビ',          icon:'🪞', cat:'論理', color:'rgba(34,211,238,0.6)' },
+    { id:'mental-nav',     name:'メンタルナビ',          icon:'🗺️', cat:'論理', color:'rgba(20,184,166,0.6)' },
+    { id:'word-link',      name:'ワードリンク',          icon:'🔤', cat:'論理', color:'rgba(56,189,248,0.6)' },
+    { id:'chain-word',     name:'チェーンワード',        icon:'🔗', cat:'論理', color:'rgba(6,182,212,0.6)' },
+    { id:'flash-sudoku',   name:'ブラインド数独',        icon:'🔦', cat:'論理', color:'rgba(99,102,241,0.6)' },
+    { id:'lights-out',     name:'ライトアウト',          icon:'🧩', cat:'論理', color:'rgba(250,204,21,0.6)' },
+    { id:'memory-matrix',  name:'ライトマトリックス',    icon:'🧩', cat:'記憶', color:'rgba(34,197,94,0.6)' },
+    { id:'n-back',         name:'Nバックチャレンジ',     icon:'🔄', cat:'記憶', color:'rgba(147,51,234,0.6)' },
+    { id:'sequence-memory',name:'シーケンスマスター',    icon:'🌈', cat:'記憶', color:'rgba(244,114,182,0.6)' },
+    { id:'emoji-order',    name:'エモジメモリー',        icon:'🎴', cat:'記憶', color:'rgba(245,158,11,0.6)' },
+    { id:'color-seq',      name:'カラーチェーン',        icon:'🎨', cat:'記憶', color:'rgba(244,63,94,0.6)' },
+    { id:'card-flip',      name:'ペアフリップ',          icon:'🀄', cat:'記憶', color:'rgba(234,88,12,0.6)' },
+    { id:'otp-memory',     name:'コードメモリー',        icon:'🔐', cat:'記憶', color:'rgba(16,185,129,0.6)' },
+    { id:'num-tap',        name:'ナンバータッチ',        icon:'🔢', cat:'反射', color:'rgba(59,130,246,0.6)' },
+    { id:'swipe-sort',     name:'スワイプジャッジ',      icon:'↔️', cat:'反射', color:'rgba(236,72,153,0.6)' },
+    { id:'color-match',    name:'カラートラップ',        icon:'🎨', cat:'反射', color:'rgba(168,85,247,0.6)' },
+    { id:'big-number',     name:'ビッグナンバー',        icon:'🆚', cat:'反射', color:'rgba(239,68,68,0.6)' },
+    { id:'go-nogo',        name:'ゴー！ノーゴー！',      icon:'🚦', cat:'反射', color:'rgba(22,163,74,0.6)' },
+    { id:'apple-catch',    name:'アップルキャッチ',      icon:'🍎', cat:'反射', color:'rgba(220,38,38,0.6)' },
+    { id:'hi-lo',          name:'ハイ＆ロー',            icon:'🃏', cat:'反射', color:'rgba(5,150,105,0.6)' },
+    { id:'just-stop',      name:'パーフェクトストップ',  icon:'⏱️', cat:'反射', color:'rgba(37,99,235,0.6)' },
+    { id:'arrow-swipe',    name:'アローマスター',        icon:'↗️', cat:'反射', color:'rgba(52,211,153,0.6)' },
+    { id:'target-search',  name:'ターゲットサーチ',      icon:'🔍', cat:'知覚', color:'rgba(202,138,4,0.6)' },
+    { id:'num-order',      name:'ナンバーオーダー',      icon:'🔢', cat:'知覚', color:'rgba(14,165,233,0.6)' },
+    { id:'obj-count',      name:'フラッシュカウント',    icon:'🔵', cat:'知覚', color:'rgba(8,145,178,0.6)' },
+    { id:'cube-count',     name:'キューブカウント',      icon:'🧊', cat:'知覚', color:'rgba(125,211,252,0.6)' },
+    { id:'shell-game',     name:'シェルゲーム',          icon:'🎩', cat:'知覚', color:'rgba(124,58,237,0.6)' },
+    { id:'color-vision',   name:'カラービジョン',        icon:'🌈', cat:'知覚', color:'rgba(219,39,119,0.6)' },
+    { id:'color-code',     name:'カラーコード',          icon:'#️⃣', cat:'知覚', color:'rgba(13,148,136,0.6)' },
+    { id:'comp-color',     name:'カラーオポジット',      icon:'🎨', cat:'知覚', color:'rgba(217,119,6,0.6)' },
+  ];
+
+
+
+  function seededRand(seed) {
+    let s = seed;
+    return function() {
+      s = (s * 1103515245 + 12345) & 0x7fffffff;
+      return s / 0x7fffffff;
+    };
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const today = new Date();
+    const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+    const rand = seededRand(seed);
+
+    // Pick 3 unique games
+    const indices = [];
+    const pool = [...Array(ALL_GAMES.length).keys()];
+    while (indices.length < 3) {
+      const i = Math.floor(rand() * pool.length);
+      indices.push(pool.splice(i, 1)[0]);
+    }
+    const picks = indices.map(i => ALL_GAMES[i]);
+
+    // Render date
+    const dateEl = document.getElementById('pick-date');
+    if (dateEl) {
+      const days = ['日','月','火','水','木','金','土'];
+      dateEl.textContent = `${today.getMonth()+1}/${today.getDate()}（${days[today.getDay()]}）`;
+    }
+
+    // Render cards
+    const list = document.getElementById('daily-pick-list');
+    if (!list) return;
+    list.innerHTML = picks.map(g => `
+      <div class="pick-card" data-game="${g.id}" onclick="showScreen('${g.id}')" style="--pick-color:${g.color}">
+        <div class="pick-icon-wrap">${g.icon}</div>
+        <div class="pick-name">${g.name}</div>
+        <div class="pick-cat-badge">${g.cat}</div>
+      </div>
+    `).join('');
+
+    // Ensure best scores are shown on pickup cards too
+    if (typeof refreshBestScores === 'function') refreshBestScores();
+  });
+})();
+
+/* ===== CATEGORY NAV ===== */
+function scrollToCategory(id) {
+  document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+  document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+  const cat = id.replace('cat-', '');
+  const tab = document.querySelector(`.cat-tab[data-cat="${cat}"]`);
+  if (tab) tab.classList.add('active');
+}
+
+// Highlight tab on scroll
+(function initCatTabScroll() {
+  const sections = ['calc','logic','memory','reflex','perception'];
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const cat = e.target.dataset.cat;
+        document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+        const tab = document.querySelector(`.cat-tab[data-cat="${cat}"]`);
+        if (tab) tab.classList.add('active');
+      }
+    });
+  }, { threshold: 0.3 });
+  document.addEventListener('DOMContentLoaded', () => {
+    sections.forEach(cat => {
+      const el = document.getElementById('cat-' + cat);
+      if (el) observer.observe(el);
+    });
+  });
+})();
+
 /* ===== SCREEN ROUTING ===== */
 let currentScreen = 'home';
+let isTransitioning = false;
 
 function showScreen(id) {
+  if (isTransitioning || currentScreen === id) return;
   sfx.nav();
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  currentScreen = id;
-  if (typeof vcStop === 'function') vcStop();
-  if (typeof ntStop === 'function') ntStop();
-  if (typeof mmStop === 'function') mmStop();
-  if (typeof cmStop === 'function') cmStop();
-  if (typeof nbStop === 'function') nbStop();
-  if (typeof fmStop === 'function') fmStop();
-  if (typeof tsStop === 'function') tsStop();
-  if (typeof slStop === 'function') slStop();
-  if (typeof ssStop === 'function') ssStop();
-  if (typeof sgStop === 'function') sgStop();
-  if (typeof jsStop === 'function') jsStop();
-  if (typeof wlStop === 'function') wlStop();
-  if (typeof smStop === 'function') smStop();
-  if (typeof eoStop === 'function') eoStop();
-  if (typeof cvStop === 'function') cvStop();
-  if (typeof ccStop === 'function') ccStop();
-  if (typeof mpStop === 'function') mpStop();
-  if (typeof plStop === 'function') plStop();
-  if (typeof cwStop === 'function') cwStop();
-  if (typeof bnStop === 'function') bnStop();
-  if (typeof blStop === 'function') blStop();
-  if (typeof pnStop === 'function') pnStop();
-  if (typeof mnStop === 'function') mnStop();
-  if (typeof gnStop === 'function') gnStop();
-  if (typeof acStop === 'function') acStop();
-  if (typeof spdStop === 'function') spdStop();
-  if (typeof eqtStop === 'function') eqtStop();
-  if (typeof norStop === 'function') norStop();
-  if (typeof ocStop === 'function') ocStop();
-  if (typeof hlStop === 'function') hlStop();
-  if (typeof cseqStop === 'function') cseqStop();
-  if (typeof phStop === 'function') phStop();
-  if (typeof fcmpStop === 'function') fcmpStop();
-  if (typeof cflipStop === 'function') cflipStop();
-  if (typeof bplanStop === 'function') bplanStop();
-  if (typeof ccntStop === 'function') ccntStop();
-  if (typeof ccolStop === 'function') ccolStop();
-  if (typeof mtenStop === 'function') mtenStop();
-  if (typeof fsdStop === 'function') fsdStop();
-  if (typeof rpStop === 'function') rpStop();
-  if (typeof omStop === 'function') omStop();
-  if (typeof dcStop === 'function') dcStop();
-  if (id === 'home') refreshBestScores();
+  
+  isTransitioning = true;
+  const overlay = document.getElementById('scene-transition');
+  if (overlay) overlay.classList.add('active'); // 暗転フェードイン
+
+  setTimeout(() => {
+    // 完全に暗転した裏側でDomを付け替え、各種ゲームのStop処理を呼ぶ
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    currentScreen = id;
+
+    if (typeof vcStop === 'function') vcStop();
+    if (typeof ntStop === 'function') ntStop();
+    if (typeof mmStop === 'function') mmStop();
+    if (typeof cmStop === 'function') cmStop();
+    if (typeof nbStop === 'function') nbStop();
+    if (typeof fmStop === 'function') fmStop();
+    if (typeof tsStop === 'function') tsStop();
+    if (typeof slStop === 'function') slStop();
+    if (typeof ssStop === 'function') ssStop();
+    if (typeof sgStop === 'function') sgStop();
+    if (typeof jsStop === 'function') jsStop();
+    if (typeof wlStop === 'function') wlStop();
+    if (typeof smStop === 'function') smStop();
+    if (typeof eoStop === 'function') eoStop();
+    if (typeof cvStop === 'function') cvStop();
+    if (typeof ccStop === 'function') ccStop();
+    if (typeof mpStop === 'function') mpStop();
+    if (typeof plStop === 'function') plStop();
+    if (typeof cwStop === 'function') cwStop();
+    if (typeof bnStop === 'function') bnStop();
+    if (typeof blStop === 'function') blStop();
+    if (typeof pnStop === 'function') pnStop();
+    if (typeof mnStop === 'function') mnStop();
+
+    if (typeof gnStop === 'function') gnStop();
+    if (typeof acStop === 'function') acStop();
+    if (typeof spdStop === 'function') spdStop();
+    if (typeof eqtStop === 'function') eqtStop();
+    if (typeof norStop === 'function') norStop();
+    if (typeof ocStop === 'function') ocStop();
+    if (typeof hlStop === 'function') hlStop();
+    if (typeof cseqStop === 'function') cseqStop();
+    if (typeof phStop === 'function') phStop();
+    if (typeof fcmpStop === 'function') fcmpStop();
+    if (typeof cflipStop === 'function') cflipStop();
+    if (typeof bplanStop === 'function') bplanStop();
+    if (typeof ccntStop === 'function') ccntStop();
+    if (typeof ccolStop === 'function') ccolStop();
+    if (typeof mtenStop === 'function') mtenStop();
+    if (typeof fsdStop === 'function') fsdStop();
+    if (typeof rpStop === 'function') rpStop();
+    if (typeof omStop === 'function') omStop();
+    if (typeof dcStop === 'function') dcStop();
+    if (typeof asStop === 'function') asStop();
+    if (typeof clStop === 'function') clStop();
+    if (typeof loStop === 'function') loStop();
+    if (id === 'home') refreshBestScores();
+
+    window.scrollTo(0, 0);
+
+
+
+    // フェードイン（暗転を解除）
+    if (overlay) overlay.classList.remove('active');
+    
+    setTimeout(() => {
+      isTransitioning = false;
+    }, 150); // アニメーション終了待ち
+  }, 150); // 暗転までの待ち時間
 }
+
 
 /* ===== BEST SCORES ON GAME CARDS ===== */
 const BS_MAPPING = [
@@ -96,13 +250,16 @@ const BS_MAPPING = [
   { target: 'flash-sudoku',   key: ['fsd_best_easy','fsd_best_normal','fsd_best_hard'],                           ranksVar: 'FSD_RANKS' },
   { target: 'race-pos',       key: ['rp_best_easy','rp_best_normal','rp_best_hard'],                               ranksVar: 'RP_RANKS' },
   { target: 'otp-memory',     key: ['om_best_easy','om_best_normal','om_best_hard'],                               ranksVar: 'OM_RANKS' },
-  { target: 'day-calc',       key: ['dc_best_easy','dc_best_normal','dc_best_hard'],                               ranksVar: 'DC_RANKS' }];
+  { target: 'day-calc',       key: ['dc_best_easy','dc_best_normal','dc_best_hard'],                               ranksVar: 'DC_RANKS' },
+  { target: 'arrow-swipe',    key: 'asBest',                                                                      ranksVar: 'AS_RANKS' },
+  { target: 'clock-calc',     key: ['cl_best_easy','cl_best_normal','cl_best_hard'],                               ranksVar: 'CL_RANKS' },
+  { target: 'lights-out',     key: ['lo_best_easy','lo_best_normal','lo_best_hard'], reverse: true, suffix: '手', ranksVar: 'LO_RANKS' }];
 
 function refreshBestScores() {
   BS_MAPPING.forEach(g => {
     if (!g.key) return;
-    const card = document.querySelector(`[onclick="showScreen('${g.target}')"]`);
-    if (!card) return;
+    const cards = document.querySelectorAll(`[onclick="showScreen('${g.target}')"]`);
+    if (cards.length === 0) return;
 
     let best = g.reverse ? Infinity : -Infinity;
     let hasScore = false;
@@ -128,28 +285,30 @@ function refreshBestScores() {
       }
     }
     
-    let badge = card.querySelector('.card-best-score');
-    if (hasScore) {
-      if (!badge) {
-        badge = document.createElement('div');
-        badge.className = 'card-best-score';
-        card.appendChild(badge);
+    cards.forEach(card => {
+      let badge = card.querySelector('.card-best-score');
+      if (hasScore) {
+        if (!badge) {
+          badge = document.createElement('div');
+          badge.className = 'card-best-score';
+          card.appendChild(badge);
+        }
+        const display = g.suffix ? best + g.suffix : best;
+        if (g.ranksVar && window[g.ranksVar]) {
+          const rank = getScoreRank(best, window[g.ranksVar]);
+          badge.innerHTML = `<span style="color:${rank.color}">${rank.emoji}</span> ${display}`;
+          badge.style.cursor = 'pointer';
+          badge.dataset.ranksVar = g.ranksVar;
+          badge.onclick = (e) => { e.stopPropagation(); showRankGuide(badge.dataset.ranksVar); };
+        } else {
+          badge.textContent = `🏆 ${display}`;
+          badge.style.cursor = '';
+          badge.onclick = null;
+        }
+      } else if (badge) {
+        badge.remove();
       }
-      const display = g.suffix ? best + g.suffix : best;
-      if (g.ranksVar && window[g.ranksVar]) {
-        const rank = getScoreRank(best, window[g.ranksVar]);
-        badge.innerHTML = `<span style="color:${rank.color}">${rank.emoji}</span> ${display}`;
-        badge.style.cursor = 'pointer';
-        badge.dataset.ranksVar = g.ranksVar;
-        badge.onclick = (e) => { e.stopPropagation(); showRankGuide(badge.dataset.ranksVar); };
-      } else {
-        badge.textContent = `🏆 ${display}`;
-        badge.style.cursor = '';
-        badge.onclick = null;
-      }
-    } else if (badge) {
-      badge.remove();
-    }
+    });
   });
 }
 
@@ -196,6 +355,16 @@ const ANNOUNCEMENTS = [
     title: 'シェルゲームに難易度「鬼」を追加しました！',
     items: [
       '👹 <strong>シェルゲーム［鬼］</strong> — カップ8個・星3つ・超高速シャッフルに挑戦！',
+    ]
+  },
+  {
+    id: 'ann_20260331',
+    icon: '✨',
+    title: '新しいゲーム3種が追加されました！',
+    items: [
+      '↗️ <strong>アローマスター</strong> — 色に従って正しい方向へスワイプしよう！',
+      '⏳ <strong>クロックマスター</strong> — 指定された時間を素早く計算しよう！',
+      '🧩 <strong>ライトアウト</strong> — すべての明かりを消灯させよう！',
     ]
   }
 ];
@@ -249,7 +418,59 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+
+  // Dynamic Rule Button Injection
+
+  document.querySelectorAll('.screen').forEach(screen => {
+    if (screen.id === 'home') return;
+    const nav = screen.querySelector('.nav');
+    if (!nav) return;
+    const btn = document.createElement('button');
+    btn.className = 'btn-rule';
+    btn.innerHTML = '<span>ℹ️</span> 遊び方';
+    btn.onclick = () => showRuleModal(screen.id);
+    nav.appendChild(btn);
+
+    const mapping = BS_MAPPING.find(m => m.target === screen.id);
+    if (mapping && mapping.ranksVar && window[mapping.ranksVar]) {
+      const gbtn = document.createElement('button');
+      gbtn.className = 'btn-rule';
+      gbtn.innerHTML = '<span>🏆</span> グレード';
+      gbtn.onclick = () => showRankGuide(mapping.ranksVar);
+      nav.appendChild(gbtn);
+    }
+  });
 });
+
+/* ===== RULE OVERLAY ===== */
+function showRuleModal(gameId) {
+  sfx.nav();
+  // Always prefer extracting from .game-card as it has the full description <p>
+  let card = document.querySelector(`.game-card[data-game="${gameId}"]`);
+  if (!card) {
+    // Fallback if not in category list (unlikely but safe)
+    card = document.querySelector(`.pick-card[data-game="${gameId}"]`);
+  }
+  if (!card) return;
+  
+  const icon = (card.querySelector('.game-icon') || card.querySelector('.pick-icon-wrap')).textContent;
+  const title = (card.querySelector('h2') || card.querySelector('.pick-name')).textContent;
+  const desc = card.querySelector('p') ? card.querySelector('p').textContent : "ルールを読み込み中...";
+  const badge = (card.querySelector('.badge') || card.querySelector('.pick-cat-badge')).textContent;
+  
+  document.getElementById('rule-icon').textContent = icon;
+  document.getElementById('rule-title').textContent = title;
+  document.getElementById('rule-badge').textContent = badge;
+  document.getElementById('rule-desc').textContent = desc;
+  
+  document.getElementById('rule-overlay').classList.add('show');
+}
+
+function closeRuleModal() {
+  sfx.nav();
+  document.getElementById('rule-overlay').classList.remove('show');
+}
 
 /* ===== RESULT OVERLAY ===== */
 let _retryFn = null;

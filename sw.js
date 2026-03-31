@@ -1,4 +1,4 @@
-const CACHE_NAME = 'noutore-v14';
+const CACHE_NAME = 'noutore-v18';
 const ASSETS = [
   './',
   './index.html',

@@ -38,12 +38,63 @@ const sfx = (() => {
       return muted;
     },
 
-    // 汎用タップ音（ボタン押下）
+    // 汎用タップ音（手触り感のあるアナログ風クリック）
     tap() {
-      play(() => tone(700, 'sine', 0.12, 0.06));
+      play(() => {
+        const c = getCtx();
+        const o = c.createOscillator();
+        const g = c.createGain();
+        o.connect(g); g.connect(c.destination);
+        o.type = 'triangle';
+        o.frequency.setValueAtTime(600, c.currentTime);
+        o.frequency.exponentialRampToValueAtTime(200, c.currentTime + 0.05);
+        g.gain.setValueAtTime(0.0, c.currentTime);
+        g.gain.linearRampToValueAtTime(0.2, c.currentTime + 0.005);
+        g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.05);
+        o.start(); o.stop(c.currentTime + 0.05);
+      });
     },
 
-    // 画面遷移
+    // 木の駒を置くような音
+    woodClick() {
+      play(() => {
+        const c = getCtx();
+        const o = c.createOscillator();
+        const g = c.createGain();
+        o.connect(g); g.connect(c.destination);
+        o.type = 'square';
+        o.frequency.setValueAtTime(300, c.currentTime);
+        o.frequency.exponentialRampToValueAtTime(50, c.currentTime + 0.03);
+        g.gain.setValueAtTime(0.0, c.currentTime);
+        g.gain.linearRampToValueAtTime(0.3, c.currentTime + 0.003);
+        g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.04);
+        o.start(); o.stop(c.currentTime + 0.04);
+      });
+    },
+
+    // カードをスナップするような音（ホワイトノイズ使用）
+    cardSnap() {
+      play(() => {
+        const c = getCtx();
+        const bufferSize = c.sampleRate * 0.06;
+        const noiseBuffer = c.createBuffer(1, bufferSize, c.sampleRate);
+        const output = noiseBuffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) output[i] = Math.random() * 2 - 1;
+        const noiseSrc = c.createBufferSource();
+        noiseSrc.buffer = noiseBuffer;
+        const filter = c.createBiquadFilter();
+        filter.type = 'lowpass';
+        filter.frequency.value = 3500;
+        const g = c.createGain();
+        noiseSrc.connect(filter); filter.connect(g); g.connect(c.destination);
+        g.gain.setValueAtTime(0, c.currentTime);
+        g.gain.linearRampToValueAtTime(0.5, c.currentTime + 0.005);
+        g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.06);
+        noiseSrc.start();
+      });
+    },
+
+    // 画面遷移（より柔らかくシネマティックな音に）
     nav() {
       play(() => {
         const c = getCtx();
@@ -51,13 +102,35 @@ const sfx = (() => {
         const g = c.createGain();
         o.connect(g); g.connect(c.destination);
         o.type = 'sine';
-        o.frequency.setValueAtTime(350, c.currentTime);
-        o.frequency.linearRampToValueAtTime(560, c.currentTime + 0.09);
-        g.gain.setValueAtTime(0.1, c.currentTime);
-        g.gain.exponentialRampToValueAtTime(0.0001, c.currentTime + 0.12);
-        o.start(); o.stop(c.currentTime + 0.12);
+        o.frequency.setValueAtTime(450, c.currentTime);
+        o.frequency.exponentialRampToValueAtTime(800, c.currentTime + 0.15);
+        g.gain.setValueAtTime(0.0, c.currentTime);
+        g.gain.linearRampToValueAtTime(0.15, c.currentTime + 0.05);
+        g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.15);
+        o.start(); o.stop(c.currentTime + 0.15);
       });
     },
+
+    // メダルきらめき音
+    medal() {
+      play(() => {
+        const c = getCtx();
+        const now = c.currentTime;
+        [1046.50, 1318.51, 1567.98, 2093.00].forEach((f, i) => {
+          const o = c.createOscillator();
+          const g = c.createGain();
+          o.connect(g); g.connect(c.destination);
+          o.type = 'sine';
+          o.frequency.value = f;
+          const t = now + (i * 0.05);
+          g.gain.setValueAtTime(0, t);
+          g.gain.linearRampToValueAtTime(0.1, t + 0.02);
+          g.gain.exponentialRampToValueAtTime(0.001, t + 0.8);
+          o.start(t); o.stop(t + 0.8);
+        });
+      });
+    },
+
 
     // ゲームスタート
     start() {
