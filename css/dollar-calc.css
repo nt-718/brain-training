@@ -1,0 +1,121 @@
+/* ===== ドル換算 ===== */
+
+.dca-stage {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 16px;
+}
+
+.dca-direction-tag {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 4px 14px;
+}
+
+.dca-question-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.dca-question {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text-main);
+  flex-wrap: wrap;
+}
+
+.dca-currency {
+  font-size: 2.6rem;
+  font-weight: 900;
+  font-family: 'Inter', monospace;
+  padding: 0.4rem 1rem;
+  border-radius: 12px;
+}
+
+.dca-currency.yen {
+  color: #e11d48;
+  background: rgba(225, 29, 72, 0.08);
+  border: 2px solid rgba(225, 29, 72, 0.25);
+}
+
+.dca-currency.dollar {
+  color: #16a34a;
+  background: rgba(22, 163, 74, 0.08);
+  border: 2px solid rgba(22, 163, 74, 0.25);
+}
+
+.dca-arrow {
+  color: var(--text-muted);
+  font-size: 1.8rem;
+}
+
+.dca-unit {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.dca-answers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.dca-answer-btn {
+  background: var(--card-bg);
+  color: var(--text-main);
+  border: 2px solid var(--card-border);
+  border-radius: 12px;
+  padding: 18px 10px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: 'Inter', monospace;
+  letter-spacing: 0.03em;
+}
+
+.dca-answer-btn:hover {
+  border-color: var(--primary);
+  background: rgba(139, 92, 246, 0.08);
+  transform: translateY(-2px);
+}
+
+.dca-answer-btn:active {
+  transform: translateY(1px);
+}
+
+.dca-message {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.dca-rate-note {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+  opacity: 0.7;
+  margin-top: 4px;
+}

@@ -61,6 +61,7 @@
   <link rel="stylesheet" href="css/arrow-swipe.css" />
   <link rel="stylesheet" href="css/clock-calc.css" />
   <link rel="stylesheet" href="css/lights-out.css" />
+  <link rel="stylesheet" href="css/dollar-calc.css" />
 </head>
 
 <body>
@@ -188,6 +189,14 @@
           <div class="game-info">
             <h2>カレンダーマスター</h2>
             <p>日付から曜日を当てよう</p>
+          </div>
+          <div class="badge">暗算</div>
+        </div>
+        <div class="game-card" onclick="showScreen('dollar-calc')" data-game="dollar-calc">
+          <div class="game-icon">💱</div>
+          <div class="game-info">
+            <h2>ドル換算</h2>
+            <p>円とドルを素早く換算しよう</p>
           </div>
           <div class="badge">暗算</div>
         </div>
@@ -2608,6 +2617,51 @@
     </div>
   </div>
 
+  <!-- ========== ドル換算 ========== -->
+  <div id="dollar-calc" class="screen">
+    <nav class="nav">
+      <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+      <h1>ドル換算</h1>
+    </nav>
+    <div class="game-content" id="dca-content">
+      <div class="diff-row" id="dca-diff-row">
+        <button class="diff-btn" onclick="dcaSetDiff(this,'easy')">かんたん</button>
+        <button class="diff-btn selected" onclick="dcaSetDiff(this,'normal')">ふつう</button>
+        <button class="diff-btn" onclick="dcaSetDiff(this,'hard')">むずかしい</button>
+      </div>
+      <div class="score-bar">
+        <div class="score-item">
+          <div class="label">正解数</div>
+          <div class="value" id="dca-score">0</div>
+        </div>
+        <div class="score-item">
+          <div class="label">ベスト</div>
+          <div class="value" id="dca-best">0</div>
+        </div>
+      </div>
+      <div class="timer-bar">
+        <div class="timer-fill" id="dca-timer-fill" style="width:100%"></div>
+      </div>
+      <div class="dca-stage" id="dca-stage">
+        <div class="dca-question-area" id="dca-question-area" style="display:none;">
+          <div class="dca-direction-tag" id="dca-direction-tag">ドル → 円</div>
+          <div class="dca-question" id="dca-question"></div>
+        </div>
+        <div class="dca-answers" id="dca-answers" style="display:none;">
+          <button class="dca-answer-btn"></button>
+          <button class="dca-answer-btn"></button>
+          <button class="dca-answer-btn"></button>
+          <button class="dca-answer-btn"></button>
+        </div>
+        <div class="dca-message" id="dca-message">スタートを押してください</div>
+        <div class="dca-rate-note">$1 = ¥150</div>
+      </div>
+      <div class="answer-area">
+        <button class="btn-primary" id="dca-start-btn" onclick="dcaStart()">スタート</button>
+      </div>
+    </div>
+  </div><!-- /#dollar-calc -->
+
   <!-- ========== SCENE TRANSITION ========== -->
   <div id="scene-transition" class="scene-transition"></div>
 
@@ -2658,6 +2712,7 @@
   <script src="js/arrow-swipe.js"></script>
   <script src="js/clock-calc.js"></script>
   <script src="js/lights-out.js"></script>
+  <script src="js/dollar-calc.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('sw.js').catch(() => { });

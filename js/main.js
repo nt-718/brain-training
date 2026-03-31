@@ -189,6 +189,7 @@ function showScreen(id) {
     if (typeof asStop === 'function') asStop();
     if (typeof clStop === 'function') clStop();
     if (typeof loStop === 'function') loStop();
+    if (typeof dcaStop === 'function') dcaStop();
     if (id === 'home') refreshBestScores();
 
     window.scrollTo(0, 0);
@@ -253,7 +254,8 @@ const BS_MAPPING = [
   { target: 'day-calc',       key: ['dc_best_easy','dc_best_normal','dc_best_hard'],                               ranksVar: 'DC_RANKS' },
   { target: 'arrow-swipe',    key: 'asBest',                                                                      ranksVar: 'AS_RANKS' },
   { target: 'clock-calc',     key: ['cl_best_easy','cl_best_normal','cl_best_hard'],                               ranksVar: 'CL_RANKS' },
-  { target: 'lights-out',     key: ['lo_best_easy','lo_best_normal','lo_best_hard'], reverse: true, suffix: '手', ranksVar: 'LO_RANKS' }];
+  { target: 'lights-out',     key: ['lo_best_easy','lo_best_normal','lo_best_hard'], reverse: true, suffix: '手', ranksVar: 'LO_RANKS' },
+  { target: 'dollar-calc',   key: ['dca_best_easy','dca_best_normal','dca_best_hard'],                           ranksVar: 'DCA_RANKS' }];
 
 function refreshBestScores() {
   BS_MAPPING.forEach(g => {
@@ -365,6 +367,14 @@ const ANNOUNCEMENTS = [
       '↗️ <strong>アローマスター</strong> — 色に従って正しい方向へスワイプしよう！',
       '⏳ <strong>クロックマスター</strong> — 指定された時間を素早く計算しよう！',
       '🧩 <strong>ライトアウト</strong> — すべての明かりを消灯させよう！',
+    ]
+  },
+  {
+    id: 'ann_20260331b',
+    icon: '💱',
+    title: '新しいゲームを追加しました！',
+    items: [
+      '💱 <strong>ドル換算</strong> — $1=¥150で円↔ドルを瞬時に換算しよう！',
     ]
   }
 ];
