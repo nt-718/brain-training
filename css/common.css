@@ -25,14 +25,14 @@
   --radius-lg: 20px;
   --radius-xl: 28px;
   --shadow:    0 8px 32px rgba(0,0,0,0.5);
-  --font-ja: 'Noto Sans JP', 'Inter', sans-serif;
+  --font-main: 'Plus Jakarta Sans', 'Inter', 'Noto Sans JP', sans-serif;
 }
 
 /* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  font-family: var(--font-ja);
+  font-family: var(--font-main);
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
@@ -103,7 +103,7 @@ body::after {
   top: 0;
   z-index: 10;
 }
-.nav h1 { font-size: 1.1rem; font-weight: 700; flex: 1; letter-spacing: 0.3px; }
+.nav h1 { font-size: 1.1rem; font-weight: 800; flex: 1; letter-spacing: 0.5px; }
 .btn-back {
   background: rgba(255,255,255,0.06);
   border: 1px solid var(--border);
@@ -114,7 +114,7 @@ body::after {
   font-size: 0.85rem;
   font-weight: 600;
   transition: all 0.18s ease;
-  font-family: var(--font-ja);
+  font-family: var(--font-main);
 }
 .btn-back:hover { background: rgba(255,255,255,0.11); color: var(--text); transform: translateX(-2px); }
 
@@ -128,7 +128,7 @@ body::after {
   font-size: 0.85rem;
   font-weight: 600;
   transition: all 0.18s ease;
-  font-family: var(--font-ja);
+  font-family: var(--font-main);
   display: flex; align-items: center; gap: 6px;
 }
 .btn-rule:hover { background: rgba(255,255,255,0.11); color: var(--text); }
@@ -193,9 +193,9 @@ body::after {
   line-height: 1;
 }
 .home-header h1 {
-  font-size: 2.2rem;
-  font-weight: 900;
-  letter-spacing: 3px;
+  font-size: 2.22rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
   background: linear-gradient(135deg, #d8b4fe 0%, #f0abfc 40%, #fda4af 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -261,7 +261,7 @@ body::after {
   cursor: pointer;
   transition: all 0.18s ease;
   white-space: nowrap;
-  font-family: var(--font-ja);
+  font-family: var(--font-main);
 }
 .cat-tab:hover { color: var(--text-2); }
 
@@ -296,7 +296,7 @@ body::after {
   font-size: 0.95rem;
   font-weight: 800;
   color: var(--text);
-  letter-spacing: 0.3px;
+  letter-spacing: -0.01em;
 }
 .pick-fire { font-size: 1rem; }
 .pick-date { font-size: 0.72rem; color: var(--text-3); font-weight: 600; letter-spacing: 0.5px; }
@@ -373,7 +373,7 @@ body::after {
   display: flex;
   align-items: center;
   gap: 8px;
-  letter-spacing: 0.2px;
+  letter-spacing: -0.01em;
 }
 .category-header p { font-size: 0.73rem; color: var(--text-3); flex: 1; }
 
@@ -459,7 +459,7 @@ body::after {
   min-height: unset;
 }
 .game-info { display: flex; flex-direction: column; align-items: center; width: 100%; padding: 0; }
-.game-info h2 { font-size: 0.8rem; font-weight: 700; color: var(--text); line-height: 1.4; letter-spacing: 0.1px; }
+.game-info h2 { font-size: 0.82rem; font-weight: 700; color: var(--text); line-height: 1.4; letter-spacing: -0.01em; }
 .game-info p { display: none; }
 .badge { display: none; }
 
@@ -545,7 +545,7 @@ body::after {
 }
 .score-item { text-align: center; }
 .score-item .label { color: var(--text-3); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
-.score-item .value { font-size: 1.3rem; font-weight: 800; color: #fff; text-shadow: 0 2px 8px rgba(139,92,246,0.5); }
+.score-item .value { font-size: 1.3rem; font-weight: 800; color: #fff; text-shadow: 0 2px 8px rgba(139,92,246,0.5); font-variant-numeric: tabular-nums; }
 
 .timer-bar { width: 100%; max-width: 520px; height: 6px; background: rgba(255,255,255,0.07); border-radius: 3px; overflow: hidden; }
 .timer-fill { height: 100%; background: linear-gradient(90deg, var(--secondary), var(--primary)); transition: width 0.1s linear; border-radius: 3px; box-shadow: 0 0 8px var(--primary); }
@@ -558,8 +558,8 @@ body::after {
   cursor: pointer;
   box-shadow: 0 6px 20px rgba(139,92,246,0.35);
   transition: all 0.2s ease;
-  font-family: var(--font-ja);
-  letter-spacing: 0.5px;
+  font-family: var(--font-main);
+  letter-spacing: 0.02em;
 }
 .btn-primary:hover  { transform: translateY(-2px) scale(1.04); box-shadow: 0 10px 28px rgba(139,92,246,0.45); }
 .btn-primary:active { transform: scale(0.96); }
@@ -570,7 +570,7 @@ body::after {
   padding: 12px 28px; border-radius: 999px;
   font-size: 0.95rem; font-weight: 700;
   cursor: pointer; transition: all 0.18s ease;
-  font-family: var(--font-ja);
+  font-family: var(--font-main);
 }
 .btn-outline:hover { background: rgba(255,255,255,0.1); color: var(--text); transform: translateY(-1px); }
 
@@ -580,7 +580,7 @@ body::after {
   border: 1px solid var(--border);
   background: rgba(255,255,255,0.03);
   cursor: pointer; font-size: 0.9rem; font-weight: 700; color: var(--text-3);
-  transition: all 0.18s ease; font-family: var(--font-ja);
+  transition: all 0.18s ease; font-family: var(--font-main);
 }
 .diff-btn:hover    { border-color: rgba(139,92,246,0.4); color: var(--text); transform: translateY(-1px); }
 .diff-btn.selected { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; border-color: transparent; box-shadow: 0 4px 14px rgba(139,92,246,0.35); }
@@ -686,7 +686,7 @@ body::after {
   background: rgba(255,255,255,0.08); padding: 3px 8px; border-radius: 999px;
   margin-bottom: 6px; border: 1px solid var(--border-2);
 }
-.rule-modal h2 { font-size: 1.4rem; font-weight: 800; color: var(--text); letter-spacing: 0.5px; }
+.rule-modal h2 { font-size: 1.4rem; font-weight: 800; color: var(--text); letter-spacing: -0.01em; }
 .rule-body p { font-size: 0.95rem; color: var(--text-2); line-height: 1.6; }
 .rule-modal .btn-row { justify-content: center; display: flex; }
 
@@ -715,7 +715,7 @@ body::after {
 .update-popup-title { font-size: 1.1rem; font-weight: 800; color: #e9d5ff; margin-bottom: 18px; }
 .update-popup-list { list-style: none; padding: 0; margin: 0 0 20px; text-align: left; display: flex; flex-direction: column; gap: 10px; }
 .update-popup-list li { background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.22); border-radius: var(--radius); padding: 10px 14px; font-size: 0.88rem; color: #ddd6fe; line-height: 1.45; }
-.update-popup-dismiss { display: block; margin: 10px auto 0; background: none; border: none; color: var(--text-3); font-size: 0.78rem; cursor: pointer; text-decoration: underline; padding: 4px; font-family: var(--font-ja); }
+.update-popup-dismiss { display: block; margin: 10px auto 0; background: none; border: none; color: var(--text-3); font-size: 0.78rem; cursor: pointer; text-decoration: underline; padding: 4px; font-family: var(--font-main); }
 .update-popup-dismiss:hover { color: var(--text-2); }
 
 /* ==============================================
