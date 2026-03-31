@@ -23,10 +23,10 @@ let asCurrentColor = ''; // 'blue', 'red'
 let asCorrectAnswer = '';
 
 const ARROWS = {
-  'up': '⬆️',
-  'down': '⬇️',
-  'left': '⬅️',
-  'right': '➡️'
+  'up': '↑',
+  'down': '↓',
+  'left': '←',
+  'right': '→'
 };
 
 const OPPOSITES = {
@@ -151,7 +151,13 @@ document.addEventListener('touchstart', (e) => {
   if (currentScreen !== 'arrow-swipe' || !asIsPlaying) return;
   asTouchStartX = e.touches[0].clientX;
   asTouchStartY = e.touches[0].clientY;
-}, { passive: true });
+});
+
+document.addEventListener('touchmove', (e) => {
+  if (currentScreen === 'arrow-swipe' && asIsPlaying) {
+    if (e.cancelable) e.preventDefault();
+  }
+}, { passive: false });
 
 document.addEventListener('touchend', (e) => {
   if (currentScreen !== 'arrow-swipe' || !asIsPlaying) return;
@@ -170,7 +176,7 @@ document.addEventListener('touchend', (e) => {
       asAnswer(dy > 0 ? 'down' : 'up');
     }
   }
-}, { passive: true });
+});
 
 function asGameOver() {
   clearInterval(asTimer);
