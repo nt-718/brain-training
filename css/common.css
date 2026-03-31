@@ -352,6 +352,41 @@ body::after {
   color: var(--text-2);
 }
 
+/* Dev Pick extras */
+.dev-pick-section { border-bottom: 1px solid var(--border); }
+.dev-pick-list { grid-template-columns: repeat(3, 1fr); }
+.dev-pick-list .pick-card.hidden { display: none; }
+.dev-pick-more-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 14px;
+}
+.dev-pick-more-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(139,92,246,0.08);
+  border: 1px solid rgba(139,92,246,0.2);
+  color: var(--text-2);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 8px 22px;
+  border-radius: 999px;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: background 0.18s, border-color 0.18s;
+}
+.dev-pick-more-btn:hover {
+  background: rgba(139,92,246,0.16);
+  border-color: rgba(139,92,246,0.4);
+}
+.dev-pick-more-arrow {
+  font-size: 0.65rem;
+  transition: transform 0.22s ease;
+  display: inline-block;
+}
+.dev-pick-more-arrow.open { transform: rotate(180deg); }
+
 /* ==============================================
    CATEGORY SECTIONS
    ============================================== */
@@ -527,6 +562,10 @@ body::after {
 .game-card[data-game="color-vision"],   .pick-card[data-game="color-vision"]   { --c: 219,39,119; }
 .game-card[data-game="color-code"],     .pick-card[data-game="color-code"]     { --c: 13,148,136; }
 .game-card[data-game="comp-color"],     .pick-card[data-game="comp-color"]     { --c: 217,119,6; }
+.game-card[data-game="clock-calc"],     .pick-card[data-game="clock-calc"]     { --c: 96,165,250; }
+.game-card[data-game="lights-out"],     .pick-card[data-game="lights-out"]     { --c: 250,204,21; }
+.game-card[data-game="arrow-swipe"],    .pick-card[data-game="arrow-swipe"]    { --c: 52,211,153; }
+.game-card[data-game="dollar-calc"],    .pick-card[data-game="dollar-calc"]    { --c: 52,168,80; }
 
 /* ==============================================
    GAME SCREENS
@@ -739,6 +778,7 @@ body::after {
   .daily-pick-section { padding: 18px 12px 22px; }
   .pick-card .pick-icon-wrap { width: 50px; height: 50px; font-size: 1.6rem; border-radius: 13px; }
   .pick-card .pick-name { font-size: 0.76rem; }
+  .dev-pick-list { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 400px) {
   .game-list { grid-template-columns: repeat(2, 1fr); }

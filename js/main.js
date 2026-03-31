@@ -95,6 +95,53 @@
   });
 })();
 
+/* ===== DEV PICK ===== */
+(function initDevPick() {
+  const DEV_PICKS = [
+    { id:'visual-calc',     name:'ドットカウンター',  icon:'🧮', cat:'計算' },
+    { id:'make-ten',        name:'メイク10',          icon:'🔟', cat:'計算' },
+    { id:'day-calc',        name:'カレンダーマスター',icon:'📅', cat:'計算' },
+    { id:'clock-calc',      name:'クロックマスター',  icon:'⏳', cat:'計算' },
+    { id:'lights-out',      name:'ライトアウト',      icon:'🧩', cat:'論理' },
+    { id:'memory-matrix',   name:'ライトマトリックス',icon:'🧩', cat:'記憶' },
+    { id:'emoji-order',     name:'絵文字メモリー',    icon:'🎴', cat:'記憶' },
+    { id:'sequence-memory', name:'シーケンスマスター',icon:'🌈', cat:'記憶' },
+    { id:'otp-memory',      name:'コードメモリー',    icon:'🔐', cat:'記憶' },
+    { id:'num-tap',         name:'ナンバータッチ',    icon:'🔢', cat:'反射' },
+    { id:'arrow-swipe',     name:'アローマスター',    icon:'↗️', cat:'反射' },
+    { id:'shell-game',      name:'シェルゲーム',      icon:'🎩', cat:'知覚' },
+    { id:'color-vision',    name:'カラービジョン',    icon:'🌈', cat:'知覚' },
+  ];
+  const INITIAL_COUNT = 6;
+  let expanded = false;
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const list = document.getElementById('dev-pick-list');
+    if (!list) return;
+    list.innerHTML = DEV_PICKS.map((g, i) => `
+      <div class="pick-card${i >= INITIAL_COUNT ? ' hidden' : ''}" data-game="${g.id}" onclick="showScreen('${g.id}')">
+        <div class="pick-icon-wrap">${g.icon}</div>
+        <div class="pick-name">${g.name}</div>
+        <div class="pick-cat-badge">${g.cat}</div>
+      </div>
+    `).join('');
+    if (typeof refreshBestScores === 'function') refreshBestScores();
+  });
+
+  window.toggleDevPick = function() {
+    expanded = !expanded;
+    const list = document.getElementById('dev-pick-list');
+    const label = document.getElementById('dev-pick-more-label');
+    const arrow = document.getElementById('dev-pick-more-arrow');
+    if (!list) return;
+    list.querySelectorAll('.pick-card').forEach((card, i) => {
+      if (i >= INITIAL_COUNT) card.classList.toggle('hidden', !expanded);
+    });
+    label.textContent = expanded ? '閉じる' : 'もっと見る';
+    arrow.classList.toggle('open', expanded);
+  };
+})();
+
 /* ===== CATEGORY NAV ===== */
 function scrollToCategory(id) {
   document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
