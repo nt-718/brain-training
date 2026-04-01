@@ -62,6 +62,7 @@
   <link rel="stylesheet" href="css/clock-calc.css" />
   <link rel="stylesheet" href="css/lights-out.css" />
   <link rel="stylesheet" href="css/dollar-calc.css" />
+  <link rel="stylesheet" href="css/double-detect.css" />
 </head>
 
 <body>
@@ -70,6 +71,7 @@
   <div id="home" class="screen active">
     <div class="home-header">
       <button id="sfx-toggle" class="sfx-toggle-btn" title="音OFF">🔊</button>
+      <button class="btn-records" onclick="showScreen('records')">🏆 記録</button>
       <div class="brain-icon">🧠</div>
       <h1>脳トレマニア</h1>
       <p>毎日少しずつ、脳を鍛えよう</p>
@@ -122,7 +124,9 @@
       </div>
       <div class="game-list">
         <div class="game-card" onclick="showScreen('visual-calc')" data-game="visual-calc">
-          <div class="game-icon">🧮</div>
+          <div class="game-icon">
+            <img src="assets/icons/dot-counter.svg" class="icon-img" alt="">
+          </div>
           <div class="game-info">
             <h2>ドットカウンター</h2>
             <p>丸の数を数えたり、計算したりしよう</p>
@@ -186,7 +190,9 @@
           <div class="badge">計画</div>
         </div>
         <div class="game-card" onclick="showScreen('make-ten')" data-game="make-ten">
-          <div class="game-icon">🔟</div>
+          <div class="game-icon">
+            <img src="assets/icons/make-ten.svg" class="icon-img" alt="">
+          </div>
           <div class="game-info">
             <h2>メイク10</h2>
             <p>4つの数字を四則演算で10にしよう</p>
@@ -455,6 +461,14 @@
           </div>
           <div class="badge">反射</div>
         </div>
+        <div class="game-card" onclick="showScreen('double-detect')" data-game="double-detect">
+          <div class="game-icon">🃏</div>
+          <div class="game-info">
+            <h2>ダブル検知</h2>
+            <p>同じ数字が出たら即押し！最初の枚数も答えよう</p>
+          </div>
+          <div class="badge">判断</div>
+        </div>
       </div>
     </div>
 
@@ -530,6 +544,22 @@
           <div class="badge">色彩感覚</div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- ========== RECORDS ========== -->
+  <div id="records" class="screen">
+    <nav class="nav">
+      <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+      <h1>記録一覧</h1>
+    </nav>
+    <div class="records-content">
+      <div class="records-stats" id="records-stats"></div>
+      <div class="records-chart-section">
+        <div class="records-section-title">ランク分布</div>
+        <div class="records-chart" id="records-chart"></div>
+      </div>
+      <div class="records-list" id="records-list"></div>
     </div>
   </div>
 
@@ -2679,6 +2709,69 @@
     </div>
   </div><!-- /#dollar-calc -->
 
+  <!-- ========== ダブル検知 ========== -->
+  <div id="double-detect" class="screen">
+    <nav class="nav">
+      <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+      <h1>ダブル検知</h1>
+    </nav>
+    <div class="game-content">
+
+      <div class="diff-row" id="dd-diff-row">
+        <button class="diff-btn" onclick="ddSetDiff(this,'easy')">かんたん</button>
+        <button class="diff-btn selected" onclick="ddSetDiff(this,'normal')">ふつう</button>
+        <button class="diff-btn" onclick="ddSetDiff(this,'hard')">むずかしい</button>
+      </div>
+
+      <div class="score-bar">
+        <div class="score-item">
+          <div class="label">スコア</div>
+          <div class="value" id="dd-score">0</div>
+        </div>
+        <div class="score-item">
+          <div class="label">ベスト</div>
+          <div class="value" id="dd-best">0</div>
+        </div>
+      </div>
+
+      <div id="dd-stage" class="dd-stage" style="display:none;">
+        <div class="dd-progress-row">
+          <span class="dd-progress" id="dd-progress">1 / 20</span>
+          <div class="dd-timer-wrap">
+            <div id="dd-timer-bar" style="width:100%;"></div>
+          </div>
+        </div>
+        <div id="dd-card-display"></div>
+        <div class="dd-stats-row">
+          <div class="dd-stat">
+            <div class="dd-stat-val" id="dd-hits">0</div>
+            <div>正解</div>
+          </div>
+          <div class="dd-stat">
+            <div class="dd-stat-val" id="dd-misses">0</div>
+            <div>ミス</div>
+          </div>
+        </div>
+        <button class="dd-btn-double" id="dd-double-btn" onclick="ddPressDouble()">ダブル！🃏</button>
+        <div class="dd-input-area" id="dd-input-area" style="display:none;">
+          <div class="dd-pos-question" id="dd-pos-question"></div>
+          <div class="dd-input-row">
+            <input type="number" class="dd-pos-input" id="dd-pos-input"
+                   inputmode="numeric" min="1" max="19" placeholder="枚目"
+                   onkeydown="if(event.key==='Enter')ddSubmitPosition()">
+            <button class="dd-btn-submit" onclick="ddSubmitPosition()">確認</button>
+          </div>
+        </div>
+        <div class="dd-feedback" id="dd-feedback" style="display:none;"></div>
+      </div>
+
+      <div class="answer-area">
+        <button class="btn-primary" id="dd-start-btn" onclick="ddStart()">スタート</button>
+      </div>
+
+    </div>
+  </div><!-- /#double-detect -->
+
   <!-- ========== SCENE TRANSITION ========== -->
   <div id="scene-transition" class="scene-transition"></div>
 
@@ -2730,6 +2823,7 @@
   <script src="js/clock-calc.js"></script>
   <script src="js/lights-out.js"></script>
   <script src="js/dollar-calc.js"></script>
+  <script src="js/double-detect.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('sw.js').catch(() => { });

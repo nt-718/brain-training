@@ -1,0 +1,19 @@
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg-grad" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1e1b4b" />
+      <stop offset="1" stop-color="#312e81" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  <rect width="100" height="100" rx="24" fill="url(#bg-grad)" />
+  <!-- Large (10) - Blue -->
+  <circle cx="32" cy="32" r="18" fill="#6c63ff" filter="url(#glow)" fill-opacity="0.9" />
+  <!-- Medium (5) - Green -->
+  <circle cx="52" cy="54" r="13" fill="#43b89c" filter="url(#glow)" fill-opacity="0.9" />
+  <!-- Small (1) - Pink -->
+  <circle cx="72" cy="76" r="9" fill="#ff6584" filter="url(#glow)" fill-opacity="0.9" />
+</svg>

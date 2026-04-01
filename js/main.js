@@ -1,7 +1,15 @@
+/* ===== ASSETS ===== */
+function renderIcon(icon) {
+  if (icon && icon.endsWith('.svg')) {
+    return `<img src="${icon}" class="icon-img" alt="">`;
+  }
+  return icon || '';
+}
+
 /* ===== DAILY PICK ===== */
 (function initDailyPick() {
   const ALL_GAMES = [
-    { id:'visual-calc',    name:'ドットカウンター',     icon:'🧮', cat:'計算', color:'rgba(251,191,36,0.6)' },
+    { id:'visual-calc',    name:'ドットカウンター',     icon:'assets/icons/dot-counter.svg', cat:'計算', color:'rgba(251,191,36,0.6)' },
     { id:'flash-math',     name:'フラッシュサム',        icon:'⚡️', cat:'計算', color:'rgba(251,146,60,0.6)' },
     { id:'speed-sum',      name:'ラピッドサム',          icon:'➕', cat:'計算', color:'rgba(74,222,128,0.6)' },
     { id:'eq-judge',       name:'イコールジャッジ',      icon:'✅', cat:'計算', color:'rgba(52,211,153,0.6)' },
@@ -9,7 +17,7 @@
     { id:'prime-hunt',     name:'プライムハンター',      icon:'🔬', cat:'計算', color:'rgba(45,212,191,0.6)' },
     { id:'frac-cmp',       name:'フラクションバトル',    icon:'➗', cat:'計算', color:'rgba(96,165,250,0.6)' },
     { id:'budget-plan',    name:'バジェットマスター',    icon:'🛒', cat:'計算', color:'rgba(34,197,94,0.6)' },
-    { id:'make-ten',       name:'メイク10',              icon:'🔟', cat:'計算', color:'rgba(251,113,133,0.6)' },
+    { id:'make-ten',       name:'メイク10',              icon:'assets/icons/make-ten.svg', cat:'計算', color:'rgba(251,113,133,0.6)' },
     { id:'race-pos',       name:'レースビジョン',        icon:'🏃', cat:'計算', color:'rgba(249,115,22,0.6)' },
     { id:'day-calc',       name:'カレンダーマスター',    icon:'📅', cat:'計算', color:'rgba(167,139,250,0.6)' },
     { id:'clock-calc',     name:'クロックマスター',      icon:'⏳', cat:'計算', color:'rgba(96,165,250,0.6)' },
@@ -46,6 +54,7 @@
     { id:'color-vision',   name:'カラービジョン',        icon:'👁️', cat:'知覚', color:'rgba(219,39,119,0.6)' },
     { id:'color-code',     name:'カラーコード',          icon:'#️⃣', cat:'知覚', color:'rgba(13,148,136,0.6)' },
     { id:'comp-color',     name:'カラーオポジット',      icon:'🌗', cat:'知覚', color:'rgba(217,119,6,0.6)' },
+    { id:'double-detect',  name:'ダブル検知',            icon:'🃏', cat:'判断', color:'rgba(139,92,246,0.6)' },
   ];
 
 
@@ -84,7 +93,7 @@
     if (!list) return;
     list.innerHTML = picks.map(g => `
       <div class="pick-card" data-game="${g.id}" onclick="showScreen('${g.id}')" style="--pick-color:${g.color}">
-        <div class="pick-icon-wrap">${g.icon}</div>
+        <div class="pick-icon-wrap">${renderIcon(g.icon)}</div>
         <div class="pick-name">${g.name}</div>
         <div class="pick-cat-badge">${g.cat}</div>
       </div>
@@ -98,8 +107,8 @@
 /* ===== DEV PICK ===== */
 (function initDevPick() {
   const DEV_PICKS = [
-    { id:'visual-calc',     name:'ドットカウンター',  icon:'🧮', cat:'計算' },
-    { id:'make-ten',        name:'メイク10',          icon:'🔟', cat:'計算' },
+    { id:'visual-calc',     name:'ドットカウンター',  icon:'assets/icons/dot-counter.svg', cat:'計算' },
+    { id:'make-ten',        name:'メイク10',          icon:'assets/icons/make-ten.svg', cat:'計算' },
     { id:'day-calc',        name:'カレンダーマスター',icon:'📅', cat:'計算' },
     { id:'clock-calc',      name:'クロックマスター',  icon:'⏳', cat:'計算' },
     { id:'lights-out',      name:'ライトアウト',      icon:'💡', cat:'論理' },
@@ -120,7 +129,7 @@
     if (!list) return;
     list.innerHTML = DEV_PICKS.map((g, i) => `
       <div class="pick-card${i >= INITIAL_COUNT ? ' hidden' : ''}" data-game="${g.id}" onclick="showScreen('${g.id}')">
-        <div class="pick-icon-wrap">${g.icon}</div>
+        <div class="pick-icon-wrap">${renderIcon(g.icon)}</div>
         <div class="pick-name">${g.name}</div>
         <div class="pick-cat-badge">${g.cat}</div>
       </div>
@@ -237,7 +246,9 @@ function showScreen(id) {
     if (typeof clStop === 'function') clStop();
     if (typeof loStop === 'function') loStop();
     if (typeof dcaStop === 'function') dcaStop();
+    if (typeof ddStop === 'function') ddStop();
     if (id === 'home') refreshBestScores();
+    if (id === 'records') refreshRecords();
 
     window.scrollTo(0, 0);
 
@@ -302,7 +313,8 @@ const BS_MAPPING = [
   { target: 'arrow-swipe',    key: 'asBest',                                                                      ranksVar: 'AS_RANKS' },
   { target: 'clock-calc',     key: ['cl_best_easy','cl_best_normal','cl_best_hard'],                               ranksVar: 'CL_RANKS' },
   { target: 'lights-out',     key: ['lo_best_easy','lo_best_normal','lo_best_hard'], reverse: true, suffix: '手', ranksVar: 'LO_RANKS' },
-  { target: 'dollar-calc',   key: ['dca_best_easy','dca_best_normal','dca_best_hard'],                           ranksVar: 'DCA_RANKS' }];
+  { target: 'dollar-calc',   key: ['dca_best_easy','dca_best_normal','dca_best_hard'],                           ranksVar: 'DCA_RANKS' },
+  { target: 'double-detect', key: ['dd_best_easy','dd_best_normal','dd_best_hard'],                              ranksVar: 'DD_RANKS' }];
 
 function refreshBestScores() {
   BS_MAPPING.forEach(g => {
@@ -423,6 +435,14 @@ const ANNOUNCEMENTS = [
     items: [
       '💱 <strong>ドル換算</strong> — $1=¥150で円↔ドルを瞬時に換算しよう！',
     ]
+  },
+  {
+    id: 'ann_20260401',
+    icon: '🃏',
+    title: '新しいゲームを追加しました！',
+    items: [
+      '🃏 <strong>ダブル検知</strong> — 同じ数字が出たら即ボタン！最初の枚数も答えよう！',
+    ]
   }
 ];
 
@@ -511,12 +531,12 @@ function showRuleModal(gameId) {
   }
   if (!card) return;
   
-  const icon = (card.querySelector('.game-icon') || card.querySelector('.pick-icon-wrap')).textContent;
+  const icon = (card.querySelector('.game-icon') || card.querySelector('.pick-icon-wrap')).innerHTML;
   const title = (card.querySelector('h2') || card.querySelector('.pick-name')).textContent;
   const desc = card.querySelector('p') ? card.querySelector('p').textContent : "ルールを読み込み中...";
   const badge = (card.querySelector('.badge') || card.querySelector('.pick-cat-badge')).textContent;
   
-  document.getElementById('rule-icon').textContent = icon;
+  document.getElementById('rule-icon').innerHTML = icon;
   document.getElementById('rule-title').textContent = title;
   document.getElementById('rule-badge').textContent = badge;
   document.getElementById('rule-desc').textContent = desc;
@@ -534,7 +554,7 @@ let _retryFn = null;
 
 function showResult(icon, title, detail, onRetry, rank = null) {
   sfx.result();
-  document.getElementById('res-icon').textContent   = icon;
+  document.getElementById('res-icon').innerHTML   = renderIcon(icon);
   document.getElementById('res-title').textContent  = title;
   const detailEl = document.getElementById('res-detail');
   detailEl.innerHTML = detail.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
@@ -594,6 +614,128 @@ function resultHome() {
 function resultRetry() {
   document.getElementById('result-overlay').classList.remove('show');
   if (_retryFn) _retryFn();
+}
+
+/* ===== RECORDS PAGE ===== */
+const RANK_TIERS = [
+  { emoji: '👑', label: '伝説',        color: '#f59e0b' },
+  { emoji: '🏆', label: '達人',        color: '#8b5cf6' },
+  { emoji: '💫', label: 'エキスパート', color: '#3b82f6' },
+  { emoji: '⭐', label: '上級者',      color: '#10b981' },
+  { emoji: '🌟', label: '中級者',      color: '#6ee7b7' },
+  { emoji: '🔰', label: '見習い',      color: '#94a3b8' },
+  { emoji: '🌱', label: 'まだまだ',    color: '#64748b' },
+];
+
+function refreshRecords() {
+  const list     = document.getElementById('records-list');
+  const statsEl  = document.getElementById('records-stats');
+  const chartEl  = document.getElementById('records-chart');
+  if (!list || !statsEl || !chartEl) return;
+
+  let crownCount = 0;
+  let playedCount = 0;
+  const totalCount = BS_MAPPING.length;
+
+  // Count per rank tier (by label)
+  const tierCounts = {};
+  RANK_TIERS.forEach(t => { tierCounts[t.label] = 0; });
+
+  const rows = BS_MAPPING.map(g => {
+    const card = document.querySelector(`.game-card[data-game="${g.target}"]`);
+    if (!card) return null;
+
+    const icon = card.querySelector('.game-icon').innerHTML;
+    const name = card.querySelector('h2').textContent;
+    const cat  = card.querySelector('.badge').textContent;
+
+    let best = g.reverse ? Infinity : -Infinity;
+    let hasScore = false;
+
+    if (Array.isArray(g.key)) {
+      g.key.forEach(k => {
+        const raw = localStorage.getItem(k);
+        if (raw !== null) {
+          hasScore = true;
+          const v = parseFloat(raw);
+          if (!isNaN(v)) {
+            if (g.reverse && v < best) best = v;
+            else if (!g.reverse && v > best) best = v;
+          }
+        }
+      });
+    } else {
+      const raw = localStorage.getItem(g.key);
+      if (raw !== null) { hasScore = true; const v = parseFloat(raw); if (!isNaN(v)) best = v; }
+    }
+
+    let rank = null;
+    let isCrown = false;
+    if (hasScore && g.ranksVar && window[g.ranksVar]) {
+      rank = getScoreRank(best, window[g.ranksVar]);
+      if (rank === window[g.ranksVar][0]) { isCrown = true; crownCount++; }
+      if (tierCounts[rank.label] !== undefined) tierCounts[rank.label]++;
+    }
+
+    if (hasScore) playedCount++;
+    const display = hasScore ? (g.suffix ? best + g.suffix : best) : null;
+
+    return { icon, name, cat, display, rank, isCrown, hasScore, target: g.target };
+  }).filter(Boolean);
+
+  // Stats
+  statsEl.innerHTML = `
+    <div class="records-stat">
+      <div class="records-stat-value">${crownCount}</div>
+      <div class="records-stat-label">👑 王冠</div>
+    </div>
+    <div class="records-stat">
+      <div class="records-stat-value">${playedCount}</div>
+      <div class="records-stat-label">🎮 プレイ済み</div>
+    </div>
+    <div class="records-stat">
+      <div class="records-stat-value">${totalCount}</div>
+      <div class="records-stat-label">🏆 全ゲーム</div>
+    </div>`;
+
+  // Chart
+  chartEl.innerHTML = RANK_TIERS.map(t => {
+    const count = tierCounts[t.label] || 0;
+    const pct = Math.round((count / totalCount) * 100);
+    return `
+      <div class="chart-row">
+        <div class="chart-label">
+          <span class="chart-emoji">${t.emoji}</span>
+          <span>${t.label}</span>
+        </div>
+        <div class="chart-bar-track">
+          <div class="chart-bar-fill" style="--bar-color:${t.color}; width:${pct}%"></div>
+        </div>
+        <div class="chart-count" style="color:${count > 0 ? t.color : 'var(--text-3)'}">${count}</div>
+      </div>`;
+  }).join('');
+
+  // Animate bars (requestAnimationFrame to allow CSS transition)
+  requestAnimationFrame(() => {
+    chartEl.querySelectorAll('.chart-bar-fill').forEach(bar => {
+      bar.style.width = bar.style.width; // trigger reflow
+    });
+  });
+
+  // Game list
+  list.innerHTML = rows.map(r => `
+    <div class="record-row${r.isCrown ? ' record-crown' : ''}${!r.hasScore ? ' record-unplayed' : ''}" onclick="showScreen('${r.target}')">
+      <div class="record-icon">${r.icon}</div>
+      <div class="record-info">
+        <div class="record-name">${r.name}</div>
+        <div class="record-cat">${r.cat}</div>
+      </div>
+      <div class="record-score">
+        ${r.hasScore && r.rank
+          ? `<span class="record-rank-badge" style="--rank-color:${r.rank.color}">${r.rank.emoji} ${r.rank.label}</span><span class="record-value">${r.display}</span>`
+          : '<span class="record-no-score">未プレイ</span>'}
+      </div>
+    </div>`).join('');
 }
 
 /* ===== UTILITIES ===== */

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'noutore-v20';
+const CACHE_NAME = 'noutore-v22';
 const ASSETS = [
   './',
   './index.html',
@@ -90,6 +90,8 @@ const ASSETS = [
   './js/day-calc.js',
   './css/dollar-calc.css',
   './js/dollar-calc.js',
+  './css/double-detect.css',
+  './js/double-detect.js',
 ];
 
 self.addEventListener('install', e => {

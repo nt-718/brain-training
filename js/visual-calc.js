@@ -211,7 +211,7 @@ function vcEnd() {
   }
   document.getElementById('vc-start-btn').style.display = '';
   const rank = getScoreRank(vcScore, VC_RANKS);
-  showResult('🧮', 'ゲーム終了!', `スコア: ${vcScore}点 (ベスト: ${vcBest})`, vcStart, rank);
+  showResult('assets/icons/dot-counter.svg', 'ゲーム終了!', `スコア: ${vcScore}点 (ベスト: ${vcBest})`, vcStart, rank);
 }
 
 function flashGameContent(correct) {
