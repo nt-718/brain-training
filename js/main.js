@@ -247,6 +247,7 @@ function showScreen(id) {
     if (typeof loStop === 'function') loStop();
     if (typeof dcaStop === 'function') dcaStop();
     if (typeof ddStop === 'function') ddStop();
+    if (typeof tcStop === 'function') tcStop();
     if (id === 'home') refreshBestScores();
     if (id === 'records') refreshRecords();
 
@@ -314,7 +315,8 @@ const BS_MAPPING = [
   { target: 'clock-calc',     key: ['cl_best_easy','cl_best_normal','cl_best_hard'],                               ranksVar: 'CL_RANKS' },
   { target: 'lights-out',     key: ['lo_best_easy','lo_best_normal','lo_best_hard'], reverse: true, suffix: '手', ranksVar: 'LO_RANKS' },
   { target: 'dollar-calc',   key: ['dca_best_easy','dca_best_normal','dca_best_hard'],                           ranksVar: 'DCA_RANKS' },
-  { target: 'double-detect', key: ['dd_best_easy','dd_best_normal','dd_best_hard'],                              ranksVar: 'DD_RANKS' }];
+  { target: 'double-detect', key: ['dd_best_easy','dd_best_normal','dd_best_hard'],                              ranksVar: 'DD_RANKS' },
+  { target: 'tax-calc',     key: ['tc_best_easy','tc_best_normal','tc_best_hard'],                              ranksVar: 'TC_RANKS' }];
 
 function refreshBestScores() {
   BS_MAPPING.forEach(g => {
@@ -442,6 +444,14 @@ const ANNOUNCEMENTS = [
     title: '新しいゲームを追加しました！',
     items: [
       '🃏 <strong>ダブル検知</strong> — 同じ数字が出たら即ボタン！最初の枚数も答えよう！',
+    ]
+  },
+  {
+    id: 'ann_20260402',
+    icon: '🧾',
+    title: '新しいゲームを追加しました！',
+    items: [
+      '🧾 <strong>消費税計算</strong> — 税抜き価格から税込み価格を素早く答えよう！',
     ]
   }
 ];

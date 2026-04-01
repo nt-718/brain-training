@@ -63,6 +63,7 @@
   <link rel="stylesheet" href="css/lights-out.css" />
   <link rel="stylesheet" href="css/dollar-calc.css" />
   <link rel="stylesheet" href="css/double-detect.css" />
+  <link rel="stylesheet" href="css/tax-calc.css" />
 </head>
 
 <body>
@@ -230,6 +231,14 @@
             <p>指定された時間を素早く計算しよう</p>
           </div>
           <div class="badge">計算</div>
+        </div>
+        <div class="game-card" onclick="showScreen('tax-calc')" data-game="tax-calc">
+          <div class="game-icon">🧾</div>
+          <div class="game-info">
+            <h2>消費税計算</h2>
+            <p>税込み価格を素早く答えよう</p>
+          </div>
+          <div class="badge">暗算</div>
         </div>
       </div>
     </div>
@@ -2772,6 +2781,58 @@
     </div>
   </div><!-- /#double-detect -->
 
+  <!-- ========== 消費税計算ゲーム ========== -->
+  <div id="tax-calc" class="screen">
+    <nav class="nav">
+      <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+      <h1>消費税計算</h1>
+    </nav>
+    <div class="game-content">
+
+      <div class="diff-row" id="tc-diff-row">
+        <button class="diff-btn" onclick="tcSetDiff(this,'easy')">かんたん</button>
+        <button class="diff-btn selected" onclick="tcSetDiff(this,'normal')">ふつう</button>
+        <button class="diff-btn" onclick="tcSetDiff(this,'hard')">むずかしい</button>
+      </div>
+
+      <div class="score-bar">
+        <div class="score-item">
+          <div class="label">スコア</div>
+          <div class="value" id="tc-score">0</div>
+        </div>
+        <div class="score-item">
+          <div class="label">ベスト</div>
+          <div class="value" id="tc-best">0</div>
+        </div>
+      </div>
+
+      <div class="timer-bar">
+        <div class="timer-fill" id="tc-timer-fill" style="width:100%"></div>
+      </div>
+
+      <div class="tc-stage" id="tc-stage">
+        <div class="tc-question-area" id="tc-question-area" style="display:none;">
+          <div class="tc-tax-tag">税抜き → 税込み（10%）</div>
+          <div class="tc-question" id="tc-question"></div>
+          <div class="tc-arrow-label"><span>↓</span> 税込みは？</div>
+        </div>
+        <div class="tc-answers" id="tc-answers" style="display:none;">
+          <button class="tc-answer-btn"></button>
+          <button class="tc-answer-btn"></button>
+          <button class="tc-answer-btn"></button>
+          <button class="tc-answer-btn"></button>
+        </div>
+        <div class="tc-message" id="tc-message">スタートを押してください</div>
+        <div class="tc-rate-note">消費税率 10%</div>
+      </div>
+
+      <div class="answer-area">
+        <button class="btn-primary" id="tc-start-btn" onclick="tcStart()">スタート</button>
+      </div>
+
+    </div>
+  </div><!-- /#tax-calc -->
+
   <!-- ========== SCENE TRANSITION ========== -->
   <div id="scene-transition" class="scene-transition"></div>
 
@@ -2824,6 +2885,7 @@
   <script src="js/lights-out.js"></script>
   <script src="js/dollar-calc.js"></script>
   <script src="js/double-detect.js"></script>
+  <script src="js/tax-calc.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('sw.js').catch(() => { });

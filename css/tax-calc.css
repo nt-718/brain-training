@@ -1,0 +1,109 @@
+/* ===== 消費税計算ゲーム ===== */
+
+.tc-stage {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 16px;
+}
+
+.tc-tax-tag {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 4px 14px;
+}
+
+.tc-question-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.tc-question-label {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.tc-question {
+  font-size: 3rem;
+  font-weight: 900;
+  font-family: 'Inter', monospace;
+  color: #e11d48;
+  background: rgba(225, 29, 72, 0.08);
+  border: 2px solid rgba(225, 29, 72, 0.25);
+  border-radius: 14px;
+  padding: 0.5rem 1.4rem;
+  letter-spacing: 0.03em;
+}
+
+.tc-arrow-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.tc-arrow-label span {
+  font-size: 1.4rem;
+}
+
+.tc-answers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.tc-answer-btn {
+  background: var(--card-bg);
+  color: var(--text-main);
+  border: 2px solid var(--card-border);
+  border-radius: 12px;
+  padding: 18px 10px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: 'Inter', monospace;
+  letter-spacing: 0.03em;
+}
+
+.tc-answer-btn:hover {
+  border-color: var(--primary);
+  background: rgba(139, 92, 246, 0.08);
+  transform: translateY(-2px);
+}
+
+.tc-answer-btn:active {
+  transform: translateY(1px);
+}
+
+.tc-message {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.tc-rate-note {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+  opacity: 0.7;
+  margin-top: 4px;
+}
