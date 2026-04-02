@@ -1,4 +1,4 @@
-const CACHE_NAME = 'noutore-v23';
+const CACHE_NAME = 'noutore-v24';
 const ASSETS = [
   './',
   './index.html',
@@ -94,6 +94,14 @@ const ASSETS = [
   './js/double-detect.js',
   './css/tax-calc.css',
   './js/tax-calc.js',
+  './css/otp-memory.css',
+  './js/otp-memory.js',
+  './css/arrow-swipe.css',
+  './js/arrow-swipe.js',
+  './css/clock-calc.css',
+  './js/clock-calc.js',
+  './css/lights-out.css',
+  './js/lights-out.js',
 ];
 
 self.addEventListener('install', e => {

@@ -163,3 +163,12 @@
 .js-history-item .diff.ok   { color: #facc15; }
 .js-history-item .diff.miss { color: var(--secondary); }
 .js-history-item .pts    { color: #c4b5fd; font-weight: 700; }
+@media (max-height: 750px) {
+  .js-target-display { padding: 12px 20px; }
+  .js-target-time { font-size: 2.8rem; }
+  .js-clock-area { width: 140px; height: 140px; }
+  .js-clock-number { font-size: 2.22rem; }
+  .js-stop-btn { width: 140px; height: 140px; font-size: 1.1rem; }
+  .js-history { max-height: 80px; gap: 4px; }
+  .js-history-item { padding: 6px 12px; font-size: 0.8rem; }
+}

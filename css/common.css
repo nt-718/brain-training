@@ -12,6 +12,9 @@
   --bg-2:     #0e1117;
   --bg-3:     #151c28;
   --bg-4:     #1a2235;
+  --card:     rgba(255,255,255,0.04);
+  --card-bg:  rgba(255,255,255,0.04);
+  --card-border: rgba(255,255,255,0.10);
 
   --text:     #eef2ff;
   --text-2:   #a8b3cf;
@@ -103,35 +106,26 @@ body::after {
   top: 0;
   z-index: 10;
 }
-.nav h1 { font-size: 1.1rem; font-weight: 800; flex: 1; letter-spacing: 0.5px; }
-.btn-back {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid var(--border);
-  color: var(--text-2);
-  padding: 7px 16px;
-  border-radius: 999px;
-  cursor: pointer;
-  font-size: 0.85rem;
-  font-weight: 600;
-  transition: all 0.18s ease;
-  font-family: var(--font-main);
-}
-.btn-back:hover { background: rgba(255,255,255,0.11); color: var(--text); transform: translateX(-2px); }
-
+.nav h1 { font-size: 1.1rem; font-weight: 800; flex: 1; letter-spacing: 0.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.btn-back,
 .btn-rule {
   background: rgba(255,255,255,0.06);
   border: 1px solid var(--border);
   color: var(--text-2);
-  padding: 7px 16px;
-  border-radius: 999px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
   cursor: pointer;
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-size: 1rem;
   transition: all 0.18s ease;
-  font-family: var(--font-main);
-  display: flex; align-items: center; gap: 6px;
+  display: flex; align-items: center; justify-content: center;
 }
-.btn-rule:hover { background: rgba(255,255,255,0.11); color: var(--text); }
+.btn-back:hover,
+.btn-rule:hover {
+  background: rgba(255,255,255,0.11);
+  color: var(--text);
+  transform: scale(1.05);
+}
 
 /* ==============================================
    HOME — HEADER
@@ -783,11 +777,20 @@ body::after {
   .dev-pick-list { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 400px) {
-  .game-list { grid-template-columns: repeat(2, 1fr); }
-  .game-content { padding: 14px 12px; gap: 12px; }
-  .result-card { padding: 30px 20px; }
-  .daily-pick-list { grid-template-columns: repeat(2, 1fr); }
+  .game-list { grid-template-columns: repeat(3, 1fr); padding: 0 10px; gap: 6px; }
+  .game-content { padding: 14px 10px; gap: 10px; }
+  .result-card { padding: 24px 16px; }
+  .daily-pick-list { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .game-icon { width: 48px; height: 48px; font-size: 1.5rem; margin: 12px auto 6px; }
+  .game-info h2 { font-size: 0.68rem; line-height: 1.1; }
 }
+
+@media (max-height: 750px) {
+  .game-content { padding: 10px 10px; gap: 10px; }
+  .score-bar { padding: 8px 16px; }
+  .score-item .value { font-size: 1.1rem; }
+}
+
 
 /* ==============================================
    RECORDS BUTTON (home header)

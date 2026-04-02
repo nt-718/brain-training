@@ -147,9 +147,10 @@ function gameEnd() {
 
 ```html
 <!-- ========== ゲーム名 ========== -->
+<!-- Note: 戻るボタンは「🏠」。また、「遊び方」(ℹ️) と「グレード」(🏆) は main.js で自動挿入されます。-->
 <div id="<game-id>" class="screen">
   <nav class="nav">
-    <button class="btn-back" onclick="showScreen('home')">← ホーム</button>
+    <button class="btn-back" onclick="showScreen('home')">🏠</button>
     <h1>ゲーム名</h1>
   </nav>
   <div class="game-content">

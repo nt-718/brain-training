@@ -481,11 +481,8 @@ function closeUpdatePopup() {
 
 function dismissUpdatePopup() {
   if (_currentAnnouncementId) {
-    const seen = _getSeenAnnouncements();
-    if (!seen.includes(_currentAnnouncementId)) {
-      seen.push(_currentAnnouncementId);
-      localStorage.setItem('seenAnnouncements', JSON.stringify(seen));
-    }
+    const allIds = ANNOUNCEMENTS.map(a => a.id);
+    localStorage.setItem('seenAnnouncements', JSON.stringify(allIds));
   }
   document.getElementById('update-popup-overlay').classList.remove('show');
 }
@@ -515,7 +512,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!nav) return;
     const btn = document.createElement('button');
     btn.className = 'btn-rule';
-    btn.innerHTML = '<span>ℹ️</span> 遊び方';
+    btn.innerHTML = 'ℹ️';
     btn.onclick = () => showRuleModal(screen.id);
     nav.appendChild(btn);
 
@@ -523,7 +520,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (mapping && mapping.ranksVar && window[mapping.ranksVar]) {
       const gbtn = document.createElement('button');
       gbtn.className = 'btn-rule';
-      gbtn.innerHTML = '<span>🏆</span> グレード';
+      gbtn.innerHTML = '🏆';
       gbtn.onclick = () => showRankGuide(mapping.ranksVar);
       nav.appendChild(gbtn);
     }

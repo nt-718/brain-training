@@ -37,7 +37,7 @@ function jsStop() {
   clearInterval(jsInterval);
   jsInterval = null;
   jsState = 'idle';
-  document.getElementById('js-start-btn').style.display = 'inline-flex';
+  document.getElementById('js-start-btn').style.display = 'inline-block';
   document.getElementById('js-stop-btn').style.display = 'none';
   document.getElementById('js-ring').classList.remove('active');
   document.getElementById('js-clock-number').classList.remove('hidden');
@@ -54,7 +54,7 @@ function jsNextRound() {
       document.getElementById('js-best').textContent = jsBest;
       localStorage.setItem('jsBest', jsBest);
     }
-    document.getElementById('js-start-btn').style.display = 'inline-flex';
+    document.getElementById('js-start-btn').style.display = 'inline-block';
     document.getElementById('js-start-btn').textContent = 'もう一度';
     const rank = getScoreRank(jsScore, JS_RANKS);
     showResult('⏱️', 'ゲーム終了！', `スコア: ${jsScore} / ${JS_ROUNDS * 10} (ベスト: ${jsBest})`, jsStart, rank);
@@ -91,7 +91,7 @@ function jsBegin() {
   jsStartTime = performance.now();
   jsElapsed = 0;
 
-  document.getElementById('js-stop-btn').style.display = 'flex';
+  document.getElementById('js-stop-btn').style.display = 'block';
   document.getElementById('js-ring').classList.add('active');
   document.getElementById('js-feedback').textContent = '今だ！と思ったら押せ！';
 
