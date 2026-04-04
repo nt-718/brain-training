@@ -64,6 +64,7 @@
   <link rel="stylesheet" href="css/dollar-calc.css" />
   <link rel="stylesheet" href="css/double-detect.css" />
   <link rel="stylesheet" href="css/tax-calc.css" />
+  <link rel="stylesheet" href="css/emoji-finder.css" />
 </head>
 
 <body>
@@ -363,6 +364,14 @@
             <p>絵文字の順番を覚えて正確に再現しよう</p>
           </div>
           <div class="badge">順序記憶</div>
+        </div>
+        <div class="game-card" onclick="showScreen('emoji-finder')" data-game="emoji-finder">
+          <div class="game-icon">🔍</div>
+          <div class="game-info">
+            <h2>絵文字さがし</h2>
+            <p>増えた絵文字を探し当てよう</p>
+          </div>
+          <div class="badge">記憶</div>
         </div>
         <div class="game-card" onclick="showScreen('color-seq')" data-game="color-seq">
           <div class="game-icon">🎨</div>
@@ -2833,6 +2842,59 @@
     </div>
   </div><!-- /#tax-calc -->
 
+  <!-- ========== 絵文字さがし ========== -->
+  <!-- Note: 戻るボタンは「🏠」。「遊び方」(ℹ️) と「グレード」(🏆) は main.js で自動挿入。-->
+  <div id="emoji-finder" class="screen">
+    <nav class="nav">
+      <button class="btn-back" onclick="showScreen('home')">🏠</button>
+      <h1>絵文字さがし</h1>
+    </nav>
+    <div class="game-content">
+
+      <!-- 難易度選択 -->
+      <div class="diff-row" id="ef-diff-row">
+        <button class="diff-btn selected" onclick="efSetDiff(this,'easy')">かんたん</button>
+        <button class="diff-btn" onclick="efSetDiff(this,'normal')">ふつう</button>
+        <button class="diff-btn" onclick="efSetDiff(this,'hard')">むずかしい</button>
+      </div>
+
+      <!-- スコアバー -->
+      <div class="score-bar">
+        <div class="score-item">
+          <div class="label">スコア</div>
+          <div class="value" id="ef-score">0</div>
+        </div>
+        <div class="score-item">
+          <div class="label">ベスト</div>
+          <div class="value" id="ef-best">0</div>
+        </div>
+      </div>
+
+      <!-- フラッシュフェーズ -->
+      <div id="ef-flash-stage" style="display:none;">
+        <div class="ef-level-label" id="ef-round-label">ラウンド 1</div>
+        <div class="ef-progress-bar">
+          <div class="ef-progress-fill" id="ef-progress-fill"></div>
+        </div>
+        <div class="ef-flash-count" id="ef-flash-count">0 / 10</div>
+        <div class="ef-flash-emoji" id="ef-flash-emoji"></div>
+        <div class="ef-flash-hint">この絵文字たちを覚えよう</div>
+      </div>
+
+      <!-- 回答フェーズ -->
+      <div id="ef-answer-stage" style="display:none;">
+        <div class="ef-answer-level" id="ef-answer-label">増えた絵文字はどれ？</div>
+        <div class="ef-grid" id="ef-grid"></div>
+      </div>
+
+      <!-- スタートボタン -->
+      <div class="answer-area" id="ef-start-area">
+        <button class="btn-primary" onclick="efStart()">スタート</button>
+      </div>
+
+    </div>
+  </div><!-- /#emoji-finder -->
+
   <!-- ========== SCENE TRANSITION ========== -->
   <div id="scene-transition" class="scene-transition"></div>
 
@@ -2886,6 +2948,7 @@
   <script src="js/dollar-calc.js"></script>
   <script src="js/double-detect.js"></script>
   <script src="js/tax-calc.js"></script>
+  <script src="js/emoji-finder.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('sw.js').catch(() => { });

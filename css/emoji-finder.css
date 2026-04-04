@@ -1,0 +1,122 @@
+/* ===== 絵文字さがし (emoji-finder) ===== */
+
+.ef-flash-stage,
+.ef-answer-stage {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.ef-level-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted, #888);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ---- Progress bar ---- */
+.ef-progress-bar {
+  width: 100%;
+  max-width: 340px;
+  height: 8px;
+  background: var(--card-border, #e2e8f0);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.ef-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  border-radius: 4px;
+  transition: width 0.12s ease;
+}
+
+.ef-flash-count {
+  font-size: 0.85rem;
+  color: var(--text-muted, #aaa);
+}
+
+/* ---- Flash emoji ---- */
+.ef-flash-emoji {
+  font-size: 6rem;
+  line-height: 1.1;
+  min-height: 1.2em;
+  text-align: center;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes efPop {
+  0%   { opacity: 0; transform: scale(0.55); }
+  65%  { transform: scale(1.12); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.ef-flash-emoji.ef-pop {
+  animation: efPop 0.22s ease-out both;
+}
+
+.ef-flash-hint {
+  font-size: 0.78rem;
+  color: var(--text-muted, #bbb);
+}
+
+/* ---- Answer phase ---- */
+.ef-answer-level {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-color, #1e293b);
+  text-align: center;
+}
+
+.ef-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+  width: 100%;
+  max-width: 360px;
+  max-height: 58vh;
+  overflow-y: auto;
+  padding: 4px 2px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ef-emoji-btn {
+  aspect-ratio: 1;
+  background: var(--card, #fff);
+  border: 2px solid var(--card-border, #e2e8f0);
+  border-radius: 10px;
+  font-size: 1.55rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.1s, border-color 0.15s, background 0.15s;
+  -webkit-tap-highlight-color: transparent;
+  line-height: 1;
+}
+
+.ef-emoji-btn:active:not(:disabled) {
+  transform: scale(0.88);
+}
+
+.ef-emoji-btn.ef-correct {
+  background: #dcfce7;
+  border-color: #22c55e;
+  animation: efPop 0.25s ease-out both;
+}
+
+.ef-emoji-btn.ef-wrong {
+  background: #fee2e2;
+  border-color: #ef4444;
+}
+
+.ef-emoji-btn:disabled {
+  cursor: default;
+}
