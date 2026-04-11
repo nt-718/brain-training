@@ -48,9 +48,7 @@ async function showLeaderboard(gameId, difficulty, myScore) {
         <div class="lb-row ${isMe ? 'lb-me' : ''} ${rankClass}">
           <div class="lb-rank">${rankIcon}</div>
           <div class="lb-avatar-wrap">
-            ${entry.photo_url 
-              ? `<img class="lb-avatar" src="${entry.photo_url}" alt="">`
-              : `<div class="lb-avatar-placeholder">👤</div>`}
+            <img class="lb-avatar" src="https://api.dicebear.com/9.x/bottts/svg?seed=${encodeURIComponent(entry.user_id || entry.user_name || 'player')}" alt="">
           </div>
           <div class="lb-name">${isMe ? 'あなた' : entry.user_name}</div>
           <div class="lb-score">${entry.score}<span class="lb-unit">点</span></div>
@@ -148,9 +146,7 @@ async function renderGlobalLeaderboard(containerId, mode = 'alltime') {
         <div class="lb-row ${isMe ? 'lb-me' : ''} ${rankClass}">
           <div class="lb-rank">${rankIcon}</div>
           <div class="lb-avatar-wrap">
-            ${entry.photo_url 
-              ? `<img class="lb-avatar" src="${entry.photo_url}" alt="">`
-              : `<div class="lb-avatar-placeholder">👤</div>`}
+            <img class="lb-avatar" src="https://api.dicebear.com/9.x/bottts/svg?seed=${encodeURIComponent(entry.user_id || entry.user_name || 'player')}" alt="">
           </div>
           <div class="lb-name">${isMe ? 'あなた' : entry.user_name}</div>
           <div class="lb-score">${entry.score}<span class="lb-unit">点</span></div>

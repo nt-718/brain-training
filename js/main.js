@@ -279,7 +279,12 @@ function showScreen(id, skipHistory = false) {
     if (!el || !el.classList.contains('screen')) {
       location.hash = ''; return;
     }
-    showScreen(hash, /*skipHistory=*/true);
+
+    if (hash === 'settings' && typeof openSettings === 'function') {
+      openSettings(true);
+    } else {
+      showScreen(hash, /*skipHistory=*/true);
+    }
   }
 
   window.addEventListener('hashchange', navigateToHash);
@@ -742,7 +747,8 @@ function rgLoadLeaderboard() {
     lbWrap.innerHTML = '<div class="lb-list">' + entries.map(e => {
       const isMe = user && user.id === e.user_id;
       const rClass = e.rank <= 3 ? `lb-rank-${e.rank}` : '';
-      const av = e.photo_url ? `<img src="${e.photo_url}" class="lb-avatar">` : `<div class="lb-avatar-ph"></div>`;
+      const seed = encodeURIComponent(e.user_id || e.user_name || 'player');
+      const av = `<img src="https://api.dicebear.com/9.x/bottts/svg?seed=${seed}" class="lb-avatar">`;
       const name = e.user_name.replace(/</g, '&lt;').replace(/>/g, '&gt;');
       return `<div class="lb-row ${isMe ? 'lb-me' : ''} ${rClass}">
         <div class="lb-rank">${e.rank}</div>

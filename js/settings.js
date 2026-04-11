@@ -94,10 +94,12 @@ function renderSettingsAccount() {
   const loggedIn = typeof isLoggedIn === 'function' ? isLoggedIn() : false;
 
   if (loggedIn && user) {
+    const seed = user.id || user.name || 'player';
+    const avatarUrl = `https://api.dicebear.com/9.x/bottts/svg?seed=${encodeURIComponent(seed)}`;
     wrap.innerHTML = `
       <div class="settings-item settings-item-row">
         <div class="settings-account-info">
-          ${user.photo_url ? `<img src="${user.photo_url}" class="settings-avatar-img" alt="avatar">` : '<div class="settings-avatar-placeholder">👤</div>'}
+          <img src="${avatarUrl}" class="settings-avatar-img" alt="avatar">
           <div>
             <div class="settings-account-name">${user.name || ''}</div>
             <div class="settings-account-email">${user.email || ''}</div>
@@ -109,9 +111,20 @@ function renderSettingsAccount() {
       </div>
     `;
   } else {
+    const customName = localStorage.getItem('user_display_name');
+    const avatarHtml = customName
+      ? `<img src="https://api.dicebear.com/9.x/bottts/svg?seed=${encodeURIComponent(customName)}" class="settings-avatar-img" alt="avatar">`
+      : `<div class="settings-avatar-placeholder">👤</div>`;
+
     wrap.innerHTML = `
       <div class="settings-item settings-item-row">
-        <span class="settings-account-guest">ゲスト（未ログイン）</span>
+        <div class="settings-account-info">
+          ${avatarHtml}
+          <div>
+            <div class="settings-account-name">${customName || 'ゲスト（未ログイン）'}</div>
+            <div class="settings-account-email" style="font-size: 0.65rem; color: var(--text-3); margin-top: 3px;">端末へのローカル保存</div>
+          </div>
+        </div>
       </div>
       <div class="settings-item">
         <div class="settings-hint">Googleアカウントでログインするとランキングに参加できます</div>
@@ -150,15 +163,17 @@ function showSettingsToast(msg) {
 }
 
 /* --- Open settings screen --- */
-function openSettings() {
+function openSettings(skipHistory = false) {
   // Populate username input
   const input = document.getElementById('settings-username-input');
   if (input) {
     input.value = getDisplayName() || '';
   }
   // Sync SFX button
-  updateSettingsSfxBtn(sfx.muted);
+  if (typeof sfx !== 'undefined') {
+    updateSettingsSfxBtn(sfx.muted);
+  }
   // Render account
   renderSettingsAccount();
-  showScreen('settings');
+  showScreen('settings', skipHistory);
 }

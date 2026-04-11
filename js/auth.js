@@ -195,7 +195,11 @@ function updateAuthUI() {
     // Logged in
     if (loginBtn) loginBtn.style.display = 'none';
     if (avatarWrap) avatarWrap.style.display = 'flex';
-    if (avatarImg && user.photo_url) avatarImg.src = user.photo_url;
+    if (avatarImg) {
+      avatarImg.style.display = '';
+      const seed = user.id || user.name || 'player';
+      avatarImg.src = `https://api.dicebear.com/9.x/bottts/svg?seed=${encodeURIComponent(seed)}`;
+    }
     if (userName) {
       userName.textContent = user.display_name || user.name;
     }
@@ -205,7 +209,10 @@ function updateAuthUI() {
     if (customName) {
       if (loginBtn) loginBtn.style.display = 'none';
       if (avatarWrap) avatarWrap.style.display = 'flex';
-      if (avatarImg) avatarImg.style.display = 'none';
+      if (avatarImg) {
+        avatarImg.style.display = '';
+        avatarImg.src = `https://api.dicebear.com/9.x/bottts/svg?seed=${encodeURIComponent(customName)}`;
+      }
       if (userName) userName.textContent = customName;
     } else {
       if (avatarWrap) avatarWrap.style.display = 'none';

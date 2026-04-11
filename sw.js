@@ -1,4 +1,4 @@
-const CACHE_NAME = 'noutore-v36';
+const CACHE_NAME = 'noutore-v37';
 const ASSETS = [
   './',
   './index.html',
@@ -116,8 +116,8 @@ self.addEventListener('fetch', e => {
   e.respondWith(
     fetch(e.request)
       .then(response => {
-        // 成功し、有効なレスポンスのみキャッシュに更新
-        if (response && response.status === 200 && response.type === 'basic') {
+        // 成功し、有効なレスポンスのみキャッシュに更新 (外部APIのDiceBearなどのCORSも含める)
+        if (response && response.status === 200 && (response.type === 'basic' || response.type === 'cors')) {
           const clone = response.clone();
           caches.open(CACHE_NAME).then(c => c.put(e.request, clone));
         }
