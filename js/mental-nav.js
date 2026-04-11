@@ -216,6 +216,7 @@ function mnGameOver(reason, wrongR, wrongC) {
 
   const rank = getScoreRank(mnScore, MN_RANKS);
   setTimeout(() => {
+  saveScore('mental-nav', 'default', mnScore);
     showResult(icon, title, detail, mnStart, rank);
   }, reason === 'wrong' ? 800 : 0);
 }

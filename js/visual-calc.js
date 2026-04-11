@@ -211,6 +211,7 @@ function vcEnd() {
   }
   document.getElementById('vc-start-btn').style.display = '';
   const rank = getScoreRank(vcScore, VC_RANKS);
+  saveScore('visual-calc', vcDiff, vcScore);
   showResult('assets/icons/dot-counter.svg', 'ゲーム終了!', `スコア: ${vcScore}点 (ベスト: ${vcBest})`, vcStart, rank);
 }
 

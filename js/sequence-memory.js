@@ -137,6 +137,7 @@ function smTap(color) {
       document.getElementById('sm-start-btn').style.display = 'inline-flex';
       document.getElementById('sm-start-btn').textContent = 'もう一度';
       const rank = getScoreRank(smLevel - 1, SM_RANKS);
+  saveScore('sequence-memory', 'default', smScore);
       showResult('🚥', 'ゲームオーバー！', `レベル ${smLevel - 1} まで到達！ (ベスト: ${smBest})`, smStart, rank);
     }, 800);
     return;

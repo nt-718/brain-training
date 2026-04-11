@@ -11,23 +11,16 @@ function renderIcon(icon) {
   const ALL_GAMES = [
     { id:'visual-calc',    name:'ドットカウンター',     icon:'assets/icons/dot-counter.svg', cat:'計算', color:'rgba(251,191,36,0.6)' },
     { id:'flash-math',     name:'フラッシュサム',        icon:'⚡️', cat:'計算', color:'rgba(251,146,60,0.6)' },
-    { id:'speed-sum',      name:'ラピッドサム',          icon:'➕', cat:'計算', color:'rgba(74,222,128,0.6)' },
-    { id:'eq-judge',       name:'イコールジャッジ',      icon:'✅', cat:'計算', color:'rgba(52,211,153,0.6)' },
     { id:'balance-scale',  name:'バランスバトル',        icon:'⚖️', cat:'計算', color:'rgba(250,204,21,0.6)' },
     { id:'prime-hunt',     name:'プライムハンター',      icon:'🔬', cat:'計算', color:'rgba(45,212,191,0.6)' },
-    { id:'frac-cmp',       name:'フラクションバトル',    icon:'➗', cat:'計算', color:'rgba(96,165,250,0.6)' },
-    { id:'budget-plan',    name:'バジェットマスター',    icon:'🛒', cat:'計算', color:'rgba(34,197,94,0.6)' },
     { id:'make-ten',       name:'メイク10',              icon:'assets/icons/make-ten.svg', cat:'計算', color:'rgba(251,113,133,0.6)' },
     { id:'race-pos',       name:'レースビジョン',        icon:'🏃', cat:'計算', color:'rgba(249,115,22,0.6)' },
     { id:'day-calc',       name:'カレンダーマスター',    icon:'📅', cat:'計算', color:'rgba(167,139,250,0.6)' },
     { id:'clock-calc',     name:'クロックマスター',      icon:'⏳', cat:'計算', color:'rgba(96,165,250,0.6)' },
-    { id:'symbol-logic',   name:'シンボルブレイカー',    icon:'🎯', cat:'論理', color:'rgba(232,121,249,0.6)' },
     { id:'pair-logic',     name:'ペアロジック',          icon:'🃏', cat:'論理', color:'rgba(129,140,248,0.6)' },
     { id:'pattern-next',   name:'パターンブレイカー',    icon:'🔮', cat:'論理', color:'rgba(192,132,252,0.6)' },
     { id:'mirror-path',    name:'リバースナビ',          icon:'🪞', cat:'論理', color:'rgba(34,211,238,0.6)' },
     { id:'mental-nav',     name:'メンタルナビ',          icon:'🗺️', cat:'論理', color:'rgba(20,184,166,0.6)' },
-    { id:'word-link',      name:'ワードリンク',          icon:'🔤', cat:'論理', color:'rgba(56,189,248,0.6)' },
-    { id:'chain-word',     name:'チェーンワード',        icon:'🔗', cat:'論理', color:'rgba(6,182,212,0.6)' },
     { id:'flash-sudoku',   name:'ブラインド数独',        icon:'🔦', cat:'論理', color:'rgba(99,102,241,0.6)' },
     { id:'lights-out',     name:'ライトアウト',          icon:'💡', cat:'論理', color:'rgba(250,204,21,0.6)' },
     { id:'memory-matrix',  name:'ライトマトリックス',    icon:'🔲', cat:'記憶', color:'rgba(34,197,94,0.6)' },
@@ -38,22 +31,16 @@ function renderIcon(icon) {
     { id:'card-flip',      name:'ペアフリップ',          icon:'🀄', cat:'記憶', color:'rgba(234,88,12,0.6)' },
     { id:'otp-memory',     name:'コードメモリー',        icon:'🔐', cat:'記憶', color:'rgba(16,185,129,0.6)' },
     { id:'num-tap',        name:'ナンバータッチ',        icon:'🔢', cat:'反射', color:'rgba(59,130,246,0.6)' },
-    { id:'swipe-sort',     name:'スワイプジャッジ',      icon:'↔️', cat:'反射', color:'rgba(236,72,153,0.6)' },
     { id:'color-match',    name:'カラートラップ',        icon:'🎭', cat:'反射', color:'rgba(168,85,247,0.6)' },
-    { id:'big-number',     name:'ビッグナンバー',        icon:'🆚', cat:'反射', color:'rgba(239,68,68,0.6)' },
-    { id:'go-nogo',        name:'ゴー！ノーゴー！',      icon:'🚦', cat:'反射', color:'rgba(22,163,74,0.6)' },
     { id:'apple-catch',    name:'アップルキャッチ',      icon:'🍎', cat:'反射', color:'rgba(220,38,38,0.6)' },
     { id:'hi-lo',          name:'ハイ＆ロー',            icon:'♠️', cat:'反射', color:'rgba(5,150,105,0.6)' },
     { id:'just-stop',      name:'パーフェクトストップ',  icon:'⏱️', cat:'反射', color:'rgba(37,99,235,0.6)' },
     { id:'arrow-swipe',    name:'アローマスター',        icon:'↗️', cat:'反射', color:'rgba(52,211,153,0.6)' },
-    { id:'target-search',  name:'ターゲットサーチ',      icon:'🔍', cat:'知覚', color:'rgba(202,138,4,0.6)' },
     { id:'num-order',      name:'ナンバーオーダー',      icon:'🔀', cat:'知覚', color:'rgba(14,165,233,0.6)' },
     { id:'obj-count',      name:'フラッシュカウント',    icon:'🔵', cat:'知覚', color:'rgba(8,145,178,0.6)' },
     { id:'cube-count',     name:'キューブカウント',      icon:'🧊', cat:'知覚', color:'rgba(125,211,252,0.6)' },
     { id:'shell-game',     name:'シェルゲーム',          icon:'🎩', cat:'知覚', color:'rgba(124,58,237,0.6)' },
     { id:'color-vision',   name:'カラービジョン',        icon:'👁️', cat:'知覚', color:'rgba(219,39,119,0.6)' },
-    { id:'color-code',     name:'カラーコード',          icon:'#️⃣', cat:'知覚', color:'rgba(13,148,136,0.6)' },
-    { id:'comp-color',     name:'カラーオポジット',      icon:'🌗', cat:'知覚', color:'rgba(217,119,6,0.6)' },
     { id:'double-detect',  name:'ダブル検知',            icon:'🃏', cat:'判断', color:'rgba(139,92,246,0.6)' },
   ];
 
@@ -135,6 +122,11 @@ function renderIcon(icon) {
       </div>
     `).join('');
     if (typeof refreshBestScores === 'function') refreshBestScores();
+
+    // Render global leaderboard
+    if (typeof renderGlobalLeaderboard === 'function') {
+      renderGlobalLeaderboard('home-global-leaderboard');
+    }
   });
 
   window.toggleDevPick = function() {
@@ -185,9 +177,13 @@ function scrollToCategory(id) {
 let currentScreen = 'home';
 let isTransitioning = false;
 
-function showScreen(id) {
+// Known valid screen IDs (non-game pages + all games)
+const VALID_SCREENS = new Set(['home','records','stats','settings']);
+
+function showScreen(id, skipHistory = false) {
   if (isTransitioning || currentScreen === id) return;
   sfx.nav();
+  if (!skipHistory) location.hash = id === 'home' ? '' : id;
   
   isTransitioning = true;
   const overlay = document.getElementById('scene-transition');
@@ -251,6 +247,8 @@ function showScreen(id) {
     if (typeof efStop === 'function') efStop();
     if (id === 'home') refreshBestScores();
     if (id === 'records') refreshRecords();
+    if (id === 'stats') refreshStats();
+    if (id === 'game-stats') refreshGameStatsScreen();
 
     window.scrollTo(0, 0);
 
@@ -265,6 +263,33 @@ function showScreen(id) {
   }, 150); // 暗転までの待ち時間
 }
 
+/* ===== HASH ROUTER ===== */
+(function initHashRouter() {
+  function navigateToHash() {
+    const hash = location.hash.replace('#', '') || 'home';
+
+    // game-stats/gameId pattern
+    if (hash.startsWith('game-stats/')) {
+      const gameId = hash.slice('game-stats/'.length);
+      showGameStats(gameId, /*skipHistory=*/true);
+      return;
+    }
+
+    const el = document.getElementById(hash);
+    if (!el || !el.classList.contains('screen')) {
+      location.hash = ''; return;
+    }
+    showScreen(hash, /*skipHistory=*/true);
+  }
+
+  window.addEventListener('hashchange', navigateToHash);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    if (location.hash && location.hash !== '#') {
+      navigateToHash();
+    }
+  });
+})();
 
 /* ===== BEST SCORES ON GAME CARDS ===== */
 const BS_MAPPING = [
@@ -276,37 +301,24 @@ const BS_MAPPING = [
   { target: 'flash-math',     key: ['fm_best_number_easy','fm_best_number_normal','fm_best_number_hard',
                                     'fm_best_visual_easy','fm_best_visual_normal','fm_best_visual_hard',
                                     'fm_best_mixed_easy','fm_best_mixed_normal','fm_best_mixed_hard'],             ranksVar: 'FM_RANKS' },
-  { target: 'target-search',  key: 'tsBest',                                                                      ranksVar: 'TS_RANKS' },
-  { target: 'symbol-logic',   key: 'slBest',                                                                      ranksVar: 'SL_RANKS' },
-  { target: 'swipe-sort',     key: 'ssBest',                                                                      ranksVar: 'SS_RANKS' },
   { target: 'shell-game',     key: 'sgBest',                                                                      ranksVar: 'SG_RANKS' },
   { target: 'just-stop',      key: 'jsBest',                                                                      ranksVar: 'JS_RANKS' },
-  { target: 'word-link',      key: 'wlBest',                                                                      ranksVar: 'WL_RANKS' },
   { target: 'sequence-memory',key: 'smBest',                                                                      ranksVar: 'SM_RANKS' },
   { target: 'emoji-order',    key: 'eoBest',                                                                      ranksVar: 'EO_RANKS' },
   { target: 'color-vision',   key: ['cv_best_easy','cv_best_normal','cv_best_hard'],                              ranksVar: 'CV_RANKS' },
-  { target: 'color-code',     key: ['cc_best_color2hex','cc_best_hex2color'],                                     ranksVar: 'CC_RANKS' },
   { target: 'mirror-path',    key: 'mpBest',                                                                      ranksVar: 'MP_RANKS' },
   { target: 'pair-logic',     key: 'plBest',                                                                      ranksVar: 'PL_RANKS' },
-  { target: 'chain-word',     key: 'cwBest',                                                                      ranksVar: 'CW_RANKS' },
-  { target: 'big-number',     key: 'bnBest',                                                                      ranksVar: 'BN_RANKS' },
   { target: 'balance-scale',  key: 'blBest',                                                                      ranksVar: 'BL_RANKS' },
   { target: 'pattern-next',   key: 'pnBest',                                                                      ranksVar: 'PN_RANKS' },
   { target: 'mental-nav',     key: 'mnBest',                                                                      ranksVar: 'MN_RANKS' },
-  { target: 'go-nogo',        key: 'gnBest',                                                                      ranksVar: 'GN_RANKS' },
   { target: 'apple-catch',    key: 'acBest',                                                                      ranksVar: 'AC_RANKS' },
-  { target: 'speed-sum',      key: ['spd_best_easy','spd_best_normal','spd_best_hard'],                           ranksVar: 'SPD_RANKS' },
-  { target: 'eq-judge',       key: ['eqt_best_easy','eqt_best_normal','eqt_best_hard'],                           ranksVar: 'EQT_RANKS' },
   { target: 'num-order',      key: ['nor_best_easy','nor_best_normal','nor_best_hard'],                           ranksVar: 'NOR_RANKS' },
   { target: 'obj-count',      key: ['oc_best_easy','oc_best_normal','oc_best_hard'],                              ranksVar: 'OC_RANKS' },
   { target: 'hi-lo',          key: 'hlBest',                                                                      ranksVar: 'HL_RANKS' },
   { target: 'color-seq',      key: 'cseqBest',                                                                    ranksVar: 'CSEQ_RANKS' },
   { target: 'prime-hunt',     key: ['ph_best_easy','ph_best_normal','ph_best_hard'],                              ranksVar: 'PH_RANKS' },
-  { target: 'frac-cmp',       key: ['fcmp_best_easy','fcmp_best_normal','fcmp_best_hard'],                        ranksVar: 'FCMP_RANKS' },
   { target: 'card-flip',      key: ['cflip_best_easy','cflip_best_normal','cflip_best_hard'], reverse: true, suffix: '手', ranksVar: 'CFLIP_RANKS' },
-  { target: 'budget-plan',    key: ['bplan_best_easy','bplan_best_normal','bplan_best_hard'],                     ranksVar: 'BPLAN_RANKS' },
   { target: 'cube-count',     key: ['ccnt_best_easy','ccnt_best_normal','ccnt_best_hard'],                        ranksVar: 'CCNT_RANKS' },
-  { target: 'comp-color',     key: ['ccol_best_easy','ccol_best_normal','ccol_best_hard'],                        ranksVar: 'CCOL_RANKS' },
   { target: 'make-ten',       key: 'mten_best',                                                                   ranksVar: 'MTEN_RANKS' },
   { target: 'flash-sudoku',   key: ['fsd_best_easy','fsd_best_normal','fsd_best_hard'],                           ranksVar: 'FSD_RANKS' },
   { target: 'race-pos',       key: ['rp_best_easy','rp_best_normal','rp_best_hard'],                               ranksVar: 'RP_RANKS' },
@@ -319,6 +331,42 @@ const BS_MAPPING = [
   { target: 'double-detect', key: ['dd_best_easy','dd_best_normal','dd_best_hard'],                              ranksVar: 'DD_RANKS' },
   { target: 'tax-calc',     key: ['tc_best_easy','tc_best_normal','tc_best_hard'],                              ranksVar: 'TC_RANKS' },
   { target: 'emoji-finder', key: ['ef_best_easy','ef_best_normal','ef_best_hard'],                              ranksVar: 'EF_RANKS' }];
+
+// Register all score keys for history tracking
+BS_MAPPING.forEach(g => {
+  const keys = Array.isArray(g.key) ? g.key : [g.key];
+  keys.forEach(k => window._scoreHistoryKeys && window._scoreHistoryKeys.add(k));
+});
+
+// Seed history from existing scores (one-time migration for pre-history data)
+(function seedScoreHistory() {
+  const FLAG = '_hist_seeded_v1';
+  if (localStorage.getItem(FLAG)) return;
+  const now = Date.now();
+  BS_MAPPING.forEach(g => {
+    const keys = Array.isArray(g.key) ? g.key : [g.key];
+    keys.forEach(k => {
+      const val = localStorage.getItem(k);
+      if (val === null) return;
+      const histKey = k + '__hist';
+      const existing = localStorage.getItem(histKey);
+      if (!existing || existing === '[]') {
+        const v = parseFloat(val);
+        if (!isNaN(v)) {
+          // Use _rawStorageSet to bypass scoping so it lands in the right namespace
+          const pfx = window._rawStoragePrefix ? window._rawStoragePrefix() : '';
+          const rawHistKey = pfx + histKey;
+          const rawExisting = window._rawStorageGet ? window._rawStorageGet(rawHistKey) : null;
+          if (!rawExisting || rawExisting === '[]') {
+            const entry = JSON.stringify([[now, v]]);
+            if (window._rawStorageSet) window._rawStorageSet(rawHistKey, entry);
+          }
+        }
+      }
+    });
+  });
+  localStorage.setItem(FLAG, '1');
+})();
 
 function refreshBestScores() {
   BS_MAPPING.forEach(g => {
@@ -583,6 +631,19 @@ function showResult(icon, title, detail, onRetry, rank = null) {
     rankEl.style.display = 'none';
   }
   _retryFn = onRetry;
+
+  // Add leaderboard button if logged in
+  const btnRow = document.querySelector('#result-overlay .btn-row');
+  const oldLb = btnRow.querySelector('.btn-leaderboard');
+  if (oldLb) oldLb.remove();
+  if (typeof isLoggedIn === 'function' && isLoggedIn() && typeof _lastSaveInfo !== 'undefined' && _lastSaveInfo) {
+    const lb = document.createElement('button');
+    lb.className = 'btn-outline btn-leaderboard';
+    lb.innerHTML = '🏆 ランキング';
+    lb.onclick = () => showLeaderboard(_lastSaveInfo.gameId, _lastSaveInfo.difficulty, _lastSaveInfo.score);
+    btnRow.appendChild(lb);
+  }
+
   document.getElementById('result-overlay').classList.add('show');
 }
 
@@ -595,28 +656,104 @@ function getScoreRank(score, ranks) {
   return ranks[ranks.length - 1];
 }
 
+let _rgCurrentMapping = null;
+let _rgCurrentUnit = '点';
+let _rgLbLoaded = false;
+
 function showRankGuide(ranksVar) {
   const ranks = window[ranksVar];
   if (!ranks) return;
+
+  _rgCurrentMapping = typeof BS_MAPPING !== 'undefined' ? BS_MAPPING.find(m => m.ranksVar === ranksVar) : null;
+  _rgCurrentUnit = ranks.unit || '点';
+  _rgLbLoaded = false;
+
+  // Title
+  const titleEl = document.getElementById('rank-guide-title');
+  if (titleEl) {
+    if (_rgCurrentMapping) {
+      const card = document.querySelector(`.game-card[data-game="${_rgCurrentMapping.target}"]`);
+      titleEl.textContent = card ? card.querySelector('h2').textContent : 'ランク基準';
+    } else {
+      titleEl.textContent = 'ランク基準';
+    }
+  }
+
+  // Rank content
   const isReverse = 'max' in ranks[0];
-  const unit = ranks.unit || '点';
   document.getElementById('rank-guide-content').innerHTML = ranks.map((r, i) => {
     let range;
     if (isReverse) {
       const prev = ranks[i - 1];
       const from = prev ? prev.max + 1 : null;
       const to   = r.max === Infinity ? null : r.max;
-      range = from === null ? `〜${to}${unit}` : to === null ? `${from}${unit}〜` : `${from}〜${to}${unit}`;
+      range = from === null ? `〜${to}${_rgCurrentUnit}` : to === null ? `${from}${_rgCurrentUnit}〜` : `${from}〜${to}${_rgCurrentUnit}`;
     } else {
       const next = ranks[i - 1];
-      range = next ? `${r.min}〜${next.min - 1}点` : `${r.min}点〜`;
+      range = next ? `${r.min}〜${next.min - 1}${_rgCurrentUnit}` : `${r.min}${_rgCurrentUnit}〜`;
     }
     return `<div class="rank-guide-row">
       <span class="rank-guide-badge" style="--rank-color:${r.color}">${r.emoji} ${r.label}</span>
       <span class="rank-guide-score">${range}</span>
     </div>`;
   }).join('');
+
+  document.getElementById('rank-guide-leaderboard-wrap').innerHTML = '';
+
   document.getElementById('rank-guide-overlay').classList.add('show');
+  rgSelectTab('rank');
+}
+
+function rgSelectTab(tab) {
+  const rankPanel = document.getElementById('rank-guide-content');
+  const lbPanel   = document.getElementById('rank-guide-leaderboard-wrap');
+  const rankTab   = document.getElementById('rgtab-rank');
+  const lbTab     = document.getElementById('rgtab-lb');
+
+  const isRank = tab === 'rank';
+  rankPanel.style.display = isRank ? '' : 'none';
+  lbPanel.style.display   = isRank ? 'none' : '';
+  rankTab.classList.toggle('active', isRank);
+  lbTab.classList.toggle('active', !isRank);
+
+  if (!isRank && !_rgLbLoaded) {
+    _rgLbLoaded = true;
+    rgLoadLeaderboard();
+  }
+}
+
+function rgLoadLeaderboard() {
+  const lbWrap = document.getElementById('rank-guide-leaderboard-wrap');
+  if (!lbWrap) return;
+
+  if (!_rgCurrentMapping || typeof getLeaderboard !== 'function') {
+    lbWrap.innerHTML = '<p class="rg-lb-empty">ランキングデータがありません</p>';
+    return;
+  }
+
+  lbWrap.innerHTML = '<div class="lb-loading"><div class="lb-spinner"></div></div>';
+
+  getLeaderboard(_rgCurrentMapping.target, 'all', 10).then(entries => {
+    if (!entries || entries.length === 0) {
+      lbWrap.innerHTML = '<p class="rg-lb-empty">まだランキングデータがありません</p>';
+      return;
+    }
+    const user = typeof getAuthUser === 'function' ? getAuthUser() : null;
+    lbWrap.innerHTML = '<div class="lb-list">' + entries.map(e => {
+      const isMe = user && user.id === e.user_id;
+      const rClass = e.rank <= 3 ? `lb-rank-${e.rank}` : '';
+      const av = e.photo_url ? `<img src="${e.photo_url}" class="lb-avatar">` : `<div class="lb-avatar-ph"></div>`;
+      const name = e.user_name.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      return `<div class="lb-row ${isMe ? 'lb-me' : ''} ${rClass}">
+        <div class="lb-rank">${e.rank}</div>
+        ${av}
+        <div class="lb-name">${name}</div>
+        <div class="lb-score">${e.score}${_rgCurrentUnit}</div>
+      </div>`;
+    }).join('') + '</div>';
+  }).catch(() => {
+    lbWrap.innerHTML = '<p class="rg-lb-empty" style="color:#f87171">取得エラー</p>';
+  });
 }
 
 function closeRankGuide() {
@@ -741,7 +878,8 @@ function refreshRecords() {
 
   // Game list
   list.innerHTML = rows.map(r => `
-    <div class="record-row${r.isCrown ? ' record-crown' : ''}${!r.hasScore ? ' record-unplayed' : ''}" onclick="showScreen('${r.target}')">
+    <div class="record-row${r.isCrown ? ' record-crown' : ''}${!r.hasScore ? ' record-unplayed' : ''}"
+         ${r.hasScore ? `onclick="showGameStats('${r.target}',false,'records')"` : ''}>
       <div class="record-icon">${r.icon}</div>
       <div class="record-info">
         <div class="record-name">${r.name}</div>
@@ -753,6 +891,412 @@ function refreshRecords() {
           : '<span class="record-no-score">未プレイ</span>'}
       </div>
     </div>`).join('');
+}
+
+/* ===== STATS PAGE ===== */
+function refreshStats() {
+  const el = document.getElementById('stats-content');
+  if (!el) return;
+
+  // Gather all history entries from all score keys
+  const allEntries = []; // { ts, val, gameId, gameName, cat }
+  const gameInfoMap = {}; // gameId -> { name, cat, icon }
+
+  // Build game info from DOM
+  BS_MAPPING.forEach(g => {
+    const card = document.querySelector(`.game-card[data-game="${g.target}"]`);
+    if (!card) return;
+    gameInfoMap[g.target] = {
+      name: card.querySelector('h2').textContent,
+      cat:  card.querySelector('.badge').textContent,
+      icon: card.querySelector('.game-icon').innerHTML,
+    };
+  });
+
+  BS_MAPPING.forEach(g => {
+    const keys = Array.isArray(g.key) ? g.key : [g.key];
+    const info = gameInfoMap[g.target] || { name: g.target, cat: '?', icon: '🎮' };
+    keys.forEach(k => {
+      try {
+        const raw = localStorage.getItem(k + '__hist');
+        if (!raw) return;
+        JSON.parse(raw).forEach(([ts, val]) => {
+          allEntries.push({ ts, val, gameId: g.target, name: info.name, cat: info.cat });
+        });
+      } catch (e) {}
+    });
+  });
+
+  allEntries.sort((a, b) => a.ts - b.ts);
+
+  const totalPlays = allEntries.length;
+  const playedGames = new Set(allEntries.map(e => e.gameId)).size;
+
+  // Activity by date (last 90 days)
+  const now = Date.now();
+  const DAY = 86400000;
+  const dayCounts = {};
+  allEntries.forEach(e => {
+    const d = new Date(e.ts);
+    const key = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+    dayCounts[key] = (dayCounts[key] || 0) + 1;
+  });
+
+  // Category breakdown
+  const catCounts = {};
+  allEntries.forEach(e => {
+    catCounts[e.cat] = (catCounts[e.cat] || 0) + 1;
+  });
+  const catEntries = Object.entries(catCounts).sort((a,b) => b[1]-a[1]);
+  const maxCat = catEntries[0]?.[1] || 1;
+
+  // Most played games (top 5)
+  const gameCounts = {};
+  allEntries.forEach(e => { gameCounts[e.gameId] = (gameCounts[e.gameId] || 0) + 1; });
+  const topGames = Object.entries(gameCounts)
+    .sort((a,b) => b[1]-a[1]).slice(0,5)
+    .map(([id, cnt]) => ({ ...gameInfoMap[id], id, cnt }));
+
+  // Recent activity (last 7 days)
+  const week = now - 7 * DAY;
+  const recentPlays = allEntries.filter(e => e.ts >= week).length;
+  const activeDays = new Set(
+    allEntries.filter(e => e.ts >= week).map(e => {
+      const d = new Date(e.ts); return `${d.getMonth()}-${d.getDate()}`;
+    })
+  ).size;
+
+  el.innerHTML = `
+    <div class="stats-section">
+      <div class="stats-kpi-row">
+        <div class="stats-kpi">
+          <div class="stats-kpi-val">${totalPlays}</div>
+          <div class="stats-kpi-label">総プレイ回数</div>
+        </div>
+        <div class="stats-kpi">
+          <div class="stats-kpi-val">${playedGames}</div>
+          <div class="stats-kpi-label">プレイ済みゲーム</div>
+        </div>
+        <div class="stats-kpi">
+          <div class="stats-kpi-val">${recentPlays}</div>
+          <div class="stats-kpi-label">直近7日</div>
+        </div>
+        <div class="stats-kpi">
+          <div class="stats-kpi-val">${activeDays}</div>
+          <div class="stats-kpi-label">アクティブ日数</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-section">
+      <div class="stats-section-title">プレイ履歴（90日）</div>
+      <div class="stats-heatmap" id="stats-heatmap"></div>
+    </div>
+
+    ${catEntries.length ? `
+    <div class="stats-section">
+      <div class="stats-section-title">カテゴリ別プレイ回数</div>
+      <div class="stats-catbar">
+        ${catEntries.map(([cat, cnt]) => `
+          <div class="stats-catbar-row">
+            <div class="stats-catbar-label">${cat}</div>
+            <div class="stats-catbar-track">
+              <div class="stats-catbar-fill" style="width:${Math.round(cnt/maxCat*100)}%"></div>
+            </div>
+            <div class="stats-catbar-count">${cnt}</div>
+          </div>`).join('')}
+      </div>
+    </div>` : ''}
+
+    ${topGames.length ? `
+    <div class="stats-section">
+      <div class="stats-section-title">よく遊んだゲーム</div>
+      <div class="stats-topgames">
+        ${topGames.map((g,i) => `
+          <div class="stats-topgame-row" onclick="showGameStats('${g.id}',false,'stats')">
+            <div class="stats-topgame-rank">${i+1}</div>
+            <div class="stats-topgame-icon">${g.icon || '🎮'}</div>
+            <div class="stats-topgame-name">${g.name || g.id}</div>
+            <div class="stats-topgame-cnt">${g.cnt}回</div>
+          </div>`).join('')}
+      </div>
+    </div>` : ''}
+
+    ${totalPlays === 0 ? `<div class="stats-empty">まだ記録がありません。<br>ゲームをプレイすると統計が表示されます。</div>` : ''}
+  `;
+
+  // Render heatmap
+  renderActivityHeatmap(document.getElementById('stats-heatmap'), dayCounts, 90);
+}
+
+function renderActivityHeatmap(el, dayCounts, days) {
+  if (!el) return;
+  const now = new Date();
+  const cells = [];
+  for (let i = days - 1; i >= 0; i--) {
+    const d = new Date(now.getFullYear(), now.getMonth(), now.getDate() - i);
+    const key = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+    const cnt = dayCounts[key] || 0;
+    const dateStr = `${d.getMonth()+1}/${d.getDate()}`;
+    let level = 0;
+    if (cnt >= 1)  level = 1;
+    if (cnt >= 5)  level = 2;
+    if (cnt >= 10) level = 3;
+    if (cnt >= 20) level = 4;
+    cells.push(`<div class="heatmap-cell lv${level}" title="${dateStr}: ${cnt}回"></div>`);
+  }
+  el.innerHTML = cells.join('');
+}
+
+/* ===== GAME STATS SCREEN ===== */
+let _gameStatsId = null;
+let _gameStatsFrom = 'records'; // which screen to go back to
+
+function showGameStats(gameId, skipHistory = false, from = null) {
+  _gameStatsId = gameId;
+  if (from) _gameStatsFrom = from;
+  if (!skipHistory) location.hash = 'game-stats/' + gameId;
+
+  // Transition to game-stats screen without updating hash again
+  const overlay = document.getElementById('scene-transition');
+  if (isTransitioning) return;
+  isTransitioning = true;
+  sfx.nav();
+  if (overlay) overlay.classList.add('active');
+  setTimeout(() => {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    const el = document.getElementById('game-stats');
+    if (el) el.classList.add('active');
+    currentScreen = 'game-stats';
+    refreshGameStatsScreen();
+    window.scrollTo(0, 0);
+    if (overlay) overlay.classList.remove('active');
+    setTimeout(() => { isTransitioning = false; }, 150);
+  }, 150);
+}
+
+function refreshGameStatsScreen() {
+  const gameId = _gameStatsId;
+  const mapping = BS_MAPPING.find(g => g.target === gameId);
+  const el = document.getElementById('game-stats-content');
+  const titleEl = document.getElementById('game-stats-title');
+  if (!el || !mapping) return;
+
+  const card = document.querySelector(`.game-card[data-game="${gameId}"]`);
+  const gameName = card ? card.querySelector('h2').textContent : gameId;
+  const gameIcon = card ? card.querySelector('.game-icon').innerHTML : '🎮';
+  if (titleEl) titleEl.innerHTML = `${gameIcon} <span>${gameName}</span>`;
+
+  // Update back button to return to the correct origin screen
+  const backBtn = document.querySelector('#game-stats .btn-back');
+  if (backBtn) {
+    const backLabel = _gameStatsFrom === 'stats' ? '← 統計' : '← 記録一覧';
+    backBtn.textContent = backLabel;
+    backBtn.onclick = () => showScreen(_gameStatsFrom);
+  }
+
+  const keys = Array.isArray(mapping.key) ? mapping.key : [mapping.key];
+
+  // Build per-key difficulty label and history
+  const difficulties = keys.map(k => {
+    // Extract difficulty suffix: lo_best_normal → "normal", vcBest → "default"
+    const m = k.match(/_(easy|normal|hard|[123])$/);
+    const label = m ? m[1] : 'default';
+    const entries = [];
+    try {
+      const raw = localStorage.getItem(k + '__hist');
+      if (raw) JSON.parse(raw).forEach(([ts, val]) => entries.push({ ts, val }));
+    } catch (e) {}
+    entries.sort((a, b) => a.ts - b.ts);
+    const bestRaw = localStorage.getItem(k);
+    const best = bestRaw !== null ? parseFloat(bestRaw) : null;
+    return { key: k, label, entries, best };
+  });
+
+  // Overall best across all difficulties
+  let overallBest = mapping.reverse ? Infinity : -Infinity;
+  let hasScore = false;
+  difficulties.forEach(d => {
+    if (d.best !== null && isFinite(d.best)) {
+      hasScore = true;
+      if (mapping.reverse ? d.best < overallBest : d.best > overallBest) overallBest = d.best;
+    }
+  });
+  const bestDisplay = hasScore ? (mapping.suffix ? overallBest + mapping.suffix : overallBest) : '—';
+  const rank = hasScore && mapping.ranksVar && window[mapping.ranksVar]
+    ? getScoreRank(overallBest, window[mapping.ranksVar]) : null;
+
+  const totalPlays = difficulties.reduce((s, d) => s + d.entries.length, 0);
+  const allTs = difficulties.flatMap(d => d.entries.map(e => e.ts));
+  const firstPlay = allTs.length ? new Date(Math.min(...allTs)) : null;
+  const lastPlay  = allTs.length ? new Date(Math.max(...allTs)) : null;
+  const fmt = d => d ? `${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()}` : '—';
+
+  const DIFF_LABELS = { easy: 'かんたん', normal: 'ふつう', hard: 'むずかしい', default: '—', '1': 'N=1', '2': 'N=2', '3': 'N=3' };
+  const hasTabs = difficulties.length > 1;
+  const tabsHtml = hasTabs ? `
+    <div class="gs-tabs" id="gs-tabs">
+      ${difficulties.map((d, i) => `
+        <button class="gs-tab${i === 0 ? ' active' : ''}" onclick="gsSelectTab(${i})">${DIFF_LABELS[d.label] || d.label}</button>
+      `).join('')}
+    </div>` : '';
+
+  el.innerHTML = `
+    <div class="gs-best-card">
+      <div class="gs-best-label">ベストスコア</div>
+      <div class="gs-best-val">${bestDisplay}</div>
+      ${rank ? `<div class="gs-best-rank" style="color:${rank.color}">${rank.emoji} ${rank.label}</div>` : ''}
+    </div>
+    <div class="gs-kpi-row">
+      <div class="gs-kpi"><div class="gs-kpi-val">${totalPlays}</div><div class="gs-kpi-label">プレイ回数</div></div>
+      <div class="gs-kpi"><div class="gs-kpi-val">${fmt(firstPlay)}</div><div class="gs-kpi-label">初プレイ</div></div>
+      <div class="gs-kpi"><div class="gs-kpi-val">${fmt(lastPlay)}</div><div class="gs-kpi-label">最終プレイ</div></div>
+    </div>
+    <div class="gs-chart-section">
+      ${tabsHtml}
+      <div class="gs-chart-wrap">
+        <canvas id="gs-canvas" class="gs-canvas"></canvas>
+        <div id="gs-empty" class="gs-empty" style="display:none">まだ記録がありません</div>
+      </div>
+    </div>
+    <button class="gs-play-btn" onclick="showScreen('${gameId}')">▶ このゲームをプレイ</button>
+  `;
+
+  // Store difficulties on element for tab switching
+  el._gsDifficulties = difficulties;
+  el._gsMapping = mapping;
+  gsSelectTab(0);
+}
+
+function gsSelectTab(idx) {
+  const el = document.getElementById('game-stats-content');
+  if (!el || !el._gsDifficulties) return;
+  const difficulties = el._gsDifficulties;
+  const mapping = el._gsMapping;
+
+  // Update tab active state
+  document.querySelectorAll('.gs-tab').forEach((t, i) => t.classList.toggle('active', i === idx));
+
+  const { entries } = difficulties[idx];
+  const canvas = document.getElementById('gs-canvas');
+  const emptyEl = document.getElementById('gs-empty');
+  if (!canvas) return;
+
+  if (entries.length === 0) {
+    canvas.style.display = 'none';
+    emptyEl.style.display = 'flex';
+  } else {
+    canvas.style.display = '';
+    emptyEl.style.display = 'none';
+    requestAnimationFrame(() => drawScoreChart(canvas, entries, mapping));
+  }
+}
+
+function drawScoreChart(canvas, entries, mapping) {
+  const dpr = window.devicePixelRatio || 1;
+  const W = canvas.offsetWidth;
+  const H = canvas.offsetHeight;
+  canvas.width  = W * dpr;
+  canvas.height = H * dpr;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+
+  const PAD = { top: 20, right: 16, bottom: 48, left: 44 };
+  const cw = W - PAD.left - PAD.right;
+  const ch = H - PAD.top  - PAD.bottom;
+
+  const vals = entries.map(e => e.val).filter(v => isFinite(v));
+  if (vals.length === 0) return;
+
+  const minV = Math.min(...vals);
+  const maxV = Math.max(...vals);
+  const range = maxV - minV || 1;
+
+  const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#10b981';
+  const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text-2').trim() || '#94a3b8';
+  const gridColor = 'rgba(148,163,184,0.12)';
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Grid lines (5 horizontal)
+  ctx.strokeStyle = gridColor;
+  ctx.lineWidth = 1;
+  for (let i = 0; i <= 4; i++) {
+    const y = PAD.top + ch * (i / 4);
+    ctx.beginPath(); ctx.moveTo(PAD.left, y); ctx.lineTo(PAD.left + cw, y); ctx.stroke();
+    // Y label
+    const labelVal = maxV - (range * i / 4);
+    ctx.fillStyle = textColor;
+    ctx.font = `${10 * dpr / dpr}px sans-serif`;
+    ctx.textAlign = 'right';
+    ctx.fillText(
+      mapping.suffix ? Math.round(labelVal) + mapping.suffix : Math.round(labelVal * 10) / 10,
+      PAD.left - 6, y + 4
+    );
+  }
+
+  // X axis: play number labels (up to 6 evenly spaced)
+  const n = entries.length;
+  const labelCount = Math.min(6, n);
+  const step = Math.max(1, Math.floor((n - 1) / (labelCount - 1 || 1)));
+  ctx.fillStyle = textColor;
+  ctx.font = `10px sans-serif`;
+  ctx.textAlign = 'center';
+  const indices = new Set([0]);
+  for (let i = step; i < n - 1; i += step) indices.add(i);
+  indices.add(n - 1);
+  indices.forEach(i => {
+    const x = PAD.left + (i / (n - 1 || 1)) * cw;
+    ctx.fillText(`${i + 1}回`, x, H - PAD.bottom + 16);
+  });
+
+  // Area fill — parse accent hex to rgba
+  function hexToRgba(hex, a) {
+    const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+    return `rgba(${r},${g},${b},${a})`;
+  }
+  const accentFill = accent.startsWith('#') ? hexToRgba(accent, 0.3) : 'rgba(16,185,129,0.3)';
+  const grad = ctx.createLinearGradient(0, PAD.top, 0, PAD.top + ch);
+  grad.addColorStop(0, accentFill);
+  grad.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.beginPath();
+  entries.forEach((e, i) => {
+    if (!isFinite(e.val)) return;
+    const x = PAD.left + (i / (entries.length - 1 || 1)) * cw;
+    const y = PAD.top  + (1 - (e.val - minV) / range) * ch;
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  });
+  const lastX = PAD.left + cw;
+  const lastY = PAD.top + ch;
+  ctx.lineTo(lastX, lastY);
+  ctx.lineTo(PAD.left, lastY);
+  ctx.closePath();
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  // Line
+  ctx.beginPath();
+  ctx.strokeStyle = accent;
+  ctx.lineWidth = 2;
+  ctx.lineJoin = 'round';
+  entries.forEach((e, i) => {
+    if (!isFinite(e.val)) return;
+    const x = PAD.left + (i / (entries.length - 1 || 1)) * cw;
+    const y = PAD.top  + (1 - (e.val - minV) / range) * ch;
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  });
+  ctx.stroke();
+
+  // Dots
+  entries.forEach((e, i) => {
+    if (!isFinite(e.val)) return;
+    const x = PAD.left + (i / (entries.length - 1 || 1)) * cw;
+    const y = PAD.top  + (1 - (e.val - minV) / range) * ch;
+    ctx.beginPath();
+    ctx.arc(x, y, 3, 0, Math.PI * 2);
+    ctx.fillStyle = accent;
+    ctx.fill();
+  });
 }
 
 /* ===== UTILITIES ===== */

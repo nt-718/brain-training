@@ -208,6 +208,7 @@ function plGameOver() {
   document.getElementById('pl-start-btn').textContent = 'もう一度';
 
   const rank = getScoreRank(plScore, PL_RANKS);
+  saveScore('pair-logic', 'default', plScore);
   showResult('🃏', 'タイムアップ', `正解数: ${plScore}\nベスト: ${plBest}`, plStart, rank);
 }
 

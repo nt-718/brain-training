@@ -200,5 +200,6 @@ function acFinish(reason) {
               :                      '🍎 を逃した！';
 
   const rank = getScoreRank(acScore, AC_RANKS);
+  saveScore('apple-catch', 'default', acScore);
   showResult(icon, title, `スコア: ${acScore}\n${badge}`, acStart, rank);
 }

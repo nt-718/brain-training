@@ -154,6 +154,7 @@ function cflipComplete() {
 
   const prevDisplay = prev === Infinity ? '-' : prev + '手';
   const rank = getScoreRank(cflipMoves, CFLIP_RANKS);
+  saveScore('card-flip', cflipDiff, cflipMoves);
   showResult(
     record ? '🏆' : '🃏',
     'クリア！',

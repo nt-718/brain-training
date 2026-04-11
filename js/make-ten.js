@@ -61,6 +61,7 @@ function mtenStart() {
       }
       const finalBest = Math.max(best, mtenScore);
       const rank = getScoreRank(mtenScore, MTEN_RANKS);
+  saveScore('make-ten', 'default', mtenScore);
       showResult('assets/icons/make-ten.svg', 'タイムアップ！', `スコア: ${mtenScore}\nベスト: ${finalBest}`, mtenStart, rank);
     }
   }, 1000);

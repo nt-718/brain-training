@@ -222,6 +222,7 @@ function rpGameEnd() {
     document.getElementById('rp-best').textContent = rpScore;
   }
   const rank = getScoreRank(rpScore, RP_RANKS);
+  saveScore('race-pos', rpDiff, rpScore);
   showResult(
     record ? '🏆' : '🏁',
     'レース終了！',

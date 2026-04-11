@@ -1,37 +1,58 @@
-name: Deploy to GitHub Pages
+name: Deploy to EC2
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+  workflow_dispatch:
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
+env:
+  BINARY_NAME: brain-training-api
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Cache Cargo
+        uses: actions/cache@v4
         with:
-          path: '.'
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            backend/target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('backend/Cargo.lock') }}
 
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Build Release
+        working-directory: backend
+        run: cargo build --release
+
+      - name: Deploy binary to EC2
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: backend/target/release/${{ env.BINARY_NAME }}
+          target: /opt/brain-training/
+          strip_components: 3
+
+      - name: Deploy frontend to EC2
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: "index.html,manifest.json,sw.js,favicon.png,icon-192.png,icon-512.png,css/,js/,assets/"
+          target: /opt/brain-training/public/
+
+      - name: Restart service
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: sudo systemctl restart brain-training

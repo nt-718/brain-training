@@ -146,6 +146,7 @@ function norTimeUp() {
     document.getElementById('nor-best').textContent = norScore;
   }
   const rank = getScoreRank(norScore, NOR_RANKS);
+  saveScore('num-order', norDiff, norScore);
   showResult(
     record ? '🏆' : '⏰',
     '時間切れ！',

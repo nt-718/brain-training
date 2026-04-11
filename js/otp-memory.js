@@ -207,6 +207,7 @@ function omEndGame() {
   const detail = `難易度: ${diffLabel}\nスコア: ${omState.score}問\n${isNewBest ? '🎉 ベストスコア更新！' : `(ベスト: ${Math.max(best, omState.score)}問)`}`;
   
   const rank = getScoreRank(omState.score, OM_RANKS);
+  saveScore('otp-memory', omDiff, omState.score);
   showResult('🔐', 'タイムアップ！', detail, omStart, rank);
   refreshBestScores(); // From main.js
 }

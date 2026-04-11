@@ -168,6 +168,7 @@ function cseqGameOver() {
     document.getElementById('cseq-best').textContent = score;
   }
   const rank = getScoreRank(score, CSEQ_RANKS);
+  saveScore('color-seq', 'default', score);
   showResult(
     record ? '🏆' : '🎨',
     'ゲームオーバー！',

@@ -171,6 +171,7 @@ function dcaGameOver() {
   }
 
   const rank = getScoreRank(dcaScore, DCA_RANKS);
+  saveScore('dollar-calc', dcaDiff, dcaScore);
   showResult(
     record ? '🏆' : '💱',
     'タイムアップ',

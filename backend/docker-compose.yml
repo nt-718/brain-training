@@ -1,0 +1,17 @@
+services:
+  shared-db:
+    image: mysql:8.0
+    container_name: shared-mysql
+    platform: linux/amd64
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: brain_training
+    ports:
+      - "3306:3306"
+    volumes:
+      - shared-mysql-data:/var/lib/mysql
+      - ./migrations:/docker-entrypoint-initdb.d
+
+volumes:
+  shared-mysql-data:

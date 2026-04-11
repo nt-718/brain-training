@@ -129,5 +129,6 @@ function cmGameOver() {
   }
   const msg = record ? '🏆 新記録!' : `ベスト: ${best}`;
   const rank = getScoreRank(cmScore, CM_RANKS);
+  saveScore('color-match', 'default', cmScore);
   showResult(record ? '🏆' : '😢', 'ゲームオーバー', `スコア: ${cmScore}\n${msg}`, cmStart, rank);
 }

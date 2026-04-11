@@ -263,6 +263,7 @@ function ddEnd() {
   document.getElementById('dd-stage').style.display     = 'none';
 
   const rank = getScoreRank(ddScore, DD_RANKS);
+  saveScore('double-detect', ddDiff, ddScore);
   showResult(
     isRec ? '🏆' : '🃏',
     'ゲーム終了！',

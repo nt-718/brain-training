@@ -247,5 +247,6 @@ function pnGameOver(reason) {
   const title = reason === 'timeout' ? '時間切れ！' : 'ミス！';
   const detail = `スコア: ${pnScore}\n${record ? '🏆 新記録!' : 'ベスト: ' + prev}`;
   const rank = getScoreRank(pnScore, PN_RANKS);
+  saveScore('pattern-next', 'default', pnScore);
   showResult(icon, title, detail, pnStart, rank);
 }

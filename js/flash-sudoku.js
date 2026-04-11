@@ -261,6 +261,7 @@ function fsdFinish() {
   const diffLabel = { easy: 'かんたん', normal: 'ふつう', hard: 'むずかしい' }[fsdDiff];
   setTimeout(() => {
     const rank = getScoreRank(prev + 1, FSD_RANKS);
+  saveScore('flash-sudoku', fsdDiff, fsdScore);
     showResult('🎉', '完成！', `数独をクリア！\n難易度: ${diffLabel}\n通算クリア: ${prev + 1}回`, fsdStart, rank);
     document.getElementById('fsd-start-btn').style.display = '';
     document.getElementById('fsd-start-btn').textContent = 'もう一度';

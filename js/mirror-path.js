@@ -219,6 +219,7 @@ function mpGameOver() {
   document.getElementById('mp-start-btn').textContent = 'もう一度';
 
   const rank = getScoreRank(mpScore, MP_RANKS);
+  saveScore('mirror-path', 'default', mpScore);
   showResult('🪞', 'タイムアップ', `正解数: ${mpScore}\nベスト: ${mpBest}`, mpStart, rank);
 }
 

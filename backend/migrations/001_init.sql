@@ -1,0 +1,19 @@
+CREATE TABLE IF NOT EXISTS users (
+  id        BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  google_id VARCHAR(255) NOT NULL UNIQUE,
+  name      VARCHAR(255) NOT NULL,
+  email     VARCHAR(255) NOT NULL,
+  photo_url VARCHAR(512),
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS scores (
+  id         BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_id    BIGINT UNSIGNED NOT NULL,
+  game_id    VARCHAR(64) NOT NULL,
+  difficulty VARCHAR(16) NOT NULL,
+  score      INT NOT NULL,
+  played_at  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id),
+  INDEX idx_ranking (game_id, difficulty, score DESC)
+);

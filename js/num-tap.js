@@ -128,5 +128,6 @@ function ntComplete() {
   const bestMsg = isRecord ? '🏆 新記録!' : 'ベスト: ' + prev + 's';
   const icon    = isRecord ? '🏆' : parseFloat(elapsed) < 20 ? '🥇' : '🎉';
   const rank = getScoreRank(parseFloat(elapsed), NT_RANKS);
+  saveScore('num-tap', 'default', elapsed);
   showResult(icon, 'クリア!', elapsed + '秒　' + bestMsg, ntStart, rank);
 }

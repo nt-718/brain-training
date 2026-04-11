@@ -161,6 +161,7 @@ function loGameOver() {
   document.getElementById('lo-start-btn').textContent = 'もう一度';
   
   const rank = getScoreRank(loMoves, LO_RANKS);
+  saveScore('lights-out', loDiff, loMoves);
   showResult('🧩', 'パズルクリア', `タイム: ${loFormatTime(loTime)}\n手数: ${loMoves}手\n難易度: ${loDiff}`, () => loStart(), rank);
 }
 

@@ -234,5 +234,6 @@ function mmGameOver() {
 
   const bestMsg = isRecord ? '🏆 新記録!' : 'ベスト: ' + prevBest;
   const rank = getScoreRank(score, MM_RANKS);
+  saveScore('memory-matrix', mmDiff, score);
   showResult(isRecord ? '🏆' : '😢', 'ゲームオーバー', `スコア: ${score} ラウンド\n${bestMsg}`, mmStart, rank);
 }

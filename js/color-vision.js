@@ -143,6 +143,7 @@ function cvGameOver() {
   
   const diffLabel = cvDiff === 'easy' ? 'かんたん' : cvDiff === 'hard' ? 'むずかしい' : 'ふつう';
   const rank = getScoreRank(cvScore, CV_RANKS);
+  saveScore('color-vision', cvDiff, best);
   showResult(
     '👁️',
     'タイムアップ！',

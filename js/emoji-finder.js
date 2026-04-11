@@ -214,6 +214,7 @@ function efEnd() {
   const body  = `${correct} / ${EF_TOTAL_ROUNDS} 正解\nスコア: ${efScore}`
     + (record ? '\n🏆 新記録!' : `\nベスト: ${prev}`);
 
+  saveScore('emoji-finder', efDiff, efScore);
   showResult(icon, title, body, efStart, rank);
   refreshBestScores();
 }

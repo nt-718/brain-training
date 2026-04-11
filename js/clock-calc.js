@@ -223,6 +223,7 @@ function clGameOver() {
   document.getElementById('cl-start-btn').textContent = 'もう一度';
   
   const rank = getScoreRank(clScore, CL_RANKS);
+  saveScore('clock-calc', clDiff, clScore);
   showResult('⏳', 'タイムアップ', `正解数: ${clScore}回\n難易度: ${clDiff}`, () => clStart(), rank);
 }
 

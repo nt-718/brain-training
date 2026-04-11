@@ -156,6 +156,7 @@ function ocFinish() {
     document.getElementById('oc-best').textContent = ocScore;
   }
   const rank = getScoreRank(ocScore, OC_RANKS);
+  saveScore('obj-count', ocDiff, ocScore);
   showResult(
     record ? '🏆' : '🎯',
     '結果発表！',

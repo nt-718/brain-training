@@ -153,5 +153,6 @@ function nbGameOver() {
   
   const msg = record ? '🏆 新記録!' : `ベスト: ${best}`;
   const rank = getScoreRank(nbScore, NB_RANKS);
+  saveScore('n-back', nbDiff, nbScore);
   showResult(record ? '🏆' : '😢', 'ゲームオーバー', `スコア: ${nbScore}\n${msg}`, nbStart, rank);
 }

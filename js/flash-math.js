@@ -228,5 +228,6 @@ function fmGameOver() {
   
   const msg = record ? '🏆 新記録!' : `ベスト: ${best} ラウンド`;
   const rank = getScoreRank(fmScore, FM_RANKS);
+  saveScore('flash-math', fmDiff, fmScore);
   showResult(record ? '🏆' : '😢', 'ゲームオーバー', `到達: ${fmScore} ラウンド\n${msg}`, fmStart, rank);
 }

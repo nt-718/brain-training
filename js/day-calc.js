@@ -148,6 +148,7 @@ function dcEnd() {
   }
   const diffLabel = { easy: 'かんたん', normal: 'ふつう', hard: 'むずかしい' }[dcState.difficulty];
   const rank = getScoreRank(dcState.score, DC_RANKS);
+  saveScore('day-calc', dcDiff, dcState.score);
   showResult(
     record ? '🏆' : '📅',
     'タイムアップ！',

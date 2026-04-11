@@ -298,6 +298,7 @@ function eoConfirm() {
     eoFlashTimer = setTimeout(() => {
       eoStop();
       const rank = getScoreRank(eoScore, EO_RANKS);
+  saveScore('emoji-order', 'default', eoScore);
       showResult(
         '🎴',
         'ゲームオーバー！',

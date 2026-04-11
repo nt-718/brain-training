@@ -1,0 +1,19 @@
+[Unit]
+Description=Brain Training API Server
+After=network.target mysql.service
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/opt/brain-training
+ExecStart=/opt/brain-training/brain-training-api
+Restart=always
+RestartSec=5
+Environment=DATABASE_URL=mysql://brain_app:STRONG_PASSWORD@127.0.0.1:3306/brain_training
+Environment=JWT_SECRET=CHANGE_ME_TO_RANDOM_SECRET
+Environment=GOOGLE_CLIENT_ID=YOUR_GOOGLE_CLIENT_ID
+Environment=PORT=3000
+Environment=RUST_LOG=info
+
+[Install]
+WantedBy=multi-user.target

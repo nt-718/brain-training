@@ -198,6 +198,7 @@ function asGameOver() {
   document.getElementById('as-start-btn').textContent = 'もう一度';
   
   const rank = getScoreRank(asScore, AS_RANKS);
+  saveScore('arrow-swipe', 'default', asScore);
   showResult('↗️', 'タイムアップ', `正解数: ${asScore}回`, () => asStart(), rank);
 }
 

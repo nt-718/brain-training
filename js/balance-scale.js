@@ -216,5 +216,6 @@ function blGameOver(reason) {
     ? `スコア: ${blScore}\n正解は「${correctSide}が重い」\n左: ${blLeftSum}  右: ${blRightSum}\n${record ? '🏆 新記録!' : 'ベスト: ' + prev}`
     : `スコア: ${blScore}\n${record ? '🏆 新記録!' : 'ベスト: ' + prev}`;
   const rank = getScoreRank(blScore, BL_RANKS);
+  saveScore('balance-scale', 'default', blScore);
   showResult(icon, title, detail, blStart, rank);
 }

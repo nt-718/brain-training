@@ -154,6 +154,7 @@ function tcGameOver() {
   }
 
   const rank = getScoreRank(tcScore, TC_RANKS);
+  saveScore('tax-calc', tcDiff, tcScore);
   showResult(
     record ? '🏆' : '🧾',
     'タイムアップ',

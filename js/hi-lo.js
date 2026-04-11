@@ -148,6 +148,7 @@ function hlSaveAndShow(icon, title, detail) {
     document.getElementById('hl-best').textContent = hlScore;
   }
   const rank = getScoreRank(hlScore, HL_RANKS);
+  saveScore('hi-lo', 'default', hlScore);
   showResult(
     record ? '🏆' : icon,
     title,

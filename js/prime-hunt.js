@@ -160,6 +160,7 @@ function phTimeUp() {
     document.getElementById('ph-best').textContent = phScore;
   }
   const rank = getScoreRank(phScore, PH_RANKS);
+  saveScore('prime-hunt', phDiff, phScore);
   showResult(
     record ? '🏆' : '⏰',
     '時間切れ！',

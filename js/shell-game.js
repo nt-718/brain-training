@@ -250,6 +250,7 @@ function sgTapCup(idx) {
     
     setTimeout(() => {
       const rank = getScoreRank(sgScore, SG_RANKS);
+  saveScore('shell-game', 'default', sgScore);
       showResult('🎩', '終了!', `スコア: ${sgScore} (ベスト: ${sgBest})`, sgStart, rank);
     }, 1500);
   }

@@ -207,6 +207,7 @@ function ccntFinish() {
     document.getElementById('ccnt-best').textContent = ccntScore;
   }
   const rank = getScoreRank(ccntScore, CCNT_RANKS);
+  saveScore('cube-count', ccntDiff, ccntScore);
   showResult(
     record ? '🏆' : '🧊',
     '結果発表！',
