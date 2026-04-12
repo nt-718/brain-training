@@ -62,7 +62,7 @@ pub async fn leaderboard(
         sqlx::query_as(
             r#"SELECT
                  CAST(RANK() OVER (ORDER BY s.best_score DESC) AS SIGNED) as `rank`,
-                 u.name as user_name,
+                 COALESCE(u.display_name, u.name) as user_name,
                  u.photo_url,
                  s.best_score as score,
                  u.id as user_id
@@ -85,7 +85,7 @@ pub async fn leaderboard(
         sqlx::query_as(
             r#"SELECT
                  CAST(RANK() OVER (ORDER BY s.best_score DESC) AS SIGNED) as `rank`,
-                 u.name as user_name,
+                 COALESCE(u.display_name, u.name) as user_name,
                  u.photo_url,
                  s.best_score as score,
                  u.id as user_id
@@ -166,7 +166,7 @@ pub async fn global_ranking(
     let entries: Vec<LeaderboardEntry> = sqlx::query_as(
         r#"SELECT
              CAST(RANK() OVER (ORDER BY total DESC) AS SIGNED) as `rank`,
-             u.name as user_name,
+             COALESCE(u.display_name, u.name) as user_name,
              u.photo_url,
              CAST(total AS SIGNED) as score,
              u.id as user_id
@@ -197,7 +197,7 @@ pub async fn weekly_global_ranking(
     let entries: Vec<LeaderboardEntry> = sqlx::query_as(
         r#"SELECT
              CAST(RANK() OVER (ORDER BY total DESC) AS SIGNED) as `rank`,
-             u.name as user_name,
+             COALESCE(u.display_name, u.name) as user_name,
              u.photo_url,
              CAST(total AS SIGNED) as score,
              u.id as user_id
