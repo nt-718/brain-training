@@ -69,6 +69,8 @@ async function saveScore(gameId, difficulty, score) {
         is_crown: isCrown
       }),
     });
+    // Invalidate local DB cache so stats refresh
+    if (typeof invalidateDbCache === 'function') invalidateDbCache();
   } catch (e) {
     console.warn('Score sync failed (offline?):', e);
   }
@@ -145,3 +147,44 @@ async function getWeeklyGlobalLeaderboard() {
     return [];
   }
 }
+
+/**
+ * Get all my best scores (aggregated per game+difficulty)
+ * @returns {Promise<Array<{game_id, difficulty, max_score, min_score, play_count, has_crown}>>}
+ */
+async function getMyRecords() {
+  const token = localStorage.getItem('jwt');
+  if (!token) return [];
+
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/scores/my/records`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    if (!res.ok) return [];
+    return await res.json();
+  } catch (e) {
+    console.warn('My records fetch failed:', e);
+    return [];
+  }
+}
+
+/**
+ * Get all my play history
+ * @returns {Promise<Array<{game_id, difficulty, score, played_at}>>}
+ */
+async function getMyHistory() {
+  const token = localStorage.getItem('jwt');
+  if (!token) return [];
+
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/scores/my/history`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    if (!res.ok) return [];
+    return await res.json();
+  } catch (e) {
+    console.warn('My history fetch failed:', e);
+    return [];
+  }
+}
+

@@ -8,7 +8,7 @@ use sqlx::MySqlPool;
 use crate::auth::jwt;
 use crate::config::Config;
 use crate::models::score::{
-    LeaderboardEntry, LeaderboardQuery, MyBestScore, MyScoreQuery, SaveScoreRequest,
+    LeaderboardEntry, LeaderboardQuery, MyBestScore, MyRecord, MyScoreQuery, SaveScoreRequest, ScoreHistory,
 };
 
 /// Extract user_id from Authorization header
@@ -220,4 +220,58 @@ pub async fn weekly_global_ranking(
     .map_err(|e| (StatusCode::INTERNAL_SERVER_ERROR, format!("DB error: {}", e)))?;
 
     Ok(Json(entries))
+}
+
+/// GET /api/scores/my/records — Get all best scores aggregated for the user
+pub async fn my_records(
+    State((pool, config)): State<(MySqlPool, Config)>,
+    headers: HeaderMap,
+) -> Result<Json<Vec<crate::models::score::MyRecord>>, (StatusCode, String)> {
+    let user_id = extract_user_id(&headers, &config.jwt_secret)?;
+
+    let records: Vec<crate::models::score::MyRecord> = sqlx::query_as(
+        r#"SELECT 
+             game_id, 
+             difficulty, 
+             MAX(score) as max_score, 
+             MIN(score) as min_score, 
+             COUNT(*) as play_count, 
+             MAX(CAST(is_crown AS UNSIGNED)) as has_crown
+           FROM scores
+           WHERE user_id = ?
+           GROUP BY game_id, difficulty"#,
+    )
+    .bind(user_id)
+    .fetch_all(&pool)
+    .await
+    .map_err(|e| (StatusCode::INTERNAL_SERVER_ERROR, format!("DB error: {}", e)))?;
+
+    Ok(Json(records))
+}
+
+/// GET /api/scores/my/history — Get all play history for the user
+pub async fn my_history(
+    State((pool, config)): State<(MySqlPool, Config)>,
+    headers: HeaderMap,
+) -> Result<Json<Vec<crate::models::score::ScoreHistory>>, (StatusCode, String)> {
+    let user_id = extract_user_id(&headers, &config.jwt_secret)?;
+
+    // Fetch history, limit to recent 3000 to prevent huge payloads for super active users
+    let history: Vec<crate::models::score::ScoreHistory> = sqlx::query_as(
+        r#"SELECT 
+             game_id, 
+             difficulty, 
+             score, 
+             played_at 
+           FROM scores
+           WHERE user_id = ?
+           ORDER BY played_at DESC
+           LIMIT 3000"#,
+    )
+    .bind(user_id)
+    .fetch_all(&pool)
+    .await
+    .map_err(|e| (StatusCode::INTERNAL_SERVER_ERROR, format!("DB error: {}", e)))?;
+
+    Ok(Json(history))
 }

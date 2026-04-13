@@ -113,6 +113,7 @@ async function handleGoogleCredentialResponse(response) {
 
     migrateGuestScoresToUser();
     updateAuthUI();
+    if (typeof invalidateDbCache === 'function') invalidateDbCache();
     if (typeof refreshBestScores === 'function') refreshBestScores();
     sfx.result(); // success sound
   } catch (e) {
@@ -148,6 +149,7 @@ function logout() {
   }
 
   updateAuthUI();
+  if (typeof invalidateDbCache === 'function') invalidateDbCache();
   if (typeof refreshBestScores === 'function') refreshBestScores();
 }
 

@@ -787,7 +787,16 @@ const RANK_TIERS = [
   { emoji: '🌱', label: 'まだまだ',    color: '#64748b' },
 ];
 
-function refreshRecords() {
+let _dbRecordsCache = null;
+let _dbHistoryCache = null;
+
+// Call this when user logs in/out or saves a score to invalidate
+function invalidateDbCache() {
+  _dbRecordsCache = null;
+  _dbHistoryCache = null;
+}
+
+async function refreshRecords() {
   const list     = document.getElementById('records-list');
   const statsEl  = document.getElementById('records-stats');
   const chartEl  = document.getElementById('records-chart');
@@ -801,6 +810,12 @@ function refreshRecords() {
   const tierCounts = {};
   RANK_TIERS.forEach(t => { tierCounts[t.label] = 0; });
 
+  const isLogged = typeof isLoggedIn === 'function' && isLoggedIn();
+  if (isLogged && !_dbRecordsCache) {
+    list.innerHTML = '<div style="padding:40px;text-align:center"><div class="lb-spinner"></div><div style="margin-top:16px;color:var(--text-3)">同期中...</div></div>';
+    _dbRecordsCache = await getMyRecords();
+  }
+
   const rows = BS_MAPPING.map(g => {
     const card = document.querySelector(`.game-card[data-game="${g.target}"]`);
     if (!card) return null;
@@ -811,29 +826,43 @@ function refreshRecords() {
 
     let best = g.reverse ? Infinity : -Infinity;
     let hasScore = false;
+    let isCrown = false;
 
-    if (Array.isArray(g.key)) {
-      g.key.forEach(k => {
-        const raw = localStorage.getItem(k);
-        if (raw !== null) {
-          hasScore = true;
-          const v = parseFloat(raw);
-          if (!isNaN(v)) {
-            if (g.reverse && v < best) best = v;
-            else if (!g.reverse && v > best) best = v;
-          }
-        }
-      });
+    if (isLogged && _dbRecordsCache) {
+      const gRecs = _dbRecordsCache.filter(r => r.game_id === g.target);
+      if (gRecs.length > 0) {
+        hasScore = true;
+        if (g.reverse) best = Math.min(...gRecs.map(r => r.min_score));
+        else best = Math.max(...gRecs.map(r => r.max_score));
+        isCrown = gRecs.some(r => r.has_crown === 1 || r.has_crown === true);
+      }
     } else {
-      const raw = localStorage.getItem(g.key);
-      if (raw !== null) { hasScore = true; const v = parseFloat(raw); if (!isNaN(v)) best = v; }
+      if (Array.isArray(g.key)) {
+        g.key.forEach(k => {
+          const raw = localStorage.getItem(k);
+          if (raw !== null) {
+            hasScore = true;
+            const v = parseFloat(raw);
+            if (!isNaN(v)) {
+              if (g.reverse && v < best) best = v;
+              else if (!g.reverse && v > best) best = v;
+            }
+          }
+        });
+      } else {
+        const raw = localStorage.getItem(g.key);
+        if (raw !== null) { hasScore = true; const v = parseFloat(raw); if (!isNaN(v)) best = v; }
+      }
     }
 
     let rank = null;
-    let isCrown = false;
     if (hasScore && g.ranksVar && window[g.ranksVar]) {
       rank = getScoreRank(best, window[g.ranksVar]);
-      if (rank === window[g.ranksVar][0]) { isCrown = true; crownCount++; }
+      if (isLogged && _dbRecordsCache) {
+        if (isCrown) crownCount++;
+      } else {
+        if (rank === window[g.ranksVar][0]) { isCrown = true; crownCount++; }
+      }
       if (tierCounts[rank.label] !== undefined) tierCounts[rank.label]++;
     }
 
@@ -900,7 +929,7 @@ function refreshRecords() {
 }
 
 /* ===== STATS PAGE ===== */
-function refreshStats() {
+async function refreshStats() {
   const el = document.getElementById('stats-content');
   if (!el) return;
 
@@ -919,19 +948,32 @@ function refreshStats() {
     };
   });
 
-  BS_MAPPING.forEach(g => {
-    const keys = Array.isArray(g.key) ? g.key : [g.key];
-    const info = gameInfoMap[g.target] || { name: g.target, cat: '?', icon: '🎮' };
-    keys.forEach(k => {
-      try {
-        const raw = localStorage.getItem(k + '__hist');
-        if (!raw) return;
-        JSON.parse(raw).forEach(([ts, val]) => {
-          allEntries.push({ ts, val, gameId: g.target, name: info.name, cat: info.cat });
-        });
-      } catch (e) {}
+  const isLogged = typeof isLoggedIn === 'function' && isLoggedIn();
+  if (isLogged && !_dbHistoryCache) {
+    el.innerHTML = '<div style="padding:40px;text-align:center"><div class="lb-spinner"></div><div style="margin-top:16px;color:var(--text-3)">同期中...</div></div>';
+    _dbHistoryCache = await getMyHistory();
+  }
+
+  if (isLogged && _dbHistoryCache) {
+    _dbHistoryCache.forEach(r => {
+      const info = gameInfoMap[r.game_id] || { name: r.game_id, cat: '?', icon: '🎮' };
+      allEntries.push({ ts: new Date(r.played_at).getTime(), val: r.score, gameId: r.game_id, name: info.name, cat: info.cat });
     });
-  });
+  } else {
+    BS_MAPPING.forEach(g => {
+      const keys = Array.isArray(g.key) ? g.key : [g.key];
+      const info = gameInfoMap[g.target] || { name: g.target, cat: '?', icon: '🎮' };
+      keys.forEach(k => {
+        try {
+          const raw = localStorage.getItem(k + '__hist');
+          if (!raw) return;
+          JSON.parse(raw).forEach(([ts, val]) => {
+            allEntries.push({ ts, val, gameId: g.target, name: info.name, cat: info.cat });
+          });
+        } catch (e) {}
+      });
+    });
+  }
 
   allEntries.sort((a, b) => a.ts - b.ts);
 
@@ -1081,7 +1123,7 @@ function showGameStats(gameId, skipHistory = false, from = null) {
   }, 150);
 }
 
-function refreshGameStatsScreen() {
+async function refreshGameStatsScreen() {
   const gameId = _gameStatsId;
   const mapping = BS_MAPPING.find(g => g.target === gameId);
   const el = document.getElementById('game-stats-content');
@@ -1101,21 +1143,41 @@ function refreshGameStatsScreen() {
     backBtn.onclick = () => showScreen(_gameStatsFrom);
   }
 
-  const keys = Array.isArray(mapping.key) ? mapping.key : [mapping.key];
+  const isLogged = typeof isLoggedIn === 'function' && isLoggedIn();
+  if (isLogged && !_dbHistoryCache) {
+    el.innerHTML = '<div style="padding:40px;text-align:center"><div class="lb-spinner"></div><div style="margin-top:16px;color:var(--text-3)">データ読み込み中...</div></div>';
+    _dbHistoryCache = await getMyHistory();
+  }
 
-  // Build per-key difficulty label and history
+  const keys = Array.isArray(mapping.key) ? mapping.key : [mapping.key];
+  const gRecs = (isLogged && _dbRecordsCache) ? _dbRecordsCache.filter(r => r.game_id === gameId) : [];
+  const gHist = (isLogged && _dbHistoryCache) ? _dbHistoryCache.filter(r => r.game_id === gameId) : [];
+
+  // Build per-key/difficulty label and history
   const difficulties = keys.map(k => {
-    // Extract difficulty suffix: lo_best_normal → "normal", vcBest → "default"
     const m = k.match(/_(easy|normal|hard|[123])$/);
-    const label = m ? m[1] : 'default';
+    let label = m ? m[1] : 'default';
+    if (label === 'default' && k.includes('vcBest')) label = 'default'; // special casing if needed
+    // Map existing key suffixes back to DB difficulty strings if needed, though they usually match
+    if (k.includes('lo_best')) label = m ? m[1] : 'normal';
+
     const entries = [];
-    try {
-      const raw = localStorage.getItem(k + '__hist');
-      if (raw) JSON.parse(raw).forEach(([ts, val]) => entries.push({ ts, val }));
-    } catch (e) {}
+    let best = null;
+
+    if (isLogged && gHist.length >= 0) {
+      gHist.filter(r => r.difficulty === label).forEach(r => entries.push({ ts: new Date(r.played_at).getTime(), val: r.score }));
+      const rec = gRecs.find(r => r.difficulty === label);
+      if (rec) best = mapping.reverse ? rec.min_score : rec.max_score;
+    } else {
+      try {
+        const raw = localStorage.getItem(k + '__hist');
+        if (raw) JSON.parse(raw).forEach(([ts, val]) => entries.push({ ts, val }));
+      } catch (e) {}
+      const bestRaw = localStorage.getItem(k);
+      best = bestRaw !== null ? parseFloat(bestRaw) : null;
+    }
+
     entries.sort((a, b) => a.ts - b.ts);
-    const bestRaw = localStorage.getItem(k);
-    const best = bestRaw !== null ? parseFloat(bestRaw) : null;
     return { key: k, label, entries, best };
   });
 

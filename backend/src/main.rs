@@ -76,6 +76,8 @@ async fn main() {
         .route("/api/scores/leaderboard", get(score_handler::leaderboard))
         .route("/api/scores/global", get(score_handler::global_ranking))
         .route("/api/scores/global/weekly", get(score_handler::weekly_global_ranking))
+        .route("/api/scores/my/records", get(score_handler::my_records))
+        .route("/api/scores/my/history", get(score_handler::my_history))
         .route("/api/scores/me", get(score_handler::my_score))
         .layer(cors)
         .with_state(state)
