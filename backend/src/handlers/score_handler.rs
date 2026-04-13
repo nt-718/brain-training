@@ -64,7 +64,7 @@ pub async fn leaderboard(
                  CAST(RANK() OVER (ORDER BY s.best_score DESC) AS SIGNED) as `rank`,
                  COALESCE(u.display_name, u.name) as user_name,
                  u.photo_url,
-                 s.best_score as score,
+                 CAST(s.best_score AS DOUBLE) as score,
                  u.id as user_id
                FROM (
                  SELECT user_id, MAX(score) as best_score
@@ -87,7 +87,7 @@ pub async fn leaderboard(
                  CAST(RANK() OVER (ORDER BY s.best_score DESC) AS SIGNED) as `rank`,
                  COALESCE(u.display_name, u.name) as user_name,
                  u.photo_url,
-                 s.best_score as score,
+                 CAST(s.best_score AS DOUBLE) as score,
                  u.id as user_id
                FROM (
                  SELECT user_id, MAX(score) as best_score
@@ -120,7 +120,7 @@ pub async fn my_score(
 
     // Get my best score
     let best: Option<(f64,)> = sqlx::query_as(
-        "SELECT MAX(score) FROM scores WHERE user_id = ? AND game_id = ? AND difficulty = ?",
+        "SELECT CAST(MAX(score) AS DOUBLE) FROM scores WHERE user_id = ? AND game_id = ? AND difficulty = ?",
     )
     .bind(user_id)
     .bind(&q.game_id)
@@ -168,12 +168,12 @@ pub async fn global_ranking(
              CAST(RANK() OVER (ORDER BY total DESC) AS SIGNED) as `rank`,
              COALESCE(u.display_name, u.name) as user_name,
              u.photo_url,
-             CAST(total AS SIGNED) as score,
+             CAST(total AS DOUBLE) as score,
              u.id as user_id
            FROM (
              SELECT user_id, SUM(has_crown) as total
              FROM (
-               SELECT user_id, game_id, MAX(CAST(is_crown AS UNSIGNED)) as has_crown
+               SELECT user_id, game_id, MAX(is_crown) as has_crown
                FROM scores
                GROUP BY user_id, game_id
              ) per_game
@@ -199,12 +199,12 @@ pub async fn weekly_global_ranking(
              CAST(RANK() OVER (ORDER BY total DESC) AS SIGNED) as `rank`,
              COALESCE(u.display_name, u.name) as user_name,
              u.photo_url,
-             CAST(total AS SIGNED) as score,
+             CAST(total AS DOUBLE) as score,
              u.id as user_id
            FROM (
              SELECT user_id, SUM(has_crown) as total
              FROM (
-               SELECT user_id, game_id, MAX(CAST(is_crown AS UNSIGNED)) as has_crown
+               SELECT user_id, game_id, MAX(is_crown) as has_crown
                FROM scores
                WHERE played_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)
                GROUP BY user_id, game_id
@@ -233,10 +233,10 @@ pub async fn my_records(
         r#"SELECT 
              game_id, 
              difficulty, 
-             MAX(score) as max_score, 
-             MIN(score) as min_score, 
+             MAX(CAST(score AS DOUBLE)) as max_score, 
+             MIN(CAST(score AS DOUBLE)) as min_score, 
              COUNT(*) as play_count, 
-             MAX(CAST(is_crown AS UNSIGNED)) as has_crown
+             MAX(is_crown) as has_crown
            FROM scores
            WHERE user_id = ?
            GROUP BY game_id, difficulty"#,
@@ -261,7 +261,7 @@ pub async fn my_history(
         r#"SELECT 
              game_id, 
              difficulty, 
-             score, 
+             CAST(score AS DOUBLE) as score, 
              played_at 
            FROM scores
            WHERE user_id = ?
