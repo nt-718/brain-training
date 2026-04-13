@@ -119,7 +119,7 @@ pub async fn my_score(
     let user_id = extract_user_id(&headers, &config.jwt_secret)?;
 
     // Get my best score
-    let best: Option<(i32,)> = sqlx::query_as(
+    let best: Option<(f64,)> = sqlx::query_as(
         "SELECT MAX(score) FROM scores WHERE user_id = ? AND game_id = ? AND difficulty = ?",
     )
     .bind(user_id)

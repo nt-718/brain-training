@@ -7,7 +7,7 @@ pub struct Score {
     pub user_id: u64,
     pub game_id: String,
     pub difficulty: String,
-    pub score: i32,
+    pub score: f64,
     pub is_crown: bool,
     pub played_at: NaiveDateTime,
 }
@@ -16,7 +16,7 @@ pub struct Score {
 pub struct SaveScoreRequest {
     pub game_id: String,
     pub difficulty: String,
-    pub score: i32,
+    pub score: f64,
     pub is_crown: Option<bool>,
 }
 
@@ -25,7 +25,7 @@ pub struct LeaderboardEntry {
     pub rank: i64,
     pub user_name: String,
     pub photo_url: Option<String>,
-    pub score: i32,
+    pub score: f64,
     pub user_id: u64,
 }
 
@@ -44,7 +44,7 @@ pub struct MyScoreQuery {
 
 #[derive(Debug, Serialize)]
 pub struct MyBestScore {
-    pub score: Option<i32>,
+    pub score: Option<f64>,
     pub rank: Option<i64>,
 }
 
@@ -52,8 +52,8 @@ pub struct MyBestScore {
 pub struct MyRecord {
     pub game_id: String,
     pub difficulty: String,
-    pub max_score: i32,
-    pub min_score: i32,
+    pub max_score: f64,
+    pub min_score: f64,
     pub play_count: i64,
     pub has_crown: bool,
 }
@@ -62,6 +62,6 @@ pub struct MyRecord {
 pub struct ScoreHistory {
     pub game_id: String,
     pub difficulty: String,
-    pub score: i32,
+    pub score: f64,
     pub played_at: NaiveDateTime,
 }

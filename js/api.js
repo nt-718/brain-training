@@ -109,6 +109,7 @@ async function getMyScore(gameId, difficulty) {
     const params = new URLSearchParams({ game_id: gameId, difficulty });
     const res = await fetch(`${API_BASE_URL}/api/scores/me?${params}`, {
       headers: { 'Authorization': `Bearer ${token}` },
+      cache: 'no-store'
     });
     if (!res.ok) return { score: null, rank: null };
     return await res.json();
@@ -158,7 +159,8 @@ async function getMyRecords() {
 
   try {
     const res = await fetch(`${API_BASE_URL}/api/scores/my/records`, {
-      headers: { 'Authorization': `Bearer ${token}` }
+      headers: { 'Authorization': `Bearer ${token}` },
+      cache: 'no-store'
     });
     if (!res.ok) return [];
     return await res.json();
@@ -178,7 +180,8 @@ async function getMyHistory() {
 
   try {
     const res = await fetch(`${API_BASE_URL}/api/scores/my/history`, {
-      headers: { 'Authorization': `Bearer ${token}` }
+      headers: { 'Authorization': `Bearer ${token}` },
+      cache: 'no-store'
     });
     if (!res.ok) return [];
     return await res.json();
