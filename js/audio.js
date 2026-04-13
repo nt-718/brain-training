@@ -184,6 +184,11 @@ const sfx = (() => {
     tickFinal() {
       play(() => tone(1200, 'square', 0.08, 0.05));
     },
+
+    // 指定の周波数を鳴らす（絶対音感用）
+    playNote(freq, duration = 0.5, type = 'triangle') {
+      play(() => tone(freq, type, 0.2, duration));
+    }
   };
 
   return api;

@@ -43,6 +43,7 @@ function renderIcon(icon) {
     { id: 'color-vision', name: 'カラービジョン', icon: '👁️', cat: '知覚', color: 'rgba(219,39,119,0.6)' },
     { id: 'double-detect', name: 'ダブル検知', icon: '🃏', cat: '判断', color: 'rgba(139,92,246,0.6)' },
     { id: 'kanji-quiz', name: '難読漢字', icon: '📚', cat: '論理', color: 'rgba(139,92,246,0.6)' },
+    { id: 'absolute-pitch', name: '絶対音感', icon: '🎵', cat: '知覚', color: 'rgba(167,139,250,0.6)' },
   ];
 
 
@@ -248,6 +249,7 @@ function showScreen(id, skipHistory = false) {
     if (typeof efStop === 'function') efStop();
     if (typeof mmutStop === 'function') mmutStop();
     if (typeof kqStop === 'function') kqStop();
+    if (typeof apStop === 'function') apStop();
     if (id === 'home') refreshBestScores();
     if (id === 'records') refreshRecords();
     if (id === 'stats') refreshStats();
@@ -342,7 +344,8 @@ const BS_MAPPING = [
   { target: 'tax-calc', key: ['tc_best_easy', 'tc_best_normal', 'tc_best_hard'], ranksVar: 'TC_RANKS' },
   { target: 'emoji-finder', key: ['ef_best_normal', 'ef_best_hard', 'ef_best_easy'], ranksVar: 'EF_RANKS' },
   { target: 'mental-mult', key: ['mmut_best_easy', 'mmut_best_normal', 'mmut_best_hard'], ranksVar: 'MMUT_RANKS' },
-  { target: 'kanji-quiz', key: 'kq_best', ranksVar: 'KQ_RANKS' }];
+  { target: 'kanji-quiz', key: 'kq_best', ranksVar: 'KQ_RANKS' },
+  { target: 'absolute-pitch', key: 'apBest', ranksVar: 'AP_RANKS' }];
 
 // Register all score keys for history tracking
 BS_MAPPING.forEach(g => {
@@ -538,6 +541,14 @@ const ANNOUNCEMENTS = [
     title: '新しいゲームを追加しました！',
     items: [
       '📚 <strong>難読漢字</strong> — 魚・植物・動物など、手強い漢字に挑もう！',
+    ]
+  },
+  {
+    id: 'ann_20260413c',
+    icon: '🎵',
+    title: '新しいゲームを追加しました！',
+    items: [
+      '🎵 <strong>絶対音感</strong> — 再生される音を聴いて、ドレミを当てよう！',
     ]
   }
 ];

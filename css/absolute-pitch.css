@@ -1,0 +1,151 @@
+/* ===== ABSOLUTE PITCH TRAINER ===== */
+
+.ap-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 20px;
+  animation: apFadeIn 0.4s ease-out;
+}
+
+@keyframes apFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Play Button */
+.ap-play-wrap {
+  perspective: 1000px;
+}
+
+.ap-play-btn {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border: none;
+  font-size: 3.5rem;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px rgba(139, 92, 246, 0.4);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  z-index: 1;
+}
+
+.ap-play-btn::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border-radius: 50%;
+  border: 2px solid var(--primary);
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+.ap-play-btn:hover {
+  transform: scale(1.05) rotate(5deg);
+  box-shadow: 0 15px 35px rgba(139, 92, 246, 0.6);
+}
+
+.ap-play-btn:active {
+  transform: scale(0.92);
+}
+
+.ap-play-btn.playing {
+  animation: apPulse 0.5s infinite alternate ease-in-out;
+}
+
+@keyframes apPulse {
+  from { transform: scale(1); box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3); }
+  to { transform: scale(1.1); box-shadow: 0 15px 35px rgba(139, 92, 246, 0.6); }
+}
+
+/* Answer Buttons Grid */
+.ap-answer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 12px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.ap-note-btn {
+  background: var(--bg-3);
+  border: 1px solid var(--border-2);
+  border-radius: var(--radius);
+  padding: 16px 8px;
+  color: var(--text);
+  font-family: var(--font-main);
+  font-size: 1.1rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.ap-note-btn:hover {
+  background: var(--bg-4);
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.ap-note-btn:active {
+  transform: scale(0.95);
+}
+
+.ap-note-btn .note-alpha {
+  font-size: 0.7rem;
+  opacity: 0.6;
+  font-weight: 400;
+}
+
+/* Note Colors (Bloomwhackers style-ish) */
+.ap-note-btn[data-note="C"] { border-bottom: 4px solid #ef4444; } /* Red */
+.ap-note-btn[data-note="D"] { border-bottom: 4px solid #f97316; } /* Orange */
+.ap-note-btn[data-note="E"] { border-bottom: 4px solid #eab308; } /* Yellow */
+.ap-note-btn[data-note="F"] { border-bottom: 4px solid #84cc16; } /* Light Green */
+.ap-note-btn[data-note="G"] { border-bottom: 4px solid #22c55e; } /* Green */
+.ap-note-btn[data-note="A"] { border-bottom: 4px solid #8b5cf6; } /* Purple */
+.ap-note-btn[data-note="B"] { border-bottom: 4px solid #ec4899; } /* Pink */
+.ap-note-btn[data-note="C2"] { border-bottom: 4px solid #ef4444; border-bottom-style: double; }
+
+/* Message / Feedback */
+.ap-message {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-2);
+  min-height: 1.4em;
+  text-align: center;
+}
+
+.ap-message.correct { color: var(--accent); animation: apBounce 0.4s; }
+.ap-message.wrong { color: var(--secondary); animation: apShake 0.4s; }
+
+@keyframes apBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes apShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* Responsive adjustment */
+@media (max-width: 360px) {
+  .ap-answer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

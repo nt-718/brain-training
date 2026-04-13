@@ -54,6 +54,7 @@
   <link rel="stylesheet" href="css/emoji-finder.css?v=1775846969" />
   <link rel="stylesheet" href="css/mental-mult.css?v=1775846969" />
   <link rel="stylesheet" href="css/kanji-quiz.css?v=1775846969" />
+  <link rel="stylesheet" href="css/absolute-pitch.css?v=1775846969" />
   <link rel="stylesheet" href="css/leaderboard.css?v=1775846969" />
 </head>
 
@@ -497,6 +498,14 @@
           </div>
           <div class="badge">色彩感覚</div>
         </div>
+        <div class="game-card" onclick="showScreen('absolute-pitch')" data-game="absolute-pitch">
+          <div class="game-icon">🎵</div>
+          <div class="game-info">
+            <h2>絶対音感</h2>
+            <p>再生される音階（ドレミ）を当てよう</p>
+          </div>
+          <div class="badge">聴覚知覚</div>
+        </div>
       </div>
     </div>
   </div>
@@ -717,6 +726,65 @@
       </div>
     </div>
   </div><!-- /#kanji-quiz -->
+
+  <!-- ========== ABSOLUTE PITCH (絶対音感) ========== -->
+  <div id="absolute-pitch" class="screen">
+    <nav class="nav">
+      <button class="btn-back" onclick="showScreen('home')">🏠</button>
+      <h1>絶対音感</h1>
+    </nav>
+
+    <div class="game-content" id="ap-content">
+      <div class="diff-row" id="ap-diff-row">
+        <button class="diff-btn" onclick="apSetDiff(this,'easy')">ドレミ</button>
+        <button class="diff-btn selected" onclick="apSetDiff(this,'normal')">ド〜ド</button>
+        <button class="diff-btn" onclick="apSetDiff(this,'hard')">クロマチック</button>
+      </div>
+
+      <div class="score-bar">
+        <div class="score-item">
+          <div class="label">スコア</div>
+          <div class="value" id="ap-score">0</div>
+        </div>
+        <div class="score-item">
+          <div class="label">問題</div>
+          <div class="value" id="ap-round">-/20</div>
+        </div>
+        <div class="score-item">
+          <div class="label">ベスト</div>
+          <div class="value" id="ap-best">0</div>
+        </div>
+      </div>
+
+      <div id="ap-stage" class="ap-stage">
+        <p class="ap-message" id="ap-message">スタートを押してください</p>
+
+        <div id="ap-play-area" class="ap-play-wrap" style="display:none;">
+          <button id="ap-play-btn" class="ap-play-btn" onclick="apPlayCurrentNote()">▶️</button>
+        </div>
+
+        <div id="ap-answer-grid" class="ap-answer-grid" style="display:none;">
+          <button class="ap-note-btn" data-note="C" onclick="apAnswer('C')">ド <span class="note-alpha">Do</span></button>
+          <button class="ap-note-btn" data-note="Cs" onclick="apAnswer('Cs')">ド♯ <span class="note-alpha">C#</span></button>
+          <button class="ap-note-btn" data-note="D" onclick="apAnswer('D')">レ <span class="note-alpha">Re</span></button>
+          <button class="ap-note-btn" data-note="Ds" onclick="apAnswer('Ds')">レ♯ <span class="note-alpha">D#</span></button>
+          <button class="ap-note-btn" data-note="E" onclick="apAnswer('E')">ミ <span class="note-alpha">Mi</span></button>
+          <button class="ap-note-btn" data-note="F" onclick="apAnswer('F')">ファ <span class="note-alpha">Fa</span></button>
+          <button class="ap-note-btn" data-note="Fs" onclick="apAnswer('Fs')">ファ♯ <span class="note-alpha">F#</span></button>
+          <button class="ap-note-btn" data-note="G" onclick="apAnswer('G')">ソ <span class="note-alpha">Sol</span></button>
+          <button class="ap-note-btn" data-note="Gs" onclick="apAnswer('Gs')">ソ♯ <span class="note-alpha">G#</span></button>
+          <button class="ap-note-btn" data-note="A" onclick="apAnswer('A')">ラ <span class="note-alpha">La</span></button>
+          <button class="ap-note-btn" data-note="As" onclick="apAnswer('As')">ラ♯ <span class="note-alpha">A#</span></button>
+          <button class="ap-note-btn" data-note="B" onclick="apAnswer('B')">シ <span class="note-alpha">Ti</span></button>
+          <button class="ap-note-btn" data-note="C2" onclick="apAnswer('C2')">ド <span class="note-alpha">Do (High)</span></button>
+        </div>
+      </div>
+
+      <div class="answer-area">
+        <button class="btn-primary" id="ap-start-btn" onclick="apStart()">スタート</button>
+      </div>
+    </div>
+  </div><!-- /#absolute-pitch -->
 
   <!-- ========== NUM TAP ========== -->
   <div id="num-tap" class="screen">
@@ -2435,7 +2503,6 @@
   <script src="js/api.js?v=1775846969"></script>
   <script src="js/leaderboard.js?v=1775846969"></script>
   <script src="js/audio.js?v=1775846969"></script>
-  <script src="js/main.js?v=1775846969"></script>
   <script src="js/visual-calc.js?v=1775846969"></script>
   <script src="js/num-tap.js?v=1775846969"></script>
   <script src="js/memory-matrix.js?v=1775846969"></script>
@@ -2473,7 +2540,9 @@
   <script src="js/tax-calc.js?v=1775846969"></script>
   <script src="js/emoji-finder.js?v=1775846969"></script>
   <script src="js/mental-mult.js?v=1775846969"></script>
-  <script src="js/kanji-quiz.js?v=1775846969"></script>
+  <script src="js/kanji-quiz.js"></script>
+  <script src="js/absolute-pitch.js"></script>
+  <script src="js/main.js"></script>
   <script>
     // キャッシュトラブル解消のため、既存のService Workerの登録をすべて解除する
     if ('serviceWorker' in navigator) {

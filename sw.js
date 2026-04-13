@@ -1,4 +1,4 @@
-const CACHE_NAME = 'noutore-v43';
+const CACHE_NAME = 'noutore-v44';
 const ASSETS = [
   './',
   './index.html',
@@ -87,6 +87,8 @@ const ASSETS = [
   './js/mental-mult.js',
   './css/kanji-quiz.css',
   './js/kanji-quiz.js',
+  './css/absolute-pitch.css',
+  './js/absolute-pitch.js',
 ];
 
 self.addEventListener('install', e => {
