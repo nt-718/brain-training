@@ -9,46 +9,47 @@ function renderIcon(icon) {
 /* ===== DAILY PICK ===== */
 (function initDailyPick() {
   const ALL_GAMES = [
-    { id:'visual-calc',    name:'ドットカウンター',     icon:'assets/icons/dot-counter.svg', cat:'計算', color:'rgba(251,191,36,0.6)' },
-    { id:'flash-math',     name:'フラッシュサム',        icon:'⚡️', cat:'計算', color:'rgba(251,146,60,0.6)' },
-    { id:'balance-scale',  name:'バランスバトル',        icon:'⚖️', cat:'計算', color:'rgba(250,204,21,0.6)' },
-    { id:'prime-hunt',     name:'プライムハンター',      icon:'🔬', cat:'計算', color:'rgba(45,212,191,0.6)' },
-    { id:'make-ten',       name:'メイク10',              icon:'assets/icons/make-ten.svg', cat:'計算', color:'rgba(251,113,133,0.6)' },
-    { id:'race-pos',       name:'レースビジョン',        icon:'🏃', cat:'計算', color:'rgba(249,115,22,0.6)' },
-    { id:'day-calc',       name:'カレンダーマスター',    icon:'📅', cat:'計算', color:'rgba(167,139,250,0.6)' },
-    { id:'clock-calc',     name:'クロックマスター',      icon:'⏳', cat:'計算', color:'rgba(96,165,250,0.6)' },
-    { id:'pair-logic',     name:'ペアロジック',          icon:'🃏', cat:'論理', color:'rgba(129,140,248,0.6)' },
-    { id:'pattern-next',   name:'パターンブレイカー',    icon:'🔮', cat:'論理', color:'rgba(192,132,252,0.6)' },
-    { id:'mirror-path',    name:'リバースナビ',          icon:'🪞', cat:'論理', color:'rgba(34,211,238,0.6)' },
-    { id:'mental-nav',     name:'メンタルナビ',          icon:'🗺️', cat:'論理', color:'rgba(20,184,166,0.6)' },
-    { id:'flash-sudoku',   name:'ブラインド数独',        icon:'🔦', cat:'論理', color:'rgba(99,102,241,0.6)' },
-    { id:'lights-out',     name:'ライトアウト',          icon:'💡', cat:'論理', color:'rgba(250,204,21,0.6)' },
-    { id:'memory-matrix',  name:'ライトマトリックス',    icon:'🔲', cat:'記憶', color:'rgba(34,197,94,0.6)' },
-    { id:'n-back',         name:'Nバックチャレンジ',     icon:'🔄', cat:'記憶', color:'rgba(147,51,234,0.6)' },
-    { id:'sequence-memory',name:'シーケンスマスター',    icon:'🌈', cat:'記憶', color:'rgba(244,114,182,0.6)' },
-    { id:'emoji-order',    name:'エモジメモリー',        icon:'🎴', cat:'記憶', color:'rgba(245,158,11,0.6)' },
-    { id:'color-seq',      name:'カラーチェーン',        icon:'🎨', cat:'記憶', color:'rgba(244,63,94,0.6)' },
-    { id:'card-flip',      name:'ペアフリップ',          icon:'🀄', cat:'記憶', color:'rgba(234,88,12,0.6)' },
-    { id:'otp-memory',     name:'コードメモリー',        icon:'🔐', cat:'記憶', color:'rgba(16,185,129,0.6)' },
-    { id:'num-tap',        name:'ナンバータッチ',        icon:'🔢', cat:'反射', color:'rgba(59,130,246,0.6)' },
-    { id:'color-match',    name:'カラートラップ',        icon:'🎭', cat:'反射', color:'rgba(168,85,247,0.6)' },
-    { id:'apple-catch',    name:'アップルキャッチ',      icon:'🍎', cat:'反射', color:'rgba(220,38,38,0.6)' },
-    { id:'hi-lo',          name:'ハイ＆ロー',            icon:'♠️', cat:'反射', color:'rgba(5,150,105,0.6)' },
-    { id:'just-stop',      name:'パーフェクトストップ',  icon:'⏱️', cat:'反射', color:'rgba(37,99,235,0.6)' },
-    { id:'arrow-swipe',    name:'アローマスター',        icon:'↗️', cat:'反射', color:'rgba(52,211,153,0.6)' },
-    { id:'num-order',      name:'ナンバーオーダー',      icon:'🔀', cat:'知覚', color:'rgba(14,165,233,0.6)' },
-    { id:'obj-count',      name:'フラッシュカウント',    icon:'🔵', cat:'知覚', color:'rgba(8,145,178,0.6)' },
-    { id:'cube-count',     name:'キューブカウント',      icon:'🧊', cat:'知覚', color:'rgba(125,211,252,0.6)' },
-    { id:'shell-game',     name:'シェルゲーム',          icon:'🎩', cat:'知覚', color:'rgba(124,58,237,0.6)' },
-    { id:'color-vision',   name:'カラービジョン',        icon:'👁️', cat:'知覚', color:'rgba(219,39,119,0.6)' },
-    { id:'double-detect',  name:'ダブル検知',            icon:'🃏', cat:'判断', color:'rgba(139,92,246,0.6)' },
+    { id: 'visual-calc', name: 'ドットカウンター', icon: 'assets/icons/dot-counter.svg', cat: '計算', color: 'rgba(251,191,36,0.6)' },
+    { id: 'flash-math', name: 'フラッシュサム', icon: '⚡️', cat: '計算', color: 'rgba(251,146,60,0.6)' },
+    { id: 'balance-scale', name: 'バランスバトル', icon: '⚖️', cat: '計算', color: 'rgba(250,204,21,0.6)' },
+    { id: 'prime-hunt', name: 'プライムハンター', icon: '🔬', cat: '計算', color: 'rgba(45,212,191,0.6)' },
+    { id: 'make-ten', name: 'メイク10', icon: 'assets/icons/make-ten.svg', cat: '計算', color: 'rgba(251,113,133,0.6)' },
+    { id: 'race-pos', name: 'レースビジョン', icon: '🏃', cat: '計算', color: 'rgba(249,115,22,0.6)' },
+    { id: 'day-calc', name: 'カレンダーマスター', icon: '📅', cat: '計算', color: 'rgba(167,139,250,0.6)' },
+    { id: 'clock-calc', name: 'クロックマスター', icon: '⏳', cat: '計算', color: 'rgba(96,165,250,0.6)' },
+    { id: 'pair-logic', name: 'ペアロジック', icon: '🃏', cat: '論理', color: 'rgba(129,140,248,0.6)' },
+    { id: 'pattern-next', name: 'パターンブレイカー', icon: '🔮', cat: '論理', color: 'rgba(192,132,252,0.6)' },
+    { id: 'mirror-path', name: 'リバースナビ', icon: '🪞', cat: '論理', color: 'rgba(34,211,238,0.6)' },
+    { id: 'mental-nav', name: 'メンタルナビ', icon: '🗺️', cat: '論理', color: 'rgba(20,184,166,0.6)' },
+    { id: 'flash-sudoku', name: 'ブラインド数独', icon: '🔦', cat: '論理', color: 'rgba(99,102,241,0.6)' },
+    { id: 'lights-out', name: 'ライトアウト', icon: '💡', cat: '論理', color: 'rgba(250,204,21,0.6)' },
+    { id: 'memory-matrix', name: 'ライトマトリックス', icon: '🔲', cat: '記憶', color: 'rgba(34,197,94,0.6)' },
+    { id: 'n-back', name: 'Nバックチャレンジ', icon: '🔄', cat: '記憶', color: 'rgba(147,51,234,0.6)' },
+    { id: 'sequence-memory', name: 'シーケンスマスター', icon: '🌈', cat: '記憶', color: 'rgba(244,114,182,0.6)' },
+    { id: 'emoji-order', name: 'エモジメモリー', icon: '🎴', cat: '記憶', color: 'rgba(245,158,11,0.6)' },
+    { id: 'color-seq', name: 'カラーチェーン', icon: '🎨', cat: '記憶', color: 'rgba(244,63,94,0.6)' },
+    { id: 'card-flip', name: 'ペアフリップ', icon: '🀄', cat: '記憶', color: 'rgba(234,88,12,0.6)' },
+    { id: 'otp-memory', name: 'コードメモリー', icon: '🔐', cat: '記憶', color: 'rgba(16,185,129,0.6)' },
+    { id: 'num-tap', name: 'ナンバータッチ', icon: '🔢', cat: '反射', color: 'rgba(59,130,246,0.6)' },
+    { id: 'color-match', name: 'カラートラップ', icon: '🎭', cat: '反射', color: 'rgba(168,85,247,0.6)' },
+    { id: 'apple-catch', name: 'アップルキャッチ', icon: '🍎', cat: '反射', color: 'rgba(220,38,38,0.6)' },
+    { id: 'hi-lo', name: 'ハイ＆ロー', icon: '♠️', cat: '反射', color: 'rgba(5,150,105,0.6)' },
+    { id: 'just-stop', name: 'パーフェクトストップ', icon: '⏱️', cat: '反射', color: 'rgba(37,99,235,0.6)' },
+    { id: 'arrow-swipe', name: 'アローマスター', icon: '↗️', cat: '反射', color: 'rgba(52,211,153,0.6)' },
+    { id: 'num-order', name: 'ナンバーオーダー', icon: '🔀', cat: '知覚', color: 'rgba(14,165,233,0.6)' },
+    { id: 'obj-count', name: 'フラッシュカウント', icon: '🔵', cat: '知覚', color: 'rgba(8,145,178,0.6)' },
+    { id: 'cube-count', name: 'キューブカウント', icon: '🧊', cat: '知覚', color: 'rgba(125,211,252,0.6)' },
+    { id: 'shell-game', name: 'シェルゲーム', icon: '🎩', cat: '知覚', color: 'rgba(124,58,237,0.6)' },
+    { id: 'color-vision', name: 'カラービジョン', icon: '👁️', cat: '知覚', color: 'rgba(219,39,119,0.6)' },
+    { id: 'double-detect', name: 'ダブル検知', icon: '🃏', cat: '判断', color: 'rgba(139,92,246,0.6)' },
+    { id: 'kanji-quiz', name: '難読漢字', icon: '📚', cat: '論理', color: 'rgba(139,92,246,0.6)' },
   ];
 
 
 
   function seededRand(seed) {
     let s = seed;
-    return function() {
+    return function () {
       s = (s * 1103515245 + 12345) & 0x7fffffff;
       return s / 0x7fffffff;
     };
@@ -71,8 +72,8 @@ function renderIcon(icon) {
     // Render date
     const dateEl = document.getElementById('pick-date');
     if (dateEl) {
-      const days = ['日','月','火','水','木','金','土'];
-      dateEl.textContent = `${today.getMonth()+1}/${today.getDate()}（${days[today.getDay()]}）`;
+      const days = ['日', '月', '火', '水', '木', '金', '土'];
+      dateEl.textContent = `${today.getMonth() + 1}/${today.getDate()}（${days[today.getDay()]}）`;
     }
 
     // Render cards
@@ -94,19 +95,19 @@ function renderIcon(icon) {
 /* ===== DEV PICK ===== */
 (function initDevPick() {
   const DEV_PICKS = [
-    { id:'visual-calc',     name:'ドットカウンター',  icon:'assets/icons/dot-counter.svg', cat:'計算' },
-    { id:'make-ten',        name:'メイク10',          icon:'assets/icons/make-ten.svg', cat:'計算' },
-    { id:'day-calc',        name:'カレンダーマスター',icon:'📅', cat:'計算' },
-    { id:'clock-calc',      name:'クロックマスター',  icon:'⏳', cat:'計算' },
-    { id:'lights-out',      name:'ライトアウト',      icon:'💡', cat:'論理' },
-    { id:'memory-matrix',   name:'ライトマトリックス',icon:'🔲', cat:'記憶' },
-    { id:'emoji-order',     name:'絵文字メモリー',    icon:'🎴', cat:'記憶' },
-    { id:'sequence-memory', name:'シーケンスマスター',icon:'🌈', cat:'記憶' },
-    { id:'otp-memory',      name:'コードメモリー',    icon:'🔐', cat:'記憶' },
-    { id:'num-tap',         name:'ナンバータッチ',    icon:'🔢', cat:'反射' },
-    { id:'arrow-swipe',     name:'アローマスター',    icon:'↗️', cat:'反射' },
-    { id:'shell-game',      name:'シェルゲーム',      icon:'🎩', cat:'知覚' },
-    { id:'color-vision',    name:'カラービジョン',    icon:'👁️', cat:'知覚' },
+    { id: 'visual-calc', name: 'ドットカウンター', icon: 'assets/icons/dot-counter.svg', cat: '計算' },
+    { id: 'make-ten', name: 'メイク10', icon: 'assets/icons/make-ten.svg', cat: '計算' },
+    { id: 'day-calc', name: 'カレンダーマスター', icon: '📅', cat: '計算' },
+    { id: 'clock-calc', name: 'クロックマスター', icon: '⏳', cat: '計算' },
+    { id: 'lights-out', name: 'ライトアウト', icon: '💡', cat: '論理' },
+    { id: 'memory-matrix', name: 'ライトマトリックス', icon: '🔲', cat: '記憶' },
+    { id: 'emoji-order', name: '絵文字メモリー', icon: '🎴', cat: '記憶' },
+    { id: 'sequence-memory', name: 'シーケンスマスター', icon: '🌈', cat: '記憶' },
+    { id: 'otp-memory', name: 'コードメモリー', icon: '🔐', cat: '記憶' },
+    { id: 'num-tap', name: 'ナンバータッチ', icon: '🔢', cat: '反射' },
+    { id: 'arrow-swipe', name: 'アローマスター', icon: '↗️', cat: '反射' },
+    { id: 'shell-game', name: 'シェルゲーム', icon: '🎩', cat: '知覚' },
+    { id: 'color-vision', name: 'カラービジョン', icon: '👁️', cat: '知覚' },
   ];
   const INITIAL_COUNT = 6;
   let expanded = false;
@@ -129,7 +130,7 @@ function renderIcon(icon) {
     }
   });
 
-  window.toggleDevPick = function() {
+  window.toggleDevPick = function () {
     expanded = !expanded;
     const list = document.getElementById('dev-pick-list');
     const label = document.getElementById('dev-pick-more-label');
@@ -154,7 +155,7 @@ function scrollToCategory(id) {
 
 // Highlight tab on scroll
 (function initCatTabScroll() {
-  const sections = ['calc','logic','memory','reflex','perception'];
+  const sections = ['calc', 'logic', 'memory', 'reflex', 'perception'];
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -178,13 +179,13 @@ let currentScreen = 'home';
 let isTransitioning = false;
 
 // Known valid screen IDs (non-game pages + all games)
-const VALID_SCREENS = new Set(['home','records','stats','settings']);
+const VALID_SCREENS = new Set(['home', 'records', 'stats', 'settings']);
 
 function showScreen(id, skipHistory = false) {
   if (isTransitioning || currentScreen === id) return;
   sfx.nav();
   if (!skipHistory) location.hash = id === 'home' ? '' : id;
-  
+
   isTransitioning = true;
   const overlay = document.getElementById('scene-transition');
   if (overlay) overlay.classList.add('active'); // 暗転フェードイン
@@ -246,6 +247,7 @@ function showScreen(id, skipHistory = false) {
     if (typeof tcStop === 'function') tcStop();
     if (typeof efStop === 'function') efStop();
     if (typeof mmutStop === 'function') mmutStop();
+    if (typeof kqStop === 'function') kqStop();
     if (id === 'home') refreshBestScores();
     if (id === 'records') refreshRecords();
     if (id === 'stats') refreshStats();
@@ -257,7 +259,7 @@ function showScreen(id, skipHistory = false) {
 
     // フェードイン（暗転を解除）
     if (overlay) overlay.classList.remove('active');
-    
+
     setTimeout(() => {
       isTransitioning = false;
     }, 150); // アニメーション終了待ち
@@ -299,45 +301,48 @@ function showScreen(id, skipHistory = false) {
 
 /* ===== BEST SCORES ON GAME CARDS ===== */
 const BS_MAPPING = [
-  { target: 'visual-calc',    key: 'vcBest',                                                                     ranksVar: 'VC_RANKS' },
-  { target: 'num-tap',        key: 'nt_best_random',        suffix: 's', reverse: true,                          ranksVar: 'NT_RANKS' },
-  { target: 'memory-matrix',  key: ['mm_best_easy','mm_best_normal','mm_best_hard'],                              ranksVar: 'MM_RANKS' },
-  { target: 'color-match',    key: 'cm_best',                                                                     ranksVar: 'CM_RANKS' },
-  { target: 'n-back',         key: ['nb_best_1','nb_best_2','nb_best_3'],                                         ranksVar: 'NB_RANKS' },
-  { target: 'flash-math',     key: ['fm_best_number_easy','fm_best_number_normal','fm_best_number_hard',
-                                    'fm_best_visual_easy','fm_best_visual_normal','fm_best_visual_hard',
-                                    'fm_best_mixed_easy','fm_best_mixed_normal','fm_best_mixed_hard'],             ranksVar: 'FM_RANKS' },
-  { target: 'shell-game',     key: 'sgBest',                                                                      ranksVar: 'SG_RANKS' },
-  { target: 'just-stop',      key: 'jsBest',                                                                      ranksVar: 'JS_RANKS' },
-  { target: 'sequence-memory',key: 'smBest',                                                                      ranksVar: 'SM_RANKS' },
-  { target: 'emoji-order',    key: 'eoBest',                                                                      ranksVar: 'EO_RANKS' },
-  { target: 'color-vision',   key: ['cv_best_easy','cv_best_normal','cv_best_hard'],                              ranksVar: 'CV_RANKS' },
-  { target: 'mirror-path',    key: 'mpBest',                                                                      ranksVar: 'MP_RANKS' },
-  { target: 'pair-logic',     key: 'plBest',                                                                      ranksVar: 'PL_RANKS' },
-  { target: 'balance-scale',  key: 'blBest',                                                                      ranksVar: 'BL_RANKS' },
-  { target: 'pattern-next',   key: 'pnBest',                                                                      ranksVar: 'PN_RANKS' },
-  { target: 'mental-nav',     key: 'mnBest',                                                                      ranksVar: 'MN_RANKS' },
-  { target: 'apple-catch',    key: 'acBest',                                                                      ranksVar: 'AC_RANKS' },
-  { target: 'num-order',      key: ['nor_best_easy','nor_best_normal','nor_best_hard'],                           ranksVar: 'NOR_RANKS' },
-  { target: 'obj-count',      key: ['oc_best_easy','oc_best_normal','oc_best_hard'],                              ranksVar: 'OC_RANKS' },
-  { target: 'hi-lo',          key: 'hlBest',                                                                      ranksVar: 'HL_RANKS' },
-  { target: 'color-seq',      key: 'cseqBest',                                                                    ranksVar: 'CSEQ_RANKS' },
-  { target: 'prime-hunt',     key: ['ph_best_easy','ph_best_normal','ph_best_hard'],                              ranksVar: 'PH_RANKS' },
-  { target: 'card-flip',      key: ['cflip_best_easy','cflip_best_normal','cflip_best_hard'], reverse: true, suffix: '手', ranksVar: 'CFLIP_RANKS' },
-  { target: 'cube-count',     key: ['ccnt_best_easy','ccnt_best_normal','ccnt_best_hard'],                        ranksVar: 'CCNT_RANKS' },
-  { target: 'make-ten',       key: 'mten_best',                                                                   ranksVar: 'MTEN_RANKS' },
-  { target: 'flash-sudoku',   key: ['fsd_best_easy','fsd_best_normal','fsd_best_hard'],                           ranksVar: 'FSD_RANKS' },
-  { target: 'race-pos',       key: ['rp_best_easy','rp_best_normal','rp_best_hard'],                               ranksVar: 'RP_RANKS' },
-  { target: 'otp-memory',     key: ['om_best_easy','om_best_normal','om_best_hard'],                               ranksVar: 'OM_RANKS' },
-  { target: 'day-calc',       key: ['dc_best_easy','dc_best_normal','dc_best_hard'],                               ranksVar: 'DC_RANKS' },
-  { target: 'arrow-swipe',    key: 'asBest',                                                                      ranksVar: 'AS_RANKS' },
-  { target: 'clock-calc',     key: ['cl_best_easy','cl_best_normal','cl_best_hard'],                               ranksVar: 'CL_RANKS' },
-  { target: 'lights-out',     key: ['lo_best_easy','lo_best_normal','lo_best_hard'], reverse: true, suffix: '手', ranksVar: 'LO_RANKS' },
-  { target: 'dollar-calc',   key: ['dca_best_easy','dca_best_normal','dca_best_hard'],                           ranksVar: 'DCA_RANKS' },
-  { target: 'double-detect', key: ['dd_best_easy','dd_best_normal','dd_best_hard'],                              ranksVar: 'DD_RANKS' },
-  { target: 'tax-calc',     key: ['tc_best_easy','tc_best_normal','tc_best_hard'],                              ranksVar: 'TC_RANKS' },
-  { target: 'emoji-finder', key: ['ef_best_easy','ef_best_normal','ef_best_hard'],                              ranksVar: 'EF_RANKS' },
-  { target: 'mental-mult',  key: ['mmut_best_easy','mmut_best_normal','mmut_best_hard'],                        ranksVar: 'MMUT_RANKS' }];
+  { target: 'visual-calc', key: 'vcBest', ranksVar: 'VC_RANKS' },
+  { target: 'num-tap', key: 'nt_best_random', suffix: 's', reverse: true, ranksVar: 'NT_RANKS' },
+  { target: 'memory-matrix', key: ['mm_best_easy', 'mm_best_normal', 'mm_best_hard'], ranksVar: 'MM_RANKS' },
+  { target: 'color-match', key: 'cm_best', ranksVar: 'CM_RANKS' },
+  { target: 'n-back', key: ['nb_best_1', 'nb_best_2', 'nb_best_3'], ranksVar: 'NB_RANKS' },
+  {
+    target: 'flash-math', key: ['fm_best_number_easy', 'fm_best_number_normal', 'fm_best_number_hard',
+      'fm_best_visual_easy', 'fm_best_visual_normal', 'fm_best_visual_hard',
+      'fm_best_mixed_easy', 'fm_best_mixed_normal', 'fm_best_mixed_hard'], ranksVar: 'FM_RANKS'
+  },
+  { target: 'shell-game', key: 'sgBest', ranksVar: 'SG_RANKS' },
+  { target: 'just-stop', key: 'jsBest', ranksVar: 'JS_RANKS' },
+  { target: 'sequence-memory', key: 'smBest', ranksVar: 'SM_RANKS' },
+  { target: 'emoji-order', key: 'eoBest', ranksVar: 'EO_RANKS' },
+  { target: 'color-vision', key: ['cv_best_easy', 'cv_best_normal', 'cv_best_hard'], ranksVar: 'CV_RANKS' },
+  { target: 'mirror-path', key: 'mpBest', ranksVar: 'MP_RANKS' },
+  { target: 'pair-logic', key: 'plBest', ranksVar: 'PL_RANKS' },
+  { target: 'balance-scale', key: 'blBest', ranksVar: 'BL_RANKS' },
+  { target: 'pattern-next', key: 'pnBest', ranksVar: 'PN_RANKS' },
+  { target: 'mental-nav', key: 'mnBest', ranksVar: 'MN_RANKS' },
+  { target: 'apple-catch', key: 'acBest', ranksVar: 'AC_RANKS' },
+  { target: 'num-order', key: ['nor_best_easy', 'nor_best_normal', 'nor_best_hard'], ranksVar: 'NOR_RANKS' },
+  { target: 'obj-count', key: ['oc_best_easy', 'oc_best_normal', 'oc_best_hard'], ranksVar: 'OC_RANKS' },
+  { target: 'hi-lo', key: 'hlBest', ranksVar: 'HL_RANKS' },
+  { target: 'color-seq', key: 'cseqBest', ranksVar: 'CSEQ_RANKS' },
+  { target: 'prime-hunt', key: ['ph_best_easy', 'ph_best_normal', 'ph_best_hard'], ranksVar: 'PH_RANKS' },
+  { target: 'card-flip', key: ['cflip_best_easy', 'cflip_best_normal', 'cflip_best_hard'], reverse: true, suffix: '手', ranksVar: 'CFLIP_RANKS' },
+  { target: 'cube-count', key: ['ccnt_best_easy', 'ccnt_best_normal', 'ccnt_best_hard'], ranksVar: 'CCNT_RANKS' },
+  { target: 'make-ten', key: 'mten_best', ranksVar: 'MTEN_RANKS' },
+  { target: 'flash-sudoku', key: ['fsd_best_easy', 'fsd_best_normal', 'fsd_best_hard'], ranksVar: 'FSD_RANKS' },
+  { target: 'race-pos', key: ['rp_best_easy', 'rp_best_normal', 'rp_best_hard'], ranksVar: 'RP_RANKS' },
+  { target: 'otp-memory', key: ['om_best_easy', 'om_best_normal', 'om_best_hard'], ranksVar: 'OM_RANKS' },
+  { target: 'day-calc', key: ['dc_best_easy', 'dc_best_normal', 'dc_best_hard'], ranksVar: 'DC_RANKS' },
+  { target: 'arrow-swipe', key: 'asBest', ranksVar: 'AS_RANKS' },
+  { target: 'clock-calc', key: ['cl_best_easy', 'cl_best_normal', 'cl_best_hard'], ranksVar: 'CL_RANKS' },
+  { target: 'lights-out', key: ['lo_best_easy', 'lo_best_normal', 'lo_best_hard'], reverse: true, suffix: '手', ranksVar: 'LO_RANKS' },
+  { target: 'dollar-calc', key: ['dca_best_easy', 'dca_best_normal', 'dca_best_hard'], ranksVar: 'DCA_RANKS' },
+  { target: 'double-detect', key: ['dd_best_easy', 'dd_best_normal', 'dd_best_hard'], ranksVar: 'DD_RANKS' },
+  { target: 'tax-calc', key: ['tc_best_easy', 'tc_best_normal', 'tc_best_hard'], ranksVar: 'TC_RANKS' },
+  { target: 'emoji-finder', key: ['ef_best_normal', 'ef_best_hard', 'ef_best_easy'], ranksVar: 'EF_RANKS' },
+  { target: 'mental-mult', key: ['mmut_best_easy', 'mmut_best_normal', 'mmut_best_hard'], ranksVar: 'MMUT_RANKS' },
+  { target: 'kanji-quiz', key: 'kq_best', ranksVar: 'KQ_RANKS' }];
 
 // Register all score keys for history tracking
 BS_MAPPING.forEach(g => {
@@ -383,7 +388,7 @@ function refreshBestScores() {
 
     let best = g.reverse ? Infinity : -Infinity;
     let hasScore = false;
-    
+
     if (Array.isArray(g.key)) {
       g.key.forEach(k => {
         const raw = localStorage.getItem(k);
@@ -404,7 +409,7 @@ function refreshBestScores() {
         if (!isNaN(v)) best = v;
       }
     }
-    
+
     cards.forEach(card => {
       let badge = card.querySelector('.card-best-score');
       if (hasScore) {
@@ -526,6 +531,14 @@ const ANNOUNCEMENTS = [
     items: [
       '❌ <strong>掛け算暗算</strong> — 2桁・3桁の掛け算を素早く解こう',
     ]
+  },
+  {
+    id: 'ann_20260413b',
+    icon: '📚',
+    title: '新しいゲームを追加しました！',
+    items: [
+      '📚 <strong>難読漢字</strong> — 魚・植物・動物など、手強い漢字に挑もう！',
+    ]
   }
 ];
 
@@ -610,17 +623,17 @@ function showRuleModal(gameId) {
     card = document.querySelector(`.pick-card[data-game="${gameId}"]`);
   }
   if (!card) return;
-  
+
   const icon = (card.querySelector('.game-icon') || card.querySelector('.pick-icon-wrap')).innerHTML;
   const title = (card.querySelector('h2') || card.querySelector('.pick-name')).textContent;
   const desc = card.querySelector('p') ? card.querySelector('p').textContent : "ルールを読み込み中...";
   const badge = (card.querySelector('.badge') || card.querySelector('.pick-cat-badge')).textContent;
-  
+
   document.getElementById('rule-icon').innerHTML = icon;
   document.getElementById('rule-title').textContent = title;
   document.getElementById('rule-badge').textContent = badge;
   document.getElementById('rule-desc').textContent = desc;
-  
+
   document.getElementById('rule-overlay').classList.add('show');
 }
 
@@ -634,10 +647,10 @@ let _retryFn = null;
 
 function showResult(icon, title, detail, onRetry, rank = null) {
   sfx.result();
-  document.getElementById('res-icon').innerHTML   = renderIcon(icon);
-  document.getElementById('res-title').textContent  = title;
+  document.getElementById('res-icon').innerHTML = renderIcon(icon);
+  document.getElementById('res-title').textContent = title;
   const detailEl = document.getElementById('res-detail');
-  detailEl.innerHTML = detail.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+  detailEl.innerHTML = detail.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>');
   const rankEl = document.getElementById('res-rank');
   if (rank) {
     rankEl.style.display = '';
@@ -701,7 +714,7 @@ function showRankGuide(ranksVar) {
     if (isReverse) {
       const prev = ranks[i - 1];
       const from = prev ? prev.max + 1 : null;
-      const to   = r.max === Infinity ? null : r.max;
+      const to = r.max === Infinity ? null : r.max;
       range = from === null ? `〜${to}${_rgCurrentUnit}` : to === null ? `${from}${_rgCurrentUnit}〜` : `${from}〜${to}${_rgCurrentUnit}`;
     } else {
       const next = ranks[i - 1];
@@ -721,13 +734,13 @@ function showRankGuide(ranksVar) {
 
 function rgSelectTab(tab) {
   const rankPanel = document.getElementById('rank-guide-content');
-  const lbPanel   = document.getElementById('rank-guide-leaderboard-wrap');
-  const rankTab   = document.getElementById('rgtab-rank');
-  const lbTab     = document.getElementById('rgtab-lb');
+  const lbPanel = document.getElementById('rank-guide-leaderboard-wrap');
+  const rankTab = document.getElementById('rgtab-rank');
+  const lbTab = document.getElementById('rgtab-lb');
 
   const isRank = tab === 'rank';
   rankPanel.style.display = isRank ? '' : 'none';
-  lbPanel.style.display   = isRank ? 'none' : '';
+  lbPanel.style.display = isRank ? 'none' : '';
   rankTab.classList.toggle('active', isRank);
   lbTab.classList.toggle('active', !isRank);
 
@@ -788,13 +801,13 @@ function resultRetry() {
 
 /* ===== RECORDS PAGE ===== */
 const RANK_TIERS = [
-  { emoji: '👑', label: '伝説',        color: '#f59e0b' },
-  { emoji: '🏆', label: '達人',        color: '#8b5cf6' },
+  { emoji: '👑', label: '伝説', color: '#f59e0b' },
+  { emoji: '🏆', label: '達人', color: '#8b5cf6' },
   { emoji: '💫', label: 'エキスパート', color: '#3b82f6' },
-  { emoji: '⭐', label: '上級者',      color: '#10b981' },
-  { emoji: '🌟', label: '中級者',      color: '#6ee7b7' },
-  { emoji: '🔰', label: '見習い',      color: '#94a3b8' },
-  { emoji: '🌱', label: 'まだまだ',    color: '#64748b' },
+  { emoji: '⭐', label: '上級者', color: '#10b981' },
+  { emoji: '🌟', label: '中級者', color: '#6ee7b7' },
+  { emoji: '🔰', label: '見習い', color: '#94a3b8' },
+  { emoji: '🌱', label: 'まだまだ', color: '#64748b' },
 ];
 
 let _dbRecordsCache = null;
@@ -807,9 +820,9 @@ function invalidateDbCache() {
 }
 
 async function refreshRecords() {
-  const list     = document.getElementById('records-list');
-  const statsEl  = document.getElementById('records-stats');
-  const chartEl  = document.getElementById('records-chart');
+  const list = document.getElementById('records-list');
+  const statsEl = document.getElementById('records-stats');
+  const chartEl = document.getElementById('records-chart');
   if (!list || !statsEl || !chartEl) return;
 
   let crownCount = 0;
@@ -832,7 +845,7 @@ async function refreshRecords() {
 
     const icon = card.querySelector('.game-icon').innerHTML;
     const name = card.querySelector('h2').textContent;
-    const cat  = card.querySelector('.badge').textContent;
+    const cat = card.querySelector('.badge').textContent;
 
     let best = g.reverse ? Infinity : -Infinity;
     let hasScore = false;
@@ -932,8 +945,8 @@ async function refreshRecords() {
       </div>
       <div class="record-score">
         ${r.hasScore && r.rank
-          ? `<span class="record-rank-badge" style="--rank-color:${r.rank.color}">${r.rank.emoji} ${r.rank.label}</span><span class="record-value">${r.display}</span>`
-          : '<span class="record-no-score">未プレイ</span>'}
+      ? `<span class="record-rank-badge" style="--rank-color:${r.rank.color}">${r.rank.emoji} ${r.rank.label}</span><span class="record-value">${r.display}</span>`
+      : '<span class="record-no-score">未プレイ</span>'}
       </div>
     </div>`).join('');
 }
@@ -953,7 +966,7 @@ async function refreshStats() {
     if (!card) return;
     gameInfoMap[g.target] = {
       name: card.querySelector('h2').textContent,
-      cat:  card.querySelector('.badge').textContent,
+      cat: card.querySelector('.badge').textContent,
       icon: card.querySelector('.game-icon').innerHTML,
     };
   });
@@ -980,7 +993,7 @@ async function refreshStats() {
           JSON.parse(raw).forEach(([ts, val]) => {
             allEntries.push({ ts, val, gameId: g.target, name: info.name, cat: info.cat });
           });
-        } catch (e) {}
+        } catch (e) { }
       });
     });
   }
@@ -1005,14 +1018,14 @@ async function refreshStats() {
   allEntries.forEach(e => {
     catCounts[e.cat] = (catCounts[e.cat] || 0) + 1;
   });
-  const catEntries = Object.entries(catCounts).sort((a,b) => b[1]-a[1]);
+  const catEntries = Object.entries(catCounts).sort((a, b) => b[1] - a[1]);
   const maxCat = catEntries[0]?.[1] || 1;
 
   // Most played games (top 5)
   const gameCounts = {};
   allEntries.forEach(e => { gameCounts[e.gameId] = (gameCounts[e.gameId] || 0) + 1; });
   const topGames = Object.entries(gameCounts)
-    .sort((a,b) => b[1]-a[1]).slice(0,5)
+    .sort((a, b) => b[1] - a[1]).slice(0, 5)
     .map(([id, cnt]) => ({ ...gameInfoMap[id], id, cnt }));
 
   // Recent activity (last 7 days)
@@ -1059,7 +1072,7 @@ async function refreshStats() {
           <div class="stats-catbar-row">
             <div class="stats-catbar-label">${cat}</div>
             <div class="stats-catbar-track">
-              <div class="stats-catbar-fill" style="width:${Math.round(cnt/maxCat*100)}%"></div>
+              <div class="stats-catbar-fill" style="width:${Math.round(cnt / maxCat * 100)}%"></div>
             </div>
             <div class="stats-catbar-count">${cnt}</div>
           </div>`).join('')}
@@ -1070,9 +1083,9 @@ async function refreshStats() {
     <div class="stats-section">
       <div class="stats-section-title">よく遊んだゲーム</div>
       <div class="stats-topgames">
-        ${topGames.map((g,i) => `
+        ${topGames.map((g, i) => `
           <div class="stats-topgame-row" onclick="showGameStats('${g.id}',false,'stats')">
-            <div class="stats-topgame-rank">${i+1}</div>
+            <div class="stats-topgame-rank">${i + 1}</div>
             <div class="stats-topgame-icon">${g.icon || '🎮'}</div>
             <div class="stats-topgame-name">${g.name || g.id}</div>
             <div class="stats-topgame-cnt">${g.cnt}回</div>
@@ -1095,10 +1108,10 @@ function renderActivityHeatmap(el, dayCounts, days) {
     const d = new Date(now.getFullYear(), now.getMonth(), now.getDate() - i);
     const key = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
     const cnt = dayCounts[key] || 0;
-    const dateStr = `${d.getMonth()+1}/${d.getDate()}`;
+    const dateStr = `${d.getMonth() + 1}/${d.getDate()}`;
     let level = 0;
-    if (cnt >= 1)  level = 1;
-    if (cnt >= 5)  level = 2;
+    if (cnt >= 1) level = 1;
+    if (cnt >= 5) level = 2;
     if (cnt >= 10) level = 3;
     if (cnt >= 20) level = 4;
     cells.push(`<div class="heatmap-cell lv${level}" title="${dateStr}: ${cnt}回"></div>`);
@@ -1183,7 +1196,7 @@ async function refreshGameStatsScreen() {
       try {
         const raw = localStorage.getItem(k + '__hist');
         if (raw) JSON.parse(raw).forEach(([ts, val]) => entries.push({ ts, val }));
-      } catch (e) {}
+      } catch (e) { }
       const bestRaw = localStorage.getItem(k);
       best = bestRaw !== null ? parseFloat(bestRaw) : null;
     }
@@ -1208,8 +1221,8 @@ async function refreshGameStatsScreen() {
   const totalPlays = difficulties.reduce((s, d) => s + d.entries.length, 0);
   const allTs = difficulties.flatMap(d => d.entries.map(e => e.ts));
   const firstPlay = allTs.length ? new Date(Math.min(...allTs)) : null;
-  const lastPlay  = allTs.length ? new Date(Math.max(...allTs)) : null;
-  const fmt = d => d ? `${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()}` : '—';
+  const lastPlay = allTs.length ? new Date(Math.max(...allTs)) : null;
+  const fmt = d => d ? `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()}` : '—';
 
   const DIFF_LABELS = { easy: 'かんたん', normal: 'ふつう', hard: 'むずかしい', default: '—', '1': 'N=1', '2': 'N=2', '3': 'N=3' };
   const hasTabs = difficulties.length > 1;
@@ -1275,14 +1288,14 @@ function drawScoreChart(canvas, entries, mapping) {
   const dpr = window.devicePixelRatio || 1;
   const W = canvas.offsetWidth;
   const H = canvas.offsetHeight;
-  canvas.width  = W * dpr;
+  canvas.width = W * dpr;
   canvas.height = H * dpr;
   const ctx = canvas.getContext('2d');
   ctx.scale(dpr, dpr);
 
   const PAD = { top: 20, right: 16, bottom: 48, left: 44 };
   const cw = W - PAD.left - PAD.right;
-  const ch = H - PAD.top  - PAD.bottom;
+  const ch = H - PAD.top - PAD.bottom;
 
   const vals = entries.map(e => e.val).filter(v => isFinite(v));
   if (vals.length === 0) return;
@@ -1331,7 +1344,7 @@ function drawScoreChart(canvas, entries, mapping) {
 
   // Area fill — parse accent hex to rgba
   function hexToRgba(hex, a) {
-    const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+    const r = parseInt(hex.slice(1, 3), 16), g = parseInt(hex.slice(3, 5), 16), b = parseInt(hex.slice(5, 7), 16);
     return `rgba(${r},${g},${b},${a})`;
   }
   const accentFill = accent.startsWith('#') ? hexToRgba(accent, 0.3) : 'rgba(16,185,129,0.3)';
@@ -1342,7 +1355,7 @@ function drawScoreChart(canvas, entries, mapping) {
   entries.forEach((e, i) => {
     if (!isFinite(e.val)) return;
     const x = PAD.left + (i / (entries.length - 1 || 1)) * cw;
-    const y = PAD.top  + (1 - (e.val - minV) / range) * ch;
+    const y = PAD.top + (1 - (e.val - minV) / range) * ch;
     i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
   });
   const lastX = PAD.left + cw;
@@ -1361,7 +1374,7 @@ function drawScoreChart(canvas, entries, mapping) {
   entries.forEach((e, i) => {
     if (!isFinite(e.val)) return;
     const x = PAD.left + (i / (entries.length - 1 || 1)) * cw;
-    const y = PAD.top  + (1 - (e.val - minV) / range) * ch;
+    const y = PAD.top + (1 - (e.val - minV) / range) * ch;
     i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
   });
   ctx.stroke();
@@ -1370,7 +1383,7 @@ function drawScoreChart(canvas, entries, mapping) {
   entries.forEach((e, i) => {
     if (!isFinite(e.val)) return;
     const x = PAD.left + (i / (entries.length - 1 || 1)) * cw;
-    const y = PAD.top  + (1 - (e.val - minV) / range) * ch;
+    const y = PAD.top + (1 - (e.val - minV) / range) * ch;
     ctx.beginPath();
     ctx.arc(x, y, 3, 0, Math.PI * 2);
     ctx.fillStyle = accent;

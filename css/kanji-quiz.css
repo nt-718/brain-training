@@ -1,0 +1,165 @@
+/* ===== KANJI QUIZ (難読漢字) Styles ===== */
+
+#kanji-quiz .game-content {
+  padding: 10px 16px;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+#kq-cat-badge {
+  background: rgba(139, 92, 246, 0.1);
+  color: #a78bfa;
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+#kq-stage {
+  width: 100%;
+  height: 120px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.2);
+}
+
+#kq-stage::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(139, 92, 246, 0.05) 0%, transparent 70%);
+}
+
+#kq-question-kanji {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+  z-index: 1;
+}
+
+#kq-choices {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+@media (max-width: 400px) {
+  #kq-choices {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+.kq-choice-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-2);
+  border-radius: var(--radius);
+  color: var(--text);
+  padding: 12px 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  font-family: var(--font-main);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+}
+
+.kq-choice-btn:hover:not(:disabled) {
+  background: rgba(139, 92, 246, 0.12);
+  border-color: rgba(139, 92, 246, 0.4);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.kq-choice-btn:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.kq-choice-btn.correct {
+  background: linear-gradient(135deg, #10b981, #059669) !important;
+  border-color: transparent !important;
+  color: #fff !important;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+}
+
+.kq-choice-btn.wrong {
+  background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+  border-color: transparent !important;
+  color: #fff !important;
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+}
+
+.kq-choice-btn:disabled {
+  cursor: default;
+  opacity: 0.7;
+}
+
+@media (max-width: 480px) {
+  #kq-question-kanji {
+    font-size: 2.4rem;
+  }
+
+  .kq-choice-btn {
+    padding: 10px 8px;
+    font-size: 0.9rem;
+    min-height: 48px;
+  }
+
+  #kq-stage {
+    height: 100px;
+    margin-bottom: 10px;
+  }
+}
+
+/* Screen transition helpers */
+.kq-content.flash-correct {
+  animation: kqFlashCorrect 0.6s ease;
+}
+
+.kq-content.flash-wrong {
+  animation: kqFlashWrong 0.6s ease;
+}
+
+@keyframes kqFlashCorrect {
+
+  0%,
+  100% {
+    box-shadow: none;
+  }
+
+  20%,
+  80% {
+    box-shadow: inset 0 0 50px rgba(16, 185, 129, 0.2);
+  }
+}
+
+@keyframes kqFlashWrong {
+
+  0%,
+  100% {
+    box-shadow: none;
+  }
+
+  20%,
+  80% {
+    box-shadow: inset 0 0 50px rgba(239, 68, 68, 0.2);
+  }
+}

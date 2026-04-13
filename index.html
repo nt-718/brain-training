@@ -53,6 +53,7 @@
   <link rel="stylesheet" href="css/tax-calc.css?v=1775846969" />
   <link rel="stylesheet" href="css/emoji-finder.css?v=1775846969" />
   <link rel="stylesheet" href="css/mental-mult.css?v=1775846969" />
+  <link rel="stylesheet" href="css/kanji-quiz.css?v=1775846969" />
   <link rel="stylesheet" href="css/leaderboard.css?v=1775846969" />
 </head>
 
@@ -90,17 +91,25 @@
 
     <!-- Global Leaderboard (Home screen) -->
     <div class="global-leaderboard-section" style="margin: 24px 20px;">
-      <div class="daily-pick-header" style="margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
-        <div class="daily-pick-title" style="font-size: 1.1rem; font-weight: 800; display: flex; align-items: center; gap: 8px;">
+      <div class="daily-pick-header"
+        style="margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
+        <div class="daily-pick-title"
+          style="font-size: 1.1rem; font-weight: 800; display: flex; align-items: center; gap: 8px;">
           <span class="pick-fire" style="font-size: 1.3rem;">🌍</span>
           <span>グローバルランキング</span>
         </div>
       </div>
-      <div class="glb-tabs" style="display: flex; gap: 0; margin-bottom: 0; border-radius: var(--radius) var(--radius) 0 0; overflow: hidden; border: 1px solid var(--border-2); border-bottom: none;">
-        <button id="glb-tab-alltime" class="glb-tab active" onclick="switchGlobalTab('alltime')" style="flex: 1; padding: 10px 0; font-size: 0.82rem; font-weight: 700; border: none; cursor: pointer; background: rgba(255,255,255,0.06); color: var(--text); transition: all 0.2s;">👑 総合</button>
-        <button id="glb-tab-weekly" class="glb-tab" onclick="switchGlobalTab('weekly')" style="flex: 1; padding: 10px 0; font-size: 0.82rem; font-weight: 700; border: none; border-left: 1px solid var(--border-2); cursor: pointer; background: transparent; color: var(--text-3); transition: all 0.2s;">🔥 週間</button>
+      <div class="glb-tabs"
+        style="display: flex; gap: 0; margin-bottom: 0; border-radius: var(--radius) var(--radius) 0 0; overflow: hidden; border: 1px solid var(--border-2); border-bottom: none;">
+        <button id="glb-tab-alltime" class="glb-tab active" onclick="switchGlobalTab('alltime')"
+          style="flex: 1; padding: 10px 0; font-size: 0.82rem; font-weight: 700; border: none; cursor: pointer; background: rgba(255,255,255,0.06); color: var(--text); transition: all 0.2s;">👑
+          総合</button>
+        <button id="glb-tab-weekly" class="glb-tab" onclick="switchGlobalTab('weekly')"
+          style="flex: 1; padding: 10px 0; font-size: 0.82rem; font-weight: 700; border: none; border-left: 1px solid var(--border-2); cursor: pointer; background: transparent; color: var(--text-3); transition: all 0.2s;">🔥
+          週間</button>
       </div>
-      <div id="home-global-leaderboard" style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-2); border-top: none; border-radius: 0 0 var(--radius-lg) var(--radius-lg); padding: 12px;">
+      <div id="home-global-leaderboard"
+        style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-2); border-top: none; border-radius: 0 0 var(--radius-lg) var(--radius-lg); padding: 12px;">
       </div>
     </div>
 
@@ -289,6 +298,14 @@
             <p>すべての明かりを消灯させよう</p>
           </div>
           <div class="badge">論理</div>
+        </div>
+        <div class="game-card" onclick="showScreen('kanji-quiz')" data-game="kanji-quiz">
+          <div class="game-icon">📚</div>
+          <div class="game-info">
+            <h2>難読漢字</h2>
+            <p>魚や植物、動物などの難しい漢字を当てよう</p>
+          </div>
+          <div class="badge">教養・言語</div>
         </div>
       </div>
     </div>
@@ -599,6 +616,107 @@
 
     </div><!-- /.game-content -->
   </div><!-- /#visual-calc -->
+
+  <!-- ========== MENTAL MULTIPLICATION (掛け算暗算) ========== -->
+  <div id="mental-mult" class="screen">
+    <nav class="nav">
+      <button class="btn-back" onclick="showScreen('home')">🏠</button>
+      <h1>掛け算暗算</h1>
+    </nav>
+    <div class="game-content" id="mmut-content">
+      <div class="diff-row" id="mmut-diff-row">
+        <button class="diff-btn selected" onclick="mmutSetDiff(this,'easy')">かんたん</button>
+        <button class="diff-btn" onclick="mmutSetDiff(this,'normal')">ふつう</button>
+        <button class="diff-btn" onclick="mmutSetDiff(this,'hard')">むずかしい</button>
+      </div>
+      <div class="score-bar">
+        <div class="score-item">
+          <div class="label">スコア</div>
+          <div class="value" id="mmut-score">0</div>
+        </div>
+        <div class="score-item">
+          <div class="label">問題</div>
+          <div class="value" id="mmut-q-num">1/10</div>
+        </div>
+        <div class="score-item">
+          <div class="label">ベスト</div>
+          <div class="value" id="mmut-best">0</div>
+        </div>
+      </div>
+      <div class="timer-bar" style="margin-top:8px;">
+        <div class="timer-fill" id="mmut-timer-fill" style="width:100%"></div>
+      </div>
+
+      <div class="mmut-stage">
+        <div id="mmut-question">スタートを押してください</div>
+      </div>
+
+      <div class="answer-area">
+        <div class="number-input" id="mmut-input">?</div>
+        <div class="numpad" id="mmut-numpad" style="display:none; margin-top:1.5rem;">
+          <button class="numpad-btn" onclick="mmutNumpad('7')">7</button>
+          <button class="numpad-btn" onclick="mmutNumpad('8')">8</button>
+          <button class="numpad-btn" onclick="mmutNumpad('9')">9</button>
+          <button class="numpad-btn del" onclick="mmutNumpad('del')">⌫</button>
+
+          <button class="numpad-btn" onclick="mmutNumpad('4')">4</button>
+          <button class="numpad-btn" onclick="mmutNumpad('5')">5</button>
+          <button class="numpad-btn" onclick="mmutNumpad('6')">6</button>
+          <button class="numpad-btn ok" onclick="mmutSubmit()">OK</button>
+
+          <button class="numpad-btn" onclick="mmutNumpad('1')">1</button>
+          <button class="numpad-btn" onclick="mmutNumpad('2')">2</button>
+          <button class="numpad-btn" onclick="mmutNumpad('3')">3</button>
+
+          <button class="numpad-btn zero" onclick="mmutNumpad('0')">0</button>
+        </div>
+        <button class="btn-primary" id="mmut-start-btn" onclick="mmutStart()">スタート</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 難読漢字 (kanji-quiz) -->
+  <div id="kanji-quiz" class="screen">
+    <div class="nav">
+      <button class="btn-back" onclick="showScreen('home')">←</button>
+      <h1>難読漢字</h1>
+      <button class="btn-rule" onclick="showRule('kanji-quiz')">?</button>
+    </div>
+    <div class="game-content" id="kq-content">
+      <div class="score-bar">
+        <div class="score-item">
+          <div class="label">SCORE</div>
+          <div id="kq-score" class="value">0</div>
+        </div>
+        <div class="score-item">
+          <div class="label">BEST</div>
+          <div id="kq-best" class="value">0</div>
+        </div>
+        <div class="score-item">
+          <div class="label">QUESTIONS</div>
+          <div id="kq-q-num" class="value">1/10</div>
+        </div>
+      </div>
+
+      <div class="timer-bar">
+        <div id="kq-timer-fill" class="timer-fill"></div>
+      </div>
+
+      <div id="kq-cat-badge">---</div>
+
+      <div id="kq-stage">
+        <div id="kq-question-kanji">漢</div>
+      </div>
+
+      <div id="kq-choices" style="display:none;">
+        <!-- Filled by JS -->
+      </div>
+
+      <div class="game-start-container">
+        <button id="kq-start-btn" class="btn-primary" onclick="kqStart()">スタート</button>
+      </div>
+    </div>
+  </div><!-- /#kanji-quiz -->
 
   <!-- ========== NUM TAP ========== -->
   <div id="num-tap" class="screen">
@@ -1963,12 +2081,12 @@
       <div class="timer-bar">
         <div class="timer-fill" id="as-timer-fill" style="width:100%"></div>
       </div>
-      
+
       <div class="as-rule-box" id="as-rule-box" style="display:none;">
         <div class="as-rule-title">🔵同じ方向 / 🔴反対方向</div>
         <div class="as-rule-desc">画面をスワイプしてください</div>
       </div>
-      
+
       <div class="as-stage" id="as-stage">
         <div class="as-arrow-box" id="as-arrow-box" style="display:none;"></div>
         <div class="as-message" id="as-message">スタートを押してください</div>
@@ -2149,9 +2267,8 @@
         <div class="dd-input-area" id="dd-input-area" style="display:none;">
           <div class="dd-pos-question" id="dd-pos-question"></div>
           <div class="dd-input-row">
-            <input type="number" class="dd-pos-input" id="dd-pos-input"
-                   inputmode="numeric" min="1" max="19" placeholder="枚目"
-                   onkeydown="if(event.key==='Enter')ddSubmitPosition()">
+            <input type="number" class="dd-pos-input" id="dd-pos-input" inputmode="numeric" min="1" max="19"
+              placeholder="枚目" onkeydown="if(event.key==='Enter')ddSubmitPosition()">
             <button class="dd-btn-submit" onclick="ddSubmitPosition()">確認</button>
           </div>
         </div>
@@ -2284,7 +2401,8 @@
         <div class="settings-item">
           <label class="settings-label" for="settings-username-input">ユーザー名</label>
           <div class="settings-username-row">
-            <input type="text" id="settings-username-input" class="settings-text-input" maxlength="20" placeholder="名前を入力（最大20文字）">
+            <input type="text" id="settings-username-input" class="settings-text-input" maxlength="20"
+              placeholder="名前を入力（最大20文字）">
             <button class="settings-save-btn" onclick="saveUsername()">保存</button>
           </div>
           <div class="settings-hint">ランキングや記録に表示される名前です</div>
@@ -2306,64 +2424,6 @@
         <div id="settings-account-content"></div>
       </div>
 
-    </div>
-  </div>
-
-  <!-- ========== MENTAL MULTIPLICATION (掛け算暗算) ========== -->
-  <div id="mental-mult" class="screen">
-    <nav class="nav">
-      <button class="btn-back" onclick="showScreen('home')">🏠</button>
-      <h1>掛け算暗算</h1>
-    </nav>
-    <div class="game-content" id="mmut-content">
-      <div class="diff-row" id="mmut-diff-row">
-        <button class="diff-btn selected" onclick="mmutSetDiff(this,'easy')">かんたん</button>
-        <button class="diff-btn" onclick="mmutSetDiff(this,'normal')">ふつう</button>
-        <button class="diff-btn" onclick="mmutSetDiff(this,'hard')">むずかしい</button>
-      </div>
-      <div class="score-bar">
-        <div class="score-item">
-          <div class="label">スコア</div>
-          <div class="value" id="mmut-score">0</div>
-        </div>
-        <div class="score-item">
-          <div class="label">問題</div>
-          <div class="value" id="mmut-q-num">1/10</div>
-        </div>
-        <div class="score-item">
-          <div class="label">ベスト</div>
-          <div class="value" id="mmut-best">0</div>
-        </div>
-      </div>
-      <div class="timer-bar" style="margin-top:8px;">
-        <div class="timer-fill" id="mmut-timer-fill" style="width:100%"></div>
-      </div>
-
-      <div class="mmut-stage">
-        <div id="mmut-question">スタートを押してください</div>
-      </div>
-
-      <div class="answer-area">
-        <div class="number-input" id="mmut-input">?</div>
-        <div class="numpad" id="mmut-numpad" style="display:none; margin-top:1.5rem;">
-          <button class="numpad-btn" onclick="mmutNumpad('7')">7</button>
-          <button class="numpad-btn" onclick="mmutNumpad('8')">8</button>
-          <button class="numpad-btn" onclick="mmutNumpad('9')">9</button>
-          <button class="numpad-btn del" onclick="mmutNumpad('del')">⌫</button>
-
-          <button class="numpad-btn" onclick="mmutNumpad('4')">4</button>
-          <button class="numpad-btn" onclick="mmutNumpad('5')">5</button>
-          <button class="numpad-btn" onclick="mmutNumpad('6')">6</button>
-          <button class="numpad-btn ok" onclick="mmutSubmit()">OK</button>
-
-          <button class="numpad-btn" onclick="mmutNumpad('1')">1</button>
-          <button class="numpad-btn" onclick="mmutNumpad('2')">2</button>
-          <button class="numpad-btn" onclick="mmutNumpad('3')">3</button>
-
-          <button class="numpad-btn zero" onclick="mmutNumpad('0')">0</button>
-        </div>
-        <button class="btn-primary" id="mmut-start-btn" onclick="mmutStart()">スタート</button>
-      </div>
     </div>
   </div>
 
@@ -2413,11 +2473,12 @@
   <script src="js/tax-calc.js?v=1775846969"></script>
   <script src="js/emoji-finder.js?v=1775846969"></script>
   <script src="js/mental-mult.js?v=1775846969"></script>
+  <script src="js/kanji-quiz.js?v=1775846969"></script>
   <script>
     // キャッシュトラブル解消のため、既存のService Workerの登録をすべて解除する
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.getRegistrations().then(function(registrations) {
-        for(let registration of registrations) {
+      navigator.serviceWorker.getRegistrations().then(function (registrations) {
+        for (let registration of registrations) {
           registration.unregister();
         }
       });
@@ -2435,7 +2496,7 @@
         <p style="font-size:0.85rem;color:#94a3b8;">※自動で移動しない場合はボタンをタップしてください</p>
       `;
       document.body.appendChild(overlay);
-      
+
       setTimeout(() => {
         window.location.href = "https://notore-mania.com";
       }, 4000);
