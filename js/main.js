@@ -1144,9 +1144,10 @@ async function refreshGameStatsScreen() {
   }
 
   const isLogged = typeof isLoggedIn === 'function' && isLoggedIn();
-  if (isLogged && !_dbHistoryCache) {
+  if (isLogged && (!_dbHistoryCache || !_dbRecordsCache)) {
     el.innerHTML = '<div style="padding:40px;text-align:center"><div class="lb-spinner"></div><div style="margin-top:16px;color:var(--text-3)">データ読み込み中...</div></div>';
-    _dbHistoryCache = await getMyHistory();
+    if (!_dbHistoryCache) _dbHistoryCache = await getMyHistory();
+    if (!_dbRecordsCache) _dbRecordsCache = await getMyRecords();
   }
 
   const keys = Array.isArray(mapping.key) ? mapping.key : [mapping.key];

@@ -188,3 +188,55 @@ async function getMyHistory() {
   }
 }
 
+/**
+ * Synchronize DB records down to localStorage to ensure
+ * individual games and UI badges show the correct best score.
+ */
+async function syncDbRecordsToLocal() {
+  const token = localStorage.getItem('jwt');
+  if (!token) return; // Must check token directly if isLoggedIn is not ready yet
+
+  const records = await getMyRecords();
+  if (!records || records.length === 0) return;
+
+  if (typeof BS_MAPPING === 'undefined') return;
+
+  records.forEach(r => {
+    const mapping = BS_MAPPING.find(m => m.target === r.game_id);
+    if (!mapping) return;
+
+    const keys = Array.isArray(mapping.key) ? mapping.key : [mapping.key];
+    const diff = r.difficulty || 'default';
+    const targetKey = keys.find(k => k.includes(diff)) || keys[0];
+
+    if (!targetKey) return;
+
+    const existingRaw = localStorage.getItem(targetKey);
+    const best = mapping.reverse ? r.min_score : r.max_score;
+
+    if (existingRaw === null) {
+      localStorage.setItem(targetKey, best.toString());
+    } else {
+      const existing = parseFloat(existingRaw);
+      if (!isNaN(existing)) {
+        if (mapping.reverse) {
+          if (best < existing) localStorage.setItem(targetKey, best.toString());
+        } else {
+          if (best > existing) localStorage.setItem(targetKey, best.toString());
+        }
+      }
+    }
+  });
+
+  // After syncing, explicitly refresh the home screen badges
+  if (typeof refreshBestScores === 'function') refreshBestScores();
+}
+
+// Run sync on app load if logged in
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    if (typeof isLoggedIn === 'function' && isLoggedIn()) {
+      syncDbRecordsToLocal();
+    }
+  }, 500); // Give auth.js slightly more time to init if needed
+});
