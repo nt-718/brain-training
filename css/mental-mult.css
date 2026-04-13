@@ -1,0 +1,48 @@
+/* ===== MENTAL MULTIPLICATION (掛け算暗算) ===== */
+
+.mmut-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+  gap: 1.5rem;
+  animation: mmutFadeIn 0.3s ease-out;
+}
+
+#mmut-question {
+  font-size: 3.5rem;
+  font-weight: 800;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: var(--text);
+  text-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#mmut-question .op {
+  color: var(--primary);
+  opacity: 0.8;
+  font-size: 2.5rem;
+}
+
+#mmut-question .val-a, #mmut-question .val-b {
+  background: linear-gradient(135deg, var(--text) 0%, var(--text-2) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.mmut-answer-display {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+@keyframes mmutFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Response and Numpad styling is shared with other games via common.css, 
+   but specific tweaks can go here if needed. */

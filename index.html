@@ -52,6 +52,7 @@
   <link rel="stylesheet" href="css/double-detect.css?v=1775846969" />
   <link rel="stylesheet" href="css/tax-calc.css?v=1775846969" />
   <link rel="stylesheet" href="css/emoji-finder.css?v=1775846969" />
+  <link rel="stylesheet" href="css/mental-mult.css?v=1775846969" />
   <link rel="stylesheet" href="css/leaderboard.css?v=1775846969" />
 </head>
 
@@ -220,6 +221,14 @@
           <div class="game-info">
             <h2>消費税計算</h2>
             <p>税込み価格を素早く答えよう</p>
+          </div>
+          <div class="badge">暗算</div>
+        </div>
+        <div class="game-card" onclick="showScreen('mental-mult')" data-game="mental-mult">
+          <div class="game-icon">❌</div>
+          <div class="game-info">
+            <h2>掛け算暗算</h2>
+            <p>2桁、3桁の掛け算を素早く解こう</p>
           </div>
           <div class="badge">暗算</div>
         </div>
@@ -2300,6 +2309,64 @@
     </div>
   </div>
 
+  <!-- ========== MENTAL MULTIPLICATION (掛け算暗算) ========== -->
+  <div id="mental-mult" class="screen">
+    <nav class="nav">
+      <button class="btn-back" onclick="showScreen('home')">🏠</button>
+      <h1>掛け算暗算</h1>
+    </nav>
+    <div class="game-content" id="mmut-content">
+      <div class="diff-row" id="mmut-diff-row">
+        <button class="diff-btn selected" onclick="mmutSetDiff(this,'easy')">かんたん</button>
+        <button class="diff-btn" onclick="mmutSetDiff(this,'normal')">ふつう</button>
+        <button class="diff-btn" onclick="mmutSetDiff(this,'hard')">むずかしい</button>
+      </div>
+      <div class="score-bar">
+        <div class="score-item">
+          <div class="label">スコア</div>
+          <div class="value" id="mmut-score">0</div>
+        </div>
+        <div class="score-item">
+          <div class="label">問題</div>
+          <div class="value" id="mmut-q-num">1/10</div>
+        </div>
+        <div class="score-item">
+          <div class="label">ベスト</div>
+          <div class="value" id="mmut-best">0</div>
+        </div>
+      </div>
+      <div class="timer-bar" style="margin-top:8px;">
+        <div class="timer-fill" id="mmut-timer-fill" style="width:100%"></div>
+      </div>
+
+      <div class="mmut-stage">
+        <div id="mmut-question">スタートを押してください</div>
+      </div>
+
+      <div class="answer-area">
+        <div class="number-input" id="mmut-input">?</div>
+        <div class="numpad" id="mmut-numpad" style="display:none; margin-top:1.5rem;">
+          <button class="numpad-btn" onclick="mmutNumpad('7')">7</button>
+          <button class="numpad-btn" onclick="mmutNumpad('8')">8</button>
+          <button class="numpad-btn" onclick="mmutNumpad('9')">9</button>
+          <button class="numpad-btn del" onclick="mmutNumpad('del')">⌫</button>
+
+          <button class="numpad-btn" onclick="mmutNumpad('4')">4</button>
+          <button class="numpad-btn" onclick="mmutNumpad('5')">5</button>
+          <button class="numpad-btn" onclick="mmutNumpad('6')">6</button>
+          <button class="numpad-btn ok" onclick="mmutSubmit()">OK</button>
+
+          <button class="numpad-btn" onclick="mmutNumpad('1')">1</button>
+          <button class="numpad-btn" onclick="mmutNumpad('2')">2</button>
+          <button class="numpad-btn" onclick="mmutNumpad('3')">3</button>
+
+          <button class="numpad-btn zero" onclick="mmutNumpad('0')">0</button>
+        </div>
+        <button class="btn-primary" id="mmut-start-btn" onclick="mmutStart()">スタート</button>
+      </div>
+    </div>
+  </div>
+
   <!-- ========== SCENE TRANSITION ========== -->
   <div id="scene-transition" class="scene-transition"></div>
 
@@ -2345,6 +2412,7 @@
   <script src="js/double-detect.js?v=1775846969"></script>
   <script src="js/tax-calc.js?v=1775846969"></script>
   <script src="js/emoji-finder.js?v=1775846969"></script>
+  <script src="js/mental-mult.js?v=1775846969"></script>
   <script>
     // キャッシュトラブル解消のため、既存のService Workerの登録をすべて解除する
     if ('serviceWorker' in navigator) {

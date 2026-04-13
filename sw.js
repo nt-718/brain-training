@@ -1,4 +1,4 @@
-const CACHE_NAME = 'noutore-v41';
+const CACHE_NAME = 'noutore-v42';
 const ASSETS = [
   './',
   './index.html',
@@ -83,6 +83,8 @@ const ASSETS = [
   './js/lights-out.js',
   './css/emoji-finder.css',
   './js/emoji-finder.js',
+  './css/mental-mult.css',
+  './js/mental-mult.js',
 ];
 
 self.addEventListener('install', e => {

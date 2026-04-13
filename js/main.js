@@ -245,6 +245,7 @@ function showScreen(id, skipHistory = false) {
     if (typeof ddStop === 'function') ddStop();
     if (typeof tcStop === 'function') tcStop();
     if (typeof efStop === 'function') efStop();
+    if (typeof mmutStop === 'function') mmutStop();
     if (id === 'home') refreshBestScores();
     if (id === 'records') refreshRecords();
     if (id === 'stats') refreshStats();
@@ -335,7 +336,8 @@ const BS_MAPPING = [
   { target: 'dollar-calc',   key: ['dca_best_easy','dca_best_normal','dca_best_hard'],                           ranksVar: 'DCA_RANKS' },
   { target: 'double-detect', key: ['dd_best_easy','dd_best_normal','dd_best_hard'],                              ranksVar: 'DD_RANKS' },
   { target: 'tax-calc',     key: ['tc_best_easy','tc_best_normal','tc_best_hard'],                              ranksVar: 'TC_RANKS' },
-  { target: 'emoji-finder', key: ['ef_best_easy','ef_best_normal','ef_best_hard'],                              ranksVar: 'EF_RANKS' }];
+  { target: 'emoji-finder', key: ['ef_best_easy','ef_best_normal','ef_best_hard'],                              ranksVar: 'EF_RANKS' },
+  { target: 'mental-mult',  key: ['mmut_best_easy','mmut_best_normal','mmut_best_hard'],                        ranksVar: 'MMUT_RANKS' }];
 
 // Register all score keys for history tracking
 BS_MAPPING.forEach(g => {
@@ -515,6 +517,14 @@ const ANNOUNCEMENTS = [
     title: '新しいゲームを追加しました！',
     items: [
       '🔍 <strong>絵文字さがし</strong> — フラッシュされた絵文字の中で増えた1個を探し当てよう！',
+    ]
+  },
+  {
+    id: 'ann_20260413',
+    icon: '❌',
+    title: '新しいゲームを追加しました！',
+    items: [
+      '❌ <strong>掛け算暗算</strong> — 2桁・3桁の掛け算を素早く解こう',
     ]
   }
 ];
