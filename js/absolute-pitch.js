@@ -12,7 +12,7 @@ var AP_RANKS = [
 ];
 
 // 2. LocalStorage Key
-const AP_BEST_KEY = 'apBest';
+const AP_BEST_KEY = 'ap_best';
 
 const AP_NOTES = [
   { id: 'C',  name: 'ド', alpha: 'C4', freq: 261.63 },
@@ -46,7 +46,8 @@ let apAnswered = false;
 // 4. Initialization
 function apLoadBest() {
   const best = localStorage.getItem(AP_BEST_KEY) || 0;
-  document.getElementById('ap-best').textContent = best;
+  const bestEl = document.getElementById('ap-best');
+  if (bestEl) bestEl.textContent = best;
 }
 
 function apSetDiff(btn, diff) {
@@ -168,12 +169,11 @@ function apAnswer(noteId) {
 // 8. END FUNCTION
 function apEnd() {
   apRunning = false;
-  const bestKey = AP_BEST_KEY;
-  const prev = parseInt(localStorage.getItem(bestKey)) || 0;
+  const prev = parseInt(localStorage.getItem(AP_BEST_KEY)) || 0;
   const isNewRecord = apScore > prev;
   
   if (isNewRecord) {
-    localStorage.setItem(bestKey, apScore);
+    localStorage.setItem(AP_BEST_KEY, apScore);
   }
   
   const rank = getScoreRank(apScore, AP_RANKS);
@@ -186,5 +186,5 @@ function apEnd() {
   );
   
   if (typeof refreshBestScores === 'function') refreshBestScores();
-  saveScore('absolute-pitch', apDifficulty, apScore);
+  saveScore('absolute-pitch', 'default', apScore);
 }

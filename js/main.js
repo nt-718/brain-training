@@ -345,7 +345,7 @@ const BS_MAPPING = [
   { target: 'emoji-finder', key: ['ef_best_normal', 'ef_best_hard', 'ef_best_easy'], ranksVar: 'EF_RANKS' },
   { target: 'mental-mult', key: ['mmut_best_easy', 'mmut_best_normal', 'mmut_best_hard'], ranksVar: 'MMUT_RANKS' },
   { target: 'kanji-quiz', key: 'kq_best', ranksVar: 'KQ_RANKS' },
-  { target: 'absolute-pitch', key: 'apBest', ranksVar: 'AP_RANKS' }];
+  { target: 'absolute-pitch', key: 'ap_best', ranksVar: 'AP_RANKS' }];
 
 // Register all score keys for history tracking
 BS_MAPPING.forEach(g => {
