@@ -1,4 +1,4 @@
-const CACHE_NAME = 'noutore-v44';
+const CACHE_NAME = 'noutore-v45';
 const ASSETS = [
   './',
   './index.html',
@@ -89,6 +89,8 @@ const ASSETS = [
   './js/kanji-quiz.js',
   './css/absolute-pitch.css',
   './js/absolute-pitch.js',
+  './css/emoji-cipher.css',
+  './js/emoji-cipher.js',
 ];
 
 self.addEventListener('install', e => {

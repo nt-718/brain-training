@@ -55,6 +55,7 @@
   <link rel="stylesheet" href="css/mental-mult.css?v=1775846969" />
   <link rel="stylesheet" href="css/kanji-quiz.css?v=1775846969" />
   <link rel="stylesheet" href="css/absolute-pitch.css?v=1775846969" />
+  <link rel="stylesheet" href="css/emoji-cipher.css?v=1775846969" />
   <link rel="stylesheet" href="css/leaderboard.css?v=1775846969" />
 </head>
 
@@ -307,6 +308,14 @@
             <p>魚や植物、動物などの難しい漢字を当てよう</p>
           </div>
           <div class="badge">教養・言語</div>
+        </div>
+        <div class="game-card" onclick="showScreen('emoji-cipher')" data-game="emoji-cipher">
+          <div class="game-icon">🔐</div>
+          <div class="game-info">
+            <h2>絵文字暗号</h2>
+            <p>絵文字で暗号化された文章を解読しよう</p>
+          </div>
+          <div class="badge">暗号解読</div>
         </div>
       </div>
     </div>
@@ -764,19 +773,32 @@
         </div>
 
         <div id="ap-answer-grid" class="ap-answer-grid" style="display:none;">
-          <button class="ap-note-btn" data-note="C" onclick="apAnswer('C')">ド <span class="note-alpha">Do</span></button>
-          <button class="ap-note-btn" data-note="Cs" onclick="apAnswer('Cs')">ド♯ <span class="note-alpha">C#</span></button>
-          <button class="ap-note-btn" data-note="D" onclick="apAnswer('D')">レ <span class="note-alpha">Re</span></button>
-          <button class="ap-note-btn" data-note="Ds" onclick="apAnswer('Ds')">レ♯ <span class="note-alpha">D#</span></button>
-          <button class="ap-note-btn" data-note="E" onclick="apAnswer('E')">ミ <span class="note-alpha">Mi</span></button>
-          <button class="ap-note-btn" data-note="F" onclick="apAnswer('F')">ファ <span class="note-alpha">Fa</span></button>
-          <button class="ap-note-btn" data-note="Fs" onclick="apAnswer('Fs')">ファ♯ <span class="note-alpha">F#</span></button>
-          <button class="ap-note-btn" data-note="G" onclick="apAnswer('G')">ソ <span class="note-alpha">Sol</span></button>
-          <button class="ap-note-btn" data-note="Gs" onclick="apAnswer('Gs')">ソ♯ <span class="note-alpha">G#</span></button>
-          <button class="ap-note-btn" data-note="A" onclick="apAnswer('A')">ラ <span class="note-alpha">La</span></button>
-          <button class="ap-note-btn" data-note="As" onclick="apAnswer('As')">ラ♯ <span class="note-alpha">A#</span></button>
-          <button class="ap-note-btn" data-note="B" onclick="apAnswer('B')">シ <span class="note-alpha">Ti</span></button>
-          <button class="ap-note-btn" data-note="C2" onclick="apAnswer('C2')">ド <span class="note-alpha">Do (High)</span></button>
+          <button class="ap-note-btn" data-note="C" onclick="apAnswer('C')">ド <span
+              class="note-alpha">Do</span></button>
+          <button class="ap-note-btn" data-note="Cs" onclick="apAnswer('Cs')">ド♯ <span
+              class="note-alpha">C#</span></button>
+          <button class="ap-note-btn" data-note="D" onclick="apAnswer('D')">レ <span
+              class="note-alpha">Re</span></button>
+          <button class="ap-note-btn" data-note="Ds" onclick="apAnswer('Ds')">レ♯ <span
+              class="note-alpha">D#</span></button>
+          <button class="ap-note-btn" data-note="E" onclick="apAnswer('E')">ミ <span
+              class="note-alpha">Mi</span></button>
+          <button class="ap-note-btn" data-note="F" onclick="apAnswer('F')">ファ <span
+              class="note-alpha">Fa</span></button>
+          <button class="ap-note-btn" data-note="Fs" onclick="apAnswer('Fs')">ファ♯ <span
+              class="note-alpha">F#</span></button>
+          <button class="ap-note-btn" data-note="G" onclick="apAnswer('G')">ソ <span
+              class="note-alpha">Sol</span></button>
+          <button class="ap-note-btn" data-note="Gs" onclick="apAnswer('Gs')">ソ♯ <span
+              class="note-alpha">G#</span></button>
+          <button class="ap-note-btn" data-note="A" onclick="apAnswer('A')">ラ <span
+              class="note-alpha">La</span></button>
+          <button class="ap-note-btn" data-note="As" onclick="apAnswer('As')">ラ♯ <span
+              class="note-alpha">A#</span></button>
+          <button class="ap-note-btn" data-note="B" onclick="apAnswer('B')">シ <span
+              class="note-alpha">Ti</span></button>
+          <button class="ap-note-btn" data-note="C2" onclick="apAnswer('C2')">ド <span class="note-alpha">Do
+              (High)</span></button>
         </div>
       </div>
 
@@ -785,6 +807,61 @@
       </div>
     </div>
   </div><!-- /#absolute-pitch -->
+
+  <!-- ========== EMOJI CIPHER (絵文字暗号) ========== -->
+  <div id="emoji-cipher" class="screen">
+    <nav class="nav">
+      <button class="btn-back" onclick="showScreen('home')">🏠</button>
+      <h1>絵文字暗号</h1>
+    </nav>
+    <div class="game-content" id="ec-content">
+      <div class="diff-row" id="ec-diff-row">
+        <button class="diff-btn selected" onclick="ecSetDiff(this,'easy')">かんたん</button>
+        <button class="diff-btn" onclick="ecSetDiff(this,'normal')">ふつう</button>
+        <button class="diff-btn" onclick="ecSetDiff(this,'hard')">むずかしい</button>
+      </div>
+      <div class="score-bar">
+        <div class="score-item">
+          <div class="label">スコア</div>
+          <div class="value" id="ec-score">0</div>
+        </div>
+        <div class="score-item">
+          <div class="label">正解数</div>
+          <div class="value" id="ec-q-num">0</div>
+        </div>
+        <div class="score-item">
+          <div class="label">ベスト</div>
+          <div class="value" id="ec-best">0</div>
+        </div>
+      </div>
+
+      <div class="timer-bar">
+        <div class="timer-fill" id="ec-timer-fill" style="width:100%"></div>
+      </div>
+
+      <!-- Map Area -->
+      <div class="ec-map-area" id="ec-map-area"></div>
+
+      <!-- Cipher Text -->
+      <div class="ec-cipher-wrap">
+        <div class="ec-cipher-label">暗号文</div>
+        <div id="ec-cipher-text">🔐 絵文字暗号</div>
+      </div>
+
+      <!-- Input -->
+      <div class="ec-input-wrap">
+        <label for="ec-input-field" class="ec-input-label">解読</label>
+        <div class="ec-input-row">
+          <input type="text" id="ec-input-field" class="ec-native-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="ここに入力...">
+          <button class="btn-primary ec-submit-btn" onclick="ecSubmit()">答える</button>
+        </div>
+      </div>
+
+      <div class="answer-area">
+        <button class="btn-primary" id="ec-start-btn" onclick="ecStart()">スタート</button>
+      </div>
+    </div>
+  </div><!-- /#emoji-cipher -->
 
   <!-- ========== NUM TAP ========== -->
   <div id="num-tap" class="screen">
@@ -795,8 +872,11 @@
 
     <div class="game-content" id="nt-content">
 
-      <!-- <div class="diff-row" id="nt-diff-row"> removed as per logic change 10~20 random -->
-
+      <div class="diff-row" id="nt-diff-row">
+        <button class="diff-btn" onclick="ntSetDiff(this,'easy')">かんたん</button>
+        <button class="diff-btn selected" onclick="ntSetDiff(this,'normal')">ふつう</button>
+        <button class="diff-btn" onclick="ntSetDiff(this,'hard')">むずかしい</button>
+      </div>
       <div class="score-bar">
         <div class="score-item">
           <div class="label">ラウンド</div>
@@ -2542,6 +2622,7 @@
   <script src="js/mental-mult.js?v=1775846969"></script>
   <script src="js/kanji-quiz.js"></script>
   <script src="js/absolute-pitch.js"></script>
+  <script src="js/emoji-cipher.js"></script>
   <script src="js/main.js"></script>
   <script>
     // キャッシュトラブル解消のため、既存のService Workerの登録をすべて解除する

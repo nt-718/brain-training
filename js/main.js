@@ -44,6 +44,7 @@ function renderIcon(icon) {
     { id: 'double-detect', name: 'ダブル検知', icon: '🃏', cat: '判断', color: 'rgba(139,92,246,0.6)' },
     { id: 'kanji-quiz', name: '難読漢字', icon: '📚', cat: '論理', color: 'rgba(139,92,246,0.6)' },
     { id: 'absolute-pitch', name: '絶対音感', icon: '🎵', cat: '知覚', color: 'rgba(167,139,250,0.6)' },
+    { id: 'emoji-cipher', name: '絵文字暗号', icon: '🔐', cat: '論理', color: 'rgba(168,85,247,0.6)' },
   ];
 
 
@@ -250,6 +251,7 @@ function showScreen(id, skipHistory = false) {
     if (typeof mmutStop === 'function') mmutStop();
     if (typeof kqStop === 'function') kqStop();
     if (typeof apStop === 'function') apStop();
+    if (typeof ecStop === 'function') ecStop();
     if (id === 'home') refreshBestScores();
     if (id === 'records') refreshRecords();
     if (id === 'stats') refreshStats();
@@ -345,7 +347,8 @@ const BS_MAPPING = [
   { target: 'emoji-finder', key: ['ef_best_normal', 'ef_best_hard', 'ef_best_easy'], ranksVar: 'EF_RANKS' },
   { target: 'mental-mult', key: ['mmut_best_easy', 'mmut_best_normal', 'mmut_best_hard'], ranksVar: 'MMUT_RANKS' },
   { target: 'kanji-quiz', key: 'kq_best', ranksVar: 'KQ_RANKS' },
-  { target: 'absolute-pitch', key: 'ap_best', ranksVar: 'AP_RANKS' }];
+  { target: 'absolute-pitch', key: ['ap_best_easy', 'ap_best_normal', 'ap_best_hard'], ranksVar: 'AP_RANKS' },
+  { target: 'emoji-cipher', key: 'ec_best', ranksVar: 'EC_RANKS' }];
 
 // Register all score keys for history tracking
 BS_MAPPING.forEach(g => {
@@ -549,6 +552,14 @@ const ANNOUNCEMENTS = [
     title: '新しいゲームを追加しました！',
     items: [
       '🎵 <strong>絶対音感</strong> — 再生される音を聴いて、ドレミを当てよう！',
+    ]
+  }
+  ,{
+    id: 'ann_20260419',
+    icon: '🔐',
+    title: '新しいゲームを追加しました！',
+    items: [
+      '🔐 <strong>絵文字暗号</strong> — 絵文字で暗号化された文章を解読しよう！',
     ]
   }
 ];
@@ -1403,6 +1414,17 @@ function drawScoreChart(canvas, entries, mapping) {
 }
 
 /* ===== UTILITIES ===== */
+function rand(a, b) {
+  return Math.floor(Math.random() * (b - a + 1)) + a;
+}
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
 function rand(a, b) {
   return Math.floor(Math.random() * (b - a + 1)) + a;
 }

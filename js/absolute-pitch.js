@@ -2,26 +2,26 @@
 
 // 1. Define RANKS (7 tiers, descending min score)
 var AP_RANKS = [
-  { min: 50, label: '伝説級',        emoji: '👑', color: '#f59e0b' },
+  { min: 50, label: '伝説級', emoji: '👑', color: '#f59e0b' },
   { min: 40, label: '絶対音感の達人', emoji: '🏆', color: '#8b5cf6' },
-  { min: 30, label: '音楽家',        emoji: '💫', color: '#3b82f6' },
-  { min: 22, label: '上級者',        emoji: '⭐', color: '#10b981' },
-  { min: 14, label: '中級者',        emoji: '🌟', color: '#6ee7b7' },
-  { min: 6,  label: '聞き習い',      emoji: '🔰', color: '#94a3b8' },
-  { min: 0,  label: 'まだまだ',      emoji: '🌱', color: '#64748b' },
+  { min: 30, label: '音楽家', emoji: '💫', color: '#3b82f6' },
+  { min: 22, label: '上級者', emoji: '⭐', color: '#10b981' },
+  { min: 14, label: '中級者', emoji: '🌟', color: '#6ee7b7' },
+  { min: 6, label: '聞き習い', emoji: '🔰', color: '#94a3b8' },
+  { min: 0, label: 'まだまだ', emoji: '🌱', color: '#64748b' },
 ];
 
-// 2. LocalStorage Key
-const AP_BEST_KEY = 'ap_best';
+// 2. LocalStorage Key Prefix
+const AP_BEST_PREFIX = 'ap_best_';
 
 const AP_NOTES = [
-  { id: 'C',  name: 'ド', alpha: 'C4', freq: 261.63 },
-  { id: 'D',  name: 'レ', alpha: 'D4', freq: 293.66 },
-  { id: 'E',  name: 'ミ', alpha: 'E4', freq: 329.63 },
-  { id: 'F',  name: 'ファ', alpha: 'F4', freq: 349.23 },
-  { id: 'G',  name: 'ソ', alpha: 'G4', freq: 392.00 },
-  { id: 'A',  name: 'ラ', alpha: 'A4', freq: 440.00 },
-  { id: 'B',  name: 'シ', alpha: 'B4', freq: 493.88 },
+  { id: 'C', name: 'ド', alpha: 'C4', freq: 261.63 },
+  { id: 'D', name: 'レ', alpha: 'D4', freq: 293.66 },
+  { id: 'E', name: 'ミ', alpha: 'E4', freq: 329.63 },
+  { id: 'F', name: 'ファ', alpha: 'F4', freq: 349.23 },
+  { id: 'G', name: 'ソ', alpha: 'G4', freq: 392.00 },
+  { id: 'A', name: 'ラ', alpha: 'A4', freq: 440.00 },
+  { id: 'B', name: 'シ', alpha: 'B4', freq: 493.88 },
   { id: 'C2', name: 'ド', alpha: 'C5', freq: 523.25 },
 ];
 
@@ -45,7 +45,8 @@ let apAnswered = false;
 
 // 4. Initialization
 function apLoadBest() {
-  const best = localStorage.getItem(AP_BEST_KEY) || 0;
+  const k = `${AP_BEST_PREFIX}${apDifficulty}`;
+  const best = localStorage.getItem(k) || 0;
   const bestEl = document.getElementById('ap-best');
   if (bestEl) bestEl.textContent = best;
 }
@@ -104,7 +105,7 @@ function apNextRound() {
   } else if (apDifficulty === 'hard') {
     pool = AP_HARD_NOTES;
   }
-  
+
   // Show/Hide buttons based on pool
   const btns = document.querySelectorAll('.ap-note-btn');
   btns.forEach(btn => {
@@ -112,9 +113,9 @@ function apNextRound() {
     const exists = pool.some(n => n.id === noteId);
     btn.style.display = exists ? 'flex' : 'none';
   });
-  
+
   apCurrentNote = pool[Math.floor(Math.random() * pool.length)];
-  
+
   // Highlight play button to encourage tapping
   const playBtn = document.getElementById('ap-play-btn');
   playBtn.classList.add('playing');
@@ -132,11 +133,11 @@ function apPlayCurrentNote() {
   if (!apRunning || !apCurrentNote) return;
   const playBtn = document.getElementById('ap-play-btn');
   playBtn.classList.add('playing');
-  
+
   // Tone duration based on difficulty?
   const duration = apDifficulty === 'hard' ? 0.4 : 0.6;
   sfx.playNote(apCurrentNote.freq, duration);
-  
+
   setTimeout(() => {
     playBtn.classList.remove('playing');
   }, duration * 1000);
@@ -169,13 +170,14 @@ function apAnswer(noteId) {
 // 8. END FUNCTION
 function apEnd() {
   apRunning = false;
-  const prev = parseInt(localStorage.getItem(AP_BEST_KEY)) || 0;
+  const bestKey = `${AP_BEST_PREFIX}${apDifficulty}`;
+  const prev = parseInt(localStorage.getItem(bestKey)) || 0;
   const isNewRecord = apScore > prev;
-  
+
   if (isNewRecord) {
-    localStorage.setItem(AP_BEST_KEY, apScore);
+    localStorage.setItem(bestKey, apScore);
   }
-  
+
   const rank = getScoreRank(apScore, AP_RANKS);
   showResult(
     isNewRecord ? '🏆' : '🎵',
@@ -184,7 +186,7 @@ function apEnd() {
     apStart,
     rank
   );
-  
+
   if (typeof refreshBestScores === 'function') refreshBestScores();
-  saveScore('absolute-pitch', 'default', apScore);
+  saveScore('absolute-pitch', apDifficulty, apScore);
 }

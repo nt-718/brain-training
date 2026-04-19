@@ -15,30 +15,35 @@
 /* Stage */
 .tap-stage {
   width: 100%;
-  max-width: 520px;
-  height: 460px;
+  max-width: 480px;
+  aspect-ratio: 1;
   background: var(--card);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--card-border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  position: relative;
   overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 8px;
+  padding: 16px;
+  box-sizing: border-box;
 }
 
 /* Tap buttons */
 .tap-btn {
-  position: absolute;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
   border: 2px solid rgba(255,255,255,0.2);
   background: rgba(255,255,255,0.1);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   color: #fff;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 800;
   cursor: pointer;
   display: flex;
@@ -54,7 +59,7 @@
   background: rgba(255,255,255,0.2); 
   border-color: rgba(139, 92, 246, 0.8);
   box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
-  transform: scale(1.12); 
+  transform: scale(1.08); 
 }
 
 .tap-btn.tapped {
@@ -73,6 +78,11 @@
   box-shadow: 0 0 15px var(--secondary);
 }
 
+.tap-empty {
+  visibility: hidden;
+  pointer-events: none;
+}
+
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
   25%       { transform: translateX(-6px); }
@@ -80,6 +90,12 @@
 }
 
 @media (max-width: 400px) {
-  .tap-stage { height: 400px; }
-  .tap-btn   { width: 48px; height: 48px; font-size: 1.1rem; }
+  .tap-stage {
+    gap: 4px;
+    padding: 10px;
+  }
+  .tap-btn {
+    font-size: 1.2rem;
+    border-radius: 8px;
+  }
 }
