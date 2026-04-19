@@ -2625,14 +2625,12 @@
   <script src="js/emoji-cipher.js"></script>
   <script src="js/main.js"></script>
   <script>
-    // キャッシュトラブル解消のため、既存のService Workerの登録をすべて解除する
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.getRegistrations().then(function (registrations) {
-        for (let registration of registrations) {
-          registration.unregister();
-        }
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').then(reg => {
+          console.log('SW registered!', reg);
+        }).catch(err => console.log('SW registration failed', err));
       });
-      // 登録解除のみ行い、今後はSWなしでの動作に戻す (次回アクセス時に完全にクリアされる)
     }
 
     // GitHub Pages からのアクセスを検知して新ドメインへリダイレクト
