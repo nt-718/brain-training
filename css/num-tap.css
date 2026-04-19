@@ -17,6 +17,7 @@
   width: 100%;
   max-width: 480px;
   aspect-ratio: 1;
+  flex-shrink: 0;
   background: var(--card);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -54,6 +55,7 @@
   /* prevent text selection on rapid tapping */
   user-select: none;
   -webkit-user-select: none;
+  touch-action: manipulation;
 }
 .tap-btn:hover { 
   background: rgba(255,255,255,0.2); 
