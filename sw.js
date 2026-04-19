@@ -1,8 +1,8 @@
-const CACHE_NAME = 'noutore-v46';
+const CACHE_NAME = 'noutore-v47';
 const ASSETS = [
   './',
   './index.html',
-  './favicon.svg',
+  './favicon.png',
   './manifest.json',
   './css/common.css',
   './css/visual-calc.css',
